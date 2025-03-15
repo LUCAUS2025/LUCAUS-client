@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export const TheHeader = () => {
-  return (
-    <div>🐉LUCAUS🐉</div>
-  )
-}
+  return <div>🐉LUCAUS🐉</div>;
+};

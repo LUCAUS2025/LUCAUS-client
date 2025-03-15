@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export const Information = () => {
-  return (
-    <div>index</div>
-  )
-}
+  return <div>index</div>;
+};
