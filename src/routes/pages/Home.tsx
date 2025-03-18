@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Thumbnail } from '../../components/home/thumbnail'
 import styled from 'styled-components'

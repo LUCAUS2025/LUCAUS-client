@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export const FoodTruck = () => {
-  return (
-    <div>index</div>
-  )
-}
+  return <div>index</div>;
+};

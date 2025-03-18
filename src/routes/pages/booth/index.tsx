@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export const Booth = () => {
-  return (
-    <div>index</div>
-  )
-}
+  return <div>index</div>;
+};
