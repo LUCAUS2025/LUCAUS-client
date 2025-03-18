@@ -6,7 +6,7 @@ export const TheHeader = () => {
 
   return (
     <Header onClick={() => navigate('/')}>
-      <img src="./home/lucaus.png" alt="logo" />
+      <img src="./images/home/lucaus.png" alt="logo" />
     </Header>
   );
 };

@@ -1,5 +1,54 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const TheFooter = () => {
-  return <div>TheFooter</div>;
+  const navigate = useNavigate();
+
+  return (
+    <Buttons>
+      <Button onClick={() => navigate('/')}>
+        <Logo src="/images/footer/home.png" alt="home" />
+        <div>홈</div>
+      </Button>
+      <Button onClick={() => navigate('/stage')}>
+        <Logo src="/images/footer/stage.png" alt="stage" />
+        <div>공연</div>
+      </Button>
+      <Button onClick={() => navigate('/booth')}>
+        <Logo src="/images/footer/booth.png" alt="booth" />
+        <div>거리문화제</div>
+      </Button>
+      <Button onClick={() => navigate('/foodTruck')}>
+        <Logo src="/images/footer/foodTruck.png" alt="foodTruck" />
+        <div>푸드트럭</div>
+      </Button>
+      <Button onClick={() => navigate('/information')}>
+        <Logo src="/images/footer/information.png" alt="information" />
+        <div>정보</div>
+      </Button>
+    </Buttons>
+  );
 };
+
+const Buttons = styled.div`
+  background-color: #fafafa;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2%;
+`;
+
+const Button = styled.button`
+  background-color: #fafafa;
+  color: #6a7282;
+  border: none;
+  padding: 2%;
+  cursor: pointer;
+  gap: 5%;
+`;
+
+const Logo = styled.img`
+  width: 30px;
+  height: 30px;
+`;
