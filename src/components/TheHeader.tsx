@@ -1,18 +1,20 @@
-
-import React from 'react'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const TheHeader = () => {
-  return (
-    <Header>LUCAUS</Header>
-  )
-}
+  const navigate = useNavigate();
 
+  return (
+    <Header onClick={() => navigate('/')}>
+      <img src="./home/lucaus.png" alt="logo" />
+    </Header>
+  );
+};
 
 const Header = styled.div`
-  background-color: #1447E6;
+  background-color: #1447e6;
   color: white;
   text-align: center;
-  // height: 10%;
-`
-
+  height: 10%;
+  padding: 10%;
+`;
