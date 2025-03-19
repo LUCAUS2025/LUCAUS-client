@@ -12,7 +12,7 @@ const TheSidebar = () => {
       {/* 사이드바 */}
       <SidebarContainer isOpen={isMenuOpen}>
         <CloseButton onClick={toggleMenu}>✕</CloseButton>
-        <nav>
+        <div>
           <h3>공연</h3>
           <MenuItem href="#">오늘의 공연</MenuItem>
           <MenuItem href="#">공연 티켓팅 안내</MenuItem>
@@ -26,7 +26,7 @@ const TheSidebar = () => {
           <MenuItem href="#">배리어 프리</MenuItem>
           <MenuItem href="#">안전</MenuItem>
           <MenuItem href="#">총학생회 공지사항</MenuItem>
-        </nav>
+        </div>
       </SidebarContainer>
     </>
   );
@@ -72,7 +72,9 @@ const MenuItem = styled.a`
   color: #333;
   text-decoration: none;
   margin: 10px 0;
+  transition: font-size 0.3s ease;
   &:hover {
     color: #1e3a8a;
+    font-size: 20px;
   }
 `;
