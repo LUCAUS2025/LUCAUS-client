@@ -14,13 +14,13 @@ const TheSidebar = () => {
         <CloseButton onClick={toggleMenu}>✕</CloseButton>
         <div>
           <h3>공연</h3>
-          <MenuItem href="#">오늘의 공연</MenuItem>
+          <MenuItem href="stage">오늘의 공연</MenuItem>
           <MenuItem href="#">공연 티켓팅 안내</MenuItem>
           <MenuItem href="#">관람 가이드</MenuItem>
           <h3>거리문화제</h3>
-          <MenuItem href="#">부스배치도</MenuItem>
+          <MenuItem href="booth">부스배치도</MenuItem>
           <h3>푸드트럭</h3>
-          <MenuItem href="#">푸드트럭 지도</MenuItem>
+          <MenuItem href="foodTruck">푸드트럭 지도</MenuItem>
           <h3>정보</h3>
           <MenuItem href="#">분실물 안내</MenuItem>
           <MenuItem href="#">배리어 프리</MenuItem>
