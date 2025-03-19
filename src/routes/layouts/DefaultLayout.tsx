@@ -30,4 +30,6 @@ const AppDom = styled.div`
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
   }
+
+  font-family: 'Pretendard-Regular';
 `;
