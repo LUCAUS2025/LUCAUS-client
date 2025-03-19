@@ -12,21 +12,21 @@ const TheSidebar = () => {
       {/* 사이드바 */}
       <SidebarContainer isOpen={isMenuOpen}>
         <CloseButton onClick={toggleMenu}>✕</CloseButton>
-        <div>
+        <MenuDom>
           <h3>공연</h3>
-          <MenuItem href="stage">오늘의 공연</MenuItem>
+          <MenuItem href="/stage">오늘의 공연</MenuItem>
           <MenuItem href="#">공연 티켓팅 안내</MenuItem>
           <MenuItem href="#">관람 가이드</MenuItem>
           <h3>거리문화제</h3>
-          <MenuItem href="booth">부스배치도</MenuItem>
+          <MenuItem href="/booth">부스배치도</MenuItem>
           <h3>푸드트럭</h3>
-          <MenuItem href="foodTruck">푸드트럭 지도</MenuItem>
+          <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
           <h3>정보</h3>
           <MenuItem href="#">분실물 안내</MenuItem>
           <MenuItem href="#">배리어 프리</MenuItem>
           <MenuItem href="#">안전</MenuItem>
           <MenuItem href="#">총학생회 공지사항</MenuItem>
-        </div>
+        </MenuDom>
       </SidebarContainer>
     </>
   );
@@ -65,6 +65,11 @@ const CloseButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+`;
+
+const MenuDom = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const MenuItem = styled.a`
