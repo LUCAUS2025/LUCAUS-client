@@ -1,5 +1,3 @@
 export const Thumbnail = () => {
-    return (
-        <div>Thumbnail</div>
-    )
-}
+  return <div>Thumbnail</div>;
+};
