@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useMenu } from '../context/MenuContext';
 
 export const TheHeader = () => {
   const navigate = useNavigate();
+  const { toggleMenu } = useMenu();
 
   return (
     <Header onClick={() => navigate('/')}>
-      <Icon className="left-icon"></Icon>
+      <Icon onClick={toggleMenu} className="left-icon"></Icon>
       <img style={{ height: '24px' }} src="./images/home/lucaus.png" alt="logo" />
       <Icon></Icon>
     </Header>

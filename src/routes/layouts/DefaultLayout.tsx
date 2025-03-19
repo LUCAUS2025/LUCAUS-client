@@ -3,14 +3,19 @@ import { TheHeader } from '../../components/TheHeader';
 import { Outlet } from 'react-router-dom';
 import { TheFooter } from '../../components/TheFooter';
 import styled from 'styled-components';
+import { MenuProvider } from '../../context/MenuContext';
+import TheSidebar from '../../components/TheSidebar';
 
 export const DefaultLayout = () => {
   return (
     <>
       <AppDom>
-        <TheHeader />
-        <Outlet />
-        <TheFooter />
+        <MenuProvider>
+          <TheHeader />
+          <TheSidebar />
+          <Outlet />
+          <TheFooter />
+        </MenuProvider>
       </AppDom>
     </>
   );
