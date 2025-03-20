@@ -88,10 +88,12 @@ const Button = styled.button`
 
 const LeftButton = styled(Button)`
   left: 10px;
+  background: rgba(255, 255, 255, 0.5);
 `;
 
 const RightButton = styled(Button)`
   right: 10px;
+  background: rgba(255, 255, 255, 0.5);
 `;
 
 const Indicators = styled.div`

@@ -77,9 +77,15 @@ const MenuItem = styled.a`
   color: #333;
   text-decoration: none;
   margin: 10px 0;
-  transition: font-size 0.3s ease;
+  transition:
+    font-size 0.3s ease,
+    font-weight 0.3s ease;
+  // &:hover {
+  //   color: #1e3a8a;
+  //   font-size: 20px;
+  // }
   &:hover {
-    color: #1e3a8a;
-    font-size: 20px;
+    // color: #1e3a8a;
+    font-weight: bold;
   }
 `;
