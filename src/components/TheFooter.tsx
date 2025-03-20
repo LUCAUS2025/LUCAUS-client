@@ -6,30 +6,40 @@ export const TheFooter = () => {
   const navigate = useNavigate();
 
   return (
-    <Buttons>
-      <Button onClick={() => navigate('/')}>
-        <Logo src="/images/footer/home.png" alt="home" />
-        <div>홈</div>
-      </Button>
-      <Button onClick={() => navigate('/stage')}>
-        <Logo src="/images/footer/stage.png" alt="stage" />
-        <div>공연</div>
-      </Button>
-      <Button onClick={() => navigate('/booth')}>
-        <Logo src="/images/footer/booth.png" alt="booth" />
-        <div>거리문화제</div>
-      </Button>
-      <Button onClick={() => navigate('/foodTruck')}>
-        <Logo src="/images/footer/foodTruck.png" alt="foodTruck" />
-        <div>푸드트럭</div>
-      </Button>
-      <Button onClick={() => navigate('/information')}>
-        <Logo src="/images/footer/information.png" alt="information" />
-        <div>정보</div>
-      </Button>
-    </Buttons>
+    <Wrapper>
+      <Buttons>
+        <Button onClick={() => navigate('/')}>
+          <Logo src="/images/footer/home.png" alt="home" />
+          <div>홈</div>
+        </Button>
+        <Button onClick={() => navigate('/stage')}>
+          <Logo src="/images/footer/stage.png" alt="stage" />
+          <div>공연</div>
+        </Button>
+        <Button onClick={() => navigate('/booth')}>
+          <Logo src="/images/footer/booth.png" alt="booth" />
+          <div>거리문화제</div>
+        </Button>
+        <Button onClick={() => navigate('/foodTruck')}>
+          <Logo src="/images/footer/foodTruck.png" alt="foodTruck" />
+          <div>푸드트럭</div>
+        </Button>
+        <Button onClick={() => navigate('/information')}>
+          <Logo src="/images/footer/information.png" alt="information" />
+          <div>정보</div>
+        </Button>
+      </Buttons>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+`;
 
 const Buttons = styled.div`
   background-color: #fafafa;
