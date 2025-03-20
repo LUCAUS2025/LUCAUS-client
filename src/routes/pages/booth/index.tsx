@@ -1,5 +1,11 @@
 import React from 'react';
+import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
+import { BottomSheet } from '../../../components/BottomSheet/BottomSheet';
 
 export const Booth = () => {
-  return <div>index</div>;
+  return (
+    <BaseLayer>
+      <BottomSheet />
+    </BaseLayer>
+  );
 };
