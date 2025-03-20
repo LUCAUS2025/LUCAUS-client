@@ -23,19 +23,19 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   position: fixed;
+  bottom: 60px;
   z-index: 1;
-  top: calc(100% - 360px);
+  top: calc(100% - ${window.innerHeight * 0.4}px);
   left: 0;
   right: 0;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-color: #fafafa;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
   height: ${BOTTOM_SHEET_HEIGHT}px;
   transition: transform 300ms ease-out;
 
   width: min(100vw, 600px); // 화면 너비에 맞추면서 최대 600px로 제한
-  //height: 100vh; // 웹 뷰
+  height: 100vh; // 웹 뷰
   margin: 0 auto;
 
   @media (max-width: 600px) {
