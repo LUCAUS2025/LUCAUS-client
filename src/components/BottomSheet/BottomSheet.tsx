@@ -5,15 +5,22 @@ import { BOTTOM_SHEET_HEIGHT } from './BottomSheetOption';
 import { motion } from 'framer-motion';
 import { Content } from './Content';
 import useBottomSheet from './useBottomSheet';
+import { BoothItem, FoodTruckItem } from '../../data/boothFood';
 
-export const BottomSheet = () => {
+interface BottomSheetProps {
+  title: string;
+  description: string;
+  data: BoothItem[] | FoodTruckItem[];
+}
+
+export const BottomSheet: React.FC<BottomSheetProps> = ({ title, description, data }) => {
   const { sheet, content } = useBottomSheet();
 
   return (
     <Wrapper ref={sheet}>
       <BottomSheetHeader />
       <BottomSheetContent ref={content}>
-        <Content />
+        <Content theTitle={title} theDescription={description} data={data} />
       </BottomSheetContent>
     </Wrapper>
   );
