@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../BaseButton';
+import { Option } from '../../../data/options';
 
 interface DropDownProps {
-  options: string[];
-  selectedOption: string;
-  setSelectedOption: (option: string) => void;
+  options: Option[];
+  selectedOption: Option;
+  setSelectedOption: (option: Option) => void;
   logoSrc: string;
 }
 
@@ -15,18 +16,18 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
   return (
     <Wrapper>
       <Logo src={logoSrc} />
-      <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption}</SelectedText>
+      <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption.label}</SelectedText>
       <DownIcon src="images/common/dropDown.webp" />
       <OptionList active={active}>
         {options.map((element) => (
           <OptionItem
-            key={element}
+            key={element.value}
             onClick={() => {
               setActive(false);
               setSelectedOption(element);
             }}
           >
-            {element}
+            {element.label}
           </OptionItem>
         ))}
       </OptionList>

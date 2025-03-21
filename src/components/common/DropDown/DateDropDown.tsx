@@ -1,18 +1,18 @@
 import React from 'react';
 import { DropDown } from './DropDown';
+import { dateOptions, Option } from '../../../data/options';
 
 interface DateDropDownProps {
-  dates: string[];
-  selectedDate: string;
-  setSelectedDate: (option: string) => void;
+  selectedDate: Option;
+  setSelectedDate: (option: Option) => void;
   darkMode: boolean;
 }
 
-export const DateDropDown: React.FC<DateDropDownProps> = ({ dates, selectedDate, setSelectedDate, darkMode }) => {
+export const DateDropDown: React.FC<DateDropDownProps> = ({ selectedDate, setSelectedDate, darkMode }) => {
   return (
     <>
       <DropDown
-        options={dates}
+        options={dateOptions}
         selectedOption={selectedDate}
         setSelectedOption={setSelectedDate}
         logoSrc={darkMode ? 'images/common/dateDark.webp' : 'images/common/date.webp'}
