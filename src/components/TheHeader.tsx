@@ -12,13 +12,23 @@ export const TheHeader = () => {
   };
 
   return (
-    <Header onClick={() => navigate('/')}>
-      <Icon onClick={openMenu} className="left-icon"></Icon>
-      <img style={{ height: '24px' }} src="./images/home/lucaus.webp" alt="logo" />
-      <Icon></Icon>
-    </Header>
+    <Wrapper>
+      <Header onClick={() => navigate('/')}>
+        <Icon onClick={openMenu} className="left-icon"></Icon>
+        <img style={{ height: '24px' }} src="./images/home/lucaus.webp" alt="logo" />
+        <Icon></Icon>
+      </Header>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
+`;
 
 const Header = styled.div`
   background-color: #1447e6;
@@ -27,7 +37,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10%;
+  height: 60px;
   padding: 0 3%;
 `;
 

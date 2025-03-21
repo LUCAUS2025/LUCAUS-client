@@ -46,14 +46,15 @@ const Buttons = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 2%;
+  // padding: 2%;
+  height: 60px;
 `;
 
 const Button = styled.button`
   background-color: #fafafa;
   color: #6a7282;
   border: none;
-  padding: 2%;
+  // padding: 2%;
   cursor: pointer;
   gap: 5%;
 `;
