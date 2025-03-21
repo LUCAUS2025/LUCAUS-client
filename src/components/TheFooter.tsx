@@ -8,23 +8,23 @@ export const TheFooter = () => {
   return (
     <Buttons>
       <Button onClick={() => navigate('/')}>
-        <Logo src="/images/footer/home.png" alt="home" />
+        <Logo src="/images/footer/home.webp" alt="home" />
         <div>홈</div>
       </Button>
       <Button onClick={() => navigate('/stage')}>
-        <Logo src="/images/footer/stage.png" alt="stage" />
+        <Logo src="/images/footer/stage.webp" alt="stage" />
         <div>공연</div>
       </Button>
       <Button onClick={() => navigate('/booth')}>
-        <Logo src="/images/footer/booth.png" alt="booth" />
+        <Logo src="/images/footer/booth.webp" alt="booth" />
         <div>거리문화제</div>
       </Button>
       <Button onClick={() => navigate('/foodTruck')}>
-        <Logo src="/images/footer/foodTruck.png" alt="foodTruck" />
+        <Logo src="/images/footer/foodTruck.webp" alt="foodTruck" />
         <div>푸드트럭</div>
       </Button>
       <Button onClick={() => navigate('/information')}>
-        <Logo src="/images/footer/information.png" alt="information" />
+        <Logo src="/images/footer/information.webp" alt="information" />
         <div>정보</div>
       </Button>
     </Buttons>

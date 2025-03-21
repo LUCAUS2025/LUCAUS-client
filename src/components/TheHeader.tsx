@@ -14,7 +14,7 @@ export const TheHeader = () => {
   return (
     <Header onClick={() => navigate('/')}>
       <Icon onClick={openMenu} className="left-icon"></Icon>
-      <img style={{ height: '24px' }} src="./images/home/lucaus.png" alt="logo" />
+      <img style={{ height: '24px' }} src="./images/home/lucaus.webp" alt="logo" />
       <Icon></Icon>
     </Header>
   );
@@ -37,7 +37,7 @@ const Icon = styled.div`
   height: 30px;
 
   &.left-icon {
-    background-image: url('./images/home/icon-L.png');
+    background-image: url('./images/home/icon-L.webp');
   }
 
   &:not(.left-icon) {
