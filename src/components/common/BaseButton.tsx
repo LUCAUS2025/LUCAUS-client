@@ -11,7 +11,7 @@ export const BaseButton = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  height: 32px;
+  //height: 32px;
   background-color: #fafafa;
   padding: 6px 12px;
   position: relative;

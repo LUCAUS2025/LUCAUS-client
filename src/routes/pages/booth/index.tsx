@@ -24,5 +24,8 @@ export const Booth = () => {
 const OptionContainer = styled.div`
   display: flex;
   flex-direction: row;
-  float: left;
+  gap: 10px;
+  left: 16px;
+  top: 20px;
+  position: absolute;
 `;

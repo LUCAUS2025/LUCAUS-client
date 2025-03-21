@@ -67,7 +67,7 @@ const DownIcon = styled.img`
 `;
 const OptionList = styled.div<{ active: boolean }>`
   width: 98%;
-  top: 93%;
+  top: 90%;
   position: absolute;
   list-style-type: none;
   display: ${({ active }) => (active ? 'block' : 'none')};
@@ -79,7 +79,8 @@ const OptionList = styled.div<{ active: boolean }>`
 `;
 const OptionItem = styled.div`
   display: flex;
-  height: 30px;
+  //height: 30px;
+  font-size: 14px;
   justify-content: center;
   align-items: center;
   padding: 8px 12px 8px 12px;
