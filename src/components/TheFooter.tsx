@@ -31,6 +31,14 @@ export const TheFooter = () => {
   );
 };
 
+const Wrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+`;
+
 const Buttons = styled.div`
   background-color: #fafafa;
   display: flex;
