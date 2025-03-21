@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BoothItem, FoodTruckItem } from '../../data/boothFood';
 
@@ -14,7 +14,7 @@ export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data
       <TitleContainer>
         <Title>{theTitle}</Title>
         <Description>{theDescription}</Description>
-        <List>
+        <List footerHeight={footerHeight}>
           {data?.map((item) => (
             <Item key={item.id}>
               <ItemId>#{item.id}</ItemId>
@@ -55,10 +55,11 @@ const Description = styled.div`
   font-weight: 400;
   color: #6a7282;
 `;
-const List = styled.div`
+const List = styled.div<{ footerHeight: number }>`
   display: flex;
   flex-direction: column;
   padding: 4px;
+  padding-bottom: 35vh;
 `;
 const Item = styled.div`
   padding: 12px 16px;
