@@ -15,6 +15,12 @@ export const Booth = () => {
     { id: 2, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
     { id: 3, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
     { id: 4, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
+    { id: 5, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
+    { id: 6, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
+    { id: 7, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
+    { id: 8, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
+    { id: 9, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
+    { id: 10, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
   ];
 
   return (
