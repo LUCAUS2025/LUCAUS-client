@@ -13,7 +13,9 @@ export const DefaultLayout = () => {
         <MenuProvider>
           <TheHeader />
           <TheSidebar />
-          <Outlet />
+          <Content>
+            <Outlet />
+          </Content>
           <TheFooter />
         </MenuProvider>
       </AppDom>
@@ -32,4 +34,8 @@ const AppDom = styled.div`
   }
 
   font-family: 'Pretendard-Regular';
+`;
+
+const Content = styled.div`
+  padding: 60px 0% 60px 0%;
 `;
