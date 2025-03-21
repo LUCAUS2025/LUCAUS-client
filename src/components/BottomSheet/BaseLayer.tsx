@@ -6,5 +6,9 @@ interface BaseLayerProps {
 }
 
 export const BaseLayer: React.FC<BaseLayerProps> = ({ children }) => {
-  return <div>{children}</div>;
+  return <Wrapper>{children}</Wrapper>;
 };
+
+const Wrapper = styled.div`
+  position: relative;
+`;

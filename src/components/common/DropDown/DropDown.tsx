@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../BaseButton';
 import { Option } from '../../../data/options';
@@ -12,12 +12,28 @@ interface DropDownProps {
 
 export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, setSelectedOption, logoSrc }) => {
   const [active, setActive] = useState<boolean>(false);
+  const dropDownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropDownRef.current && e.target instanceof Node && !dropDownRef.current.contains(e.target)) {
+        setActive(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <Wrapper>
-      <Logo src={logoSrc} />
-      <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption.label}</SelectedText>
-      <DownIcon src="images/common/dropDown.webp" />
+    <Wrapper ref={dropDownRef}>
+      <SelectedWrapper>
+        <Logo src={logoSrc} />
+        <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption.label}</SelectedText>
+        <DownIcon src="images/common/dropDown.webp" />
+      </SelectedWrapper>
       <OptionList active={active}>
         {options.map((element) => (
           <OptionItem
@@ -35,33 +51,38 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
   );
 };
 
-const Wrapper = styled(BaseButton)``;
+const Wrapper = styled.div`
+  position: relative;
+`;
+const SelectedWrapper = styled(BaseButton)`
+  z-index: 2;
+`;
 const Logo = styled.img`
   width: 16px;
   margin-bottom: 2.5px;
 `;
-const SelectedText = styled.div`
-  position: relative;
-`;
+const SelectedText = styled.div``;
 const DownIcon = styled.img`
   width: 20px;
 `;
 const OptionList = styled.div<{ active: boolean }>`
-  width: 100%;
-  top: 100%;
+  width: 98%;
+  top: 90%;
   position: absolute;
   list-style-type: none;
   display: ${({ active }) => (active ? 'block' : 'none')};
-  overflow-y: scroll;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 0px 0px 12px 0px #00000014;
+  border: 1px solid #d1d5dc;
+  z-index: 1;
 `;
 const OptionItem = styled.div`
   display: flex;
+  //height: 30px;
+  font-size: 14px;
   justify-content: center;
   align-items: center;
   padding: 8px 12px 8px 12px;
-  border: 1px solid '#D1D5DC';
-  border-top: 1px solid '#D1D5DC';
+  border-top: 1px solid #d1d5dc;
 `;
