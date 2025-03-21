@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../BaseButton';
 import { Option } from '../../../data/options';
@@ -12,9 +12,23 @@ interface DropDownProps {
 
 export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, setSelectedOption, logoSrc }) => {
   const [active, setActive] = useState<boolean>(false);
+  const dropDownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropDownRef.current && e.target instanceof Node && !dropDownRef.current.contains(e.target)) {
+        setActive(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <Wrapper>
+    <Wrapper ref={dropDownRef}>
       <SelectedWrapper>
         <Logo src={logoSrc} />
         <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption.label}</SelectedText>
