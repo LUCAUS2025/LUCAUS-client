@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Ticketing from '../../../components/stage/Ticketing';
+import Watchiing from '../../../components/stage/Watching';
 
-const Container = styled.div` ... `;
 const AppBar = styled.div` ... `;
 const BackArrow = styled.span` ... `;
 
@@ -12,8 +14,12 @@ interface LayoutProps {
 const Guide: React.FC<LayoutProps> = ({ children }) => {
   const { tab } = useParams<{ tab: string }>();
   const navigate = useNavigate();
+  const [currentTab, setCurrentTab] = useState(tab === 'ticketing' ? 'ticketing' : 'watching');
 
-  const current = tab === 'ticketing' ? 'ticketing' : 'watching';
+  const handleTabClick = (tab: string) => {
+    setCurrentTab(tab);
+    navigate(`/guide/${tab}`);
+  };
 
   return (
     <>
@@ -23,13 +29,15 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
       </AppBar>
 
       <Tabs>
-        <Tab active={current === 'ticketing'} onClick={() => navigate('/guide/ticketing')}>
+        <Tab active={currentTab === 'ticketing'} onClick={() => handleTabClick('ticketing')}>
           공연 티켓팅 안내
         </Tab>
-        <Tab active={current === 'watching'} onClick={() => navigate('/guide/watching')}>
+        <Tab active={currentTab === 'watching'} onClick={() => handleTabClick('watching')}>
           공연 관람 가이드
         </Tab>
       </Tabs>
+      {currentTab === 'ticketing' && <Ticketing />}
+      {currentTab === 'watching' && <Watchiing />}
       {children}
     </>
   );
