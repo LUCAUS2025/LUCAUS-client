@@ -4,8 +4,6 @@ import styled from 'styled-components';
 const Container = styled.div` ... `;
 const AppBar = styled.div` ... `;
 const BackArrow = styled.span` ... `;
-const Tabs = styled.div` ... `;
-const Tab = styled.div<{ active?: boolean }>` ... `;
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -18,7 +16,7 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
   const current = tab === 'ticketing' ? 'ticketing' : 'watching';
 
   return (
-    <Container>
+    <>
       <AppBar>
         <BackArrow onClick={() => navigate('/stage')}>←</BackArrow>
         오늘의 공연
@@ -33,8 +31,26 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
         </Tab>
       </Tabs>
       {children}
-    </Container>
+    </>
   );
 };
 
 export default Guide;
+
+const Tabs = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 1.2rem;
+`;
+const Tab = styled.div<{ active?: boolean }>`
+  padding: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #d1d5dc;
+  width: 50%;
+  text-align: center;
+  &:hover {
+    font-weight: bold;
+    border-bottom: 2px solid #1447e6;
+  }
+`;
