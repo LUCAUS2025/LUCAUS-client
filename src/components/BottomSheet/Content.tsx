@@ -78,6 +78,7 @@ const ItemTitle = styled.div`
 `;
 const ItemDescription = styled.div`
   margin-bottom: 4px;
+  font-size: 12px;
 `;
 const ItemKeywords = styled.div`
   display: flex;
