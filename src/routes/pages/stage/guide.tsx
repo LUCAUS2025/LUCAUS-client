@@ -20,7 +20,7 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Container>
       <AppBar>
-        <BackArrow onClick={() => navigate(-1)}>←</BackArrow>
+        <BackArrow onClick={() => navigate('/stage')}>←</BackArrow>
         오늘의 공연
       </AppBar>
 
