@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Button, Section, SectionTitle } from './Watching';
+import { Box, Button, SectionTitle } from './Watching';
 
 const MapImage = styled.div` ... `;
 const Description = styled.div` ... `;
 
 const Ticketing: React.FC = () => {
   return (
-    <Section>
+    <>
       <Box>
         <div>
           축제 공연 티켓팅
@@ -23,7 +23,7 @@ const Ticketing: React.FC = () => {
         <br />
         설명글 텍스트
       </Description>
-    </Section>
+    </>
   );
 };
 

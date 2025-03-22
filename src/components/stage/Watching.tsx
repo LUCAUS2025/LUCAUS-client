@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Section = styled.div`
-  padding: 16px;
-`;
 export const Box = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 16px;
 `;
 export const Button = styled.div`
   width: 106px;
@@ -30,7 +28,7 @@ const Description = styled.div` ... `;
 
 const Watchiing: React.FC = () => {
   return (
-    <Section>
+    <>
       <Box>
         <div>
           공연 관람 시 유의사항
@@ -45,7 +43,7 @@ const Watchiing: React.FC = () => {
         총학생회 티켓팅 방식 및 입장 정책에 대한 <br />
         주의사항 안내 텍스트
       </Description>
-    </Section>
+    </>
   );
 };
 
