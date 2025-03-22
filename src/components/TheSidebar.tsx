@@ -15,8 +15,8 @@ const TheSidebar = () => {
         <MenuDom>
           <MenuHeading>공연</MenuHeading>
           <MenuItem href="/stage">오늘의 공연</MenuItem>
-          <MenuItem href="#">공연 티켓팅 안내</MenuItem>
-          <MenuItem href="#">관람 가이드</MenuItem>
+          <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
+          <MenuItem href="/guide/watching">관람 가이드</MenuItem>
           <MenuHeading>거리문화제</MenuHeading>
           <MenuItem href="/booth">부스배치도</MenuItem>
           <MenuHeading>푸드트럭</MenuHeading>
