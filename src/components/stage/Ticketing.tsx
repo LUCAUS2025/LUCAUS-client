@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Box, Button, Section, SectionTitle } from './Watching';
 
-const Section = styled.div`
-  padding: 16px;
-`;
-const Box = styled.div` ... `;
-const Button = styled.button` ... `;
-const SectionTitle = styled.div` ... `;
 const MapImage = styled.div` ... `;
 const Description = styled.div` ... `;
 
