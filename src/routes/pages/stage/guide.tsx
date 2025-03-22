@@ -23,10 +23,10 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
       </AppBar>
 
       <Tabs>
-        <Tab active={current === 'ticketing'} onClick={() => navigate('/performance/ticketing')}>
+        <Tab active={current === 'ticketing'} onClick={() => navigate('/guide/ticketing')}>
           공연 티켓팅 안내
         </Tab>
-        <Tab active={current === 'watching'} onClick={() => navigate('/performance/watching')}>
+        <Tab active={current === 'watching'} onClick={() => navigate('/guide/watching')}>
           공연 관람 가이드
         </Tab>
       </Tabs>
@@ -49,6 +49,8 @@ const Tab = styled.div<{ active?: boolean }>`
   border-bottom: 1px solid #d1d5dc;
   width: 50%;
   text-align: center;
+  font-weight: ${({ active }) => (active ? 'bold' : 'normal')};
+  border-bottom: ${({ active }) => (active ? '2px solid #1447e6' : '1px solid #d1d5dc')};
   &:hover {
     font-weight: bold;
     border-bottom: 2px solid #1447e6;
