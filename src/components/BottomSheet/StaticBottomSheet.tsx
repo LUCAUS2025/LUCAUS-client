@@ -24,7 +24,7 @@ export const StaticBottomSheet = <T extends object>({
 
 const Wrapper = styled.div<{ size: 'small' | 'large' }>`
   ${bottomSheetBaseStyle};
-  top: ${({ size }) => (size === 'large' ? '15%' : '70%')};
+  top: ${({ size }) => (size === 'large' ? '30%' : '65%')};
   height: ${({ size }) => (size === 'large' ? '80vh' : '60vh')};
   z-index: 10;
 `;

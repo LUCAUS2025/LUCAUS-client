@@ -33,6 +33,7 @@ export const Booth = () => {
         <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
         <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
       </OptionContainer>
+      {/* 리스트 바텀시트 */}
       {!selectedItem && (
         <BottomSheet
           title={boothTitle}
@@ -41,7 +42,7 @@ export const Booth = () => {
           setSelectedItem={setSelectedItem}
         />
       )}
-      {/* 프리뷰 바텀시트*/}
+      {/* 프리뷰 바텀시트 */}
       {selectedItem && (
         <StaticBottomSheet
           size={'small'}

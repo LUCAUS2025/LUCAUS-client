@@ -61,7 +61,7 @@ export default function useBottomSheet() {
 
     // 터치를 한 상태로 움직일 때 (드래그 할 때)
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
+      //e.preventDefault();
 
       const { touchStart, touchMove } = metrics.current;
       const currentTouch = e.touches[0];
@@ -85,6 +85,8 @@ export default function useBottomSheet() {
 
       // 2. 바텀 시트를 움직여줌
       if (canUserMoveBottomSheet()) {
+        //e.preventDefault();
+
         const touchOffset = currentTouch.clientY - touchStart.touchY;
         let nextSheetY = touchStart.sheetY + touchOffset; //이동 후의 바텀 시트의 최상단 높이 Y
 

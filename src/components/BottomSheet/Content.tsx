@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CommonItem } from '../../data/boothFood';
+import { keywordBaseStyle } from '../../styles/keyword';
 
 interface ContentProps {
   theTitle: string;
@@ -87,11 +88,7 @@ const ItemKeywords = styled.div`
   gap: 4px;
 `;
 const Keyword = styled.div`
-  background-color: #f3f4f6;
-  color: #1447e6;
-  padding: 2px 4px;
-  border-radius: 8px;
-  font-size: 12px;
+  ${keywordBaseStyle}
 `;
 const ItemTextContainer = styled.div`
   display: flex;

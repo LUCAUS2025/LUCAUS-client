@@ -35,6 +35,7 @@ const Wrapper = styled(motion.div)`
 `;
 
 const BottomSheetContent = styled.div`
-  overflow-y: auto;
+  height: 100%;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 `;
