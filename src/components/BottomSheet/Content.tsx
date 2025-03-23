@@ -17,7 +17,7 @@ export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data
         <Description>{theDescription}</Description>
         <List>
           {data?.map((item) => (
-            <Item key={item.id}>
+            <Item key={item.id} onClick={() => setSelectedItem(item)}>
               <ItemId>#{item.id}</ItemId>
               <ItemTextContainer>
                 <ItemTitle>{item.title}</ItemTitle>
