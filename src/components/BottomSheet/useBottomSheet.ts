@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MAX_Y, MIN_Y } from './BottomSheetOption';
 
 interface BottomSheetMetrics {
@@ -17,6 +17,8 @@ export default function useBottomSheet() {
   const sheet = useRef<HTMLDivElement>(null);
 
   const content = useRef<HTMLDivElement>(null);
+
+  const [isSheetOpen, setIsSheetOpen] = useState<boolean>(false);
 
   const metrics = useRef<BottomSheetMetrics>({
     touchStart: {
@@ -44,7 +46,7 @@ export default function useBottomSheet() {
         return true;
       }
 
-      // 더이상 컨텐츠에서 스크롤 내릴 내용이 없을 때 바텀시트를 움직임
+      // 스크롤이 맨 위일 때 아래로 드래그하면 바텀시트를 움직임
       if (touchMove.movingDirection === 'down') {
         return content.current!.scrollTop <= 0;
       }
@@ -59,17 +61,17 @@ export default function useBottomSheet() {
 
     // 터치를 한 상태로 움직일 때 (드래그 할 때)
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
+      //e.preventDefault();
 
       const { touchStart, touchMove } = metrics.current;
       const currentTouch = e.touches[0];
 
       // 1. 드래그 방향을 정해줌
-      if (touchMove.prevTouchY === 0) {
+      if (touchMove.prevTouchY === undefined) {
         touchMove.prevTouchY = touchStart.touchY;
       }
 
-      if (touchMove.prevTouchY === undefined) {
+      if (touchMove.prevTouchY === 0) {
         touchMove.prevTouchY = touchStart.touchY;
       }
 
@@ -83,6 +85,8 @@ export default function useBottomSheet() {
 
       // 2. 바텀 시트를 움직여줌
       if (canUserMoveBottomSheet()) {
+        //e.preventDefault();
+
         const touchOffset = currentTouch.clientY - touchStart.touchY;
         let nextSheetY = touchStart.sheetY + touchOffset; //이동 후의 바텀 시트의 최상단 높이 Y
 
@@ -102,7 +106,6 @@ export default function useBottomSheet() {
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      document.body.style.overflowY = 'auto';
       const { touchMove } = metrics.current;
 
       // 드래그가 끝난 후, 현재 위치인 바텀 시트의 최상단 모서리 Y
@@ -113,11 +116,13 @@ export default function useBottomSheet() {
         // 아래로 드래그 했을 경우 바텀시트 아래로 내림
         if (touchMove.movingDirection === 'down') {
           sheet.current!.style.setProperty('transform', 'translateY(0)');
+          setIsSheetOpen(false);
         }
 
         // 위로 드래그 했을 경우 바텀시트 최상단 까지 올림
         if (touchMove.movingDirection === 'up') {
           sheet.current!.style.setProperty('transform', `translateY(${MIN_Y - MAX_Y}px)`);
+          setIsSheetOpen(true);
         }
       }
       // metrics 초기화
@@ -145,7 +150,12 @@ export default function useBottomSheet() {
       metrics.current!.isContentAreaTouched = true;
     };
     content.current!.addEventListener('touchstart', handleTouchStart);
+    content.current!.style.overflowY = 'hidden';
   }, []);
+
+  useEffect(() => {
+    content.current!.style.overflowY = isSheetOpen ? 'auto' : 'hidden';
+  }, [isSheetOpen]);
 
   return { sheet, content };
 }

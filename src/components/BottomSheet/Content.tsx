@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BoothItem, FoodTruckItem } from '../../data/boothFood';
+import { CommonItem } from '../../data/boothFood';
+import { keywordBaseStyle } from '../../styles/keyword';
 
 interface ContentProps {
   theTitle: string;
   theDescription: string;
-  data: BoothItem[] | FoodTruckItem[];
+  data: CommonItem[];
+  setSelectedItem: (item: CommonItem | null) => void;
 }
 
-export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data }) => {
+export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data, setSelectedItem }) => {
   return (
     <Wrapper>
       <TitleContainer>
@@ -16,11 +18,11 @@ export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data
         <Description>{theDescription}</Description>
         <List>
           {data?.map((item) => (
-            <Item key={item.id}>
+            <Item key={item.id} onClick={() => setSelectedItem(item)}>
               <ItemId>#{item.id}</ItemId>
               <ItemTextContainer>
                 <ItemTitle>{item.title}</ItemTitle>
-                {'description' in item && <ItemDescription>{item.description}</ItemDescription>}
+                {item.description && <ItemDescription>{item.description}</ItemDescription>}
                 <ItemKeywords>
                   {item.keywords.map((key, index) => (
                     <Keyword key={index}>#{key}</Keyword>
@@ -78,6 +80,7 @@ const ItemTitle = styled.div`
 `;
 const ItemDescription = styled.div`
   margin-bottom: 4px;
+  font-size: 12px;
 `;
 const ItemKeywords = styled.div`
   display: flex;
@@ -85,11 +88,7 @@ const ItemKeywords = styled.div`
   gap: 4px;
 `;
 const Keyword = styled.div`
-  background-color: #f3f4f6;
-  color: #1447e6;
-  padding: 2px 4px;
-  border-radius: 8px;
-  font-size: 12px;
+  ${keywordBaseStyle}
 `;
 const ItemTextContainer = styled.div`
   display: flex;
