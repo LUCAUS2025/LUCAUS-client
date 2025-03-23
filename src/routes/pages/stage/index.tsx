@@ -1,10 +1,14 @@
 import React from 'react';
 import { Thumbnail } from '../../../components/home/thumbnail';
 import { LineUp } from '../../../components/stage/lineUp';
+import { useNavigate } from 'react-router-dom';
 
 export const Stage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
+      <img src="./images/home/stage/ticket.png" onClick={() => navigate('/guide/ticketing')} style={{ width: '80%' }} />
       <h2>청룡가요제</h2>
       <div>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</div>
       <Thumbnail />
