@@ -43,7 +43,14 @@ export const Booth = () => {
       )}
       {/* 프리뷰 바텀시트*/}
       {selectedItem && (
-        <StaticBottomSheet size={'small'} ContentComponent={ItemPreviewContent} componentProps={{ id: 1 }} />
+        <StaticBottomSheet
+          size={'small'}
+          ContentComponent={ItemPreviewContent}
+          componentProps={{
+            item: selectedItem,
+            onClose: () => setSelectedItem(null),
+          }}
+        />
       )}
     </BaseLayer>
   );

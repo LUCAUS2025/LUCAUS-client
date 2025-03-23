@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { bottomSheetBaseStyle } from '../../styles/bottomSheetStyles';
+import { BottomSheetHeader } from './BottomSheetHeader';
 
 interface StaticBottomSheetProps<T> {
   size: 'small' | 'large';
@@ -15,6 +16,7 @@ export const StaticBottomSheet = <T extends object>({
 }: StaticBottomSheetProps<T>) => {
   return (
     <Wrapper size={size}>
+      <BottomSheetHeader />
       <ContentComponent {...componentProps} />
     </Wrapper>
   );
@@ -22,6 +24,7 @@ export const StaticBottomSheet = <T extends object>({
 
 const Wrapper = styled.div<{ size: 'small' | 'large' }>`
   ${bottomSheetBaseStyle};
-  top: ${({ size }) => (size === 'large' ? '10%' : '40%')};
+  top: ${({ size }) => (size === 'large' ? '15%' : '70%')};
   height: ${({ size }) => (size === 'large' ? '80vh' : '60vh')};
+  z-index: 10;
 `;
