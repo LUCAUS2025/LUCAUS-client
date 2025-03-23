@@ -8,6 +8,7 @@ import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown
 import { boothDescription, BoothItem, boothTitle, CommonItem } from '../../../data/boothFood';
 import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
 import { ItemPreviewContent } from '../../../components/BottomSheet/ItemPreviewContent';
+import { GoBackButton } from '../../../components/common/GoBackButton';
 
 export const Booth = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
@@ -29,29 +30,36 @@ export const Booth = () => {
 
   return (
     <BaseLayer>
-      <OptionContainer>
-        <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
-        <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
-      </OptionContainer>
       {/* 리스트 바텀시트 */}
       {!selectedItem && (
-        <BottomSheet
-          title={boothTitle}
-          description={boothDescription}
-          data={tempBoothData}
-          setSelectedItem={setSelectedItem}
-        />
+        <>
+          <OptionContainer>
+            <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
+            <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
+          </OptionContainer>
+          <BottomSheet
+            title={boothTitle}
+            description={boothDescription}
+            data={tempBoothData}
+            setSelectedItem={setSelectedItem}
+          />
+        </>
       )}
       {/* 프리뷰 바텀시트 */}
       {selectedItem && (
-        <StaticBottomSheet
-          size={'small'}
-          ContentComponent={ItemPreviewContent}
-          componentProps={{
-            item: selectedItem,
-            onClose: () => setSelectedItem(null),
-          }}
-        />
+        <>
+          <GoBackButtonContainer>
+            <GoBackButton onClick={() => setSelectedItem(null)} />
+          </GoBackButtonContainer>
+          <StaticBottomSheet
+            size={'small'}
+            ContentComponent={ItemPreviewContent}
+            componentProps={{
+              item: selectedItem,
+              onClose: () => setSelectedItem(null),
+            }}
+          />
+        </>
       )}
     </BaseLayer>
   );
@@ -61,7 +69,13 @@ const OptionContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
-  left: 16px;
+  left: 10px;
   top: 20px;
   position: absolute;
+`;
+
+const GoBackButtonContainer = styled.div`
+  position: absolute;
+  left: 10px;
+  top: 20px;
 `;
