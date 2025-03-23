@@ -6,6 +6,8 @@ import { dateOptions, Option, placeOptions } from '../../../data/options';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
 import { boothDescription, BoothItem, boothTitle, CommonItem } from '../../../data/boothFood';
+import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
+import { ItemPreviewContent } from '../../../components/BottomSheet/ItemPreviewContent';
 
 export const Booth = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
@@ -31,12 +33,18 @@ export const Booth = () => {
         <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
         <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
       </OptionContainer>
-      <BottomSheet
-        title={boothTitle}
-        description={boothDescription}
-        data={tempBoothData}
-        setSelectedItem={setSelectedItem}
-      />
+      {!selectedItem && (
+        <BottomSheet
+          title={boothTitle}
+          description={boothDescription}
+          data={tempBoothData}
+          setSelectedItem={setSelectedItem}
+        />
+      )}
+      {/* 프리뷰 바텀시트*/}
+      {selectedItem && (
+        <StaticBottomSheet size={'small'} ContentComponent={ItemPreviewContent} componentProps={{ id: 1 }} />
+      )}
     </BaseLayer>
   );
 };
