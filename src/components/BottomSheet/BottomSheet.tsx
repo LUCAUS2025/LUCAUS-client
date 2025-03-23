@@ -5,22 +5,23 @@ import { BOTTOM_SHEET_HEIGHT } from './BottomSheetOption';
 import { motion } from 'framer-motion';
 import { Content } from './Content';
 import useBottomSheet from './useBottomSheet';
-import { BoothItem, FoodTruckItem } from '../../data/boothFood';
+import { CommonItem } from '../../data/boothFood';
 
 interface BottomSheetProps {
   title: string;
   description: string;
-  data: BoothItem[] | FoodTruckItem[];
+  data: CommonItem[];
+  setSelectedItem: (item: CommonItem | null) => void;
 }
 
-export const BottomSheet: React.FC<BottomSheetProps> = ({ title, description, data }) => {
+export const BottomSheet: React.FC<BottomSheetProps> = ({ title, description, data, setSelectedItem }) => {
   const { sheet, content } = useBottomSheet();
 
   return (
     <Wrapper ref={sheet}>
       <BottomSheetHeader />
       <BottomSheetContent ref={content}>
-        <Content theTitle={title} theDescription={description} data={data} />
+        <Content theTitle={title} theDescription={description} data={data} setSelectedItem={setSelectedItem} />
       </BottomSheetContent>
     </Wrapper>
   );

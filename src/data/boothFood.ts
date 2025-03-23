@@ -1,15 +1,15 @@
-export interface BoothItem {
+export interface CommonItem {
   id: number;
   title: string;
-  description: string;
   keywords: string[];
+  description?: string;
 }
 
-export interface FoodTruckItem {
-  id: number;
-  title: string;
-  keywords: string[];
+export interface BoothItem extends CommonItem {
+  description: string;
 }
+
+export type FoodTruckItem = CommonItem;
 
 export const boothTitle = '부스 배치도';
 export const boothDescription = '한눈에 보는 부스 배치도와 부스 리스트';

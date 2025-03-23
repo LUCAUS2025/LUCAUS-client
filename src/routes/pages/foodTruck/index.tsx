@@ -4,12 +4,13 @@ import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
 import { BottomSheet } from '../../../components/BottomSheet/BottomSheet';
 import { dateOptions, Option, placeOptions } from '../../../data/options';
-import { foodTruckDescription, FoodTruckItem, foodTruckTitle } from '../../../data/boothFood';
+import { CommonItem, foodTruckDescription, FoodTruckItem, foodTruckTitle } from '../../../data/boothFood';
 import styled from 'styled-components';
 
 export const FoodTruck = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
   const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
+  const [selectedItem, setSelectedItem] = useState<CommonItem | null>(null);
   const tempFoodTruckData: FoodTruckItem[] = [
     { id: 1, title: '오픈 더 치킨', keywords: ['츄러스', '해시브라운'] },
     { id: 2, title: '오픈 더 치킨', keywords: ['츄러스', '해시브라운'] },
@@ -29,7 +30,12 @@ export const FoodTruck = () => {
         <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
         <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
       </OptionContainer>
-      <BottomSheet title={foodTruckTitle} description={foodTruckDescription} data={tempFoodTruckData} />
+      <BottomSheet
+        title={foodTruckTitle}
+        description={foodTruckDescription}
+        data={tempFoodTruckData}
+        setSelectedItem={setSelectedItem}
+      />
     </BaseLayer>
   );
 };

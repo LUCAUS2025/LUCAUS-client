@@ -5,11 +5,13 @@ import styled from 'styled-components';
 import { dateOptions, Option, placeOptions } from '../../../data/options';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
-import { boothDescription, BoothItem, boothTitle } from '../../../data/boothFood';
+import { boothDescription, BoothItem, boothTitle, CommonItem } from '../../../data/boothFood';
 
 export const Booth = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
   const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
+  const [selectedItem, setSelectedItem] = useState<CommonItem | null>(null);
+
   const tempBoothData: BoothItem[] = [
     { id: 1, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
     { id: 2, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
@@ -29,7 +31,12 @@ export const Booth = () => {
         <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
         <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
       </OptionContainer>
-      <BottomSheet title={boothTitle} description={boothDescription} data={tempBoothData} />
+      <BottomSheet
+        title={boothTitle}
+        description={boothDescription}
+        data={tempBoothData}
+        setSelectedItem={setSelectedItem}
+      />
     </BaseLayer>
   );
 };

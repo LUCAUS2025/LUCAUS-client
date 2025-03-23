@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BoothItem, FoodTruckItem } from '../../data/boothFood';
+import { CommonItem } from '../../data/boothFood';
 
 interface ContentProps {
   theTitle: string;
   theDescription: string;
-  data: BoothItem[] | FoodTruckItem[];
+  data: CommonItem[];
+  setSelectedItem: (item: CommonItem | null) => void;
 }
 
-export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data }) => {
+export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data, setSelectedItem }) => {
   return (
     <Wrapper>
       <TitleContainer>
@@ -20,7 +21,7 @@ export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data
               <ItemId>#{item.id}</ItemId>
               <ItemTextContainer>
                 <ItemTitle>{item.title}</ItemTitle>
-                {'description' in item && <ItemDescription>{item.description}</ItemDescription>}
+                {item.description && <ItemDescription>{item.description}</ItemDescription>}
                 <ItemKeywords>
                   {item.keywords.map((key, index) => (
                     <Keyword key={index}>#{key}</Keyword>
