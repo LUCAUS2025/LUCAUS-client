@@ -2,6 +2,7 @@ import React from 'react';
 import { Thumbnail } from '../../components/home/thumbnail';
 import styled from 'styled-components';
 import { Banner } from '../../components/home/banner';
+import Toast from '../../components/home/Toast';
 
 export const Home = () => {
   return (
@@ -9,6 +10,7 @@ export const Home = () => {
       <Banner />
       <h3>이 무대 절대 놓치지 마세요!</h3>
       <div>올해 축제를 빛낼 아티스트들을 지금 확인하세요</div>
+      <Toast />
       <Thumbnail />
 
       <h3>최근 공지사항</h3>

@@ -26,7 +26,7 @@ const Button = styled.button`
   backdrop-filter: blur(4px);
 `;
 
-const Icon = styled.img`
+export const Icon = styled.img`
   width: 20px;
   height: 20px;
 `;
