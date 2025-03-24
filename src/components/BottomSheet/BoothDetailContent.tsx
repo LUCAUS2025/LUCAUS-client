@@ -13,6 +13,7 @@ import {
   Keyword,
 } from '../../styles/itemDetailStyles';
 import { DetailOperatingInfo } from './ItemDetailComponents/DetailOperatingInfo';
+import { DetailReview } from './ItemDetailComponents/DetailReview';
 
 export const BoothDetailContent = () => {
   return (
@@ -20,7 +21,7 @@ export const BoothDetailContent = () => {
       <HeaderContainer>
         <TitleContainer>
           <ItemTitle>
-            <ItemId>#1&nbsp;</ItemId>너 내 친구과 되어라
+            <ItemId>#1&nbsp;</ItemId>너 내 친구가 되어라
           </ItemTitle>
           <ItemHost>LIKELION CAU</ItemHost>
           <Keywords>
@@ -34,6 +35,7 @@ export const BoothDetailContent = () => {
         </ItemDescription>
       </HeaderContainer>
       <DetailOperatingInfo />
+      <DetailReview />
     </DetailWrapper>
   );
 };

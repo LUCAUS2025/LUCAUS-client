@@ -19,7 +19,9 @@ export const StaticBottomSheet = <T extends object>({
   return (
     <Wrapper size={size}>
       {isBottomSheetHeader && <BottomSheetHeader />}
-      <ContentComponent {...componentProps} />
+      <ContentWrapper>
+        <ContentComponent {...componentProps} />
+      </ContentWrapper>
     </Wrapper>
   );
 };
@@ -27,6 +29,14 @@ export const StaticBottomSheet = <T extends object>({
 const Wrapper = styled.div<{ size: 'small' | 'large' }>`
   ${bottomSheetBaseStyle};
   top: ${({ size }) => (size === 'large' ? '33%' : '65%')};
-  height: ${({ size }) => (size === 'large' ? '80vh' : '60vh')};
+  //height: ${({ size }) => (size === 'large' ? '80vh' : '60vh')};
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;

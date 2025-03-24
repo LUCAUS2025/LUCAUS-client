@@ -2,12 +2,12 @@
 import styled, { css } from 'styled-components';
 import { keywordBaseStyle } from './keyword';
 
-// ✅ 공통 Wrapper
 export const DetailWrapper = styled.div`
   padding: 36px 20px;
   gap: 40px;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 export const HeaderContainer = styled.div`
@@ -16,7 +16,6 @@ export const HeaderContainer = styled.div`
   gap: 20px;
 `;
 
-// ✅ 공통 Title 영역
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,7 +41,6 @@ export const ItemHost = styled.div`
   line-height: 150%;
 `;
 
-// ✅ 공통 키워드
 export const Keywords = styled.div`
   display: flex;
   flex-direction: row;
@@ -53,7 +51,6 @@ export const Keyword = styled.div`
   ${keywordBaseStyle};
 `;
 
-// ✅ 공통 설명
 export const ItemDescription = styled.div`
   font-weight: 400;
   font-size: 14px;
