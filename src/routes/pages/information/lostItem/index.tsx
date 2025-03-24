@@ -18,8 +18,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 30vh;
-  font-size: 24px;
+  // height: 30vh;
+  padding: 16px;
   background-color: #f9fafb;
   border-radius: 8px;
 `;
