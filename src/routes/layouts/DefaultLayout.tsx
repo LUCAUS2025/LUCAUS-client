@@ -34,6 +34,9 @@ const AppDom = styled.div`
   }
 
   font-family: 'Pretendard-Regular';
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
 `;
 
 const Content = styled.div`
