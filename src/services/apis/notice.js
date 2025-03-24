@@ -8,7 +8,7 @@ export const getshortNotice = async () => {
     const response = await axios.get(`${URL}/api/short-notices`);
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch all snowman data", error);
+    console.error('Failed to fetch all snowman data', error);
     throw error;
   }
 };
