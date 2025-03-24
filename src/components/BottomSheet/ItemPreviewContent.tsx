@@ -45,6 +45,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  justify-content: center;
   padding: 12px 20px;
 `;
 const TitleContainer = styled.div`
@@ -86,6 +87,7 @@ const DetailButton = styled.div`
   font-weight: 400;
   background-color: #1447e6;
   border-radius: 12px;
+  width: 100%;
 `;
 const CloseButton = styled.div`
   display: flex;
@@ -97,4 +99,5 @@ const CloseButton = styled.div`
   font-weight: 400;
   border-radius: 12px;
   background-color: #d1d5dc;
+  width: 100%;
 `;

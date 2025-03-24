@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
 import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
 import { BoothDetailContent } from '../../../components/BottomSheet/BoothDetailContent';
 import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
@@ -17,7 +16,7 @@ export const BoothDetail = () => {
   };
 
   return (
-    <Wrapper>
+    <>
       <BaseLayer>
         <StaticBottomSheet
           size={'large'}
@@ -26,8 +25,6 @@ export const BoothDetail = () => {
           isBottomSheetHeader={false}
         />
       </BaseLayer>
-    </Wrapper>
+    </>
   );
 };
-
-const Wrapper = styled.div``;
