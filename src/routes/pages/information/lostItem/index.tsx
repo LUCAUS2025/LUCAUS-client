@@ -13,6 +13,7 @@ const LostItem = () => {
         어떻게 찾아야하나요?
         <Answer>이미 총학생회에 접수된 물건이라면 107관 총학생회실 방문 후 개인 신분 확인 뒤 수령가능합니다.</Answer>
       </Container>
+      <h3>내 분실물 찾기</h3>
     </BigContainer>
   );
 };
