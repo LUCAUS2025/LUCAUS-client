@@ -30,7 +30,6 @@ const Toast = () => {
     <Container>
       <Icon src="/images/common/info.webp" alt="information" />
       <Notice>{shortNotice}</Notice>
-      <Icon src="/images/common/refresh.webp" alt="새로고침" />
     </Container>
   );
 };
@@ -39,7 +38,6 @@ export default Toast;
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   background-color: #f3f4f6;
   padding: 12px;
