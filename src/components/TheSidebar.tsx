@@ -13,15 +13,15 @@ const TheSidebar = () => {
       <SidebarContainer isOpen={isMenuOpen}>
         <CloseButton onClick={toggleMenu}>✕</CloseButton>
         <MenuDom>
-          <h3>공연</h3>
+          <MenuHeading>공연</MenuHeading>
           <MenuItem href="/stage">오늘의 공연</MenuItem>
-          <MenuItem href="#">공연 티켓팅 안내</MenuItem>
-          <MenuItem href="#">관람 가이드</MenuItem>
-          <h3>거리문화제</h3>
+          <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
+          <MenuItem href="/guide/watching">관람 가이드</MenuItem>
+          <MenuHeading>거리문화제</MenuHeading>
           <MenuItem href="/booth">부스배치도</MenuItem>
-          <h3>푸드트럭</h3>
+          <MenuHeading>푸드트럭</MenuHeading>
           <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
-          <h3>정보</h3>
+          <MenuHeading>정보</MenuHeading>
           <MenuItem href="#">분실물 안내</MenuItem>
           <MenuItem href="#">배리어 프리</MenuItem>
           <MenuItem href="#">안전</MenuItem>
@@ -44,7 +44,6 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
   transition: transform 0.3s ease-in-out;
-  padding: 20px;
   z-index: 10;
 `;
 
@@ -77,16 +76,15 @@ const MenuItem = styled.a`
   font-size: 16px;
   color: #333;
   text-decoration: none;
-  margin: 10px 0;
+  padding: 10px;
   transition:
     font-size 0.3s ease,
     font-weight 0.3s ease;
-  // &:hover {
-  //   color: #1e3a8a;
-  //   font-size: 20px;
-  // }
   &:hover {
-    // color: #1e3a8a;
-    font-weight: bold;
+    background-color: #e7f1ff;
   }
+`;
+
+const MenuHeading = styled.h3`
+  padding: 0 10px;
 `;

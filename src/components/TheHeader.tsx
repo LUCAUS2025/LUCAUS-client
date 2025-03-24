@@ -1,8 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMenu } from '../context/MenuContext';
+import exp from 'constants';
 
-export const TheHeader = () => {
+interface TheHeaderProps {
+  title?: string;
+  backgroundColor?: string;
+  textColor?: string;
+}
+
+export const TheHeader = ({
+  title = './images/home/lucaus.webp',
+  backgroundColor = '#1447e6',
+  textColor = '#000',
+}: TheHeaderProps) => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
 
@@ -21,6 +32,7 @@ export const TheHeader = () => {
     </Wrapper>
   );
 };
+export default TheHeader;
 
 const Wrapper = styled.div`
   position: fixed;
