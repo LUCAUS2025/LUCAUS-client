@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Button, SectionTitle } from './Watching';
+import { Box, SectionTitle } from './Watching';
 import { BlackButton } from '../common/BaseButton';
 
 const MapImage = styled.div` ... `;
