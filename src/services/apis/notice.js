@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 // import URL from "../../constants/constants";
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem('token');
 
 // export const getshortNotice = async () => {
 //   try {
-//     const response = await axios.get(`${URL}/map/${}`);
+//     const response = await axios.get(`${URL}/api/short-notices`);
 //     return response.data;
 //   } catch (error) {
 //     console.error("Failed to fetch all snowman data", error);
