@@ -12,6 +12,7 @@ import {
   Keywords,
   Keyword,
 } from '../../styles/itemDetailStyles';
+import { DetailOperatingInfo } from './ItemDetailComponents/DetailOperatingInfo';
 
 export const BoothDetailContent = () => {
   return (
@@ -32,6 +33,7 @@ export const BoothDetailContent = () => {
           게임을 즐기며 자연스럽게 친해져 보세요. 혼자 와도 걱정 NO! 이 부스를 나오면 친구 한 명쯤은 생겨 있을걸요?
         </ItemDescription>
       </HeaderContainer>
+      <DetailOperatingInfo />
     </DetailWrapper>
   );
 };
