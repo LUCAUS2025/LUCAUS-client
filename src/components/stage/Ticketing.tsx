@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box, Button, SectionTitle } from './Watching';
+import { BlackButton } from '../common/BaseButton';
 
 const MapImage = styled.div` ... `;
 const Description = styled.div` ... `;
@@ -14,7 +15,7 @@ const Ticketing: React.FC = () => {
           <br />
           지금 바로 예매하세요!
         </div>
-        <Button>바로가기</Button>
+        <BlackButton>바로가기</BlackButton>
       </Box>
       <SectionTitle>관람 구역 지도</SectionTitle>
       <MapImage />

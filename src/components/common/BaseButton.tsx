@@ -17,3 +17,19 @@ export const BaseButton = styled.div`
   position: relative;
   border: 1px solid #d1d5dc;
 `;
+
+export const BlackButton = styled.div`
+  width: 106px;
+  height: 42px;
+  gap: 10px;
+  border-radius: 8px;
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-bottom: 8px;
+  padding-left: 10px;
+  background: #1e2939;
+  color: #f9fafb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

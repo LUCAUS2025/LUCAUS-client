@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BlackButton } from '../common/BaseButton';
 
 export const Box = styled.div`
   display: flex;
@@ -7,21 +8,7 @@ export const Box = styled.div`
   align-items: center;
   margin-top: 16px;
 `;
-export const Button = styled.div`
-  width: 106px;
-  height: 42px;
-  gap: 10px;
-  border-radius: 8px;
-  padding-top: 8px;
-  padding-right: 10px;
-  padding-bottom: 8px;
-  padding-left: 10px;
-  background: #1e2939;
-  color: #f9fafb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+
 export const SectionTitle = styled.h3` ... `;
 const MapImage = styled.img` ... `;
 const Description = styled.div` ... `;
@@ -35,7 +22,7 @@ const Watchiing: React.FC = () => {
           <br />
           지금 확인하세요!
         </div>
-        <Button>바로가기</Button>
+        <BlackButton>바로가기</BlackButton>
       </Box>
       <SectionTitle>공연 관람시에 꼭 지켜주세요</SectionTitle>
       <MapImage />
