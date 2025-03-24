@@ -16,16 +16,76 @@ export const Booth = () => {
   const [selectedItem, setSelectedItem] = useState<CommonItem | null>(null);
 
   const tempBoothData: BoothItem[] = [
-    { id: 1, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 2, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 3, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 4, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 5, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 6, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 7, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 8, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 9, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
-    { id: 10, title: '배리어 프리존 안내', description: '배리어 프리존 안내', keywords: ['배리어', '프리존'] },
+    {
+      id: 1,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 2,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 3,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 4,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 5,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 6,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 7,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 8,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 9,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
+    {
+      id: 10,
+      title: '배리어 프리존 안내',
+      description: '배리어 프리존 안내',
+      keywords: ['배리어', '프리존'],
+      type: 'booth',
+    },
   ];
 
   return (

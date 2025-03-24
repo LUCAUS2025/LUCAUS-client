@@ -61,7 +61,7 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
   padding: 4px;
-  padding-bottom: 35vh;
+  padding-bottom: 20vh;
 `;
 const Item = styled.div`
   padding: 12px 16px;
