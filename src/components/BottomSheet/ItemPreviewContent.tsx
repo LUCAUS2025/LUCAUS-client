@@ -47,6 +47,11 @@ const Wrapper = styled.div`
   gap: 12px;
   justify-content: center;
   padding: 12px 20px;
+
+  /* 스크롤 막기 */
+  overflow-y: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: none;
 `;
 const TitleContainer = styled.div`
   display: flex;
