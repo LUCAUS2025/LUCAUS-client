@@ -6,6 +6,7 @@ import { Booth } from './pages/booth';
 import { FoodTruck } from './pages/foodTruck';
 import { Stage } from './pages/stage';
 import { Information } from './pages/information';
+import LostItem from './pages/information/lostItem';
 import Guide from './pages/stage/guide';
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/information',
         element: <Information />,
+      },
+      {
+        path: '/lostitem',
+        element: <LostItem />,
       },
     ],
   },
