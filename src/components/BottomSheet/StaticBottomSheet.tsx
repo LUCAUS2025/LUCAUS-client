@@ -7,16 +7,18 @@ interface StaticBottomSheetProps<T> {
   size: 'small' | 'large';
   ContentComponent: React.ComponentType<T>;
   componentProps: T;
+  isBottomSheetHeader: boolean;
 }
 
 export const StaticBottomSheet = <T extends object>({
   size,
   ContentComponent,
   componentProps,
+  isBottomSheetHeader,
 }: StaticBottomSheetProps<T>) => {
   return (
     <Wrapper size={size}>
-      <BottomSheetHeader />
+      {isBottomSheetHeader && <BottomSheetHeader />}
       <ContentComponent {...componentProps} />
     </Wrapper>
   );

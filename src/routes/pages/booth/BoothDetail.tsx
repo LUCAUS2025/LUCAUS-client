@@ -1,6 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
+import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
+import { BoothDetailContent } from '../../../components/BottomSheet/BoothDetailContent';
+import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
 
 export const BoothDetail = () => {
+  // id는 params로 가져오기
   const tempBooth = {
     id: 1,
     title: '너 내 친구가 되어라',
@@ -10,5 +16,18 @@ export const BoothDetail = () => {
     place: '운영 일자',
   };
 
-  return <div>BoothDetail</div>;
+  return (
+    <Wrapper>
+      <BaseLayer>
+        <StaticBottomSheet
+          size={'large'}
+          ContentComponent={BoothDetailContent}
+          componentProps={{ id: tempBooth.id }}
+          isBottomSheetHeader={false}
+        />
+      </BaseLayer>
+    </Wrapper>
+  );
 };
+
+const Wrapper = styled.div``;

@@ -118,6 +118,7 @@ export const Booth = () => {
               item: selectedItem,
               onClose: () => setSelectedItem(null),
             }}
+            isBottomSheetHeader={true}
           />
         </>
       )}
