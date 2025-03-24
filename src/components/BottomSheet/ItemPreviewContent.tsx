@@ -2,6 +2,7 @@ import React from 'react';
 import { CommonItem } from '../../data/boothFood';
 import styled from 'styled-components';
 import { keywordBaseStyle } from '../../styles/keyword';
+import { useNavigate } from 'react-router-dom';
 
 interface ItemPreviewContentProps {
   item: CommonItem;
@@ -9,6 +10,15 @@ interface ItemPreviewContentProps {
 }
 
 export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, onClose }) => {
+  const navigate = useNavigate();
+  const goDetail = () => {
+    if (item.type === 'booth') {
+      navigate(`/booth/${item.id}`);
+    } else if (item.type === 'foodTruck') {
+      navigate(`/foodTruck/${item.id}`);
+    }
+  };
+
   return (
     <Wrapper>
       <TitleContainer>
@@ -24,7 +34,7 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
         ))}
       </ItemKeywords>
       <ButtonContainer>
-        <DetailButton>부스 상세보기</DetailButton>
+        <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>
         <CloseButton onClick={() => onClose()}>닫기</CloseButton>
       </ButtonContainer>
     </Wrapper>
@@ -35,6 +45,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  justify-content: center;
   padding: 12px 20px;
 `;
 const TitleContainer = styled.div`
@@ -76,6 +87,7 @@ const DetailButton = styled.div`
   font-weight: 400;
   background-color: #1447e6;
   border-radius: 12px;
+  width: 100%;
 `;
 const CloseButton = styled.div`
   display: flex;
@@ -87,4 +99,5 @@ const CloseButton = styled.div`
   font-weight: 400;
   border-radius: 12px;
   background-color: #d1d5dc;
+  width: 100%;
 `;

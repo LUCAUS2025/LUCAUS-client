@@ -3,6 +3,7 @@ export interface CommonItem {
   title: string;
   keywords: string[];
   description?: string;
+  type: 'booth' | 'foodTruck';
 }
 
 export interface BoothItem extends CommonItem {

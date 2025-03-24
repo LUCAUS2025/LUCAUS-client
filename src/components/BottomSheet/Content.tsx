@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px;
+  padding: 12px 20px;
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -60,8 +60,7 @@ const Description = styled.div`
 const List = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 4px;
-  padding-bottom: 35vh;
+  padding-bottom: 20vh;
 `;
 const Item = styled.div`
   padding: 12px 16px;

@@ -8,6 +8,7 @@ import { Stage } from './pages/stage';
 import { Information } from './pages/information';
 import LostItem from './pages/information/lostItem';
 import Guide from './pages/stage/guide';
+import { BoothDetail } from './pages/booth/BoothDetail';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/booth',
         element: <Booth />,
+      },
+      {
+        path: '/booth/:id',
+        element: <BoothDetail />,
       },
       {
         path: '/foodTruck',
