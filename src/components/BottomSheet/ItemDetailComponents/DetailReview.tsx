@@ -48,7 +48,6 @@ const Description = styled.div`
   color: #6a7282;
 `;
 const WriteReviewButton = styled.div`
-  text-decoration: underline;
   align-self: flex-end;
   font-weight: 400;
   font-size: 12px;
