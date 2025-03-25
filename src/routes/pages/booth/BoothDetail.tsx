@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
 import { BoothDetailContent } from '../../../components/BottomSheet/BoothDetailContent';
 import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
+import { GoBackButton } from '../../../components/common/GoBackButton';
+import { useNavigate } from 'react-router-dom';
 
 export const BoothDetail = () => {
+  const navigate = useNavigate();
+
   // id는 params로 가져오기
   const tempBooth = {
     id: 1,
@@ -18,6 +22,9 @@ export const BoothDetail = () => {
   return (
     <>
       <BaseLayer>
+        <GoBackButtonContainer>
+          <GoBackButton onClick={() => navigate(-1)} />
+        </GoBackButtonContainer>
         <StaticBottomSheet
           size={'large'}
           ContentComponent={BoothDetailContent}
@@ -28,3 +35,9 @@ export const BoothDetail = () => {
     </>
   );
 };
+
+const GoBackButtonContainer = styled.div`
+  position: absolute;
+  left: 10px;
+  top: 20px;
+`;
