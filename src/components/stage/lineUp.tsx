@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered } from 'lucide-react';
-
-const Container = styled.div`
-  padding: 1rem;
-`;
 
 const Title = styled.div`
   font-size: 1.5rem;
@@ -51,7 +47,10 @@ const ArtistImageWrapper = styled.div<{ selected: boolean }>`
 `;
 
 const ArtistImage = styled.img`
-  width: 1.5rem;
+  width: 100%; // 부모 요소에 맞게 크기를 조정
+  height: 100%; // 부모 요소에 맞게 크기를 조정
+  object-fit: cover; // 이미지 비율을 유지하며 부모 요소에 맞게 자르기
+  border-radius: 9999px; // 둥근 모양 유지
 `;
 
 const ArtistName = styled.div`
@@ -116,13 +115,13 @@ const ListButton = styled.button`
   }
 `;
 
-const artists = ['멋쟁이 밴드처럼', '멋쟁이 밴드처럼', '멋쟁이 밴드처럼', '멋쟁이 밴드처럼'];
+const artists = ['멋쟁이 밴드처럼', '멋쟁이 호랑이처럼', '멋쟁이 사자처럼', '멋쟁이 판다처럼'];
 
 export const LineUp = () => {
   const [selected, setSelected] = useState(0);
 
   return (
-    <Container>
+    <>
       <Title>아티스트 라인업</Title>
       <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
 
@@ -130,7 +129,7 @@ export const LineUp = () => {
         {artists.map((name, index) => (
           <ArtistItem key={index} selected={selected === index} onClick={() => setSelected(index)}>
             <ArtistImageWrapper selected={selected === index}>
-              <ArtistImage src="/likelion-logo.png" alt="Like Lion" />
+              <ArtistImage src="images/home/banner/1.png" alt="artist" />
             </ArtistImageWrapper>
             <ArtistName>{name}</ArtistName>
           </ArtistItem>
@@ -139,7 +138,7 @@ export const LineUp = () => {
 
       <CardGrid>
         <Card>
-          <CardImage src="/artist1.jpg" alt="옥씨 부인전" />
+          <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
           <CardContent>
             <CardTitle>새롭게 재해석한 옥씨 부인전</CardTitle>
             <CardSubtitle>추영우 학우의 꿀 발린 보이스</CardSubtitle>
@@ -153,6 +152,6 @@ export const LineUp = () => {
           리스트 뷰
         </ListButton>
       </ListButtonWrapper>
-    </Container>
+    </>
   );
 };
