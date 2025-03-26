@@ -41,7 +41,7 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
         `;
       case 'middle':
         return `
-          top: 50%;
+          top: 56%;
         `;
       case 'large':
         return `
