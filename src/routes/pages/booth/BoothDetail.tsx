@@ -36,3 +36,11 @@ export const BoothDetail = () => {
     </>
   );
 };
+
+const GoBackButtonContainer = styled.div`
+  position: absolute;
+  left: 10px;
+  top: 20px;
+`;
+
+export default BoothDetail;
