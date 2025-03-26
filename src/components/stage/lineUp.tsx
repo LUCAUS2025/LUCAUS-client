@@ -85,19 +85,6 @@ const CardImage = styled.img`
   object-fit: cover;
 `;
 
-const CardContent = styled.div`
-  padding: 0.75rem;
-`;
-
-const CardTitle = styled.div`
-  font-weight: 600;
-`;
-
-const CardSubtitle = styled.div`
-  font-size: 0.875rem;
-  color: #6b7280;
-`;
-
 const ListButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -207,10 +194,6 @@ export const LineUp = () => {
           <CardGrid>
             <Card>
               <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-              <CardContent>
-                <CardTitle>새롭게 재해석한 옥씨 부인전</CardTitle>
-                <CardSubtitle>추영우 학우의 꿀 발린 보이스</CardSubtitle>
-              </CardContent>
             </Card>
           </CardGrid>
         </>
