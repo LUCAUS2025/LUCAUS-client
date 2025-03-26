@@ -10,6 +10,7 @@ import Guide from './pages/stage/guide';
 import { BoothDetail } from './pages/booth/BoothDetail';
 import LostItem from './pages/information/lostitem';
 import Notice from './pages/information/notice';
+import NoticeDetail from './pages/information/notice-detail';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: '/notice',
         element: <Notice />,
+      },
+      {
+        path: '/notice/:id',
+        element: <NoticeDetail />,
       },
     ],
   },

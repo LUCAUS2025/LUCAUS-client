@@ -1,5 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
 
 const noticeItems = [
@@ -40,43 +39,32 @@ const noticeItems = [
   },
 ];
 
-// 클릭 가능한 Item 컴포넌트
-const ClickableItem = styled(Item)`
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #f9fafb;
-  }
-
-  &:active {
-    background-color: #f3f4f6;
-  }
-`;
-
-const Notice = () => {
+const NoticeDetail = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const noticeId = Number(id);
+  const item = noticeItems.find((item) => item.id === noticeId);
 
-  const handleItemClick = (id: number) => {
-    navigate(`/notice/${id}`);
-  };
+  if (!item) {
+    return <div>해당 공지사항을 찾을 수 없습니다.</div>;
+  }
 
   return (
-    <ItemList>
-      {noticeItems.map((item) => (
-        <ClickableItem key={item.id} onClick={() => handleItemClick(item.id)}>
+    <>
+      <ItemList>
+        <Item key={item.id}>
           <ItemInfo>
             <ItemName>{item.name}</ItemName>
-            <ItemDetail>{item.detail}</ItemDetail>
             <Line>
               <Tag>{item.category}</Tag>
               <ItemDate>등록 일시 | {item.date}</ItemDate>
             </Line>
           </ItemInfo>
-        </ClickableItem>
-      ))}
-    </ItemList>
+        </Item>
+      </ItemList>
+      <ItemDetail>{item.detail}</ItemDetail>
+    </>
   );
 };
 
-export default Notice;
+export default NoticeDetail;
