@@ -100,7 +100,7 @@ const SectionTitle = styled.h3`
 export const ItemList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  // gap: 16px;
 `;
 
 export const Item = styled.div`
