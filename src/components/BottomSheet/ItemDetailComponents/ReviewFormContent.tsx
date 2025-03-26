@@ -6,6 +6,10 @@ interface ReviewOption {
   label: string;
 }
 
+interface ReviewFormContentProps {
+  onClose: () => void;
+}
+
 const reviewOptions: ReviewOption[] = [
   { icon: '👍', label: '완전\n추천해요' },
   { icon: '🍭', label: '간식이\n맛있어요' },
@@ -13,7 +17,7 @@ const reviewOptions: ReviewOption[] = [
   { icon: '🤣', label: '분위기가\n재밌어요' },
 ];
 
-export const ReviewFormContent: React.FC = () => {
+export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose }) => {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
@@ -33,7 +37,7 @@ export const ReviewFormContent: React.FC = () => {
         ))}
       </OptionsContainer>
       <ButtonContainer>
-        <CancelButton>취소</CancelButton>
+        <CancelButton onClick={onClose}>취소</CancelButton>
         <SubmitButton disabled={selected === null}>리뷰 보내기</SubmitButton>
       </ButtonContainer>
     </Wrapper>
@@ -77,7 +81,6 @@ const SubText = styled.div`
 const OptionsContainer = styled.div`
   display: flex;
   flex-direction: row;
-  //gap: 15px;
   flex-wrap: nowrap;
   justify-content: center;
   margin-top: 8px;

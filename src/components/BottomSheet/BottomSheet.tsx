@@ -45,5 +45,4 @@ const BottomSheetContent = styled.div`
   height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  //min-height: 0;
 `;
