@@ -59,11 +59,10 @@ const Card = styled.div`
 `;
 
 const CardImage = styled.img`
-  width: 580px;
-  height: 240px;
+  width: 580px; // 이미지 너비 580px로 수정
   object-fit: cover;
+  border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  width: 280px;
 `;
 
 const ListButtonWrapper = styled.div`
