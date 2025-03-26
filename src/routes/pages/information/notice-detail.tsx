@@ -62,7 +62,7 @@ const NoticeDetail = () => {
           </ItemInfo>
         </Item>
       </ItemList>
-      <ItemDetail>{item.detail}</ItemDetail>
+      <div>{item.detail}</div>
     </>
   );
 };
