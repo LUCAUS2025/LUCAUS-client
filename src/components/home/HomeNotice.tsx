@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Title } from '../../routes/pages/stage';
 
-const Notice = () => {
+const HomeNotice = () => {
   return (
     <NoticeSection>
       <SectionHeader>
@@ -21,7 +21,7 @@ const Notice = () => {
     </NoticeSection>
   );
 };
-export default Notice;
+export default HomeNotice;
 
 const NoticeSection = styled.div`
   margin: 40px 0;

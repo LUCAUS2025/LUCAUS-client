@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Banner } from '../../components/home/banner';
 import Toast from '../../components/home/Toast';
 import { Subtitle, Title } from './stage';
-import Notice from '../../components/home/Notice';
+import HomeNotice from '../../components/home/HomeNotice';
 
 export const Home = () => {
   return (
@@ -15,7 +15,7 @@ export const Home = () => {
       <Toast />
       <Thumbnail />
 
-      <Notice />
+      <HomeNotice />
 
       <Title>놓칠 수 없는 부스</Title>
       <Subtitle>꼭 가봐야할 부스를 추천해드려요.</Subtitle>
