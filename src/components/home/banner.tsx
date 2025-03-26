@@ -45,7 +45,6 @@ const images = [
 ];
 
 const CarouselContainer = styled.div`
-  position: relative;
   width: 100%;
   max-width: 500px;
   margin: auto;

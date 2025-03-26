@@ -42,3 +42,5 @@ const GoBackButtonContainer = styled.div`
   left: 10px;
   top: 20px;
 `;
+
+export default BoothDetail;

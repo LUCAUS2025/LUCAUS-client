@@ -6,6 +6,7 @@ import { BottomSheet } from '../../../components/BottomSheet/BottomSheet';
 import { dateOptions, Option, placeOptions } from '../../../data/options';
 import { CommonItem, foodTruckDescription, FoodTruckItem, foodTruckTitle } from '../../../data/boothFood';
 import styled from 'styled-components';
+import exp from 'constants';
 
 export const FoodTruck = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
@@ -39,6 +40,8 @@ export const FoodTruck = () => {
     </BaseLayer>
   );
 };
+
+export default FoodTruck;
 
 const OptionContainer = styled.div`
   display: flex;

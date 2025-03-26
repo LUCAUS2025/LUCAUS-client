@@ -6,9 +6,12 @@ import { Booth } from './pages/booth';
 import { FoodTruck } from './pages/foodTruck';
 import { Stage } from './pages/stage';
 import { Information } from './pages/information';
-import LostItem from './pages/information/lostItem';
 import Guide from './pages/stage/guide';
 import { BoothDetail } from './pages/booth/BoothDetail';
+import LostItem from './pages/information/lostitem';
+import Notice from './pages/information/notice';
+import NoticeDetail from './pages/information/notice-detail';
+import BarrierFree from './pages/information/barrierfree';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +48,18 @@ const router = createBrowserRouter([
       {
         path: '/lostitem',
         element: <LostItem />,
+      },
+      {
+        path: '/notice',
+        element: <Notice />,
+      },
+      {
+        path: '/notice/:id',
+        element: <NoticeDetail />,
+      },
+      {
+        path: '/barrierfree',
+        element: <BarrierFree />,
       },
     ],
   },
