@@ -1,5 +1,5 @@
 // styles/itemDetailStyles.ts
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { keywordBaseStyle } from './keyword';
 
 export const DetailWrapper = styled.div`
