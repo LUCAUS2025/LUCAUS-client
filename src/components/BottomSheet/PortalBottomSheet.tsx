@@ -28,7 +28,7 @@ export const PortalBottomSheet = <T extends object>({
 
   return ReactDOM.createPortal(
     <>
-      <Backdrop onClick={() => onClose} />
+      <Backdrop onClick={() => onClose()} />
       <ModalWrapper>
         <ContentWrapper>
           <StaticBottomSheet
@@ -61,6 +61,7 @@ const ModalWrapper = styled.div`
   max-width: 600px;
   display: flex;
   flex-direction: column;
+  position: fixed;
 `;
 
 const ContentWrapper = styled.div`
