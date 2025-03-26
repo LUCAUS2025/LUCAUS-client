@@ -40,9 +40,10 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   background-color: #f3f4f6;
-  padding: 12px;
+  padding: 12px 0 12px 12px;
   border-radius: 12px;
   width: 100%;
+  margin-top: 1rem;
 `;
 
 const Notice = styled.div`

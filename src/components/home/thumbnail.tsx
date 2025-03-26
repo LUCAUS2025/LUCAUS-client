@@ -16,7 +16,7 @@ export const Card = styled.div`
   border-radius: 0.5rem;
   overflow-y: auto; // 세로 스크롤 활성화
   max-height: 240px; // 높이를 제한하여 스크롤이 작동하도록 설정
-  padding-bottom: 1rem;
+  padding: 1rem 0;
 `;
 
 export const CardImage = styled.img`
