@@ -59,7 +59,7 @@ const NoticeContent = styled.div`
 `;
 
 const NoticeDate = styled.div`
-  position: absolute;
+  // position: absolute;
   right: 20px;
   bottom: 20px;
   font-size: 14px;
