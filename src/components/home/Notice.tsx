@@ -44,7 +44,6 @@ const NoticeCard = styled.div`
   border-radius: 16px;
   padding: 20px;
   margin-top: 12px;
-  position: relative;
 `;
 
 const NoticeTitle = styled.div`
