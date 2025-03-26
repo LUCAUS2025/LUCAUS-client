@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
+import { Card, CardImage } from '../home/thumbnail';
 
 const ArtistScroll = styled.div`
   display: flex;
@@ -47,22 +48,6 @@ const ArtistImage = styled.img`
 const ArtistName = styled.div`
   font-size: 0.75rem;
   margin-top: 0.25rem;
-`;
-
-const Card = styled.div`
-  display: flex;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  overflow-y: auto; // 세로 스크롤 활성화
-  max-height: 240px; // 높이를 제한하여 스크롤이 작동하도록 설정
-  padding: 1rem;
-`;
-
-const CardImage = styled.img`
-  width: 580px; // 이미지 너비 580px로 수정
-  object-fit: cover;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const ListButtonWrapper = styled.div`
