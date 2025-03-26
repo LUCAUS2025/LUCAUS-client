@@ -31,6 +31,7 @@ export const StaticBottomSheet = <T extends object>({
 const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: boolean }>`
   ${bottomSheetBaseStyle};
   bottom: ${({ overlapFooter }) => (overlapFooter ? '0px' : '60px')};
+  // *** 아래 size 반응형 필요
   ${({ size }) => {
     switch (size) {
       case 'small':
@@ -43,7 +44,7 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
         `;
       case 'large':
         return `
-          top: 33%;
+          top: 35%;
         `;
       default:
         return '';
