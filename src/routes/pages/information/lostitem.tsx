@@ -22,38 +22,43 @@ const LostItem = () => {
           <ItemInfo>
             <ItemName>검정색 반지갑</ItemName>
             <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
-            <Tag>지갑/카드</Tag>
-            <ItemDate>접수 일자 | 05.19</ItemDate>
+            <Line>
+              <Tag>지갑/카드</Tag>
+              <ItemDate>접수 일자 | 05.19</ItemDate>
+            </Line>
           </ItemInfo>
         </Item>
-
-        <Item>
-          <ItemImage src="/images/iphone-white.jpg" />
-          <ItemInfo>
-            <ItemName>하얀색 아이폰</ItemName>
-            <ItemDetail>습득 장소 : 어디서 주웠는지 모르겠어요</ItemDetail>
-            <Tag>휴대폰</Tag>
-            <ItemDate>접수 일자 | 05.19</ItemDate>
-          </ItemInfo>
-        </Item>
-
-        <Item>
-          <ItemImage src="/images/iphone-black.jpg" />
-          <ItemInfo>
-            <ItemName>검정색 아이폰</ItemName>
-            <ItemDetail>습득 장소 : 잔디광장</ItemDetail>
-            <Tag>휴대폰</Tag>
-            <ItemDate>접수 일자 | 05.19</ItemDate>
-          </ItemInfo>
-        </Item>
-
         <Item>
           <ItemImage src="/images/wallet-black.jpg" />
           <ItemInfo>
             <ItemName>검정색 반지갑</ItemName>
             <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
-            <Tag>지갑/카드</Tag>
-            <ItemDate>접수 일자 | 05.19</ItemDate>
+            <Line>
+              <Tag>지갑/카드</Tag>
+              <ItemDate>접수 일자 | 05.19</ItemDate>
+            </Line>
+          </ItemInfo>
+        </Item>
+        <Item>
+          <ItemImage src="/images/wallet-black.jpg" />
+          <ItemInfo>
+            <ItemName>검정색 반지갑</ItemName>
+            <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
+            <Line>
+              <Tag>지갑/카드</Tag>
+              <ItemDate>접수 일자 | 05.19</ItemDate>
+            </Line>
+          </ItemInfo>
+        </Item>
+        <Item>
+          <ItemImage src="/images/wallet-black.jpg" />
+          <ItemInfo>
+            <ItemName>검정색 반지갑</ItemName>
+            <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
+            <Line>
+              <Tag>지갑/카드</Tag>
+              <ItemDate>접수 일자 | 05.19</ItemDate>
+            </Line>
           </ItemInfo>
         </Item>
       </ItemList>
@@ -102,8 +107,7 @@ const Item = styled.div`
   display: flex;
   gap: 16px;
   padding: 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  border-bottom: 1px solid #d1d5dc;
 `;
 
 const ItemImage = styled.img`
@@ -117,6 +121,7 @@ const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
 `;
 
 const ItemName = styled.div`
@@ -141,5 +146,11 @@ const Tag = styled.span`
 const ItemDate = styled.div`
   font-size: 12px;
   color: #9ca3af;
-  margin-top: 4px;
+`;
+
+const Line = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 `;
