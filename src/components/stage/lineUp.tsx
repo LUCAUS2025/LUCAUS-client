@@ -2,18 +2,6 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
 
-const Title = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-`;
-
-const Subtitle = styled.div`
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-bottom: 1rem;
-`;
-
 const ArtistScroll = styled.div`
   display: flex;
   overflow-x: auto;
@@ -27,7 +15,7 @@ const ArtistItem = styled.div<{ selected: boolean }>`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  color: ${({ selected }) => (selected ? '#2563eb' : '#6b7280')};
+  color: ${({ selected }) => (selected ? '#101828' : '#6a7282')};
   font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
   padding: 0.5rem;
 `;
@@ -61,28 +49,22 @@ const ArtistName = styled.div`
   margin-top: 0.25rem;
 `;
 
-const CardGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  overflow-y: auto;
-  max-height: 80vh;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
 const Card = styled.div`
+  display: flex;
+  gap: 1rem;
   border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; // 세로 스크롤 활성화
+  max-height: 20rem; // 높이를 제한하여 스크롤이 작동하도록 설정
+  border: 1px solid #d1d5db;
+  padding: 1rem;
 `;
 
 const CardImage = styled.img`
   width: 100%;
   height: 12rem;
   object-fit: cover;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  width: 280px;
 `;
 
 const ListButtonWrapper = styled.div`
@@ -158,9 +140,6 @@ export const LineUp = () => {
 
   return (
     <>
-      <Title>아티스트 라인업</Title>
-      <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-
       {isListView ? (
         <TableWrapper>
           <TableHeader>
@@ -191,11 +170,12 @@ export const LineUp = () => {
               </ArtistItem>
             ))}
           </ArtistScroll>
-          <CardGrid>
-            <Card>
-              <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-            </Card>
-          </CardGrid>
+
+          <Card>
+            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+          </Card>
         </>
       )}
 
