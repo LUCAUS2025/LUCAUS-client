@@ -1,18 +1,7 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
-
-const Title = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-`;
-
-const Subtitle = styled.div`
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-bottom: 1rem;
-`;
+import { Card, CardImage } from '../home/thumbnail';
 
 const ArtistScroll = styled.div`
   display: flex;
@@ -27,7 +16,7 @@ const ArtistItem = styled.div<{ selected: boolean }>`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  color: ${({ selected }) => (selected ? '#2563eb' : '#6b7280')};
+  color: ${({ selected }) => (selected ? '#101828' : '#6a7282')};
   font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
   padding: 0.5rem;
 `;
@@ -59,43 +48,6 @@ const ArtistImage = styled.img`
 const ArtistName = styled.div`
   font-size: 0.75rem;
   margin-top: 0.25rem;
-`;
-
-const CardGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  overflow-y: auto;
-  max-height: 80vh;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const Card = styled.div`
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const CardImage = styled.img`
-  width: 100%;
-  height: 12rem;
-  object-fit: cover;
-`;
-
-const CardContent = styled.div`
-  padding: 0.75rem;
-`;
-
-const CardTitle = styled.div`
-  font-weight: 600;
-`;
-
-const CardSubtitle = styled.div`
-  font-size: 0.875rem;
-  color: #6b7280;
 `;
 
 const ListButtonWrapper = styled.div`
@@ -171,9 +123,6 @@ export const LineUp = () => {
 
   return (
     <>
-      <Title>아티스트 라인업</Title>
-      <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-
       {isListView ? (
         <TableWrapper>
           <TableHeader>
@@ -204,15 +153,12 @@ export const LineUp = () => {
               </ArtistItem>
             ))}
           </ArtistScroll>
-          <CardGrid>
-            <Card>
-              <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-              <CardContent>
-                <CardTitle>새롭게 재해석한 옥씨 부인전</CardTitle>
-                <CardSubtitle>추영우 학우의 꿀 발린 보이스</CardSubtitle>
-              </CardContent>
-            </Card>
-          </CardGrid>
+
+          <Card>
+            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+          </Card>
         </>
       )}
 

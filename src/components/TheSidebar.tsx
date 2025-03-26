@@ -25,7 +25,7 @@ const TheSidebar = () => {
           <MenuItem href="/lostitem">분실물 안내</MenuItem>
           <MenuItem href="#">배리어 프리</MenuItem>
           <MenuItem href="#">안전</MenuItem>
-          <MenuItem href="#">총학생회 공지사항</MenuItem>
+          <MenuItem href="/notice">총학생회 공지사항</MenuItem>
         </MenuDom>
       </SidebarContainer>
     </>
