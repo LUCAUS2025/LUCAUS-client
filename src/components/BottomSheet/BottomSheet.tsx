@@ -1,7 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { BottomSheetHeader } from './BottomSheetHeader';
 import styled from 'styled-components';
-import { BOTTOM_SHEET_HEIGHT } from './BottomSheetOption';
 import { motion } from 'framer-motion';
 import { Content } from './Content';
 import useBottomSheet from './useBottomSheet';
@@ -30,12 +30,20 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ title, description, da
 
 const Wrapper = styled(motion.div)`
   ${bottomSheetBaseStyle};
+  //top: calc(100% - ${window.innerHeight * 0.4}px);
   top: calc(100% - ${window.innerHeight * 0.4}px);
-  height: 100vh;
+  position: fixed;
+  bottom: 100px;
+  //max-height: calc(100vh - 60px);
+  height: ${window.innerHeight * 0.9}px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const BottomSheetContent = styled.div`
   height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  //min-height: 0;
 `;

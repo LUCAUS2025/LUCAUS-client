@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { ReviewBarList } from '../../review/ReviewBarList';
 import { ReviewItem } from '../../review/ReviewBarItem';
 
-export const DetailReview = () => {
+interface DetailReviewProps {
+  onOpenReview: () => void;
+}
+
+export const DetailReview: React.FC<DetailReviewProps> = ({ onOpenReview }) => {
   const tempReviewItems: ReviewItem[] = [
     { icon: '👍', label: '완전 추천해요', value: 100 },
     { icon: '🤣', label: '분위기가 재밌어요', value: 80 },
@@ -18,7 +22,7 @@ export const DetailReview = () => {
         <Description>부스 방문 후 부스에 대한 리뷰를 남겨주세요.</Description>
       </Header>
       <ReviewBarList reviews={tempReviewItems} />
-      <WriteReviewButton>리뷰 작성하기</WriteReviewButton>
+      <WriteReviewButton onClick={() => onOpenReview()}>리뷰 작성하기</WriteReviewButton>
     </Wrapper>
   );
 };
@@ -55,7 +59,6 @@ const WriteReviewButton = styled.div`
   letter-spacing: -0.26px;
   text-decoration: underline;
   text-decoration-style: solid;
-  text-decoration-offset: 0%;
   text-decoration-thickness: 0%;
   text-decoration-skip-ink: auto;
   cursor: pointer;
