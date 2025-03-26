@@ -19,7 +19,7 @@ export const ReviewBarItem: React.FC<ReviewBarItemProps> = ({ item, max }) => {
     <ItemWrapper>
       <Bar percent={percent}>
         <Icon>{item.icon}</Icon>
-        <Label>{item.label}</Label>
+        <Label value={item.value}>{item.label}</Label>
         <Value>{item.value}</Value>
       </Bar>
     </ItemWrapper>
@@ -63,7 +63,7 @@ const Icon = styled.div`
   transform: translateY(-50%);
 `;
 
-const Label = styled.div`
+const Label = styled.div<{ value: number }>`
   position: absolute;
   z-index: 1;
   color: #f9fafb;
@@ -76,6 +76,8 @@ const Label = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   vertical-align: middle;
+
+  color: ${({ value }) => (value >= 50 ? '#f9fafb' : '#000000')};
 `;
 
 const Value = styled.div`
