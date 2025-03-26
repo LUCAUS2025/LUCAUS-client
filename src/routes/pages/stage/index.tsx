@@ -28,13 +28,13 @@ export const Stage = () => {
   );
 };
 
-const Title = styled.div`
+export const Title = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.25rem;
 `;
 
-const Subtitle = styled.div`
+export const Subtitle = styled.div`
   font-size: 0.875rem;
   color: #6b7280;
   margin-bottom: 1rem;
