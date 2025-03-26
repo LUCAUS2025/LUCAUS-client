@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { keywordBaseStyle } from '../../styles/keyword';
 import {
   DetailWrapper,
   HeaderContainer,
@@ -14,8 +13,20 @@ import {
 } from '../../styles/itemDetailStyles';
 import { DetailOperatingInfo } from './ItemDetailComponents/DetailOperatingInfo';
 import { DetailReview } from './ItemDetailComponents/DetailReview';
+import { PortalBottomSheet } from './PortalBottomSheet';
+import { ReviewFormContent } from './ItemDetailComponents/ReviewFormContent';
 
 export const BoothDetailContent = () => {
+  const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
+
+  const openReviewSheet = () => {
+    setIsReviewSheetOpen(true);
+  };
+
+  const closeReviewSheet = () => {
+    setIsReviewSheetOpen(false);
+  };
+
   return (
     <Wrapper>
       <DetailWrapper>
@@ -36,14 +47,22 @@ export const BoothDetailContent = () => {
           </ItemDescription>
         </HeaderContainer>
         <DetailOperatingInfo />
-        <DetailReview />
+        <DetailReview onOpenReview={openReviewSheet} />
       </DetailWrapper>
+
+      {isReviewSheetOpen && (
+        <PortalBottomSheet
+          componentProps={closeReviewSheet}
+          contentComponent={ReviewFormContent}
+          onClose={() => closeReviewSheet}
+        />
+      )}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   flex: 1;
-  overflow-y: auto;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;

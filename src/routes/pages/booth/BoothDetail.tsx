@@ -30,6 +30,7 @@ export const BoothDetail = () => {
           ContentComponent={BoothDetailContent}
           componentProps={{ id: tempBooth.id }}
           isBottomSheetHeader={false}
+          overlapFooter={false}
         />
       </BaseLayer>
     </>

@@ -119,6 +119,7 @@ export const Booth = () => {
               onClose: () => setSelectedItem(null),
             }}
             isBottomSheetHeader={true}
+            overlapFooter={false}
           />
         </>
       )}
