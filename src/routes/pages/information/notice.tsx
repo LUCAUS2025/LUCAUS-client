@@ -38,6 +38,20 @@ const noticeItems = [
     category: '안전',
     date: '05.18 오전 9:00',
   },
+  {
+    id: 6,
+    name: '축제 주의사항',
+    detail: '안전한 축제를 위한 주의사항 안내',
+    category: '안전',
+    date: '05.18 오전 9:00',
+  },
+  {
+    id: 7,
+    name: '축제 주의사항',
+    detail: '안전한 축제를 위한 주의사항 안내',
+    category: '안전',
+    date: '05.18 오전 9:00',
+  },
 ];
 
 // 클릭 가능한 Item 컴포넌트
