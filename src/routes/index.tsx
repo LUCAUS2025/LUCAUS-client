@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       {
         path: '/barrierfree',
         element: <BarrierFree />,
-      }
+      },
     ],
   },
 ]);
