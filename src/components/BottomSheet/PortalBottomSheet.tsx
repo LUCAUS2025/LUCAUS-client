@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StaticBottomSheet } from './StaticBottomSheet';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
@@ -15,6 +15,15 @@ export const PortalBottomSheet = <T extends object>({
   onClose,
 }: PortalBottomSheetProps<T>) => {
   const portalRoot = document.getElementById('portal-root');
+
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
+
   if (!portalRoot) return null;
 
   return ReactDOM.createPortal(
@@ -44,15 +53,12 @@ const Backdrop = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  //position: fixed;
-  //bottom: 0;
   left: 0;
   right: 0;
   z-index: 10;
   background-color: #fafafa;
   padding: 20px;
   max-width: 600px;
-  //max-height: 90vh;
   display: flex;
   flex-direction: column;
 `;
