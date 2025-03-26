@@ -126,6 +126,8 @@ export const Booth = () => {
   );
 };
 
+export default Booth;
+
 const OptionContainer = styled.div`
   display: flex;
   flex-direction: row;

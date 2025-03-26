@@ -4,9 +4,10 @@ import { BlackButton } from '../common/BaseButton';
 
 export const Box = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin-top: 16px;
+  width: 100%;
 `;
 
 export const SectionTitle = styled.h3` ... `;

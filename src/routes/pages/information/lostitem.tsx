@@ -97,43 +97,43 @@ const SectionTitle = styled.h3`
   font-weight: 700;
 `;
 
-const ItemList = styled.div`
+export const ItemList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  // gap: 16px;
 `;
 
-const Item = styled.div`
+export const Item = styled.div`
   display: flex;
   gap: 16px;
   padding: 12px;
   border-bottom: 1px solid #d1d5dc;
 `;
 
-const ItemImage = styled.img`
+export const ItemImage = styled.img`
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
 `;
 
-const ItemInfo = styled.div`
+export const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.8rem;
   width: 100%;
 `;
 
-const ItemName = styled.div`
+export const ItemName = styled.div`
   font-weight: 700;
 `;
 
-const ItemDetail = styled.div`
+export const ItemDetail = styled.div`
   font-size: 14px;
   color: #4b5563;
 `;
 
-const Tag = styled.span`
+export const Tag = styled.span`
   display: inline-block;
   background-color: #eef2ff;
   color: #4f46e5;
@@ -143,12 +143,12 @@ const Tag = styled.span`
   width: fit-content;
 `;
 
-const ItemDate = styled.div`
+export const ItemDate = styled.div`
   font-size: 12px;
   color: #9ca3af;
 `;
 
-const Line = styled.div`
+export const Line = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
