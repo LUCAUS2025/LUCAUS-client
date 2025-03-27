@@ -1,0 +1,53 @@
+import styled from 'styled-components';
+import { Icon } from '../common/GoBackButton';
+import { getshortNotice } from '../../services/apis/notice';
+import { useEffect, useState } from 'react';
+
+const Toast = () => {
+  const [shortNotice, setShortNotice] = useState<string | null>(null);
+
+  const getToastMessage = () => {
+    getshortNotice()
+      .then((res) => {
+        console.log(res);
+        if (res.data.length > 0) {
+          setShortNotice(res.result[0].info);
+        } else {
+          setShortNotice('공지사항이 없습니다.');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  getToastMessage();
+
+  useEffect(() => {
+    getToastMessage();
+  }, []);
+
+  return (
+    <Container>
+      <Icon src="/images/common/info.webp" alt="information" />
+      <Notice>{shortNotice}</Notice>
+    </Container>
+  );
+};
+export default Toast;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f3f4f6;
+  padding: 12px 0 12px 12px;
+  border-radius: 12px;
+  width: 100%;
+  margin-top: 1rem;
+`;
+
+const Notice = styled.div`
+  width: 80%;
+  font-size: 16px;
+  color: #364153;
+`;
