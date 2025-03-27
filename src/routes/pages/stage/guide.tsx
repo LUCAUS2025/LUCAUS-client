@@ -23,11 +23,6 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <>
-      <AppBar>
-        <BackArrow onClick={() => navigate('/stage')}>←</BackArrow>
-        오늘의 공연
-      </AppBar>
-
       <Tabs>
         <Tab active={currentTab === 'ticketing'} onClick={() => handleTabClick('ticketing')}>
           공연 티켓팅 안내
