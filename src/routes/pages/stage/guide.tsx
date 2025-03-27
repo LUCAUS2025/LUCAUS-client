@@ -4,14 +4,7 @@ import styled from 'styled-components';
 import Ticketing from '../../../components/stage/Ticketing';
 import Watchiing from '../../../components/stage/Watching';
 
-const AppBar = styled.div` ... `;
-const BackArrow = styled.span` ... `;
-
-interface LayoutProps {
-  children?: React.ReactNode;
-}
-
-const Guide: React.FC<LayoutProps> = ({ children }) => {
+const Guide = () => {
   const { tab } = useParams<{ tab: string }>();
   const navigate = useNavigate();
   const [currentTab, setCurrentTab] = useState(tab === 'ticketing' ? 'ticketing' : 'watching');
@@ -23,11 +16,6 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <>
-      <AppBar>
-        <BackArrow onClick={() => navigate('/stage')}>←</BackArrow>
-        오늘의 공연
-      </AppBar>
-
       <Tabs>
         <Tab active={currentTab === 'ticketing'} onClick={() => handleTabClick('ticketing')}>
           공연 티켓팅 안내
@@ -38,7 +26,6 @@ const Guide: React.FC<LayoutProps> = ({ children }) => {
       </Tabs>
       {currentTab === 'ticketing' && <Ticketing />}
       {currentTab === 'watching' && <Watchiing />}
-      {children}
     </>
   );
 };
