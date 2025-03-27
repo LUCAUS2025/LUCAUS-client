@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { Title } from '../../routes/pages/stage';
+import { useNavigate } from 'react-router-dom';
 
 const HomeNotice = () => {
+  const navigate = useNavigate();
+
   return (
     <NoticeSection>
       <SectionHeader>
         <Title>최근 공지사항</Title>
-        <MoreButton>더보기</MoreButton>
+        <MoreButton onClick={() => navigate('/notice')}>더보기</MoreButton>
       </SectionHeader>
       <NoticeCard>
         <NoticeTitle>베리어 프리존 안내</NoticeTitle>
