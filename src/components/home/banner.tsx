@@ -31,11 +31,27 @@ export const Banner = () => {
           <Indicator key={index} active={index === currentIndex} />
         ))}
       </Indicators>
+      <BackCards>
+        {images.map((image, index) => {
+          const isPrevious = index === (currentIndex - 1 + images.length) % images.length;
+          const isNext = index === (currentIndex + 1) % images.length;
+
+          return (
+            (isPrevious || isNext) && (
+              <BackCard key={index} active={isPrevious || isNext}>
+                <BackCardImage src={image} alt={`Slide ${index}`} />
+              </BackCard>
+            )
+          );
+        })}
+      </BackCards>
     </CarouselContainer>
   );
 };
 
 const images = [
+  '/images/home/banner/1.png',
+  '/images/home/banner/1.png',
   '/images/home/banner/1.png',
   '/images/home/banner/1.png',
   '/images/home/banner/1.png',
@@ -113,4 +129,26 @@ const Indicator = styled.div<IndicatorProps>`
   background: ${(props) => (props.active ? '#3b82f6' : '#d1d5db')};
   transition: all 0.3s ease-in-out;
   transform: ${(props) => (props.active ? 'scale(1.25)' : 'scale(1)')};
+`;
+
+const BackCards = styled.div`
+  display: flex;
+  z-index: -1;
+  width: 100%;
+  position: relative;
+`;
+
+const BackCard = styled.div<IndicatorProps>`
+  background-color: ${(props) => (props.active ? '#e5e7eb' : '#f0f0f0')};
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: ${(props) => (props.active ? '0 4px 10px rgba(0, 0, 0, 0.2)' : 'none')};
+`;
+
+const BackCardImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;
