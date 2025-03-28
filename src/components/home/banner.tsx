@@ -144,6 +144,7 @@ const BackCard = styled.div<IndicatorProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
 `;
 
 const BackCardImage = styled.img`
