@@ -4,7 +4,7 @@ import { keywordBaseStyle } from './keyword';
 
 export const DetailWrapper = styled.div`
   padding: 36px 20px;
-  gap: 40px;
+  gap: 32px;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -55,4 +55,6 @@ export const ItemDescription = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
+  margin-bottom: 8px;
+  color: #364153;
 `;

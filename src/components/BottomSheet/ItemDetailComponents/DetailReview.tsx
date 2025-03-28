@@ -2,27 +2,49 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReviewBarList } from '../../review/ReviewBarList';
 import { ReviewItem } from '../../review/ReviewBarItem';
+import { CommonItem } from '../../../data/boothFood';
 
 interface DetailReviewProps {
+  type: CommonItem['type'];
   onOpenReview: () => void;
 }
 
-export const DetailReview: React.FC<DetailReviewProps> = ({ onOpenReview }) => {
-  const tempReviewItems: ReviewItem[] = [
+export const DetailReview: React.FC<DetailReviewProps> = ({ type, onOpenReview }) => {
+  const tempBoothReviewItems: ReviewItem[] = [
     { icon: '👍', label: '완전 추천해요', value: 100 },
     { icon: '🤣', label: '분위기가 재밌어요', value: 80 },
     { icon: '🤓', label: '콘텐츠가 유익해요', value: 40 },
     { icon: '🍭', label: '간식이 맛있어요', value: 20 },
   ];
+  const tempFoodTruckReviewItems: ReviewItem[] = [
+    { icon: '👍', label: '완전 추천해요', value: 100 },
+    { icon: '😋', label: '맛있어요', value: 80 },
+    { icon: '🙆‍♂️', label: '양이 많아요', value: 40 },
+    { icon: '💨', label: '빨라요', value: 20 },
+  ];
 
   return (
     <Wrapper>
-      <Header>
-        <Title>이 부스 추천해요!</Title>
-        <Description>부스 방문 후 부스에 대한 리뷰를 남겨주세요.</Description>
-      </Header>
-      <ReviewBarList reviews={tempReviewItems} />
-      <WriteReviewButton onClick={() => onOpenReview()}>리뷰 작성하기</WriteReviewButton>
+      {type === 'booth' && (
+        <>
+          <Header>
+            <Title>이 부스 추천해요!</Title>
+            <Description>부스 방문 후 부스에 대한 리뷰를 남겨주세요.</Description>
+          </Header>
+          <ReviewBarList reviews={tempBoothReviewItems} />
+          <WriteReviewButton onClick={() => onOpenReview()}>리뷰 작성하기</WriteReviewButton>
+        </>
+      )}
+      {type === 'foodTruck' && (
+        <>
+          <Header>
+            <Title>푸드트럭, 어땠나요?</Title>
+            <Description>방문 후 푸드트럭에 대한 리뷰를 남겨주세요.</Description>
+          </Header>
+          <ReviewBarList reviews={tempFoodTruckReviewItems} />
+          <WriteReviewButton onClick={() => onOpenReview()}>리뷰 작성하기</WriteReviewButton>
+        </>
+      )}
     </Wrapper>
   );
 };
