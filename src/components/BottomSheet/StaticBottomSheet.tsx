@@ -36,11 +36,11 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
     switch (size) {
       case 'small':
         return `
-          top: 58%;
+          top: 56%;
         `;
       case 'middle':
         return `
-          top: 56%;
+          top: 52%;
         `;
       case 'large':
         return `
