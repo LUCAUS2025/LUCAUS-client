@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { LoadingSpinner } from '../../../styles/LoadingSpinner';
+import { CommonItem } from '../../../data/boothFood';
+import { ReviewItem } from '../../review/ReviewBarItem';
 
 interface ReviewOption {
   icon: string;
@@ -9,16 +11,24 @@ interface ReviewOption {
 
 interface ReviewFormContentProps {
   onClose: () => void;
+  type: CommonItem['type'];
 }
 
-const reviewOptions: ReviewOption[] = [
+const boothReviewOptions: ReviewOption[] = [
   { icon: '👍', label: '완전\n추천해요' },
   { icon: '🍭', label: '간식이\n맛있어요' },
   { icon: '🤓', label: '콘텐츠가\n유익해요' },
   { icon: '🤣', label: '분위기가\n재밌어요' },
 ];
 
-export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose }) => {
+const foodTruckReviewOptions: ReviewItem[] = [
+  { icon: '👍', label: '완전 n추천해요', value: 100 },
+  { icon: '😋', label: '맛있어요', value: 80 },
+  { icon: '🙆‍♂️', label: '양이 많아요', value: 40 },
+  { icon: '💨', label: '빨라요', value: 20 },
+];
+
+export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type }) => {
   const [selected, setSelected] = useState<number | null>(null);
   const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success'>('ready');
   const submitReview = () => {
@@ -35,14 +45,38 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose })
 
   return (
     <Wrapper>
-      {reviewStatus === 'ready' && (
+      {reviewStatus === 'ready' && type === 'booth' && (
         <>
           <TitleContainer>
             <Title>이 부스 추천해요!</Title>
             <SubText>부스 방문 후 부스에 대한 리뷰를 남겨주세요.</SubText>
           </TitleContainer>
           <OptionsContainer>
-            {reviewOptions.map((option, idx) => (
+            {boothReviewOptions.map((option, idx) => (
+              <Option key={idx}>
+                <IconWrapper key={idx} selected={selected === idx} onClick={() => setSelected(idx)}>
+                  {option.icon}
+                </IconWrapper>
+                <Label>{option.label}</Label>
+              </Option>
+            ))}
+          </OptionsContainer>
+          <ButtonContainer>
+            <CancelButton onClick={onClose}>취소</CancelButton>
+            <SubmitButton disabled={selected === null} onClick={() => submitReview()}>
+              리뷰 보내기
+            </SubmitButton>
+          </ButtonContainer>
+        </>
+      )}
+      {reviewStatus === 'ready' && type === 'foodTruck' && (
+        <>
+          <TitleContainer>
+            <Title>푸드트럭, 어땠나요?</Title>
+            <SubText>방문 후 푸드트럭에 대한 리뷰를 남겨주세요.</SubText>
+          </TitleContainer>
+          <OptionsContainer>
+            {foodTruckReviewOptions.map((option, idx) => (
               <Option key={idx}>
                 <IconWrapper key={idx} selected={selected === idx} onClick={() => setSelected(idx)}>
                   {option.icon}
