@@ -31,7 +31,7 @@ export const Banner = () => {
           <Indicator key={index} active={index === currentIndex} />
         ))}
       </Indicators>
-      <BackCards>
+      {/* <BackCards>
         {images.map((image, index) => {
           const isPrevious = index === (currentIndex - 1 + images.length) % images.length;
           const isNext = index === (currentIndex + 1) % images.length;
@@ -44,7 +44,7 @@ export const Banner = () => {
             )
           );
         })}
-      </BackCards>
+      </BackCards> */}
     </CarouselContainer>
   );
 };
@@ -133,18 +133,19 @@ const Indicator = styled.div<IndicatorProps>`
 
 const BackCards = styled.div`
   display: flex;
+  flex-direction: column;
   z-index: -1;
   width: 100%;
   position: relative;
 `;
 
 const BackCard = styled.div<IndicatorProps>`
-  background-color: ${(props) => (props.active ? '#e5e7eb' : '#f0f0f0')};
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
+  background: rgba(0, 0, 0, 0.2);
 `;
 
 const BackCardImage = styled.img`
