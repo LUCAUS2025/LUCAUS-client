@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { LoadingSpinner } from '../../../styles/LoadingSpinner';
 
 interface ReviewOption {
   icon: string;
@@ -19,27 +20,57 @@ const reviewOptions: ReviewOption[] = [
 
 export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose }) => {
   const [selected, setSelected] = useState<number | null>(null);
+  const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success'>('ready');
+  const submitReview = () => {
+    setReviewStatus('submitting');
+  };
 
   return (
     <Wrapper>
-      <TitleContainer>
-        <Title>이 부스 추천해요!</Title>
-        <SubText>부스 방문 후 부스에 대한 리뷰를 남겨주세요.</SubText>
-      </TitleContainer>
-      <OptionsContainer>
-        {reviewOptions.map((option, idx) => (
-          <Option key={idx}>
-            <IconWrapper key={idx} selected={selected === idx} onClick={() => setSelected(idx)}>
-              {option.icon}
-            </IconWrapper>
-            <Label>{option.label}</Label>
-          </Option>
-        ))}
-      </OptionsContainer>
-      <ButtonContainer>
-        <CancelButton onClick={onClose}>취소</CancelButton>
-        <SubmitButton disabled={selected === null}>리뷰 보내기</SubmitButton>
-      </ButtonContainer>
+      {reviewStatus === 'ready' && (
+        <>
+          <TitleContainer>
+            <Title>이 부스 추천해요!</Title>
+            <SubText>부스 방문 후 부스에 대한 리뷰를 남겨주세요.</SubText>
+          </TitleContainer>
+          <OptionsContainer>
+            {reviewOptions.map((option, idx) => (
+              <Option key={idx}>
+                <IconWrapper key={idx} selected={selected === idx} onClick={() => setSelected(idx)}>
+                  {option.icon}
+                </IconWrapper>
+                <Label>{option.label}</Label>
+              </Option>
+            ))}
+          </OptionsContainer>
+          <ButtonContainer>
+            <CancelButton onClick={onClose}>취소</CancelButton>
+            <SubmitButton disabled={selected === null} onClick={() => submitReview()}>
+              리뷰 보내기
+            </SubmitButton>
+          </ButtonContainer>
+        </>
+      )}
+      {reviewStatus === 'submitting' && (
+        <>
+          <TitleContainer>
+            <Title>리뷰 전송중...</Title>
+            <SubText>리뷰를 전송 중입니다.</SubText>
+            <SubmittingAnimation>
+              <LoadingSpinner />
+            </SubmittingAnimation>
+          </TitleContainer>
+        </>
+      )}
+      {reviewStatus === 'success' && (
+        <>
+          <TitleContainer>
+            <Title>리뷰 작성 완료!</Title>
+            <SubText>리뷰가 성공적으로 전송되었습니다.</SubText>
+            <SubmittingAnimation></SubmittingAnimation>
+          </TitleContainer>
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -151,3 +182,5 @@ const SubmitButton = styled.button<{ disabled: boolean }>`
   font-size: 14px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
+
+const SubmittingAnimation = styled.div``;
