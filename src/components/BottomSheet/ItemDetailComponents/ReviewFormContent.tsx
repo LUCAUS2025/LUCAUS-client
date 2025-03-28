@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { LoadingSpinner } from '../../../styles/LoadingSpinner';
 
 interface ReviewOption {
@@ -23,6 +23,14 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose })
   const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success'>('ready');
   const submitReview = () => {
     setReviewStatus('submitting');
+
+    setTimeout(() => {
+      setReviewStatus('success');
+
+      setTimeout(() => {
+        onClose();
+      }, 2000);
+    }, 2000);
   };
 
   return (
@@ -67,7 +75,9 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose })
           <TitleContainer>
             <Title>리뷰 작성 완료!</Title>
             <SubText>리뷰가 성공적으로 전송되었습니다.</SubText>
-            <SubmittingAnimation></SubmittingAnimation>
+            <CompleteAnimation>
+              <Complete src="/images/common/complete.webp"></Complete>
+            </CompleteAnimation>
           </TitleContainer>
         </>
       )}
@@ -183,4 +193,33 @@ const SubmitButton = styled.button<{ disabled: boolean }>`
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
 
-const SubmittingAnimation = styled.div``;
+const SubmittingAnimation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 56px;
+`;
+const fadeInUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const CompleteAnimation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 56px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: ${fadeInUp} 0.6s ease-out forwards;
+`;
+const Complete = styled.img`
+  width: 48px;
+  height: 48px;
+`;
