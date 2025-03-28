@@ -32,7 +32,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
   const [selected, setSelected] = useState<number | null>(null);
   const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success'>('ready');
   const submitReview = () => {
-    setReviewStatus('submitting');
+    setReviewStatus('submitting'); //
 
     setTimeout(() => {
       setReviewStatus('success');
