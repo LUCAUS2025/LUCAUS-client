@@ -62,14 +62,12 @@ const images = [
 
 const CarouselContainer = styled.div`
   width: 100%;
-  max-width: 500px;
+  // max-width: 500px;
   margin: auto;
 `;
 
 const Card = styled.div`
   overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const CardContent = styled.div`
@@ -80,9 +78,11 @@ const CardContent = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: 80%;
   height: auto;
   object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0px 0px 40px 0px #00000033;
 `;
 
 const Button = styled.button`
@@ -140,12 +140,10 @@ const BackCards = styled.div`
 
 const BackCard = styled.div<IndicatorProps>`
   background-color: ${(props) => (props.active ? '#e5e7eb' : '#f0f0f0')};
-  border-radius: 8px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: ${(props) => (props.active ? '0 4px 10px rgba(0, 0, 0, 0.2)' : 'none')};
 `;
 
 const BackCardImage = styled.img`
