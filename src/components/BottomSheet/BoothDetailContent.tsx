@@ -47,12 +47,12 @@ export const BoothDetailContent = () => {
           </ItemDescription>
         </HeaderContainer>
         <DetailOperatingInfo />
-        <DetailReview onOpenReview={openReviewSheet} />
+        <DetailReview type={'booth'} onOpenReview={openReviewSheet} />
       </DetailWrapper>
       {/* 리뷰 바텀시트 */}
       {isReviewSheetOpen && (
         <PortalBottomSheet
-          componentProps={{ onClose: closeReviewSheet }}
+          componentProps={{ onClose: closeReviewSheet, type: 'booth' }}
           contentComponent={ReviewFormContent}
           onClose={closeReviewSheet}
         />
