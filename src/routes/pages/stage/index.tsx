@@ -3,23 +3,33 @@ import { Thumbnail } from '../../../components/home/thumbnail';
 import { LineUp } from '../../../components/stage/lineUp';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { CommonItem } from '../../../data/boothFood';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
-import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
-import { OptionContainer } from '../foodTruck';
-import { dateOptions, Option, placeOptions } from '../../../data/options';
+import { dateOptions, Option } from '../../../data/options';
+
+const stageOptions = ['버스킹', '응원제', '본무대', '아티스트'];
 
 export const Stage = () => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
-  const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
-  const [selectedItem, setSelectedItem] = useState<CommonItem | null>(null);
+  const [selectedStage, setSelectedStage] = useState(stageOptions[0]); // 기본값: "버스킹"
+  const [isStageOptionActive, setIsStageOptionActive] = useState(false);
+
+  const handleStageSelect = (option: string) => {
+    setSelectedStage(option);
+    setIsStageOptionActive(false);
+  };
 
   return (
     <>
       <DropDownContainer>
         <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
-        <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
+        <DropDownContainer>
+          {stageOptions.map((option) => (
+            <OptionItem key={option} onClick={() => handleStageSelect(option)}>
+              {option}
+            </OptionItem>
+          ))}
+        </DropDownContainer>
       </DropDownContainer>
       <img src="./images/home/stage/ticket.png" onClick={() => navigate('/guide/ticketing')} style={{ width: '80%' }} />
       <Title>청룡가요제</Title>
@@ -51,11 +61,27 @@ export const Subtitle = styled.div`
   margin-bottom: 1rem;
 `;
 
-const DropDownContainer = styled(OptionContainer)`
-  margin: 0 1rem;
+const DropDownContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  gap: 0.5rem;
+`;
+
+const OptionItem = styled.div`
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  color: #364153;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5dc;
+  box-shadow: 0px 0px 12px 0px #00000014;
+
+  &:hover {
+    background-color: #f3f4f6;
+  }
 `;
