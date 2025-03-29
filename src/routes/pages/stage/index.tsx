@@ -8,7 +8,6 @@ import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
 import { OptionContainer } from '../foodTruck';
 import { dateOptions, Option, placeOptions } from '../../../data/options';
-import { DropDown } from '../../../components/common/DropDown/DropDown';
 
 export const Stage = () => {
   const navigate = useNavigate();
