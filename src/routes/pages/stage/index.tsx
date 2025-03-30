@@ -16,7 +16,6 @@ export const Stage = () => {
 
   const handleStageSelect = (option: string) => {
     setSelectedStage(option);
-    setIsStageOptionActive(false);
   };
 
   return (
@@ -25,7 +24,7 @@ export const Stage = () => {
         <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
         <DropDownContainer>
           {stageOptions.map((option) => (
-            <OptionItem key={option} onClick={() => handleStageSelect(option)}>
+            <OptionItem key={option} selected={selectedStage === option} onClick={() => handleStageSelect(option)}>
               {option}
             </OptionItem>
           ))}
@@ -70,18 +69,19 @@ const DropDownContainer = styled.div`
   gap: 0.5rem;
 `;
 
-const OptionItem = styled.div`
+const OptionItem = styled.div<{ selected: boolean }>`
   padding: 0.5rem 1rem;
   cursor: pointer;
   border-radius: 0.375rem;
-  color: #364153;
+  color: ${({ selected }) => (selected ? 'white' : '#364153')};
   font-size: 0.875rem;
   display: flex;
   align-items: center;
-  border: 1px solid #d1d5dc;
+  border: 1px solid ${({ selected }) => (selected ? '#3b82f6' : '#d1d5dc')};
+  background-color: ${({ selected }) => (selected ? '#3b82f6' : 'white')};
   box-shadow: 0px 0px 12px 0px #00000014;
 
   &:hover {
-    background-color: #f3f4f6;
+    background-color: ${({ selected }) => (selected ? '#2563eb' : '#f3f4f6')};
   }
 `;
