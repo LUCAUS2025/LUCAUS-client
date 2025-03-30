@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Information = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <FestivalInfo>
@@ -12,21 +15,21 @@ export const Information = () => {
         <InfoContainer>
           <InfoBox>
             <InfoTitleImg src="images/information/idea.webp" />
-            <InfoTitleCol>
+            <InfoTitleCol onClick={() => navigate('/notice')}>
               <InfoBoxTitle>총학생회 공지</InfoBoxTitle>
               <InfoBoxDescription>배리어 프리존 안내</InfoBoxDescription>
             </InfoTitleCol>
           </InfoBox>
           <CardList>
-            <InfoCard>
+            <InfoCard onClick={() => navigate('/lostitem')}>
               <CardImg />
               <CardText>분실물 안내</CardText>
             </InfoCard>
-            <InfoCard>
+            <InfoCard onClick={() => navigate('/barrierfree')}>
               <CardImg />
               <CardText>배리어프리</CardText>
             </InfoCard>
-            <InfoCard>
+            <InfoCard onClick={() => navigate('/entry')}>
               <CardImg />
               <CardText>이동 정책</CardText>
             </InfoCard>
@@ -48,10 +51,10 @@ export const Information = () => {
             </InfoBox>
           </BoxContainer>
           <BoxContainer>
-            <Subtitle>축제에 관해서 궁금한 것이 있어요!</Subtitle>
+            <Subtitle>축제 사이트에 오류가 있어요!</Subtitle>
             <InfoBox>
               <InfoBoxImg src="images/information/idea.webp"></InfoBoxImg>
-              <InfoBoxText>축제 기획단 카카오톡 채널 바로가기</InfoBoxText>
+              <InfoBoxText>멋쟁이사자처럼 중앙대학교 카카오톡 채널 바로가기</InfoBoxText>
             </InfoBox>
           </BoxContainer>
         </BoxList>
