@@ -2,7 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMenu } from '../context/MenuContext';
 
-export const TheHeader = () => {
+interface TheHeaderProps {
+  title?: string;
+}
+
+export const TheHeader = ({ title = '오늘의 공연' }: TheHeaderProps) => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
 
@@ -15,7 +19,7 @@ export const TheHeader = () => {
     <Wrapper>
       <Header onClick={() => navigate('/')}>
         <Icon onClick={openMenu} className="left-icon"></Icon>
-        <img style={{ height: '36px' }} src="./images/common/logo.webp" alt="logo" />
+        <img style={{ height: '24px' }} src="./images/home/lucaus.webp" alt="logo" />
         <Icon></Icon>
       </Header>
     </Wrapper>
@@ -32,11 +36,10 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #1447e6;
-  color: white;
+  background-color: #f9fafb;
+  color: #030712;
   text-align: center;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   height: 60px;
   padding: 0 3%;
@@ -49,5 +52,9 @@ const Icon = styled.div`
 
   &.left-icon {
     background-image: url('./images/home/icon-L.webp');
+  }
+
+  &:not(.left-icon) {
+    background-image: none;
   }
 `;
