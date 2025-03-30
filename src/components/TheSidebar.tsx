@@ -23,8 +23,8 @@ const TheSidebar = () => {
           <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
           <MenuHeading>정보</MenuHeading>
           <MenuItem href="/lostitem">분실물 안내</MenuItem>
-          <MenuItem href="#">배리어 프리</MenuItem>
-          <MenuItem href="#">안전</MenuItem>
+          <MenuItem href="/barrierfree">배리어 프리</MenuItem>
+          <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
           <MenuItem href="/notice">총학생회 공지사항</MenuItem>
         </MenuDom>
       </SidebarContainer>

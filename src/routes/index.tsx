@@ -10,6 +10,10 @@ import Guide from './pages/stage/guide';
 import { BoothDetail } from './pages/booth/BoothDetail';
 import LostItem from './pages/information/lostitem';
 import Notice from './pages/information/notice';
+import NoticeDetail from './pages/information/notice-detail';
+import BarrierFree from './pages/information/barrierfree';
+import { FoodTruckDetail } from './pages/foodTruck/FoodTruckDetail';
+import Entry from './pages/information/entry';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +44,10 @@ const router = createBrowserRouter([
         element: <FoodTruck />,
       },
       {
+        path: '/foodTruck/:id',
+        element: <FoodTruckDetail />,
+      },
+      {
         path: '/information',
         element: <Information />,
       },
@@ -50,6 +58,18 @@ const router = createBrowserRouter([
       {
         path: '/notice',
         element: <Notice />,
+      },
+      {
+        path: '/notice/:id',
+        element: <NoticeDetail />,
+      },
+      {
+        path: '/barrierfree',
+        element: <BarrierFree />,
+      },
+      {
+        path: '/entry',
+        element: <Entry />,
       },
     ],
   },
