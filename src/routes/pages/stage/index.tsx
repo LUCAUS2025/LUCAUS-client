@@ -56,23 +56,26 @@ export const Stage = () => {
       />
       <div ref={buskingRef}>
         <Title>버스킹</Title>
-        <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
-        <Thumbnail />
       </div>
+      <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
+      <Thumbnail />
+
       <div ref={cheeringRef}>
         <Title>응원제</Title>
-        <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
       </div>
+      <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
+
       <div ref={mainStageRef}>
         <Title>본무대 라인업</Title>
-        <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
-        <LineUp />
       </div>
+      <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
+      <LineUp />
+
       <div ref={artistRef}>
         <Title>아티스트 라인업</Title>
-        <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-        <LineUp />
       </div>
+      <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
+      <LineUp />
     </>
   );
 };
