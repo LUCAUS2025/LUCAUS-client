@@ -68,7 +68,7 @@ export const FoodTruck = () => {
 
 export default FoodTruck;
 
-const OptionContainer = styled.div`
+export const OptionContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
