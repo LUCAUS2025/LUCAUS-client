@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Thumbnail } from '../../../components/home/thumbnail';
 import { LineUp } from '../../../components/stage/lineUp';
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +12,28 @@ export const Stage = () => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
   const [selectedStage, setSelectedStage] = useState(stageOptions[0]); // 기본값: "버스킹"
-  const [isStageOptionActive, setIsStageOptionActive] = useState(false);
+
+  // 각 섹션에 대한 ref 생성
+  const buskingRef = useRef<HTMLDivElement>(null);
+  const cheeringRef = useRef<HTMLDivElement>(null);
+  const mainStageRef = useRef<HTMLDivElement>(null);
+  const artistRef = useRef<HTMLDivElement>(null);
 
   const handleStageSelect = (option: string) => {
     setSelectedStage(option);
+
+    // 선택된 옵션에 따라 해당 섹션으로 스크롤
+    const sectionRefs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
+      버스킹: buskingRef,
+      응원제: cheeringRef,
+      본무대: mainStageRef,
+      아티스트: artistRef,
+    };
+
+    const targetRef = sectionRefs[option];
+    if (targetRef?.current) {
+      targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
@@ -30,24 +48,38 @@ export const Stage = () => {
           ))}
         </DropDownContainer>
       </DropDownContainer>
-      <img src="./images/home/stage/ticket.png" onClick={() => navigate('/guide/ticketing')} style={{ width: '80%' }} />
-      <Title>청룡가요제</Title>
-      <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
-      <Thumbnail />
-      <Title>무대 기획전</Title>
-      <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
-      <Title>본무대 라인업</Title>
-      <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
-      <LineUp />
-      <Title>아티스트 라인업</Title>
-      <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-      <LineUp />
+      <img
+        src="./images/home/stage/ticket.png"
+        onClick={() => navigate('/guide/ticketing')}
+        style={{ width: '80%' }}
+        alt="티켓 안내"
+      />
+      <div ref={buskingRef}>
+        <Title>버스킹</Title>
+        <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
+        <Thumbnail />
+      </div>
+      <div ref={cheeringRef}>
+        <Title>응원제</Title>
+        <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
+      </div>
+      <div ref={mainStageRef}>
+        <Title>본무대 라인업</Title>
+        <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
+        <LineUp />
+      </div>
+      <div ref={artistRef}>
+        <Title>아티스트 라인업</Title>
+        <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
+        <LineUp />
+      </div>
     </>
   );
 };
 
 export default Stage;
 
+// 스타일 컴포넌트
 export const Title = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
