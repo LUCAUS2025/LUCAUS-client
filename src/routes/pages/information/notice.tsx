@@ -9,6 +9,7 @@ const noticeItems = [
     detail: '줄 똑바로 서서 이용해주세요',
     category: '이용안내',
     date: '05.22 오후 6:00',
+    newindex: true,
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const noticeItems = [
     detail: '우천으로 인한 일정 변경사항을 확인해주세요',
     category: '일정',
     date: '05.21 오전 10:30',
+    newindex: true,
   },
   {
     id: 3,
@@ -23,6 +25,7 @@ const noticeItems = [
     detail: '푸드트럭 위치가 변경되었습니다',
     category: '위치',
     date: '05.20 오후 2:15',
+    newindex: true,
   },
   {
     id: 4,
@@ -30,6 +33,7 @@ const noticeItems = [
     detail: '공연 티켓팅 방법 및 시간 안내',
     category: '티켓',
     date: '05.19 오후 5:30',
+    newindex: false,
   },
   {
     id: 5,
@@ -56,6 +60,7 @@ const noticeItems = [
 
 // 클릭 가능한 Item 컴포넌트
 const ClickableItem = styled(Item)`
+  position: relative;
   cursor: pointer;
   transition: background-color 0.2s;
 
@@ -80,7 +85,10 @@ const Notice = () => {
       {noticeItems.map((item) => (
         <ClickableItem key={item.id} onClick={() => handleItemClick(item.id)}>
           <ItemInfo>
-            <ItemName>{item.name}</ItemName>
+            <ItemNameRow>
+              {item.newindex && <RedDot />}
+              <ItemName>{item.name}</ItemName>
+            </ItemNameRow>
             <ItemDetail>{item.detail}</ItemDetail>
             <Line>
               <Tag>{item.category}</Tag>
@@ -94,3 +102,19 @@ const Notice = () => {
 };
 
 export default Notice;
+
+// 빨간 점 스타일 컴포넌트
+const RedDot = styled.span`
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+`;
+
+const ItemNameRow = styled.div`
+  display: flex;
+  align-items: center;
+`;

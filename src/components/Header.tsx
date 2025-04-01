@@ -1,12 +1,12 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMenu } from '../context/MenuContext';
+import { useNavigate } from 'react-router-dom';
 
 interface TheHeaderProps {
   title?: string;
 }
 
-export const TheHeader = ({ title = '오늘의 공연' }: TheHeaderProps) => {
+export const Header = ({ title = '오늘의 공연' }: TheHeaderProps) => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
 
@@ -17,15 +17,14 @@ export const TheHeader = ({ title = '오늘의 공연' }: TheHeaderProps) => {
 
   return (
     <Wrapper>
-      <Header onClick={() => navigate('/')}>
+      <HeaderWrapper onClick={() => navigate('/')}>
         <Icon onClick={openMenu} className="left-icon"></Icon>
-        <img style={{ height: '24px' }} src="./images/home/lucaus.webp" alt="logo" />
         <Icon></Icon>
-      </Header>
+      </HeaderWrapper>
     </Wrapper>
   );
 };
-export default TheHeader;
+export default Header;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -35,14 +34,9 @@ const Wrapper = styled.div`
   z-index: 3;
 `;
 
-const Header = styled.div`
+const HeaderWrapper = styled.div`
   background-color: #f9fafb;
-  color: #030712;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  height: 60px;
-  padding: 0 3%;
+  color: white;
 `;
 
 const Icon = styled.div`
