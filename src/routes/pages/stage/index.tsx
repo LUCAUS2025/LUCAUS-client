@@ -40,7 +40,7 @@ export const Stage = () => {
     <>
       <DropDownContainer>
         <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
-        <DropDownContainer>
+        <DropDownContainer style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
           {stageOptions.map((option) => (
             <OptionItem key={option} selected={selectedStage === option} onClick={() => handleStageSelect(option)}>
               {option}
