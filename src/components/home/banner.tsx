@@ -31,6 +31,20 @@ export const Banner = () => {
           <Indicator key={index} active={index === currentIndex} />
         ))}
       </Indicators>
+      {/* <BackCards>
+        {images.map((image, index) => {
+          const isPrevious = index === (currentIndex - 1 + images.length) % images.length;
+          const isNext = index === (currentIndex + 1) % images.length;
+
+          return (
+            (isPrevious || isNext) && (
+              <BackCard key={index} active={isPrevious || isNext}>
+                <BackCardImage src={image} alt={`Slide ${index}`} />
+              </BackCard>
+            )
+          );
+        })}
+      </BackCards> */}
     </CarouselContainer>
   );
 };
@@ -42,18 +56,18 @@ const images = [
   '/images/home/banner/1.png',
   '/images/home/banner/1.png',
   '/images/home/banner/1.png',
+  '/images/home/banner/1.png',
+  '/images/home/banner/1.png',
 ];
 
 const CarouselContainer = styled.div`
   width: 100%;
-  max-width: 500px;
+  // max-width: 500px;
   margin: auto;
 `;
 
 const Card = styled.div`
   overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const CardContent = styled.div`
@@ -64,9 +78,11 @@ const CardContent = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: 80%;
   height: auto;
   object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0px 0px 40px 0px #00000033;
 `;
 
 const Button = styled.button`
@@ -113,4 +129,26 @@ const Indicator = styled.div<IndicatorProps>`
   background: ${(props) => (props.active ? '#3b82f6' : '#d1d5db')};
   transition: all 0.3s ease-in-out;
   transform: ${(props) => (props.active ? 'scale(1.25)' : 'scale(1)')};
+`;
+
+const BackCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  z-index: -1;
+  width: 100%;
+  position: relative;
+`;
+
+const BackCard = styled.div<IndicatorProps>`
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+`;
+
+const BackCardImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;

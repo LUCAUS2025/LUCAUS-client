@@ -28,7 +28,7 @@ const ArtistImageWrapper = styled.div<{ selected: boolean }>`
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  border: 2px solid transparent;
+  border: 2px solid transparent; //이거 안 하면 border가 울렁거림 ㅠㅠ
   overflow-y: auto;
   ${({ selected }) =>
     selected &&
@@ -105,9 +105,6 @@ const Tag = styled.span`
 
 const artists = [
   '멋쟁이 밴드처럼',
-  '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
   '멋쟁이 호랑이처럼',
   '멋쟁이 호랑이처럼',
   '멋쟁이 호랑이처럼',

@@ -1,19 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMenu } from '../context/MenuContext';
-import exp from 'constants';
 
 interface TheHeaderProps {
   title?: string;
-  backgroundColor?: string;
-  textColor?: string;
 }
 
-export const Header = ({
-  title = './images/home/lucaus.webp',
-  backgroundColor = '#1447e6',
-  textColor = '#000',
-}: TheHeaderProps) => {
+export const TheHeader = ({ title = '오늘의 공연' }: TheHeaderProps) => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
 
@@ -42,8 +35,12 @@ const Wrapper = styled.div`
 `;
 
 const HeaderWrapper = styled.div`
-  background-color: #F9FAFB;
+  background-color: #f9fafb;
   color: white;
+`;
+const Header = styled.div`
+  background-color: #f9fafb;
+  color: #030712;
   text-align: center;
   display: flex;
   align-items: center;

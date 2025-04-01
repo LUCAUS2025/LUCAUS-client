@@ -119,6 +119,7 @@ export const Booth = () => {
               onClose: () => setSelectedItem(null),
             }}
             isBottomSheetHeader={true}
+            overlapFooter={false}
           />
         </>
       )}
@@ -139,6 +140,6 @@ const OptionContainer = styled.div`
 
 const GoBackButtonContainer = styled.div`
   position: absolute;
-  left: 10px;
+  left: 7px;
   top: 20px;
 `;

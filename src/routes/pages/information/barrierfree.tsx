@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box, SectionTitle } from '../../../components/stage/Watching';
 import { BlackButton } from '../../../components/common/BaseButton';
-import { Title } from '../stage';
 
 const BarrierFree = () => {
   return (

@@ -4,10 +4,11 @@ import { bottomSheetBaseStyle } from '../../styles/bottomSheetStyles';
 import { BottomSheetHeader } from './BottomSheetHeader';
 
 interface StaticBottomSheetProps<T> {
-  size: 'small' | 'large';
+  size: 'small' | 'middle' | 'large';
   ContentComponent: React.ComponentType<T>;
   componentProps: T;
   isBottomSheetHeader: boolean;
+  overlapFooter: boolean;
 }
 
 export const StaticBottomSheet = <T extends object>({
@@ -15,9 +16,10 @@ export const StaticBottomSheet = <T extends object>({
   ContentComponent,
   componentProps,
   isBottomSheetHeader,
+  overlapFooter,
 }: StaticBottomSheetProps<T>) => {
   return (
-    <Wrapper size={size}>
+    <Wrapper size={size} overlapFooter={overlapFooter}>
       {isBottomSheetHeader && <BottomSheetHeader />}
       <ContentWrapper>
         <ContentComponent {...componentProps} />
@@ -26,10 +28,28 @@ export const StaticBottomSheet = <T extends object>({
   );
 };
 
-const Wrapper = styled.div<{ size: 'small' | 'large' }>`
+const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: boolean }>`
   ${bottomSheetBaseStyle};
-  top: ${({ size }) => (size === 'large' ? '33%' : '65%')};
-  //height: ${({ size }) => (size === 'large' ? '80vh' : '60vh')};
+  bottom: ${({ overlapFooter }) => (overlapFooter ? '0px' : '60px')};
+  // *** 아래 size 반응형 필요
+  ${({ size }) => {
+    switch (size) {
+      case 'small':
+        return `
+          top: 56%;
+        `;
+      case 'middle':
+        return `
+          top: 52%;
+        `;
+      case 'large':
+        return `
+          top: 35%;
+        `;
+      default:
+        return '';
+    }
+  }}
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -39,4 +59,5 @@ const ContentWrapper = styled.div`
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  min-height: 0;
 `;

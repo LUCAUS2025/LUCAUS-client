@@ -1,19 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMenu } from '../context/MenuContext';
-import exp from 'constants';
 
-interface TheHeaderProps {
-  title?: string;
-  backgroundColor?: string;
-  textColor?: string;
-}
-
-export const TheHeader = ({
-  title = './images/home/lucaus.webp',
-  backgroundColor = '#1447e6',
-  textColor = '#000',
-}: TheHeaderProps) => {
+export const TheHeader = () => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
 
@@ -26,7 +15,7 @@ export const TheHeader = ({
     <Wrapper>
       <Header onClick={() => navigate('/')}>
         <Icon onClick={openMenu} className="left-icon"></Icon>
-        <img style={{ height: '24px' }} src="./images/home/lucaus.webp" alt="logo" />
+        <img style={{ height: '36px' }} src="./images/common/logo.webp" alt="logo" />
         <Icon></Icon>
       </Header>
     </Wrapper>
@@ -60,9 +49,5 @@ const Icon = styled.div`
 
   &.left-icon {
     background-image: url('./images/home/icon-L.webp');
-  }
-
-  &:not(.left-icon) {
-    background-image: none;
   }
 `;
