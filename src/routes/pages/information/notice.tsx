@@ -60,6 +60,7 @@ const noticeItems = [
 
 // 클릭 가능한 Item 컴포넌트
 const ClickableItem = styled(Item)`
+  position: relative;
   cursor: pointer;
   transition: background-color 0.2s;
 
@@ -104,13 +105,13 @@ export default Notice;
 
 // 빨간 점 스타일 컴포넌트
 const RedDot = styled.span`
+  position: absolute;
+  top: 8px;
+  left: 5px;
   width: 6px;
   height: 6px;
   background-color: red;
   border-radius: 50%;
-  // display: inline-block;
-  margin-right: 6px;
-  margin-bottom: 6x;
 `;
 
 const ItemNameRow = styled.div`
