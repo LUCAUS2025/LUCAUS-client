@@ -21,6 +21,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -28,6 +29,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -35,6 +37,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -42,6 +45,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -49,6 +53,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -56,6 +61,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -63,6 +69,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -70,6 +77,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -77,6 +85,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
     {
@@ -84,6 +93,7 @@ export const Booth = () => {
       title: '배리어 프리존 안내',
       description: '배리어 프리존 안내',
       keywords: ['배리어', '프리존'],
+      recommendCount: 323,
       type: 'booth',
     },
   ];
