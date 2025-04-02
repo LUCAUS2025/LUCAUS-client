@@ -31,7 +31,7 @@ export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data
                   </ItemKeywords>
                 </ItemTextContainer>
                 <RecommendContainer>
-                  <RecommendNum>323</RecommendNum>
+                  <RecommendNum>{item.recommendCount}</RecommendNum>
                   <RecommendIcon src="images/common/thumbsUp.webp" />
                 </RecommendContainer>
               </ItemContent>
