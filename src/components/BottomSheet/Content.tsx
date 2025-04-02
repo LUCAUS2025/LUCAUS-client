@@ -19,16 +19,22 @@ export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data
         <List>
           {data?.map((item) => (
             <Item key={item.id} onClick={() => setSelectedItem(item)}>
-              <ItemId>#{item.id}</ItemId>
-              <ItemTextContainer>
-                <ItemTitle>{item.title}</ItemTitle>
-                {item.description && <ItemDescription>{item.description}</ItemDescription>}
-                <ItemKeywords>
-                  {item.keywords.map((key, index) => (
-                    <Keyword key={index}>#{key}</Keyword>
-                  ))}
-                </ItemKeywords>
-              </ItemTextContainer>
+              <ItemContent>
+                <ItemId>#{item.id}</ItemId>
+                <ItemTextContainer>
+                  <ItemTitle>{item.title}</ItemTitle>
+                  {item.description && <ItemDescription>{item.description}</ItemDescription>}
+                  <ItemKeywords>
+                    {item.keywords.map((key, index) => (
+                      <Keyword key={index}>#{key}</Keyword>
+                    ))}
+                  </ItemKeywords>
+                </ItemTextContainer>
+                <RecommendContainer>
+                  <RecommendNum>323</RecommendNum>
+                  <RecommendIcon src="images/common/thumbsUp.webp" />
+                </RecommendContainer>
+              </ItemContent>
             </Item>
           ))}
         </List>
@@ -63,10 +69,15 @@ const List = styled.div`
   padding-bottom: 20vh;
 `;
 const Item = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const ItemContent = styled.div`
   padding: 12px 16px;
   display: flex;
   flex-direction: row;
   gap: 12px;
+  width: 100%;
 `;
 const ItemId = styled.div`
   font-size: 16px;
@@ -93,4 +104,29 @@ const ItemTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
+`;
+const RecommendContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  justify-self: flex-end;
+`;
+const RecommendNum = styled.div`
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 150%;
+  letter-spacing: -0.26px;
+  color: #364153;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  margin-top: 1px;
+`;
+const RecommendIcon = styled.img`
+  width: 16px;
+  height: 16px;
 `;
