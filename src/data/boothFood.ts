@@ -4,6 +4,7 @@ export interface CommonItem {
   keywords: string[];
   description?: string;
   type: 'booth' | 'foodTruck';
+  recommendCount: number;
 }
 
 export interface BoothItem extends CommonItem {
