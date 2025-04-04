@@ -1,7 +1,7 @@
 import React from 'react';
-import { CommonItem } from '../../data/boothFood';
+import { CommonItem } from '../../../data/boothFood';
 import styled from 'styled-components';
-import { keywordBaseStyle } from '../../styles/keyword';
+import { keywordBaseStyle } from '../../../styles/keyword';
 import { useNavigate } from 'react-router-dom';
 
 interface ItemPreviewContentProps {

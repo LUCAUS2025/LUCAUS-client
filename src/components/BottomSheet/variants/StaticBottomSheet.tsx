@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { bottomSheetBaseStyle } from '../../styles/bottomSheetStyles';
-import { BottomSheetHeader } from './BottomSheetHeader';
+import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
+import { BottomSheetHeader } from '../layout/BottomSheetHeader';
 
 interface StaticBottomSheetProps<T> {
   size: 'small' | 'middle' | 'large';
