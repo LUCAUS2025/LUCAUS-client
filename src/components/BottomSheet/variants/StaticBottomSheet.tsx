@@ -50,7 +50,7 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
         return '';
     }
   }}
-  z-index: 10;
+  z-index: 9;
   display: flex;
   flex-direction: column;
 `;
