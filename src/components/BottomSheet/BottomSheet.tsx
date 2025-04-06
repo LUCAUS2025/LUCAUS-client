@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { BottomSheetHeader } from './BottomSheetHeader';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';

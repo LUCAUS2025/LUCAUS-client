@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
+import { Item, ItemDate, ItemDetail, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
 
 const noticeItems = [
   {

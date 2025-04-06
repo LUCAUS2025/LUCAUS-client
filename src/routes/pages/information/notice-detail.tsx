@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
+import { useParams } from 'react-router-dom';
+import { Item, ItemDate, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
 
 const noticeItems = [
   {
@@ -40,7 +40,6 @@ const noticeItems = [
 ];
 
 const NoticeDetail = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
   const noticeId = Number(id);
   const item = noticeItems.find((item) => item.id === noticeId);

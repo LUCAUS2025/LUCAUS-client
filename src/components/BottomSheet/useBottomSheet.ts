@@ -104,8 +104,8 @@ export default function useBottomSheet() {
         document.body.style.overflowY = 'hidden';
       }
     };
-
-    const handleTouchEnd = (e: TouchEvent) => {
+    // const handleTouchEnd = (e: TouchEvent) => { 였는데 일단 수정할게요오ㅠㅠ
+    const handleTouchEnd = () => {
       const { touchMove } = metrics.current;
 
       // 드래그가 끝난 후, 현재 위치인 바텀 시트의 최상단 모서리 Y
