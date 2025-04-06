@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ReviewBarList } from '../../review/ReviewBarList';
 import { ReviewItem } from '../../review/ReviewBarItem';
