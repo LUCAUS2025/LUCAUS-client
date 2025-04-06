@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
+import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
-import { BottomSheet } from '../../../components/BottomSheet/BottomSheet';
+import { BasicBottomSheet } from '../../../components/BottomSheet/variants/BasicBottomSheet';
 import { dateOptions, Option, placeOptions } from '../../../data/options';
 import { CommonItem, foodTruckDescription, FoodTruckItem, foodTruckTitle } from '../../../data/boothFood';
 import styled from 'styled-components';
 import exp from 'constants';
 import { GoBackButton } from '../../../components/common/GoBackButton';
-import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
-import { ItemPreviewContent } from '../../../components/BottomSheet/ItemPreviewContent';
+import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
+import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
 
 export const FoodTruck = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
@@ -37,7 +37,7 @@ export const FoodTruck = () => {
             <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
             <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
           </OptionContainer>
-          <BottomSheet
+          <BasicBottomSheet
             title={foodTruckTitle}
             description={foodTruckDescription}
             data={tempFoodTruckData}

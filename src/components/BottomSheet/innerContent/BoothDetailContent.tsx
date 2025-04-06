@@ -10,11 +10,11 @@ import {
   ItemDescription,
   Keywords,
   Keyword,
-} from '../../styles/itemDetailStyles';
-import { DetailOperatingInfo } from './ItemDetailComponents/DetailOperatingInfo';
-import { DetailReview } from './ItemDetailComponents/DetailReview';
-import { PortalBottomSheet } from './PortalBottomSheet';
-import { ReviewFormContent } from './ItemDetailComponents/ReviewFormContent';
+} from '../../../styles/itemDetailStyles';
+import { DetailOperatingInfo } from '../itemDetailComponents/DetailOperatingInfo';
+import { DetailReview } from '../itemDetailComponents/DetailReview';
+import { PortalBottomSheet } from '../variants/PortalBottomSheet';
+import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
 
 export const BoothDetailContent = () => {
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { bottomSheetBaseStyle } from '../../styles/bottomSheetStyles';
-import { BottomSheetHeader } from './BottomSheetHeader';
+import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
+import { BottomSheetHeader } from '../layout/BottomSheetHeader';
 
 interface StaticBottomSheetProps<T> {
   size: 'small' | 'middle' | 'large';
@@ -50,7 +50,7 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
         return '';
     }
   }}
-  z-index: 10;
+  z-index: 9;
   display: flex;
   flex-direction: column;
 `;

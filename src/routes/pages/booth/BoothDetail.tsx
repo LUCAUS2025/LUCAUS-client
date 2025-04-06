@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
-import { BoothDetailContent } from '../../../components/BottomSheet/BoothDetailContent';
-import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
+import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
+import { BoothDetailContent } from '../../../components/BottomSheet/innerContent/BoothDetailContent';
+import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { useNavigate } from 'react-router-dom';
 
