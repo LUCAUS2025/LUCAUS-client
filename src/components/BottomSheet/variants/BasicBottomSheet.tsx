@@ -1,27 +1,27 @@
 import React from 'react';
-import { BottomSheetHeader } from './BottomSheetHeader';
+import { BottomSheetHeader } from '../layout/BottomSheetHeader';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Content } from './Content';
-import useBottomSheet from './useBottomSheet';
-import { CommonItem } from '../../data/boothFood';
-import { bottomSheetBaseStyle } from '../../styles/bottomSheetStyles';
+import { ItemListContent } from '../innerContent/ItemListContent';
+import useBottomSheet from '../useBottomSheet';
+import { CommonItem } from '../../../data/boothFood';
+import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
 
 interface BottomSheetProps {
-  title: string;
-  description: string;
-  data: CommonItem[];
+  title?: string;
+  description?: string;
+  data?: CommonItem[];
   setSelectedItem: (item: CommonItem | null) => void;
 }
 
-export const BottomSheet: React.FC<BottomSheetProps> = ({ title, description, data, setSelectedItem }) => {
+export const BasicBottomSheet: React.FC<BottomSheetProps> = ({ title, description, data, setSelectedItem }) => {
   const { sheet, content } = useBottomSheet();
 
   return (
     <Wrapper ref={sheet}>
       <BottomSheetHeader />
       <BottomSheetContent ref={content}>
-        <Content theTitle={title} theDescription={description} data={data} setSelectedItem={setSelectedItem} />
+        <ItemListContent theTitle={title} theDescription={description} data={data} setSelectedItem={setSelectedItem} />
       </BottomSheetContent>
     </Wrapper>
   );

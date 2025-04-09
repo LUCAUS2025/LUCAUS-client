@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
-import { BottomSheet } from '../../../components/BottomSheet/BottomSheet';
+import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
+import { BasicBottomSheet } from '../../../components/BottomSheet/variants/BasicBottomSheet';
 import styled from 'styled-components';
 import { dateOptions, Option, placeOptions } from '../../../data/options';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
 import { boothDescription, BoothItem, boothTitle, CommonItem } from '../../../data/boothFood';
-import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
-import { ItemPreviewContent } from '../../../components/BottomSheet/ItemPreviewContent';
+import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
+import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 
 export const Booth = () => {
@@ -107,7 +107,7 @@ export const Booth = () => {
             <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
             <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
           </OptionContainer>
-          <BottomSheet
+          <BasicBottomSheet
             title={boothTitle}
             description={boothDescription}
             data={tempBoothData}

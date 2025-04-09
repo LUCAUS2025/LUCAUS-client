@@ -1,9 +1,9 @@
 import React from 'react';
-import { BaseLayer } from '../../../components/BottomSheet/BaseLayer';
+import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { useNavigate } from 'react-router-dom';
-import { StaticBottomSheet } from '../../../components/BottomSheet/StaticBottomSheet';
-import { FoodTruckDetailContent } from '../../../components/BottomSheet/FoodTruckDetailContent';
+import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
+import { FoodTruckDetailContent } from '../../../components/BottomSheet/innerContent/FoodTruckDetailContent';
 import styled from 'styled-components';
 
 export const FoodTruckDetail = () => {

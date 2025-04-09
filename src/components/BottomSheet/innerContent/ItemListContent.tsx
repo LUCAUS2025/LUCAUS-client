@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CommonItem } from '../../data/boothFood';
-import { keywordBaseStyle } from '../../styles/keyword';
+import { CommonItem } from '../../../data/boothFood';
+import { keywordBaseStyle } from '../../../styles/keyword';
 
 interface ContentProps {
-  theTitle: string;
-  theDescription: string;
-  data: CommonItem[];
+  theTitle?: string;
+  theDescription?: string;
+  data?: CommonItem[];
   setSelectedItem: (item: CommonItem | null) => void;
 }
 
-export const Content: React.FC<ContentProps> = ({ theTitle, theDescription, data, setSelectedItem }) => {
+export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescription, data, setSelectedItem }) => {
   return (
     <Wrapper>
       <TitleContainer>

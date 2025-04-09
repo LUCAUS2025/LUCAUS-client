@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { DetailWrapper, HeaderContainer, ItemId, ItemTitle, TitleContainer } from '../../styles/itemDetailStyles';
-import { DetailOperatingInfo } from './ItemDetailComponents/DetailOperatingInfo';
+import { DetailWrapper, HeaderContainer, ItemId, ItemTitle, TitleContainer } from '../../../styles/itemDetailStyles';
+import { DetailOperatingInfo } from '../itemDetailComponents/DetailOperatingInfo';
 import styled from 'styled-components';
-import { DetailReview } from './ItemDetailComponents/DetailReview';
-import { PortalBottomSheet } from './PortalBottomSheet';
-import { ReviewFormContent } from './ItemDetailComponents/ReviewFormContent';
+import { DetailReview } from '../itemDetailComponents/DetailReview';
+import { PortalBottomSheet } from '../variants/PortalBottomSheet';
+import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
 
 export const FoodTruckDetailContent = () => {
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
