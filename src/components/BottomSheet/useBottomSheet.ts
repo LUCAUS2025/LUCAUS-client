@@ -11,6 +11,7 @@ interface BottomSheetMetrics {
     movingDirection: 'none' | 'down' | 'up';
   };
   isContentAreaTouched: boolean;
+  scrollAtTopTouched: boolean;
 }
 
 export default function useBottomSheet() {
@@ -27,6 +28,7 @@ export default function useBottomSheet() {
       movingDirection: 'none',
     },
     isContentAreaTouched: false,
+    scrollAtTopTouched: false,
   });
 
   // ✅ 바텀시트 드래그 가능한 조건
@@ -77,9 +79,16 @@ export default function useBottomSheet() {
     } else if (canUserMoveBottomSheet()) {
       // 컨텐츠에서 스크롤이 맨 위일 때만 드래그 허용
       e.preventDefault();
+      if (content.current!.scrollTop === 0 && !metrics.current.scrollAtTopTouched) {
+        // 스크롤이 top에 도달했을 때 처음 한번은 그냥 무시하고 flag 세움, 바텀시트 움직이지 않음
+        metrics.current.scrollAtTopTouched = true;
+        return;
+      }
       if (nextSheetY >= MIN_Y) {
         sheet.current!.style.setProperty('transform', `translateY(${nextSheetY - MAX_Y}px)`);
       }
+    } else {
+      metrics.current.scrollAtTopTouched = false;
     }
   };
 
@@ -127,6 +136,7 @@ export default function useBottomSheet() {
       touchStart: { sheetY: 0, touchY: 0 },
       touchMove: { prevTouchY: 0, movingDirection: 'none' },
       isContentAreaTouched: false,
+      scrollAtTopTouched: false,
     };
   };
 
