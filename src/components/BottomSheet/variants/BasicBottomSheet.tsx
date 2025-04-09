@@ -37,7 +37,7 @@ const Wrapper = styled(motion.div)`
   height: ${window.innerHeight * 0.9}px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  //overflow: hidden;
 `;
 
 const BottomSheetContent = styled.div`
