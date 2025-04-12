@@ -1,9 +1,33 @@
 import styled from 'styled-components';
 import { Title } from '../../routes/pages/stage';
 import { useNavigate } from 'react-router-dom';
+import { getNotices } from '../../services/apis/notice';
+import { useEffect, useState } from 'react';
 
 const HomeNotice = () => {
   const navigate = useNavigate();
+  const [notices, setNotices] = useState<any[]>([]);
+
+  const getNotice = () => {
+    getNotices()
+      .then((res) => {
+        console.log(res);
+        if (res.data.length > 0) {
+          setNotices(res.data);
+        } else {
+          setNotices([]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  getNotice();
+
+  useEffect(() => {
+    getNotice();
+  }, []);
 
   return (
     <NoticeSection>
@@ -11,16 +35,13 @@ const HomeNotice = () => {
         <Title>최근 공지사항</Title>
         <MoreButton onClick={() => navigate('/notice')}>더보기</MoreButton>
       </SectionHeader>
-      <NoticeCard>
-        <NoticeTitle>베리어 프리존 안내</NoticeTitle>
-        <NoticeContent>베리어 프리존 안내</NoticeContent>
-        <NoticeDate>25.05.01</NoticeDate>
-      </NoticeCard>
-      <NoticeCard>
-        <NoticeTitle>베리어 프리존 안내</NoticeTitle>
-        <NoticeContent>베리어 프리존 안내</NoticeContent>
-        <NoticeDate>25.05.01</NoticeDate>
-      </NoticeCard>
+      {notices.map((notice, index) => (
+        <NoticeCard key={index}>
+          <NoticeTitle>{notice.title}</NoticeTitle>
+          <NoticeContent>{notice.content}</NoticeContent>
+          <NoticeDate>{notice.date}</NoticeDate>
+        </NoticeCard>
+      ))}
     </NoticeSection>
   );
 };
