@@ -9,8 +9,8 @@ const Toast = () => {
   const getToastMessage = () => {
     getshortNotice()
       .then((res) => {
-        console.log(res);
-        if (res.data.length > 0) {
+        // console.log(res);
+        if (res.result[0].info.length > 0) {
           setShortNotice(res.result[0].info);
         } else {
           setShortNotice('공지사항이 없습니다.');

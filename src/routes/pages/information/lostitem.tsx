@@ -1,6 +1,55 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getLostItems } from '../../../services/apis/lostitem';
+import { formatDate } from '../../../components/common/formatData';
+
+interface LostItemProps {
+  category: string;
+  name: string;
+  detail: string;
+  date: string;
+  image: string;
+}
 
 const LostItem = () => {
+  const [lostItems, setLostItems] = useState<LostItemProps[]>([]);
+
+  const translateCategory = (category: string) => {
+    const categoryMap: Record<string, string> = {
+      WALLET_CARD: '지갑/카드',
+      ELECTRONICS: '전자기기',
+      CLOTHING: '의류',
+      DAILY_NECESSITIES: '생활용품',
+      COSMETICS: '화장품',
+      OTHERS: '기타',
+      TOTAL: '전체',
+    };
+    return categoryMap[category] || '기타';
+  };
+
+  useEffect(() => {
+    getLostItems({})
+      .then((res) => {
+        if (res.result?.content?.length > 0) {
+          const items = res.result.content.map(
+            (item: { category: string; name: string; updatedDateTime: string; photoUrl: string; place: string }) => ({
+              category: item.category,
+              name: item.name,
+              date: item.updatedDateTime,
+              image: item.photoUrl,
+              detail: `습득 장소 : ${item.place}`,
+            }),
+          );
+          setLostItems(items);
+        } else {
+          setLostItems([]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return (
     <BigContainer>
       <Container>
@@ -15,52 +64,20 @@ const LostItem = () => {
       </Container>
 
       <SectionTitle>내 분실물 찾기</SectionTitle>
-
       <ItemList>
-        <Item>
-          <ItemImage src="/images/wallet-black.jpg" />
-          <ItemInfo>
-            <ItemName>검정색 반지갑</ItemName>
-            <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
-            <Line>
-              <Tag>지갑/카드</Tag>
-              <ItemDate>접수 일자 | 05.19</ItemDate>
-            </Line>
-          </ItemInfo>
-        </Item>
-        <Item>
-          <ItemImage src="/images/wallet-black.jpg" />
-          <ItemInfo>
-            <ItemName>검정색 반지갑</ItemName>
-            <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
-            <Line>
-              <Tag>지갑/카드</Tag>
-              <ItemDate>접수 일자 | 05.19</ItemDate>
-            </Line>
-          </ItemInfo>
-        </Item>
-        <Item>
-          <ItemImage src="/images/wallet-black.jpg" />
-          <ItemInfo>
-            <ItemName>검정색 반지갑</ItemName>
-            <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
-            <Line>
-              <Tag>지갑/카드</Tag>
-              <ItemDate>접수 일자 | 05.19</ItemDate>
-            </Line>
-          </ItemInfo>
-        </Item>
-        <Item>
-          <ItemImage src="/images/wallet-black.jpg" />
-          <ItemInfo>
-            <ItemName>검정색 반지갑</ItemName>
-            <ItemDetail>습득 장소 : 310관 1층</ItemDetail>
-            <Line>
-              <Tag>지갑/카드</Tag>
-              <ItemDate>접수 일자 | 05.19</ItemDate>
-            </Line>
-          </ItemInfo>
-        </Item>
+        {lostItems.map((item, idx) => (
+          <Item key={idx}>
+            <ItemImage src={item.image || ''} />
+            <ItemInfo>
+              <ItemName>{item.name}</ItemName>
+              <ItemDetail>{item.detail}</ItemDetail>
+              <Line>
+                <Tag>{translateCategory(item.category)}</Tag>
+                <ItemDate>접수 일자 | {formatDate(item.date)}</ItemDate>
+              </Line>
+            </ItemInfo>
+          </Item>
+        ))}
       </ItemList>
     </BigContainer>
   );
