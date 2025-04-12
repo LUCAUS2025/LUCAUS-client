@@ -3,6 +3,7 @@ import { Title } from '../../routes/pages/stage';
 import { useNavigate } from 'react-router-dom';
 import { getNotices } from '../../services/apis/notice';
 import { useEffect, useState } from 'react';
+import { formatDate } from '../common/formatData';
 
 interface Notice {
   id: number;
@@ -46,7 +47,7 @@ const HomeNotice = () => {
         <NoticeCard key={index}>
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
           <NoticeContent>{notice.content}</NoticeContent>
-          <NoticeDate>{new Date(notice.uploadDateTime).toLocaleString()}</NoticeDate>
+          <NoticeDate>{formatDate(notice.uploadDateTime)}</NoticeDate>
         </NoticeCard>
       ))}
     </NoticeSection>
