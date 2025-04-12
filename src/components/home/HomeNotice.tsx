@@ -4,16 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import { getNotices } from '../../services/apis/notice';
 import { useEffect, useState } from 'react';
 
+interface Notice {
+  id: number;
+  category: string;
+  title: string | null;
+  content: string;
+  photoUrl: string;
+  uploadDateTime: string;
+}
+
 const HomeNotice = () => {
   const navigate = useNavigate();
-  const [notices, setNotices] = useState<any[]>([]);
+  const [notices, setNotices] = useState<Notice[]>([]);
 
   const getNotice = () => {
     getNotices()
       .then((res) => {
         console.log(res);
-        if (res.data.length > 0) {
-          setNotices(res.data);
+        if (res.result && res.result.content && res.result.content.length > 0) {
+          setNotices(res.result.content);
         } else {
           setNotices([]);
         }
@@ -22,8 +31,6 @@ const HomeNotice = () => {
         console.error(err);
       });
   };
-
-  getNotice();
 
   useEffect(() => {
     getNotice();
@@ -37,16 +44,18 @@ const HomeNotice = () => {
       </SectionHeader>
       {notices.map((notice, index) => (
         <NoticeCard key={index}>
-          <NoticeTitle>{notice.title}</NoticeTitle>
+          <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
           <NoticeContent>{notice.content}</NoticeContent>
-          <NoticeDate>{notice.date}</NoticeDate>
+          <NoticeDate>{new Date(notice.uploadDateTime).toLocaleString()}</NoticeDate>
         </NoticeCard>
       ))}
     </NoticeSection>
   );
 };
+
 export default HomeNotice;
 
+// Styled Components
 const NoticeSection = styled.div`
   margin: 40px 0;
 `;
@@ -83,9 +92,7 @@ const NoticeContent = styled.div`
 `;
 
 const NoticeDate = styled.div`
-  // position: absolute;
-  right: 20px;
-  bottom: 20px;
   font-size: 14px;
   color: #6b7280;
+  margin-top: 8px;
 `;
