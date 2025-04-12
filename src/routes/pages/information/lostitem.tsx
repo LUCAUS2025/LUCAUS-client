@@ -28,7 +28,7 @@ const LostItem = () => {
   };
 
   useEffect(() => {
-    getLostItems()
+    getLostItems({})
       .then((res) => {
         if (res.result?.content?.length > 0) {
           const items = res.result.content.map(
