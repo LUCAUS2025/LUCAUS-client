@@ -1,5 +1,16 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
+import { useEffect, useState } from 'react';
+import { getNotices } from '../../../services/apis/notice';
+
+interface Notice {
+  id: number;
+  category: string;
+  title: string | null;
+  content: string;
+  photoUrl: string;
+  uploadDateTime: string;
+}
 
 const noticeItems = [
   {
@@ -44,6 +55,21 @@ const NoticeDetail = () => {
   const { id } = useParams();
   const noticeId = Number(id);
   const item = noticeItems.find((item) => item.id === noticeId);
+  const [notices, setNotices] = useState<Notice[]>([]);
+
+    useEffect(() => {
+      getNotices()
+        .then((res) => {
+          if (res.result?.content?.length > 0) {
+            setNotices(res.result.content);
+          } else {
+            setNotices([]);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }, []);
 
   if (!item) {
     return <div>해당 공지사항을 찾을 수 없습니다.</div>;
