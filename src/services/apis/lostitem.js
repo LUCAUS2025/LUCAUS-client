@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const URL = 'http://lucaus.kro.kr:8080';
 
-export const getLostItems = async ({ category, date, page = 1, size = 10 }) => {
+export const getLostItems = async ({ category = 'TOTAL', date = '2025-03-22', page = 1, size = 10 }) => {
   try {
     const response = await axios.get(`${URL}/api/lost-items`, {
       params: {
