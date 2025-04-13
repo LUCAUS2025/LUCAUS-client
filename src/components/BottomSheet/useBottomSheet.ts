@@ -137,41 +137,41 @@ export default function useBottomSheet() {
       touchMove: { prevTouchY: 0, movingDirection: 'none' },
       isContentAreaTouched: false,
       scrollAtTopTouched: false,
-// =======
-//     // const handleTouchEnd = (e: TouchEvent) => { 였는데 일단 수정할게요오ㅠㅠ
-//     const handleTouchEnd = () => {
-//       const { touchMove } = metrics.current;
+      // =======
+      //     // const handleTouchEnd = (e: TouchEvent) => { 였는데 일단 수정할게요오ㅠㅠ
+      //     const handleTouchEnd = () => {
+      //       const { touchMove } = metrics.current;
 
-//       // 드래그가 끝난 후, 현재 위치인 바텀 시트의 최상단 모서리 Y
-//       const currentSheetY = sheet.current!.getBoundingClientRect().y;
+      //       // 드래그가 끝난 후, 현재 위치인 바텀 시트의 최상단 모서리 Y
+      //       const currentSheetY = sheet.current!.getBoundingClientRect().y;
 
-//       // 바텀 시트가 최상단 위치가 아닐 경우
-//       if (currentSheetY !== MIN_Y) {
-//         // 아래로 드래그 했을 경우 바텀시트 아래로 내림
-//         if (touchMove.movingDirection === 'down') {
-//           sheet.current!.style.setProperty('transform', 'translateY(0)');
-//           setIsSheetOpen(false);
-//         }
+      //       // 바텀 시트가 최상단 위치가 아닐 경우
+      //       if (currentSheetY !== MIN_Y) {
+      //         // 아래로 드래그 했을 경우 바텀시트 아래로 내림
+      //         if (touchMove.movingDirection === 'down') {
+      //           sheet.current!.style.setProperty('transform', 'translateY(0)');
+      //           setIsSheetOpen(false);
+      //         }
 
-//         // 위로 드래그 했을 경우 바텀시트 최상단 까지 올림
-//         if (touchMove.movingDirection === 'up') {
-//           sheet.current!.style.setProperty('transform', `translateY(${MIN_Y - MAX_Y}px)`);
-//           setIsSheetOpen(true);
-//         }
-//       }
-//       // metrics 초기화
-//       metrics.current = {
-//         touchStart: {
-//           sheetY: 0,
-//           touchY: 0,
-//         },
-//         touchMove: {
-//           prevTouchY: 0,
-//           movingDirection: 'none',
-//         },
-//         isContentAreaTouched: false,
-//       };
-// >>>>>>> main
+      //         // 위로 드래그 했을 경우 바텀시트 최상단 까지 올림
+      //         if (touchMove.movingDirection === 'up') {
+      //           sheet.current!.style.setProperty('transform', `translateY(${MIN_Y - MAX_Y}px)`);
+      //           setIsSheetOpen(true);
+      //         }
+      //       }
+      //       // metrics 초기화
+      //       metrics.current = {
+      //         touchStart: {
+      //           sheetY: 0,
+      //           touchY: 0,
+      //         },
+      //         touchMove: {
+      //           prevTouchY: 0,
+      //           movingDirection: 'none',
+      //         },
+      //         isContentAreaTouched: false,
+      //       };
+      // >>>>>>> main
     };
   };
 

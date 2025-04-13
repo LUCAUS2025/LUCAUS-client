@@ -1,10 +1,9 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
+import { useParams } from 'react-router-dom';
+import { Item, ItemDate, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
 import { useEffect, useState } from 'react';
 import { getNotices } from '../../../services/apis/notice';
 import { formatDate } from '../../../components/common/formatData';
-import { useParams } from 'react-router-dom';
-        
+
 interface Notice {
   id: number;
   category: string;
