@@ -1,9 +1,41 @@
 import styled from 'styled-components';
 import { Title } from '../../routes/pages/stage';
 import { useNavigate } from 'react-router-dom';
+import { getNotices } from '../../services/apis/notice';
+import { useEffect, useState } from 'react';
+import { formatDate } from '../common/formatData';
+
+interface Notice {
+  id: number;
+  category: string;
+  title: string | null;
+  content: string;
+  photoUrl: string;
+  uploadDateTime: string;
+}
 
 const HomeNotice = () => {
   const navigate = useNavigate();
+  const [notices, setNotices] = useState<Notice[]>([]);
+
+  const getNotice = () => {
+    getNotices()
+      .then((res) => {
+        console.log(res);
+        if (res.result && res.result.content && res.result.content.length > 0) {
+          setNotices(res.result.content);
+        } else {
+          setNotices([]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getNotice();
+  }, []);
 
   return (
     <NoticeSection>
@@ -11,21 +43,20 @@ const HomeNotice = () => {
         <Title>최근 공지사항</Title>
         <MoreButton onClick={() => navigate('/notice')}>더보기</MoreButton>
       </SectionHeader>
-      <NoticeCard>
-        <NoticeTitle>베리어 프리존 안내</NoticeTitle>
-        <NoticeContent>베리어 프리존 안내</NoticeContent>
-        <NoticeDate>25.05.01</NoticeDate>
-      </NoticeCard>
-      <NoticeCard>
-        <NoticeTitle>베리어 프리존 안내</NoticeTitle>
-        <NoticeContent>베리어 프리존 안내</NoticeContent>
-        <NoticeDate>25.05.01</NoticeDate>
-      </NoticeCard>
+      {notices.map((notice, index) => (
+        <NoticeCard key={index}>
+          <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
+          <NoticeContent>{notice.content}</NoticeContent>
+          <NoticeDate>{formatDate(notice.uploadDateTime)}</NoticeDate>
+        </NoticeCard>
+      ))}
     </NoticeSection>
   );
 };
+
 export default HomeNotice;
 
+// Styled Components
 const NoticeSection = styled.div`
   margin: 40px 0;
 `;
@@ -62,9 +93,7 @@ const NoticeContent = styled.div`
 `;
 
 const NoticeDate = styled.div`
-  // position: absolute;
-  right: 20px;
-  bottom: 20px;
   font-size: 14px;
   color: #6b7280;
+  margin-top: 8px;
 `;

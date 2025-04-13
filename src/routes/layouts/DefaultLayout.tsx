@@ -40,5 +40,5 @@ const AppDom = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 60px 16px 60px 16px; // 상단 헤더와 하단 푸터를 제외한 여백
+  padding: 60px 0px 60px 0px; // 상단 헤더와 하단 푸터를 제외한 여백
 `;
