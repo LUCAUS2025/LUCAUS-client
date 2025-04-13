@@ -16,6 +16,7 @@ export const BaseButton = styled.div`
   padding: 6px 12px;
   position: relative;
   border: 1px solid #d1d5dc;
+  white-space: nowrap;
 `;
 
 export const BlackButton = styled.div`
