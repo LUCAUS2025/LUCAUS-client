@@ -131,24 +131,24 @@ const Indicator = styled.div<IndicatorProps>`
   transform: ${(props) => (props.active ? 'scale(1.25)' : 'scale(1)')};
 `;
 
-const BackCards = styled.div`
-  display: flex;
-  flex-direction: column;
-  z-index: -1;
-  width: 100%;
-  position: relative;
-`;
+// const BackCards = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   z-index: -1;
+//   width: 100%;
+//   position: relative;
+// `;
 
-const BackCard = styled.div<IndicatorProps>`
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.2);
-`;
+// const BackCard = styled.div<IndicatorProps>`
+//   overflow: hidden;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   position: absolute;
+//   background: rgba(0, 0, 0, 0.2);
+// `;
 
-const BackCardImage = styled.img`
-  width: 100%;
-  height: 100%;
-`;
+// const BackCardImage = styled.img`
+//   width: 100%;
+//   height: 100%;
+// `;

@@ -6,7 +6,6 @@ import { BasicBottomSheet } from '../../../components/BottomSheet/variants/Basic
 import { dateOptions, Option, placeOptions } from '../../../data/options';
 import { CommonItem, foodTruckDescription, FoodTruckItem, foodTruckTitle } from '../../../data/boothFood';
 import styled from 'styled-components';
-import exp from 'constants';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
 import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
