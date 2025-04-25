@@ -65,6 +65,7 @@ const EachIndex = styled.div<EachIndexProps>`
   border-bottom: ${({ isSelected }) => (isSelected ? '2px solid #1ab888' : '2px solid #ffffff')};
 `;
 
+// 이거로 반응형 구현
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;

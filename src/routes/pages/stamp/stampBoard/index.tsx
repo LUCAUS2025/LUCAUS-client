@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Signup from './signup/Signup';
 
 const StampBoard = () => {
   const [whichView, setWhichView] = useState<string>('default');
@@ -31,7 +32,7 @@ const StampBoard = () => {
           </Button>
         </ButtonBox>
       )}
-      {whichView == 'signup' && <SignupBox>회원가입화면</SignupBox>}
+      {whichView == 'signup' && <Signup />}
       {whichView == 'login' && <div>로그인화면</div>}
 
       <GuideTextBox>
@@ -90,10 +91,4 @@ const Button = styled.button`
   color: white;
   border: none;
   cursor: pointer;
-`;
-
-const SignupBox = styled.div`
-  width: 100%;
-  height: 300px;
-  border: 1px solid black;
 `;
