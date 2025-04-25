@@ -3,8 +3,7 @@ import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Li
 import { useEffect, useState } from 'react';
 import { getNotices } from '../../../services/apis/notice';
 import { formatDate } from '../../../components/common/formatData';
-import { useParams } from 'react-router-dom';
-        
+
 interface Notice {
   id: number;
   category: string;
