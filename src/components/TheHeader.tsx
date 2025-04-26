@@ -15,7 +15,7 @@ export const TheHeader = () => {
     <Wrapper>
       <Header onClick={() => navigate('/')}>
         <Icon onClick={openMenu} className="left-icon"></Icon>
-        <img style={{ height: '36px' }} src="./images/common/logo.webp" alt="logo" />
+        <img style={{ height: '36px' }} src="/images/common/logo.webp" alt="logo" />
         <Icon></Icon>
       </Header>
     </Wrapper>
@@ -48,6 +48,6 @@ const Icon = styled.div`
   height: 30px;
 
   &.left-icon {
-    background-image: url('./images/home/icon-L.webp');
+    background-image: url('/images/home/icon-L.webp');
   }
 `;

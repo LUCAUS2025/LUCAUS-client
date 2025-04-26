@@ -7,17 +7,22 @@ import { useIsLoginStore } from '../../../../../store/isLoginStore';
 import { useSignupError } from '../../../../../hook/useSignupError';
 import ConfirmModalContent from './confirmModalContent';
 import { LoadingSpinner } from '../../../../../styles/LoadingSpinner';
+import { login } from '../../../../../services/apis/stamp/login';
 
 interface Props {
+  setWhichView: (value: string) => void;
+}
+
+interface SignupProps {
   id: string;
   pw: string;
   name: string;
   studentId: string;
 }
 
-const Signup = () => {
+const Signup = ({ setWhichView }: Props) => {
   // 지금 입력받는 데이터
-  const [signupData, setSignupData] = useState<Props>({
+  const [signupData, setSignupData] = useState<SignupProps>({
     id: '',
     pw: '',
     name: '',
@@ -42,7 +47,7 @@ const Signup = () => {
   };
 
   // 값 변경시 동작
-  const handleInputChange = (field: keyof Props, value: string) => {
+  const handleInputChange = (field: keyof SignupProps, value: string) => {
     setSignupData((prev) => ({ ...prev, [field]: value }));
 
     // 입력값 수정시 에러 해제
@@ -73,7 +78,25 @@ const Signup = () => {
 
       // 바로 로그인 요청 보내고 로그인 완료까지 시키기
       if (response.isSuccess) {
-        setIsLogin(true);
+        // 로그인 시도
+        try {
+          const response = await login(id!, pw!);
+          setIsLoading(false);
+          if (!response) return;
+
+          if (response.isSuccess) {
+            setIsLogin(true);
+            localStorage.setItem('accessToken', response.result);
+          } else {
+            //로그인 문제 생기면 그냥 첫 화면으로 보냄
+            setWhichView('default');
+          }
+        } catch (e) {
+          // 로그인 문제 생기면 그냥 첫 화면으로 보냄
+          setIsLoading(false);
+          setWhichView('default');
+        }
+
         //alert('회원가입이 완료되었습니다!');
       } else {
         setErrorState({ ...errorState, isUnknownError: true });
