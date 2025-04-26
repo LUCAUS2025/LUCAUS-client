@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         element: <Entry />,
       },
       {
-        path: '/stamp',
+        path: '/stamp/auth',
         element: <Stamp />,
       },
     ],

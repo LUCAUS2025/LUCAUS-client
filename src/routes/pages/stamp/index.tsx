@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
-import StampBoard from './stampBoard';
+import Auth from './auth';
 import Intro from './intro';
 
 const Stamp = () => {
@@ -31,7 +31,7 @@ const Stamp = () => {
           스탬프
         </EachIndex>
       </IndexBox>
-      <ContentBox>{selectedIndex == 'stamp' ? <StampBoard /> : <Intro />}</ContentBox>
+      <ContentBox>{selectedIndex == 'stamp' ? <Auth /> : <Intro />}</ContentBox>
     </Wrapper>
   );
 };

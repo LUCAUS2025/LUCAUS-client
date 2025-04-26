@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Signup from './signup/Signup';
+import Login from './login/Login';
 
-const StampBoard = () => {
+const AuthPage = () => {
   const [whichView, setWhichView] = useState<string>('default');
 
   return (
@@ -33,7 +34,7 @@ const StampBoard = () => {
         </ButtonBox>
       )}
       {whichView == 'signup' && <Signup />}
-      {whichView == 'login' && <div>로그인화면</div>}
+      {whichView == 'login' && <Login />}
 
       <GuideTextBox>
         <div>입력하신 정보는 광장기획전 참여 상품 응모에 활용됩니다.</div>
@@ -43,7 +44,7 @@ const StampBoard = () => {
   );
 };
 
-export default StampBoard;
+export default AuthPage;
 
 const IntroBox = styled.div`
   display: flex;
