@@ -33,8 +33,8 @@ const AuthPage = () => {
           </Button>
         </ButtonBox>
       )}
-      {whichView == 'signup' && <Signup />}
-      {whichView == 'login' && <Login />}
+      {whichView == 'signup' && <Signup setWhichView={setWhichView} />}
+      {whichView == 'login' && <Login setWhichView={setWhichView} />}
 
       <GuideTextBox>
         <div>입력하신 정보는 광장기획전 참여 상품 응모에 활용됩니다.</div>

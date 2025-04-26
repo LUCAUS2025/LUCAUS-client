@@ -7,13 +7,16 @@ import { login } from '../../../../../services/apis/stamp/login';
 import { AxiosError } from 'axios';
 
 interface Props {
+  setWhichView: (value: string) => void;
+}
+interface LoginProps {
   id: string;
   pw: string;
 }
 
-const Login = () => {
+const Login = ({ setWhichView }: Props) => {
   // 지금 입력받는 데이터
-  const [loginData, setLoginData] = useState<Props>({
+  const [loginData, setLoginData] = useState<LoginProps>({
     id: '',
     pw: '',
   });
@@ -25,7 +28,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // 값 변경시 동작
-  const handleInputChange = (field: keyof Props, value: string) => {
+  const handleInputChange = (field: keyof LoginProps, value: string) => {
     setLoginData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -53,14 +56,14 @@ const Login = () => {
       if (error.response?.data) {
         const errorCode = error.response.data.code;
         if (errorCode == 'COMMON500') {
-          alert('예기치 못한 오류 발생. 회원가입 다시 시도해주세요!');
+          alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
         } else if (errorCode == 'LOGIN404') {
           setOpenModal(true);
         } else if (errorCode == 'PW400') {
           setOpenModal(true);
         }
       } else {
-        alert('예기치 못한 오류 발생. 회원가입 다시 시도해주세요!');
+        alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
       }
     }
   };
