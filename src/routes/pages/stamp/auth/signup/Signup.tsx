@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 import Modal from '../../../../../components/Modal/Modal';
 import { useIsLoginStore } from '../../../../../store/isLoginStore';
 import { useSignupError } from '../../../../../hook/useSignupError';
-import ConfirmModalContent from './confirmModalContent';
+import ConfirmModalContent from './ConfirmModalContent';
 import { LoadingSpinner } from '../../../../../styles/LoadingSpinner';
 import { login } from '../../../../../services/apis/stamp/login';
 

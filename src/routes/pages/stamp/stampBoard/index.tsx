@@ -4,21 +4,30 @@ import { DateDropDown } from '../../../../components/common/DropDown/DateDropDow
 import { Option } from '../../../../data/options';
 import EachBooth from './EachBooth';
 import Modal from '../../../../components/Modal/Modal';
+import StampBoardBox from './StampBoardBox';
+import BeforGetStampModalContent from './BeforGetStampModalContent';
+import AfterGetStampModalContent from './AfterGetStampModalContent';
 
+// 드롭다운 옵션 리스트
 const dateOptions: Option[] = [
   { label: '19, 20일', value: 1 },
   { label: '21일', value: 2 },
 ];
 
+// 부스 이름 여기서 변경하기
 const BoothInfo = ['1번부스', '2번부스', '3번부스', '4번부스', '5번부스', '6번부스', '7번부스', '8번부스', '9번부스'];
 
 const StampBoard = () => {
+  // 현재 어떤 드롭다운 선택되었는지
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
 
+  // 모달 상태관리
   const [openModal, setOpenModal] = useState(false);
 
+  // 어떤 부스가 선택되었는지 관리
   const [selectedBooth, setSelectedBooth] = useState(1);
 
+  // 부스 클리어 여부 -> 나중에 백 연동해서 백 값으로 갈아치우기 해야함
   const [isCleared, setIsCleared] = useState<Record<number, boolean>>({
     1: false,
     2: false,
@@ -30,19 +39,6 @@ const StampBoard = () => {
     8: false,
     9: false,
   });
-
-  const handleClickBooth = (index: number) => {
-    setSelectedBooth(index);
-    setOpenModal(true);
-  };
-
-  const handleClickEnterPwButton = (index: number) => {
-    setIsCleared((prev) => ({
-      ...prev,
-      [index]: true,
-    }));
-    setOpenModal(false);
-  };
 
   return (
     <Wrapper>
@@ -63,67 +59,27 @@ const StampBoard = () => {
         </RewardBox>
       </IntroRewardLine>
       <ContentBox>
-        <StampBoardBox>
-          <SideBoothLine>
-            <EachBooth isCleared={isCleared} index={1} isCenterBooth={false} onClick={handleClickBooth} />
-            <EachBooth isCleared={isCleared} index={2} isCenterBooth={false} onClick={handleClickBooth} />
-            <EachBooth isCleared={isCleared} index={3} isCenterBooth={false} onClick={handleClickBooth} />
-            <EachBooth isCleared={isCleared} index={4} isCenterBooth={false} onClick={handleClickBooth} />
-          </SideBoothLine>
-          <CenterBoothLine>
-            <WideBooth>축구골대</WideBooth>
-            <EachBooth isCleared={isCleared} index={5} isCenterBooth={true} onClick={handleClickBooth} />
-            <WideBooth>축기단부스</WideBooth>
-          </CenterBoothLine>
-          <SideBoothLine>
-            <EachBooth isCleared={isCleared} index={6} isCenterBooth={false} onClick={handleClickBooth} />
-            <EachBooth isCleared={isCleared} index={7} isCenterBooth={false} onClick={handleClickBooth} />
-            <EachBooth isCleared={isCleared} index={8} isCenterBooth={false} onClick={handleClickBooth} />
-            <EachBooth isCleared={isCleared} index={9} isCenterBooth={false} onClick={handleClickBooth} />
-          </SideBoothLine>
-        </StampBoardBox>
+        <StampBoardBox
+          isCleared={isCleared}
+          setSelectedBooth={setSelectedBooth}
+          setOpenModal={setOpenModal}
+        ></StampBoardBox>
       </ContentBox>
       {openModal && (
         <Modal isShort={true}>
           {isCleared[selectedBooth] ? (
-            <>
-              <div>
-                <div>{BoothInfo[selectedBooth - 1]}</div>
-                <div>부스 참여를 완료하여 키를 획득하였습니다!</div>
-              </div>
-              <div>아이콘 들어가야 함</div>
-              <button
-                onClick={() => {
-                  setOpenModal(false);
-                }}
-              >
-                닫기
-              </button>
-            </>
+            <AfterGetStampModalContent
+              BoothInfo={BoothInfo}
+              selectedBooth={selectedBooth}
+              setOpenModal={setOpenModal}
+            />
           ) : (
-            <>
-              <div>
-                <div>{BoothInfo[selectedBooth - 1]}</div>
-                <div>부스 체험 후 축기단에게 화면을 보여주세요.</div>
-              </div>
-              <input></input>
-              <div>
-                <button
-                  onClick={() => {
-                    setOpenModal(false);
-                  }}
-                >
-                  닫기
-                </button>
-                <button
-                  onClick={() => {
-                    handleClickEnterPwButton(selectedBooth);
-                  }}
-                >
-                  비밀번호 확인
-                </button>
-              </div>
-            </>
+            <BeforGetStampModalContent
+              BoothInfo={BoothInfo}
+              selectedBooth={selectedBooth}
+              setOpenModal={setOpenModal}
+              setIsCleared={setIsCleared}
+            />
           )}
         </Modal>
       )}
@@ -186,43 +142,4 @@ const ContentBox = styled.div`
   align-items: center;
   height: calc(100vh - 120px - 70px);
   overflow-y: auto;
-`;
-
-const StampBoardBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  background-color: #d9d9d9;
-  min-width: 343px;
-  min-height: 450px;
-  height: 90%;
-  width: 90%;
-  max-height: 700px;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-const SideBoothLine = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
-  height: 75%;
-  justify-content: space-between;
-`;
-
-const CenterBoothLine = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
-  height: 90%;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const WideBooth = styled.div`
-  display: flex;
-  width: 107px;
-  height: 38px;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid blue;
 `;
