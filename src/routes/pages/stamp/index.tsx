@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Auth from './auth';
 import Intro from './intro';
 
-const Stamp = () => {
+const StampEntrance = () => {
   const [selectedIndex, setSelectedIndex] = useState<string>('stamp');
 
   const handleClickIndex = (index: string) => {
@@ -36,7 +36,7 @@ const Stamp = () => {
   );
 };
 
-export default Stamp;
+export default StampEntrance;
 
 interface EachIndexProps {
   isSelected: boolean;

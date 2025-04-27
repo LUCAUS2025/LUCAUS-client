@@ -14,7 +14,8 @@ import NoticeDetail from './pages/information/notice-detail';
 import BarrierFree from './pages/information/barrierfree';
 import { FoodTruckDetail } from './pages/foodTruck/FoodTruckDetail';
 import Entry from './pages/information/entry';
-import Stamp from './pages/stamp';
+import StampEntrance from './pages/stamp';
+import StampBoard from './pages/stamp/stampBoard';
 
 const router = createBrowserRouter([
   {
@@ -74,7 +75,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/stamp/auth',
-        element: <Stamp />,
+        element: <StampEntrance />,
+      },
+      {
+        path: '/stamp/board',
+        element: <StampBoard />,
       },
     ],
   },

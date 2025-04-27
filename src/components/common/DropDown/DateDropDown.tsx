@@ -15,7 +15,7 @@ export const DateDropDown: React.FC<DateDropDownProps> = ({ selectedDate, setSel
         options={dateOptions}
         selectedOption={selectedDate}
         setSelectedOption={setSelectedDate}
-        logoSrc={darkMode ? 'images/common/dateDark.webp' : 'images/common/date.webp'}
+        logoSrc={darkMode ? '/images/common/dateDark.webp' : '/images/common/date.webp'}
       />
     </>
   );
