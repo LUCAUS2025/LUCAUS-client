@@ -32,7 +32,7 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
       <SelectedWrapper>
         <Logo src={logoSrc} />
         <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption.label}</SelectedText>
-        <DownIcon src="images/common/dropDown.webp" />
+        <DownIcon src="/images/common/dropDown.webp" />
       </SelectedWrapper>
       <OptionList active={active}>
         {options.map((element) => (
