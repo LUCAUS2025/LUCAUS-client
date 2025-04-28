@@ -87,6 +87,8 @@ const Signup = ({ setWhichView }: Props) => {
           if (response.isSuccess) {
             setIsLogin(true);
             localStorage.setItem('accessToken', response.result);
+            // 로그인 성공했으니까 바로 스탬프보드로 이동
+            window.location.href = '/stamp/board';
           } else {
             //로그인 문제 생기면 그냥 첫 화면으로 보냄
             setWhichView('default');

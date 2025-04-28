@@ -6,13 +6,14 @@ interface DateDropDownProps {
   selectedDate: Option;
   setSelectedDate: (option: Option) => void;
   darkMode: boolean;
+  customData?: Option[];
 }
 
-export const DateDropDown: React.FC<DateDropDownProps> = ({ selectedDate, setSelectedDate, darkMode }) => {
+export const DateDropDown: React.FC<DateDropDownProps> = ({ selectedDate, setSelectedDate, darkMode, customData }) => {
   return (
     <>
       <DropDown
-        options={dateOptions}
+        options={customData ? customData : dateOptions}
         selectedOption={selectedDate}
         setSelectedOption={setSelectedDate}
         logoSrc={darkMode ? '/images/common/dateDark.webp' : '/images/common/date.webp'}

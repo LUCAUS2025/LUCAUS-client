@@ -1,4 +1,5 @@
 // axios 공통 처리
+// 토큰 안넣는 것
 
 import axios from 'axios';
 

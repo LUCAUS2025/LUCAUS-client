@@ -46,6 +46,8 @@ const Login = ({ setWhichView }: Props) => {
       if (response.isSuccess) {
         setIsLogin(true);
         localStorage.setItem('accessToken', response.result);
+        // 로그인 성공시 자동으로 스탬프보드 페이지로 이동
+        window.location.href = '/stamp/board';
       } else {
         alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
       }

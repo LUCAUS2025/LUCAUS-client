@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { DateDropDown } from '../../../../components/common/DropDown/DateDropDown';
 import { Option } from '../../../../data/options';
@@ -7,17 +7,38 @@ import Modal from '../../../../components/Modal/Modal';
 import StampBoardBox from './StampBoardBox';
 import BeforGetStampModalContent from './BeforGetStampModalContent';
 import AfterGetStampModalContent from './AfterGetStampModalContent';
+import { stampBoardInfo } from '../../../../services/apis/stamp/stampBoardInfo';
+import { userInfo } from '../../../../services/apis/stamp/userInfo';
 
-// 드롭다운 옵션 리스트
-const dateOptions: Option[] = [
-  { label: '19, 20일', value: 1 },
-  { label: '21일', value: 2 },
-];
+interface BoothClear {
+  boothId: number;
+  isClear: boolean;
+}
+// 백에서 받아오는 데이터 형식
+interface StampBoardDayData {
+  id: number;
+  type: number;
+  firstReward: boolean;
+  secondReward: boolean;
+  thirdReward: boolean;
+  isBoothClear: BoothClear[];
+}
+
+interface UserInfoData {
+  name: string;
+  studentId: string;
+}
 
 // 부스 이름 여기서 변경하기
 const BoothInfo = ['1번부스', '2번부스', '3번부스', '4번부스', '5번부스', '6번부스', '7번부스', '8번부스', '9번부스'];
 
 const StampBoard = () => {
+  // 드롭다운 옵션 리스트
+  const dateOptions: Option[] = [
+    { label: '19, 20일', value: 1 },
+    { label: '21일', value: 2 },
+  ];
+
   // 현재 어떤 드롭다운 선택되었는지
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
 
@@ -40,14 +61,58 @@ const StampBoard = () => {
     9: false,
   });
 
+  // 백에서 받아온 스탬프 정보
+  const [stampData, setStampData] = useState<StampBoardDayData[]>([]);
+
+  // 백에서 받아온 유저 정보
+  const [userData, setUserData] = useState<UserInfoData>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // 스탬프 정보 받아오기
+        const responseStampInfo = await stampBoardInfo();
+        setStampData(responseStampInfo.result);
+
+        // 유저 정보 받아오기
+        const responseUserInfo = await userInfo();
+        console.log(responseUserInfo.result);
+        setUserData(responseUserInfo.result);
+      } catch (error) {
+        alert('다시 로그인 해주세요.');
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (stampData.length === 0) return;
+
+    const matchedData = stampData.find((item) => item.type === selectedDate.value);
+
+    if (matchedData) {
+      const clearedMap: Record<number, boolean> = {};
+      matchedData.isBoothClear.forEach((booth) => {
+        clearedMap[booth.boothId] = booth.isClear;
+      });
+      setIsCleared(clearedMap);
+    }
+  }, [selectedDate, stampData]);
+
   return (
     <Wrapper>
       <MyInfoLine>
-        <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
+        <DateDropDown
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          darkMode={false}
+          customData={dateOptions}
+        />
         <div>내정보</div>
         <MyInfoBox>
-          <div>홍길동</div>
-          <div>20250000</div>
+          <div>{userData?.name}</div>
+          <div>{userData?.studentId}</div>
         </MyInfoBox>
       </MyInfoLine>
       <IntroRewardLine>
