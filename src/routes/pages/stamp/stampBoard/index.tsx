@@ -5,8 +5,8 @@ import { Option } from '../../../../data/options';
 import EachBooth from './EachBooth';
 import Modal from '../../../../components/Modal/Modal';
 import StampBoardBox from './StampBoardBox';
-import BeforGetStampModalContent from './BeforGetStampModalContent';
-import AfterGetStampModalContent from './AfterGetStampModalContent';
+import BeforGetStampModalContent from './boothStampModal/BeforGetStampModalContent';
+import AfterGetStampModalContent from './boothStampModal/AfterGetStampModalContent';
 import { stampBoardInfo } from '../../../../services/apis/stamp/stampBoardInfo';
 import { userInfo } from '../../../../services/apis/stamp/userInfo';
 
@@ -48,7 +48,7 @@ const StampBoard = () => {
   // 어떤 부스가 선택되었는지 관리
   const [selectedBooth, setSelectedBooth] = useState(1);
 
-  // 부스 클리어 여부 -> 나중에 백 연동해서 백 값으로 갈아치우기 해야함
+  // 부스 클리어 여부
   const [isCleared, setIsCleared] = useState<Record<number, boolean>>({
     1: false,
     2: false,
@@ -59,6 +59,13 @@ const StampBoard = () => {
     7: false,
     8: false,
     9: false,
+  });
+
+  // 상품 수령 여부
+  const [isRewarded, setIsRewarded] = useState<Record<number, boolean>>({
+    1: false,
+    2: false,
+    3: false,
   });
 
   // 백에서 받아온 스탬프 정보
@@ -76,7 +83,6 @@ const StampBoard = () => {
 
         // 유저 정보 받아오기
         const responseUserInfo = await userInfo();
-        console.log(responseUserInfo.result);
         setUserData(responseUserInfo.result);
       } catch (error) {
         alert('다시 로그인 해주세요.');
@@ -92,11 +98,19 @@ const StampBoard = () => {
     const matchedData = stampData.find((item) => item.type === selectedDate.value);
 
     if (matchedData) {
+      // 부스 도장 받았는지 여부 체크
       const clearedMap: Record<number, boolean> = {};
       matchedData.isBoothClear.forEach((booth) => {
         clearedMap[booth.boothId] = booth.isClear;
       });
       setIsCleared(clearedMap);
+
+      // 보상 받았는지 여부
+      setIsRewarded({
+        1: matchedData.firstReward,
+        2: matchedData.secondReward,
+        3: matchedData.thirdReward,
+      });
     }
   }, [selectedDate, stampData]);
 
@@ -118,9 +132,9 @@ const StampBoard = () => {
       <IntroRewardLine>
         <IntroButton>광장기획전 소개</IntroButton>
         <RewardBox>
-          <EachReward>1단계</EachReward>
-          <EachReward>2단계</EachReward>
-          <EachReward>3단계</EachReward>
+          {isRewarded[1] ? <div>1단계수령</div> : <EachReward>1단계미수령</EachReward>}
+          {isRewarded[2] ? <div>2단계수령</div> : <EachReward>2단계미수령</EachReward>}
+          {isRewarded[3] ? <div>3단계수령</div> : <EachReward>3단계미수령</EachReward>}
         </RewardBox>
       </IntroRewardLine>
       <ContentBox>
@@ -128,6 +142,8 @@ const StampBoard = () => {
           isCleared={isCleared}
           setSelectedBooth={setSelectedBooth}
           setOpenModal={setOpenModal}
+          selectedDate={selectedDate}
+          isRewarded={isRewarded}
         ></StampBoardBox>
       </ContentBox>
       {openModal && (
@@ -144,6 +160,7 @@ const StampBoard = () => {
               selectedBooth={selectedBooth}
               setOpenModal={setOpenModal}
               setIsCleared={setIsCleared}
+              selectedDate={selectedDate}
             />
           )}
         </Modal>
