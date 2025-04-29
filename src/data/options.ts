@@ -3,6 +3,11 @@ export interface Option {
   value: number | string;
 }
 
+export interface OptionOnlyNumber {
+  label: string;
+  value: number;
+}
+
 export const dateOptions: Option[] = [
   { label: '19 일', value: 19 },
   { label: '20 일', value: 20 },

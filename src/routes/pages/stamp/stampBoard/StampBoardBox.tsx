@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import EachBooth from './EachBooth';
+import Modal from '../../../../components/Modal/Modal';
+import RewardInfoModal from './rewardStampModal/RewardInfoModal';
+import PwPushModal from './rewardStampModal/PwPushModal';
 
 interface Props {
   isCleared: Record<number, boolean>;
   setSelectedBooth: (boothNum: number) => void;
   setOpenModal: (open: boolean) => void;
+  selectedDate: { label: string; value: number | string };
+  isRewarded: Record<number, boolean>;
 }
 
-const StampBoardBox = ({ isCleared, setSelectedBooth, setOpenModal }: Props) => {
+const StampBoardBox = ({ isCleared, setSelectedBooth, setOpenModal, selectedDate, isRewarded }: Props) => {
   // 부스 클릭시 실행할 함수
   const handleClickBooth = (index: number) => {
     setSelectedBooth(index);
     setOpenModal(true);
   };
+
+  // 축기단 부스 모달 오픈 여부
+  const [openRewardModal, setOpenRewardModal] = useState(false);
+
+  // 축기단 부스 모달 스탭
+  const [rewardStampStep, setRewardStampStep] = useState(1);
 
   return (
     <Wrapper>
@@ -26,7 +37,13 @@ const StampBoardBox = ({ isCleared, setSelectedBooth, setOpenModal }: Props) => 
       <CenterBoothLine>
         <WideBooth>축구골대</WideBooth>
         <EachBooth isCleared={isCleared} index={5} isCenterBooth={true} onClick={handleClickBooth} />
-        <WideBooth>축기단부스</WideBooth>
+        <WideBooth
+          onClick={() => {
+            setOpenRewardModal(true);
+          }}
+        >
+          축기단부스
+        </WideBooth>
       </CenterBoothLine>
       <SideBoothLine>
         <EachBooth isCleared={isCleared} index={6} isCenterBooth={false} onClick={handleClickBooth} />
@@ -34,6 +51,21 @@ const StampBoardBox = ({ isCleared, setSelectedBooth, setOpenModal }: Props) => 
         <EachBooth isCleared={isCleared} index={8} isCenterBooth={false} onClick={handleClickBooth} />
         <EachBooth isCleared={isCleared} index={9} isCenterBooth={false} onClick={handleClickBooth} />
       </SideBoothLine>
+      {openRewardModal &&
+        (rewardStampStep == 1 ? (
+          <Modal isShort={false}>
+            <RewardInfoModal setOpenRewardModal={setOpenRewardModal} setRewardStampStep={setRewardStampStep} />
+          </Modal>
+        ) : (
+          <Modal isShort={true}>
+            <PwPushModal
+              setOpenRewardModal={setOpenRewardModal}
+              setRewardStampStep={setRewardStampStep}
+              selectedDate={selectedDate}
+              isRewarded={isRewarded}
+            />
+          </Modal>
+        ))}
     </Wrapper>
   );
 };
