@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { ItemListContent } from '../innerContent/ItemListContent';
 import useBottomSheet from '../useBottomSheet';
-import { CommonItem } from '../../../data/boothFood';
+import { BoothOrFoodTruckItem } from '../../../data/boothFood';
 import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
 
 interface BottomSheetProps {
   title?: string;
   description?: string;
-  data?: CommonItem[];
-  setSelectedItem: (item: CommonItem | null) => void;
+  data?: BoothOrFoodTruckItem[];
+  setSelectedItem: (item: BoothOrFoodTruckItem | null) => void;
 }
 
 export const BasicBottomSheet: React.FC<BottomSheetProps> = ({ title, description, data, setSelectedItem }) => {
