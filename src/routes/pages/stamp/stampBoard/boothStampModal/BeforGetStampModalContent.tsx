@@ -1,6 +1,20 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import { gameStamp } from '../../../../../services/apis/stamp/gameStamp';
 import { AxiosError } from 'axios';
+import { stampBoardInfo } from '../../../../../services/apis/stamp/stampBoardInfo';
+
+interface BoothClear {
+  boothId: number;
+  isClear: boolean;
+}
+interface StampBoardDayData {
+  id: number;
+  type: number;
+  firstReward: boolean;
+  secondReward: boolean;
+  thirdReward: boolean;
+  isBoothClear: BoothClear[];
+}
 
 interface Props {
   BoothInfo: string[];
@@ -8,9 +22,17 @@ interface Props {
   setOpenModal: (open: boolean) => void;
   setIsCleared: React.Dispatch<React.SetStateAction<Record<number, boolean>>>;
   selectedDate: { label: string; value: number | string };
+  setStampData: React.Dispatch<SetStateAction<StampBoardDayData[]>>;
 }
 
-const BeforGetStampModalContent = ({ BoothInfo, selectedBooth, setOpenModal, setIsCleared, selectedDate }: Props) => {
+const BeforGetStampModalContent = ({
+  BoothInfo,
+  selectedBooth,
+  setOpenModal,
+  setIsCleared,
+  selectedDate,
+  setStampData,
+}: Props) => {
   // 지금 입력받는 데이터
   const [pwData, setPwData] = useState<string>('');
 
@@ -26,7 +48,6 @@ const BeforGetStampModalContent = ({ BoothInfo, selectedBooth, setOpenModal, set
   };
 
   // 비밀번호 입력 후 제출 버튼
-  // 추후 백 api 연결 필요
   const handleClickEnterPwButton = async () => {
     setIsLoading(true);
     const pw = pwData;
@@ -34,8 +55,17 @@ const BeforGetStampModalContent = ({ BoothInfo, selectedBooth, setOpenModal, set
       const response = await gameStamp(selectedDate.value!, selectedBooth!, pw!);
       setIsLoading(false);
       setOpenModal(false);
-      // 페이지 새로고침
-      window.location.reload();
+
+      // 갱신된 도장판 정보 받아오고 정보 업데이트
+      try {
+        // 스탬프 정보 받아오기
+        const responseStampInfo = await stampBoardInfo();
+        setStampData(responseStampInfo.result);
+      } catch (error) {
+        alert('다시 로그인 해주세요.');
+        // 데이터 가져오기 실패시 다시 로그인 화면으로
+        window.location.href = '/stamp/auth';
+      }
     } catch (e) {
       setIsLoading(false);
       // 비밀번호 에러 구현
@@ -44,6 +74,7 @@ const BeforGetStampModalContent = ({ BoothInfo, selectedBooth, setOpenModal, set
         const errorCode = error.response.data.code;
         if (errorCode == 'COMMON500') {
           alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
+          window.location.reload();
         } else if (errorCode == 'BOOTH404') {
           alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
           window.location.reload();

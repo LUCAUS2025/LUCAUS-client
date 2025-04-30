@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import { styled } from 'styled-components';
 import EachBooth from './EachBooth';
 import Modal from '../../../../components/Modal/Modal';
 import RewardInfoModal from './rewardStampModal/RewardInfoModal';
 import PwPushModal from './rewardStampModal/PwPushModal';
 
+interface BoothClear {
+  boothId: number;
+  isClear: boolean;
+}
+interface StampBoardDayData {
+  id: number;
+  type: number;
+  firstReward: boolean;
+  secondReward: boolean;
+  thirdReward: boolean;
+  isBoothClear: BoothClear[];
+}
 interface Props {
   isCleared: Record<number, boolean>;
   setSelectedBooth: (boothNum: number) => void;
   setOpenModal: (open: boolean) => void;
   selectedDate: { label: string; value: number | string };
   isRewarded: Record<number, boolean>;
+  setStampData: React.Dispatch<SetStateAction<StampBoardDayData[]>>;
 }
 
-const StampBoardBox = ({ isCleared, setSelectedBooth, setOpenModal, selectedDate, isRewarded }: Props) => {
+const StampBoardBox = ({
+  isCleared,
+  setSelectedBooth,
+  setOpenModal,
+  selectedDate,
+  isRewarded,
+  setStampData,
+}: Props) => {
   // 부스 클릭시 실행할 함수
   const handleClickBooth = (index: number) => {
     setSelectedBooth(index);
@@ -63,6 +83,7 @@ const StampBoardBox = ({ isCleared, setSelectedBooth, setOpenModal, selectedDate
               setRewardStampStep={setRewardStampStep}
               selectedDate={selectedDate}
               isRewarded={isRewarded}
+              setStampData={setStampData}
             />
           </Modal>
         ))}

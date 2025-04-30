@@ -86,6 +86,8 @@ const StampBoard = () => {
         setUserData(responseUserInfo.result);
       } catch (error) {
         alert('다시 로그인 해주세요.');
+        // 데이터 가져오기 실패시 다시 로그인 화면으로
+        window.location.href = '/stamp/auth';
       }
     };
 
@@ -95,21 +97,21 @@ const StampBoard = () => {
   useEffect(() => {
     if (stampData.length === 0) return;
 
-    const matchedData = stampData.find((item) => item.type === selectedDate.value);
+    const stampBoardDataWithType = stampData.find((item) => item.type === selectedDate.value);
 
-    if (matchedData) {
+    if (stampBoardDataWithType) {
       // 부스 도장 받았는지 여부 체크
-      const clearedMap: Record<number, boolean> = {};
-      matchedData.isBoothClear.forEach((booth) => {
-        clearedMap[booth.boothId] = booth.isClear;
+      const isClearedData: Record<number, boolean> = {};
+      stampBoardDataWithType.isBoothClear.forEach((booth) => {
+        isClearedData[booth.boothId] = booth.isClear;
       });
-      setIsCleared(clearedMap);
+      setIsCleared(isClearedData);
 
       // 보상 받았는지 여부
       setIsRewarded({
-        1: matchedData.firstReward,
-        2: matchedData.secondReward,
-        3: matchedData.thirdReward,
+        1: stampBoardDataWithType.firstReward,
+        2: stampBoardDataWithType.secondReward,
+        3: stampBoardDataWithType.thirdReward,
       });
     }
   }, [selectedDate, stampData]);
@@ -144,6 +146,7 @@ const StampBoard = () => {
           setOpenModal={setOpenModal}
           selectedDate={selectedDate}
           isRewarded={isRewarded}
+          setStampData={setStampData}
         ></StampBoardBox>
       </ContentBox>
       {openModal && (
@@ -161,6 +164,7 @@ const StampBoard = () => {
               setOpenModal={setOpenModal}
               setIsCleared={setIsCleared}
               selectedDate={selectedDate}
+              setStampData={setStampData}
             />
           )}
         </Modal>

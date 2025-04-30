@@ -1,15 +1,30 @@
 import React, { SetStateAction, useState } from 'react';
 import { rewardStamp } from '../../../../../services/apis/stamp/rewardStamp';
 import { AxiosError } from 'axios';
+import { stampBoardInfo } from '../../../../../services/apis/stamp/stampBoardInfo';
+
+interface BoothClear {
+  boothId: number;
+  isClear: boolean;
+}
+interface StampBoardDayData {
+  id: number;
+  type: number;
+  firstReward: boolean;
+  secondReward: boolean;
+  thirdReward: boolean;
+  isBoothClear: BoothClear[];
+}
 
 interface Props {
   setOpenRewardModal: React.Dispatch<SetStateAction<boolean>>;
   setRewardStampStep: React.Dispatch<SetStateAction<number>>;
   selectedDate: { label: string; value: number | string };
   isRewarded: Record<number, boolean>;
+  setStampData: React.Dispatch<SetStateAction<StampBoardDayData[]>>;
 }
 
-const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isRewarded }: Props) => {
+const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isRewarded, setStampData }: Props) => {
   // 로딩표현
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,8 +55,18 @@ const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isR
     try {
       const response = await rewardStamp(selectedDate.value!, degree, pw);
       setIsLoading(false);
-      // 페이지 새로고침
-      window.location.reload();
+      setOpenRewardModal(false);
+
+      // 갱신된 도장판 정보 받아오고 정보 업데이트
+      try {
+        // 스탬프 정보 받아오기
+        const responseStampInfo = await stampBoardInfo();
+        setStampData(responseStampInfo.result);
+      } catch (error) {
+        alert('다시 로그인 해주세요.');
+        // 데이터 가져오기 실패시 다시 로그인 화면으로
+        window.location.href = '/stamp/auth';
+      }
     } catch (e) {
       setIsLoading(false);
       // 에러 구현
@@ -50,7 +75,6 @@ const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isR
         const errorCode = error.response.data.code;
         if (errorCode == 'COMMON500') {
           alert('예기치 못한 오류 발생. 다시 시도해주세요');
-          window.location.reload();
         } else if (errorCode == 'REWARD4001') {
           setIsError({ error: true, message: '도장 개수가 불충분합니다.' });
         } else if (errorCode == 'PW400') {
@@ -59,7 +83,6 @@ const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isR
           setIsError({ error: true, message: '이미 상품을 수령하였습니다.' });
         } else if (errorCode == 'REWARD4002') {
           alert('예기치 못한 오류 발생. 다시 시도해주세요');
-          window.location.reload();
         }
       }
     }
