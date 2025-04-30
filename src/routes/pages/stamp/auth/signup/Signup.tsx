@@ -7,7 +7,7 @@ import { useIsLoginStore } from '../../../../../store/isLoginStore';
 import { useSignupError } from '../../../../../hook/useSignupError';
 import { LoadingSpinner } from '../../../../../styles/LoadingSpinner';
 import { login } from '../../../../../services/apis/stamp/login';
-import ConfirmModalContent from './confirmModalContent';
+import ConfirmModalContent from './ConfirmModalContent';
 
 interface Props {
   setWhichView: (value: string) => void;
