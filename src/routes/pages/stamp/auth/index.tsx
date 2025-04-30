@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Signup from './signup/Signup';
 import Login from './login/Login';
+import WaveTest1 from './wave/WaveTest1';
 
 const AuthPage = () => {
   const [whichView, setWhichView] = useState<string>('default');
@@ -32,6 +33,7 @@ const AuthPage = () => {
             <div>확인할래요</div>
           </Button>
         </ButtonBox>
+        //<WaveTest1 />
       )}
       {whichView == 'signup' && <Signup setWhichView={setWhichView} />}
       {whichView == 'login' && <Login setWhichView={setWhichView} />}
