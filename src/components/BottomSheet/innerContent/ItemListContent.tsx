@@ -1,43 +1,74 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CommonItem } from '../../../data/boothFood';
+import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
 
 interface ContentProps {
   theTitle?: string;
   theDescription?: string;
-  data?: CommonItem[];
-  setSelectedItem: (item: CommonItem | null) => void;
+  data?: BoothOrFoodTruckItem[];
+  setSelectedItem: (item: BoothOrFoodTruckItem | null) => void;
 }
 
 export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescription, data, setSelectedItem }) => {
+  const booths = data?.filter((item): item is BoothItem => item.type === 'booth');
+  const foodTrucks = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
+
   return (
     <Wrapper>
       <TitleContainer>
         <Title>{theTitle}</Title>
         <Description>{theDescription}</Description>
-        <List>
-          {data?.map((item) => (
-            <Item key={item.id} onClick={() => setSelectedItem(item)}>
-              <ItemContent>
-                <ItemId>#{item.id}</ItemId>
-                <ItemTextContainer>
-                  <ItemTitle>{item.title}</ItemTitle>
-                  {item.description && <ItemDescription>{item.description}</ItemDescription>}
-                  <ItemKeywords>
-                    {item.keywords.map((key, index) => (
-                      <Keyword key={index}>#{key}</Keyword>
-                    ))}
-                  </ItemKeywords>
-                </ItemTextContainer>
-                <RecommendContainer>
-                  <RecommendNum>{item.recommendCount}</RecommendNum>
-                  <RecommendIcon src="images/common/thumbsUp.webp" />
-                </RecommendContainer>
-              </ItemContent>
-            </Item>
-          ))}
-        </List>
+        {/* 부스 리스트 */}
+        {booths && booths.length > 0 && (
+          <List>
+            {booths?.map((item) => (
+              <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
+                <ItemContent>
+                  <ItemId>#{item.dayBoothNum}</ItemId>
+                  <ItemTextContainer>
+                    <ItemTitle>{item.name}</ItemTitle>
+                    <ItemDescription>{item.info}</ItemDescription>
+                    <ItemKeywords>
+                      {item.categories.map((key, index) => (
+                        <Keyword key={index}>#{key}</Keyword>
+                      ))}
+                    </ItemKeywords>
+                  </ItemTextContainer>
+                  <RecommendContainer>
+                    <RecommendNum>{item.recommendNum}</RecommendNum>
+                    <RecommendIcon src="images/common/thumbsUp.webp" />
+                  </RecommendContainer>
+                </ItemContent>
+              </Item>
+            ))}
+          </List>
+        )}
+
+        {/* 푸드트럭 리스트 */}
+        {foodTrucks && foodTrucks.length > 0 && (
+          <List>
+            {foodTrucks?.map((item) => (
+              <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
+                <ItemContent>
+                  <ItemId>#{item.dayBoothNum}</ItemId>
+                  <ItemTextContainer>
+                    <ItemTitle>{item.name}</ItemTitle>
+                    <ItemKeywords>
+                      {item.representMenu.map((key, index) => (
+                        <Keyword key={index}>#{key}</Keyword>
+                      ))}
+                    </ItemKeywords>
+                  </ItemTextContainer>
+                  <RecommendContainer>
+                    <RecommendNum>{item.recommendNum}</RecommendNum>
+                    <RecommendIcon src="images/common/thumbsUp.webp" />
+                  </RecommendContainer>
+                </ItemContent>
+              </Item>
+            ))}
+          </List>
+        )}
       </TitleContainer>
     </Wrapper>
   );

@@ -1,102 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { BasicBottomSheet } from '../../../components/BottomSheet/variants/BasicBottomSheet';
 import styled from 'styled-components';
 import { dateOptions, Option, placeOptions } from '../../../data/options';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
-import { boothDescription, BoothItem, boothTitle, CommonItem } from '../../../data/boothFood';
+import { BoothItem, BoothOrFoodTruckItem } from '../../../data/boothFood';
 import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
 import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
 import { GoBackButton } from '../../../components/common/GoBackButton';
+import { fetchBoothList } from '../../../services/apis/booth/boothList';
 
 export const Booth = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
   const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
-  const [selectedItem, setSelectedItem] = useState<CommonItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
+  const [boothList, setBoothList] = useState<BoothItem[] | []>([]);
 
-  const tempBoothData: BoothItem[] = [
-    {
-      id: 1,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 2,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 3,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 4,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 5,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 6,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 7,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 8,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 9,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-    {
-      id: 10,
-      title: '배리어 프리존 안내',
-      description: '배리어 프리존 안내',
-      keywords: ['배리어', '프리존'],
-      recommendCount: 323,
-      type: 'booth',
-    },
-  ];
+  useEffect(() => {
+    const getBoothList = async () => {
+      try {
+        const boothListResponse = await fetchBoothList(selectedDate.value as number);
+        setBoothList(boothListResponse ?? []);
+      } catch (e) {
+        console.log(e);
+        alert('로딩에 실패하였습니다.');
+      }
+    };
+    getBoothList();
+  }, [selectedDate]);
 
   return (
     <BaseLayer>
@@ -108,13 +40,14 @@ export const Booth = () => {
             <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
           </OptionContainer>
           <BasicBottomSheet
-            title={boothTitle}
-            description={boothDescription}
-            data={tempBoothData}
+            title={'부스 배치도'}
+            description={'한눈에 보는 부스 배치도와 부스 리스트'}
+            data={boothList || []}
             setSelectedItem={setSelectedItem}
           />
         </>
       )}
+
       {/* 프리뷰 바텀시트 */}
       {selectedItem && (
         <>

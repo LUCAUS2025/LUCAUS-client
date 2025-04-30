@@ -28,19 +28,20 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
   }, []);
 
   return (
-    <Wrapper ref={dropDownRef}>
+    <Wrapper onClick={() => setActive((prev) => !prev)} ref={dropDownRef}>
       <SelectedWrapper>
         <Logo src={logoSrc} />
-        <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption.label}</SelectedText>
+        <SelectedText>{selectedOption.label}</SelectedText>
         <DownIcon src="/images/common/dropDown.webp" />
       </SelectedWrapper>
       <OptionList active={active}>
         {options.map((element) => (
           <OptionItem
             key={element.value}
-            onClick={() => {
+            onClick={(e) => {
               setActive(false);
               setSelectedOption(element);
+              e.stopPropagation();
             }}
           >
             {element.label}
@@ -53,6 +54,7 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
 
 const Wrapper = styled.div`
   position: relative;
+  z-index: 8;
 `;
 const SelectedWrapper = styled(BaseButton)`
   z-index: 2;
@@ -76,6 +78,7 @@ const OptionList = styled.div<{ active: boolean }>`
   box-shadow: 0px 0px 12px 0px #00000014;
   border: 1px solid #d1d5dc;
   z-index: 1;
+  overflow: hidden;
 `;
 const OptionItem = styled.div`
   display: flex;
@@ -85,4 +88,5 @@ const OptionItem = styled.div`
   align-items: center;
   padding: 8px 12px 8px 12px;
   border-top: 1px solid #d1d5dc;
+  background-color: #fafafa;
 `;
