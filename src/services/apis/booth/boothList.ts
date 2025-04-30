@@ -9,7 +9,7 @@ interface BoothListRawData {
   categories: string[];
 }
 
-export function mapRawToBoothList(rawList: BoothListRawData[]): BoothItem[] {
+function mapRawToBoothList(rawList: BoothListRawData[]): BoothItem[] {
   return rawList.map((raw) => ({
     dayBoothNum: raw.dayBoothNum,
     name: raw.name,
@@ -30,7 +30,6 @@ interface BoothList {
 export async function fetchBoothList(date: number) {
   try {
     const response = await axiosInstance.get<BoothList>(`/booth/${date}`);
-    console.log(response.data);
     return mapRawToBoothList(response.data.result);
   } catch (error) {
     if (error) throw error;

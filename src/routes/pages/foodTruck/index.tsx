@@ -9,11 +9,26 @@ import styled from 'styled-components';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
 import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
+import { fetchFoodTruckList } from '../../../services/apis/foodTruck/foodTruckList';
 
 export const FoodTruck = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
   const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
   const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
+  const [foodTruckList, setFoodTruckList] = useState<FoodTruckItem[] | []>([]);
+
+  useEffect(() => {
+    const getFoodTruckList = async () => {
+      try {
+        const foodTruckResponse = await fetchFoodTruckList(selectedDate.value as number);
+        setFoodTruckList(foodTruckResponse ?? []);
+      } catch (e) {
+        console.log(e);
+        alert('로딩에 실패하였습니다.');
+      }
+    };
+    getFoodTruckList();
+  }, [selectedDate]);
 
   return (
     <BaseLayer>
@@ -26,7 +41,7 @@ export const FoodTruck = () => {
           <BasicBottomSheet
             title={'푸드트럭 지도'}
             description={'매일 10시부터 19시, 맛의 향연을 즐겨보세요!'}
-            data={[]}
+            data={foodTruckList || []}
             setSelectedItem={setSelectedItem}
           />
         </>

@@ -47,6 +47,7 @@ export const Booth = () => {
           />
         </>
       )}
+
       {/* 프리뷰 바텀시트 */}
       {selectedItem && (
         <>
