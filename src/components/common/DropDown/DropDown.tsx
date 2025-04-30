@@ -28,19 +28,20 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
   }, []);
 
   return (
-    <Wrapper ref={dropDownRef}>
+    <Wrapper onClick={() => setActive((prev) => !prev)} ref={dropDownRef}>
       <SelectedWrapper>
         <Logo src={logoSrc} />
-        <SelectedText onClick={() => setActive((prev) => !prev)}>{selectedOption.label}</SelectedText>
+        <SelectedText>{selectedOption.label}</SelectedText>
         <DownIcon src="/images/common/dropDown.webp" />
       </SelectedWrapper>
       <OptionList active={active}>
         {options.map((element) => (
           <OptionItem
             key={element.value}
-            onClick={() => {
+            onClick={(e) => {
               setActive(false);
               setSelectedOption(element);
+              e.stopPropagation();
             }}
           >
             {element.label}
