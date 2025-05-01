@@ -47,7 +47,7 @@ export const FoodTruckDetailContent = () => {
         </MenuContainer>
         <OperatingContainer>
           <OperatingTitle>푸드트럭 운영</OperatingTitle>
-          <DetailOperatingInfo />
+          <DetailOperatingInfo type={'foodTruck'} selectedDate={selectedDate} location={'해방광장'} />
         </OperatingContainer>
         <DetailReview type={'foodTruck'} onOpenReview={openReviewSheet} />
       </DetailWrapper>

@@ -44,7 +44,7 @@ export const BoothDetailContent = () => {
   }, [dayBoothNum, selectedDate]);
 
   if (!boothDetail) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; // 또는 Skeleton
   }
 
   return (
@@ -63,7 +63,7 @@ export const BoothDetailContent = () => {
           </TitleContainer>
           <ItemDescription>{boothDetail?.info}</ItemDescription>
         </HeaderContainer>
-        <DetailOperatingInfo />
+        <DetailOperatingInfo type={'booth'} selectedDate={selectedDate} location={boothDetail?.location} />
         <DetailReview type={'booth'} onOpenReview={openReviewSheet} />
       </DetailWrapper>
       {/* 리뷰 바텀시트 */}
