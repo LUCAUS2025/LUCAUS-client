@@ -7,15 +7,16 @@ import { useNavigate } from 'react-router-dom';
 interface ItemPreviewContentProps {
   item: BoothOrFoodTruckItem;
   onClose: () => void;
+  selectedDate: number;
 }
 
-export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, onClose }) => {
+export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, onClose, selectedDate }) => {
   const navigate = useNavigate();
   const goDetail = () => {
     if (item.type === 'booth') {
-      navigate(`/booth/${item.dayBoothNum}`);
+      navigate(`/booth/${item.dayBoothNum}`, { state: { selectedDate } });
     } else if (item.type === 'foodTruck') {
-      navigate(`/foodTruck/${item.dayBoothNum}`);
+      navigate(`/foodTruck/${item.dayBoothNum}`, { state: { selectedDate } });
     }
   };
 

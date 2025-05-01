@@ -5,9 +5,12 @@ import styled from 'styled-components';
 import { DetailReview } from '../itemDetailComponents/DetailReview';
 import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
+import { useLocation } from 'react-router-dom';
 
 export const FoodTruckDetailContent = () => {
+  const location = useLocation();
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
+  const selectedDate = location.state?.selectedDate;
 
   const openReviewSheet = () => {
     setIsReviewSheetOpen(true);

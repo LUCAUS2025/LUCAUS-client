@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         element: <Booth />,
       },
       {
-        path: '/booth/:id',
+        path: '/booth/:dayBoothNum',
         element: <BoothDetail />,
       },
       {
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         element: <FoodTruck />,
       },
       {
-        path: '/foodTruck/:id',
+        path: '/foodTruck/:dayFoodTruckNum',
         element: <FoodTruckDetail />,
       },
       {
