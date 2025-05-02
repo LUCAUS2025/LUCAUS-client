@@ -46,9 +46,7 @@ const HomeNotice = () => {
       {notices.map((notice, index) => (
         <NoticeCard key={index}>
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
-          <NoticeContent>
-            {notice.content.length > 25 ? `${notice.content.slice(0, 25)}...` : notice.content}
-          </NoticeContent>
+          <NoticeContent>{notice.content}</NoticeContent>
           <NoticeDate>{formatDate(notice.uploadDateTime)}</NoticeDate>
         </NoticeCard>
       ))}
@@ -92,6 +90,9 @@ const NoticeContent = styled.div`
   font-size: 16px;
   color: #6b7280;
   margin-top: 4px;
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 '...'으로 표시 */
 `;
 
 const NoticeDate = styled.div`
