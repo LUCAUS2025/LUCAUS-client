@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Thumbnail } from '../../../components/home/thumbnail';
 import { LineUp } from '../../../components/stage/lineUp';
 import { useNavigate } from 'react-router-dom';
@@ -6,29 +6,40 @@ import styled from 'styled-components';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { dateOptions, Option } from '../../../data/options';
 
-const stageOptions = ['버스킹', '응원제', '본무대', '아티스트'];
-export const stagedateOptions = ['13일', '14일', '22일', '23일'];
-// stagedateOptions를 Option 타입으로 변환
+const stagedateOptions = ['13일', '14일', '22일', '23일'];
+
 const customDateOptions: Option[] = stagedateOptions.map((date) => ({
   label: date,
   value: date,
 }));
 
+const stageOptionsByDate: { [key: string]: string[] } = {
+  '13일': ['버스킹'],
+  '14일': ['버스킹'],
+  '22일': ['버스킹', '무대기획전', '본무대', '아티스트'],
+  '23일': ['응원제', '본무대', '아티스트'],
+};
+
 export const Stage = () => {
   const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
-  const [selectedStage, setSelectedStage] = useState(stageOptions[0]); // 기본값: "버스킹"
+  const [selectedDate, setSelectedDate] = useState<Option>(customDateOptions[0]);
+  const [selectedStage, setSelectedStage] = useState(stageOptionsByDate[customDateOptions[0].value][0]);
 
-  // 각 섹션에 대한 ref 생성
   const buskingRef = useRef<HTMLDivElement>(null);
   const cheeringRef = useRef<HTMLDivElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
   const artistRef = useRef<HTMLDivElement>(null);
 
+  const availableStages = stageOptionsByDate[selectedDate.value] || [];
+
+  useEffect(() => {
+    if (!availableStages.includes(selectedStage)) {
+      setSelectedStage(availableStages[0]);
+    }
+  }, [selectedDate]);
+
   const handleStageSelect = (option: string) => {
     setSelectedStage(option);
-
-    // 선택된 옵션에 따라 해당 섹션으로 스크롤
     const sectionRefs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
       버스킹: buskingRef,
       응원제: cheeringRef,
@@ -42,6 +53,8 @@ export const Stage = () => {
     }
   };
 
+  const isSelectedDate = (date: string) => selectedDate.value === date;
+
   return (
     <>
       <DropDownContainer>
@@ -49,44 +62,82 @@ export const Stage = () => {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
           darkMode={false}
-          customData={customDateOptions} // customData를 stagedateOptions로 설정
+          customData={customDateOptions}
         />
         <DropDownContainer style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
-          {stageOptions.map((option) => (
+          {availableStages.map((option) => (
             <OptionItem key={option} selected={selectedStage === option} onClick={() => handleStageSelect(option)}>
               {option}
             </OptionItem>
           ))}
         </DropDownContainer>
       </DropDownContainer>
+
       <img
-        src="./images/home/stage/ticket.png"
+        src="/images/home/stage/ticket.png"
         onClick={() => navigate('/guide/ticketing')}
         style={{ width: '80%' }}
         alt="티켓 안내"
       />
-      <div ref={buskingRef}>
-        <Title>버스킹</Title>
-      </div>
-      <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
-      <Thumbnail />
 
-      <div ref={cheeringRef}>
-        <Title>응원제</Title>
-      </div>
-      <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
+      {/* 버스킹 */}
+      {(isSelectedDate('13일') || isSelectedDate('14일')) && (
+        <div ref={buskingRef}>
+          <Title>버스킹</Title>
+          <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
+          <Thumbnail />
+        </div>
+      )}
 
-      <div ref={mainStageRef}>
-        <Title>본무대 라인업</Title>
-      </div>
-      <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
-      <LineUp />
+      {isSelectedDate('22일') && (
+        <div ref={buskingRef}>
+          <Title>청룡가요제</Title>
+          <Subtitle>좌우로 넘겨보며 청룡가요제를 즐겨보세요!</Subtitle>
+          <Thumbnail />
+        </div>
+      )}
 
-      <div ref={artistRef}>
-        <Title>아티스트 라인업</Title>
-      </div>
-      <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-      <LineUp />
+      {/* 무대기획전 */}
+      {isSelectedDate('22일') && (
+        <div>
+          <Title>무대기획전</Title>
+          <img
+            src="/images/home/stage/ticket.png"
+            alt="무대기획전 포스터"
+            style={{ width: '100%', borderRadius: '12px' }}
+          />
+        </div>
+      )}
+
+      {/* 응원제 */}
+      {isSelectedDate('23일') && (
+        <div ref={cheeringRef}>
+          <Title>응원제</Title>
+          <img
+            src="/images/home/stage/ticket.png"
+            alt="응원제 포스터"
+            style={{ width: '100%', borderRadius: '12px' }}
+          />
+        </div>
+      )}
+
+      {/* 본무대 */}
+      {(isSelectedDate('22일') || isSelectedDate('23일')) && (
+        <div ref={mainStageRef}>
+          <Title>본무대 라인업</Title>
+          <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
+          <LineUp />
+        </div>
+      )}
+
+      {/* 아티스트 */}
+      {(isSelectedDate('22일') || isSelectedDate('23일')) && (
+        <div ref={artistRef}>
+          <Title>아티스트 라인업</Title>
+          <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
+          <LineUp />
+        </div>
+      )}
     </>
   );
 };
