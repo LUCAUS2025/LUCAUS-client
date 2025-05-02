@@ -4,6 +4,7 @@ import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDate } from '../../../components/common/formatData';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
+import { dateOptions, itemsOptions, Option } from '../../../data/options';
 
 interface LostItemProps {
   category: string;
@@ -15,6 +16,8 @@ interface LostItemProps {
 
 const LostItem = () => {
   const [lostItems, setLostItems] = useState<LostItemProps[]>([]);
+  const [selectDate, setSelectDate] = useState<Option>(dateOptions[0]); // 날짜 선택 상태
+  const [selectItem, setSelectItem] = useState<Option>(itemsOptions[0]); // 분실물 선택 상태
 
   const translateCategory = (category: string) => {
     const categoryMap: Record<string, string> = {
@@ -30,18 +33,19 @@ const LostItem = () => {
   };
 
   useEffect(() => {
-    getLostItems({})
+    getLostItems({
+      date: String(selectDate.value),
+      category: String(selectItem.value),
+    })
       .then((res) => {
         if (res.result?.content?.length > 0) {
-          const items = res.result.content.map(
-            (item: { category: string; name: string; updatedDateTime: string; photoUrl: string; place: string }) => ({
-              category: item.category,
-              name: item.name,
-              date: item.updatedDateTime,
-              image: item.photoUrl,
-              detail: `습득 장소 : ${item.place}`,
-            }),
-          );
+          const items = res.result.content.map((item) => ({
+            category: item.category,
+            name: item.name,
+            date: item.updatedDateTime,
+            image: item.photoUrl,
+            detail: `습득 장소 : ${item.place}`,
+          }));
           setLostItems(items);
         } else {
           setLostItems([]);
@@ -50,7 +54,7 @@ const LostItem = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [selectDate, selectItem]);
 
   return (
     <BigContainer>
@@ -67,12 +71,8 @@ const LostItem = () => {
 
       <SectionTitle>내 분실물 찾기</SectionTitle>
       <DropDowns>
-        <DateDropDown selectedDate={{ label: '19일', value: '19' }} setSelectedDate={() => {}} darkMode={false} />
-        <LostitemDropDown
-          selectedItem={{ label: '전체', value: 'TOTAL' }}
-          setSelectedItem={() => {}}
-          darkMode={false}
-        />
+        <DateDropDown selectedDate={selectDate} setSelectedDate={setSelectDate} darkMode={false} />
+        <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
       <ItemList>
         {lostItems.map((item, idx) => (
