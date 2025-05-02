@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useMenu } from '../context/MenuContext';
+import { useMenu } from '../../context/MenuContext';
 
-export const TheHeader = () => {
+export const HomeHeader = () => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
 
@@ -21,7 +21,7 @@ export const TheHeader = () => {
     </Wrapper>
   );
 };
-export default TheHeader;
+export default HomeHeader;
 
 const Wrapper = styled.div`
   position: fixed;

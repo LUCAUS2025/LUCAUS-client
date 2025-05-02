@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useMenu } from '../context/MenuContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMemo } from 'react';
+import { useMenu } from '../../context/MenuContext';
 
 export const Header = () => {
   const navigate = useNavigate();
