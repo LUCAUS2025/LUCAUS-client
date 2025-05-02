@@ -92,6 +92,7 @@ const NoticeContent = styled.div`
   margin-top: 4px;
   white-space: nowrap; /* 텍스트를 한 줄로 표시 */
   overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis;
 `;
 
 const NoticeDate = styled.div`
