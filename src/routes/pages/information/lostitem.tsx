@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDate } from '../../../components/common/formatData';
+import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
+import { LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 
 interface LostItemProps {
   category: string;
@@ -64,6 +66,14 @@ const LostItem = () => {
       </Container>
 
       <SectionTitle>내 분실물 찾기</SectionTitle>
+      <DropDowns>
+        <DateDropDown selectedDate={{ label: '19일', value: '19' }} setSelectedDate={() => {}} darkMode={false} />
+        <LostitemDropDown
+          selectedItem={{ label: '전체', value: 'TOTAL' }}
+          setSelectedItem={() => {}}
+          darkMode={false}
+        />
+      </DropDowns>
       <ItemList>
         {lostItems.map((item, idx) => (
           <Item key={idx}>
@@ -170,4 +180,10 @@ export const Line = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+`;
+
+const DropDowns = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
 `;

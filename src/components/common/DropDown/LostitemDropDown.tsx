@@ -6,14 +6,13 @@ interface LostitemDropDownProps {
   selectedItem: Option;
   setSelectedItem: (option: Option) => void;
   darkMode: boolean;
-  customData?: Option[];
 }
 
-export const DateDropDown: React.FC<LostitemDropDownProps> = ({ selectedItem, setSelectedItem, darkMode, customData }) => {
+export const LostitemDropDown: React.FC<LostitemDropDownProps> = ({ selectedItem, setSelectedItem, darkMode }) => {
   return (
     <>
       <DropDown
-        options={customData ? customData : itemsOptions}
+        options={itemsOptions}
         selectedOption={selectedItem}
         setSelectedOption={setSelectedItem}
         logoSrc={darkMode ? '/images/common/dateDark.webp' : '/images/common/date.webp'}
