@@ -1,8 +1,9 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
+import { useParams } from 'react-router-dom';
+import { Item, ItemDate, ItemInfo, ItemList, Line, Tag } from './lostitem';
 import { useEffect, useState } from 'react';
 import { getNotice } from '../../../services/apis/notice';
 import { formatDate } from '../../../components/common/formatData';
+import styled from 'styled-components';
 
 interface Notice {
   id: number;
@@ -49,9 +50,34 @@ const NoticeDetail = () => {
           </ItemInfo>
         </Item>
       </ItemList>
-      <div>{notice.content}</div>
+      <ItemContent>
+        <ItemImage src={notice.photoUrl || ''} />
+        {notice.content}
+      </ItemContent>
     </>
   );
 };
 
 export default NoticeDetail;
+
+const ItemContent = styled.div`
+  margin-top: 10px;
+  padding: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ItemName = styled.div`
+  font-weight: 700;
+  font-size: 20px;
+`;
+
+const ItemImage = styled.img`
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #d1d5dc;
+`;
