@@ -2,59 +2,103 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { LoadingSpinner } from '../../../styles/LoadingSpinner';
 import { CommonItem } from '../../../data/boothFood';
-import { ReviewItem } from '../../review/ReviewBarItem';
+import { postBoothReview } from '../../../services/apis/booth/boothReview';
+import { postFoodTruckReview } from '../../../services/apis/foodTruck/foodTruckReview';
+import { AxiosError } from 'axios';
 
 interface ReviewOption {
   icon: string;
   label: string;
+  tag: string;
 }
 
 interface ReviewFormContentProps {
   onClose: () => void;
   type: CommonItem['type'];
+  currentId: number;
 }
 
 const boothReviewOptions: ReviewOption[] = [
-  { icon: '👍', label: '완전\n추천해요' },
-  { icon: '🍭', label: '간식이\n맛있어요' },
-  { icon: '🤓', label: '콘텐츠가\n유익해요' },
-  { icon: '🤣', label: '분위기가\n재밌어요' },
+  { icon: '👍', label: '완전\n추천해요', tag: 'RECOMMEND' },
+  { icon: '🍭', label: '간식이\n맛있어요', tag: 'DELICIOUS' },
+  { icon: '🤓', label: '콘텐츠가\n유익해요', tag: 'BENEFICIAL' },
+  { icon: '🤣', label: '분위기가\n재밌어요', tag: 'FUN' },
 ];
 
-const foodTruckReviewOptions: ReviewItem[] = [
-  { icon: '👍', label: '완전 n추천해요', value: 100 },
-  { icon: '😋', label: '맛있어요', value: 80 },
-  { icon: '🙆‍♂️', label: '양이 많아요', value: 40 },
-  { icon: '💨', label: '빨라요', value: 20 },
+const foodTruckReviewOptions: ReviewOption[] = [
+  { icon: '👍', label: '완전\n추천해요', tag: 'RECOMMEND' },
+  { icon: '😋', label: '맛있어요', tag: 'DELICIOUS' },
+  { icon: '🙆‍♂️', label: '양이 많아요', tag: 'MANY' },
+  { icon: '💨', label: '빨라요', tag: 'FAST' },
 ];
 
-export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type }) => {
-  const [selected, setSelected] = useState<number | null>(null);
+export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type, currentId }) => {
+  const [selected, setSelected] = useState<number[]>([]);
   const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success'>('ready');
-  const submitReview = () => {
-    setReviewStatus('submitting'); //
 
-    setTimeout(() => {
-      setReviewStatus('success');
-
-      setTimeout(() => {
-        onClose();
-      }, 2000);
-    }, 2000);
+  const toggleSelected = (idx: number) => {
+    setSelected((prev) => (prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]));
   };
+
+  const submitReview = async () => {
+    setReviewStatus('submitting');
+
+    const selectedTags =
+      type === 'booth'
+        ? selected.map((i) => boothReviewOptions[i].tag)
+        : selected.map((i) => foodTruckReviewOptions[i].tag);
+    try {
+      if (type === 'booth') {
+        const result = await postBoothReview(currentId, selectedTags);
+        if (result?.isSuccess) {
+          setReviewStatus('success');
+          setTimeout(() => {
+            onClose();
+          }, 1500);
+        } else {
+          alert(result?.message || '리뷰 전송에 실패했습니다.');
+          setReviewStatus('ready');
+          onClose();
+        }
+      } else if (type === 'foodTruck') {
+        const result = await postFoodTruckReview(currentId, selectedTags);
+        if (result?.isSuccess) {
+          setReviewStatus('success');
+          setTimeout(() => {
+            onClose();
+          }, 1500);
+        } else {
+          alert(result?.message || '리뷰 전송에 실패했습니다.');
+          setReviewStatus('ready');
+          onClose();
+        }
+      }
+    } catch (error: unknown) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      const message = axiosError.response?.data?.message || '알 수 없는 오류가 발생했습니다.';
+      alert(message);
+      setReviewStatus('ready');
+      onClose();
+    }
+  };
+  const options = type === 'booth' ? boothReviewOptions : foodTruckReviewOptions;
 
   return (
     <Wrapper>
-      {reviewStatus === 'ready' && type === 'booth' && (
+      {reviewStatus === 'ready' && (
         <>
           <TitleContainer>
-            <Title>이 부스 추천해요!</Title>
-            <SubText>부스 방문 후 부스에 대한 리뷰를 남겨주세요.</SubText>
+            <Title>{type === 'booth' ? '이 부스 추천해요!' : '푸드트럭, 어땠나요?'}</Title>
+            <SubText>
+              {type === 'booth'
+                ? '부스 방문 후 부스에 대한 리뷰를 남겨주세요.'
+                : '방문 후 푸드트럭에 대한 리뷰를 남겨주세요.'}
+            </SubText>
           </TitleContainer>
           <OptionsContainer>
-            {boothReviewOptions.map((option, idx) => (
+            {options.map((option, idx) => (
               <Option key={idx}>
-                <IconWrapper key={idx} selected={selected === idx} onClick={() => setSelected(idx)}>
+                <IconWrapper selected={selected.includes(idx)} onClick={() => toggleSelected(idx)}>
                   {option.icon}
                 </IconWrapper>
                 <Label>{option.label}</Label>
@@ -63,31 +107,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
           </OptionsContainer>
           <ButtonContainer>
             <CancelButton onClick={onClose}>취소</CancelButton>
-            <SubmitButton disabled={selected === null} onClick={() => submitReview()}>
-              리뷰 보내기
-            </SubmitButton>
-          </ButtonContainer>
-        </>
-      )}
-      {reviewStatus === 'ready' && type === 'foodTruck' && (
-        <>
-          <TitleContainer>
-            <Title>푸드트럭, 어땠나요?</Title>
-            <SubText>방문 후 푸드트럭에 대한 리뷰를 남겨주세요.</SubText>
-          </TitleContainer>
-          <OptionsContainer>
-            {foodTruckReviewOptions.map((option, idx) => (
-              <Option key={idx}>
-                <IconWrapper key={idx} selected={selected === idx} onClick={() => setSelected(idx)}>
-                  {option.icon}
-                </IconWrapper>
-                <Label>{option.label}</Label>
-              </Option>
-            ))}
-          </OptionsContainer>
-          <ButtonContainer>
-            <CancelButton onClick={onClose}>취소</CancelButton>
-            <SubmitButton disabled={selected === null} onClick={() => submitReview()}>
+            <SubmitButton disabled={selected.length === 0} onClick={submitReview}>
               리뷰 보내기
             </SubmitButton>
           </ButtonContainer>
@@ -110,7 +130,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
             <Title>리뷰 작성 완료!</Title>
             <SubText>리뷰가 성공적으로 전송되었습니다.</SubText>
             <CompleteAnimation>
-              <Complete src="/images/common/complete.webp"></Complete>
+              <Complete src="/images/common/complete.webp" />
             </CompleteAnimation>
           </TitleContainer>
         </>
@@ -119,6 +139,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
   );
 };
 
+// Styled Components 아래 동일 (수정 없음)
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -142,20 +163,16 @@ const Title = styled.div`
 `;
 
 const SubText = styled.div`
-  font-size: 13px;
-  font-weight: 400;
-  color: #6a7282;
-  font-weight: 400;
   font-size: 12px;
   line-height: 150%;
   letter-spacing: -0.26px;
   text-align: center;
   vertical-align: middle;
+  color: #6a7282;
 `;
 
 const OptionsContainer = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   margin-top: 8px;
@@ -167,7 +184,6 @@ const Option = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  transition: background-color 0.2s;
   width: 60px;
   padding: 6px;
 `;
@@ -189,7 +205,6 @@ const IconWrapper = styled.div<{ selected: boolean }>`
 `;
 
 const Label = styled.div`
-  font-weight: 400;
   font-size: 12px;
   line-height: 150%;
   letter-spacing: -0.26px;
@@ -233,6 +248,7 @@ const SubmittingAnimation = styled.div`
   align-items: center;
   padding: 56px;
 `;
+
 const fadeInUp = keyframes`
   0% {
     opacity: 0;
@@ -253,6 +269,7 @@ const CompleteAnimation = styled.div`
   transform: translateY(10px);
   animation: ${fadeInUp} 0.6s ease-out forwards;
 `;
+
 const Complete = styled.img`
   width: 48px;
   height: 48px;

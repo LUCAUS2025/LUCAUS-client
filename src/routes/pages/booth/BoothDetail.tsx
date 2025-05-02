@@ -34,9 +34,13 @@ export const BoothDetail = () => {
     return <div>Loading...</div>;
   }
 
+  if (!boothDetail.cover) {
+    return <div>loading...</div>;
+  }
+
   return (
     <>
-      <BaseLayer>
+      <BaseLayer backgroundImgSrc={boothDetail.cover}>
         <GoBackButtonContainer>
           <GoBackButton onClick={() => navigate(-1)} />
         </GoBackButtonContainer>
@@ -54,7 +58,7 @@ export const BoothDetail = () => {
 
 const GoBackButtonContainer = styled.div`
   position: absolute;
-  left: 7px;
+  left: 16px;
   top: 20px;
 `;
 

@@ -58,7 +58,7 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDet
       {/* 리뷰 바텀시트 */}
       {isReviewSheetOpen && (
         <PortalBottomSheet
-          componentProps={{ onClose: closeReviewSheet, type: 'booth' }}
+          componentProps={{ onClose: closeReviewSheet, type: 'booth', currentId: boothDetail?.boothId }}
           contentComponent={ReviewFormContent}
           onClose={closeReviewSheet}
         />
