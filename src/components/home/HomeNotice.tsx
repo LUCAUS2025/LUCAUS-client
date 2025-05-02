@@ -46,7 +46,9 @@ const HomeNotice = () => {
       {notices.map((notice, index) => (
         <NoticeCard key={index}>
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
-          <NoticeContent>{notice.content}</NoticeContent>
+          <NoticeContent>
+            {notice.content.length > 25 ? `${notice.content.slice(0, 25)}...` : notice.content}
+          </NoticeContent>
           <NoticeDate>{formatDate(notice.uploadDateTime)}</NoticeDate>
         </NoticeCard>
       ))}
