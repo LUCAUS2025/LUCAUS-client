@@ -1,47 +1,35 @@
 import styled from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
 import { useMenu } from '../../context/MenuContext';
+import { Wrapper } from './HomeHeader';
 
 export const Header = () => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
-  const params = useParams();
+  const location = useLocation();
+  useEffect(() => {
+    console.log('params:', location.pathname);
+  }, []);
 
   const title = useMemo(() => {
-    const paramValues = Object.values(params);
+    const path = location.pathname;
 
-    // 파라미터가 없을 경우(예: 홈)
-    if (paramValues.length === 0) return '청람';
+    if (path === '/') return '청람';
+    if (path.startsWith('/guide')) return '오늘의 공연';
+    if (path.includes('stage')) return '오늘의 공연';
+    if (path.includes('booth')) return '거리문화제';
+    if (path.includes('foodTruck')) return '푸드트럭';
+    if (path.includes('information')) return '정보';
+    if (path.includes('entry')) return '이동 정책';
+    if (path.includes('notice')) return '공지사항';
+    if (path.includes('lostitem')) return '분실물 안내';
+    if (path.includes('barrierfree')) return '배리어프리';
+    if (path.startsWith('/stamp/board')) return '광장기획전 스탬프';
+    if (path.startsWith('/stamp/auth')) return '로그인';
 
-    const param = paramValues[0];
-
-    // param에 따라 타이틀 결정
-    switch (param) {
-      case 'stage':
-        return '오늘의 공연';
-      case 'booth':
-        return '거리문화제';
-      case 'foodTruck':
-        return '푸드트럭';
-      case 'information':
-        return '정보';
-      case 'entry':
-        return '이동 정책';
-      case 'notice':
-        return '공지사항';
-      case 'lostitem':
-        return '분실물 안내';
-      case 'barrierfree':
-        return '배리어프리';
-      case 'board':
-        return '광장기획전 스탬프';
-      case 'auth':
-        return '로그인';
-      default:
-        return '오늘의 공연';
-    }
-  }, [params]);
+    return '오늘의 공연'; // default
+  }, [location.pathname]);
 
   const openMenu = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -50,7 +38,7 @@ export const Header = () => {
 
   return (
     <Wrapper>
-      <HeaderWrapper onClick={() => navigate('/')}>
+      <HeaderWrapper>
         <Icon onClick={openMenu} className="left-icon" />
         <Title>{title}</Title>
         <Icon />
@@ -61,21 +49,14 @@ export const Header = () => {
 
 export default Header;
 
-const Wrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 3;
-`;
-
 const HeaderWrapper = styled.div`
   background-color: #f9fafb;
   color: black;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+  // justify-content: space-between;
+  height: 60px;
+  padding: 0 3%;
 `;
 
 const Title = styled.div`

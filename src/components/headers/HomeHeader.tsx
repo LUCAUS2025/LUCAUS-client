@@ -23,7 +23,7 @@ export const HomeHeader = () => {
 };
 export default HomeHeader;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   position: fixed;
   width: 100%;
   top: 0;
