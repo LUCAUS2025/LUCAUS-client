@@ -12,7 +12,6 @@ interface DetailOperatingInfoProps {
 export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({ type, selectedDate, location }) => {
   return (
     <Wrapper>
-      <Title>부스 운영</Title>
       <InfoContainer>
         <InfoItem>
           <LabelContainer>

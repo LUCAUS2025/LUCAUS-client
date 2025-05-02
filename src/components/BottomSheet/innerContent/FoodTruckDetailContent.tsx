@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import { DetailReview } from '../itemDetailComponents/DetailReview';
 import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
-import { useLocation } from 'react-router-dom';
+import { FoodTruckDetailRawData } from '../../../services/apis/foodTruck/foodTruckDetail';
+interface FoodTruckDetailContentProps {
+  foodTruckDetail: FoodTruckDetailRawData;
+  selectedDate: number;
+}
 
-export const FoodTruckDetailContent = () => {
-  const location = useLocation();
+export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({ foodTruckDetail, selectedDate }) => {
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
-  const selectedDate = location.state?.selectedDate;
 
   const openReviewSheet = () => {
     setIsReviewSheetOpen(true);
@@ -26,30 +28,28 @@ export const FoodTruckDetailContent = () => {
         <HeaderContainer>
           <TitleContainer>
             <ItemTitle>
-              <ItemId>#1&nbsp;</ItemId>닭꼬치 묵고 떠블로 가~!
+              <ItemId>#{foodTruckDetail?.dayFoodTruckNum}&nbsp;</ItemId>
+              {foodTruckDetail?.name}
             </ItemTitle>
           </TitleContainer>
         </HeaderContainer>
         <MenuContainer>
           <MenuTitle>대표메뉴</MenuTitle>
-          <MenuOption>
-            <MenuText>매운 닭꼬치</MenuText>
-            <MenuPrice>5,000원</MenuPrice>
-          </MenuOption>
-          <MenuOption>
-            <MenuText>안매운 닭꼬치</MenuText>
-            <MenuPrice>5,000원</MenuPrice>
-          </MenuOption>
-          <MenuOption>
-            <MenuText>달달한 닭꼬치</MenuText>
-            <MenuPrice>5,000원</MenuPrice>
-          </MenuOption>
+          {foodTruckDetail.menus.map((item, idx) => {
+            const [name, price] = Object.entries(item)[0];
+            return (
+              <MenuOption key={idx}>
+                <MenuText>{name}</MenuText>
+                <MenuPrice>{price.toLocaleString()}원</MenuPrice>
+              </MenuOption>
+            );
+          })}
         </MenuContainer>
         <OperatingContainer>
           <OperatingTitle>푸드트럭 운영</OperatingTitle>
-          <DetailOperatingInfo type={'foodTruck'} selectedDate={selectedDate} location={'해방광장'} />
+          <DetailOperatingInfo type={'foodTruck'} selectedDate={selectedDate} location={foodTruckDetail.location} />
         </OperatingContainer>
-        <DetailReview type={'foodTruck'} onOpenReview={openReviewSheet} />
+        <DetailReview type={'foodTruck'} onOpenReview={openReviewSheet} reviewData={foodTruckDetail.foodTruckReviews} />
       </DetailWrapper>
       {/*리뷰 바텀시트*/}
       {isReviewSheetOpen && (

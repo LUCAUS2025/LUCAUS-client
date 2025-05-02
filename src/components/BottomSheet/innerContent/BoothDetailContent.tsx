@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   DetailWrapper,
@@ -49,8 +49,11 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDet
           </TitleContainer>
           <ItemDescription>{boothDetail?.info}</ItemDescription>
         </HeaderContainer>
-        <DetailOperatingInfo type={'booth'} selectedDate={selectedDate} location={boothDetail?.location} />
-        <DetailReview type={'booth'} onOpenReview={openReviewSheet} />
+        <OperatingContainer>
+          <OperatingTitle>부스 운영</OperatingTitle>
+          <DetailOperatingInfo type={'booth'} selectedDate={selectedDate} location={boothDetail?.location} />
+        </OperatingContainer>
+        <DetailReview type={'booth'} onOpenReview={openReviewSheet} reviewData={boothDetail.boothReview} />
       </DetailWrapper>
       {/* 리뷰 바텀시트 */}
       {isReviewSheetOpen && (
@@ -68,4 +71,17 @@ const Wrapper = styled.div`
   flex: 1;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+`;
+
+const OperatingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const OperatingTitle = styled.div`
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: -0.26px;
 `;

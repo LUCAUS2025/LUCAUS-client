@@ -8,19 +8,17 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
 
 export const BoothDetail = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { dayBoothNum } = useParams<{ dayBoothNum: string }>();
   const [boothDetail, setBoothDetail] = useState<BoothDetailRawData | null>(null);
   const selectedDate = location.state?.selectedDate;
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getBoothDetail = async () => {
       const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
       const booth = result?.[0];
       setBoothDetail(booth ?? null);
-      console.log(result);
     };
     getBoothDetail();
   }, [dayBoothNum, selectedDate]);
