@@ -46,10 +46,8 @@ const HomeNotice = () => {
       {notices.map((notice, index) => (
         <NoticeCard key={index}>
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
-          <Line>
-            <NoticeContent>{notice.content}</NoticeContent>
-            <NoticeDate>{formatDateNoTime(notice.uploadDateTime)}</NoticeDate>
-          </Line>
+          <NoticeContent>{notice.content}</NoticeContent>
+          <NoticeDate>{formatDateNoTime(notice.uploadDateTime)}</NoticeDate>
         </NoticeCard>
       ))}
     </NoticeSection>
@@ -100,12 +98,4 @@ const NoticeDate = styled.div`
   font-size: 14px;
   color: #6b7280;
   margin-top: 8px;
-`;
-
-const Line = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
-  gap: 8px;
 `;
