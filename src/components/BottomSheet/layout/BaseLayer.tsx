@@ -7,10 +7,6 @@ interface BaseLayerProps {
 }
 
 export const BaseLayer: React.FC<BaseLayerProps> = ({ children, backgroundImgSrc }) => {
-  useEffect(() => {
-    console.log('배경이미지', backgroundImgSrc);
-  }, [backgroundImgSrc]);
-
   return <Wrapper $backgroundImgSrc={backgroundImgSrc}>{children}</Wrapper>;
 };
 
@@ -22,4 +18,5 @@ const Wrapper = styled.div<{ $backgroundImgSrc?: string }>`
   background-position: center;
   background-repeat: no-repeat;
   height: 40vh;
+  overflow: hidden;
 `;

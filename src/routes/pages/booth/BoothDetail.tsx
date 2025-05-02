@@ -58,7 +58,7 @@ export const BoothDetail = () => {
 
 const GoBackButtonContainer = styled.div`
   position: absolute;
-  left: 7px;
+  left: 16px;
   top: 20px;
 `;
 
