@@ -1,29 +1,64 @@
 import styled from 'styled-components';
 import { useMenu } from '../context/MenuContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useMemo } from 'react';
 
-interface TheHeaderProps {
-  title?: string;
-}
-
-export const Header = ({ title = '오늘의 공연' }: TheHeaderProps) => {
+export const Header = () => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
+  const params = useParams();
+
+  const title = useMemo(() => {
+    const paramValues = Object.values(params);
+
+    // 파라미터가 없을 경우(예: 홈)
+    if (paramValues.length === 0) return '청람';
+
+    const param = paramValues[0];
+
+    // param에 따라 타이틀 결정
+    switch (param) {
+      case 'stage':
+        return '오늘의 공연';
+      case 'booth':
+        return '거리문화제';
+      case 'foodTruck':
+        return '푸드트럭';
+      case 'information':
+        return '정보';
+      case 'entry':
+        return '이동 정책';
+      case 'notice':
+        return '공지사항';
+      case 'lostitem':
+        return '분실물 안내';
+      case 'barrierfree':
+        return '배리어프리';
+      case 'board':
+        return '광장기획전 스탬프';
+      case 'auth':
+        return '로그인';
+      default:
+        return '오늘의 공연';
+    }
+  }, [params]);
 
   const openMenu = (event: React.MouseEvent) => {
-    event.stopPropagation(); // 부모 Header의 onClick 이벤트 전파 방지
+    event.stopPropagation();
     toggleMenu();
   };
 
   return (
     <Wrapper>
       <HeaderWrapper onClick={() => navigate('/')}>
-        <Icon onClick={openMenu} className="left-icon"></Icon>
-        <Icon></Icon>
+        <Icon onClick={openMenu} className="left-icon" />
+        <Title>{title}</Title>
+        <Icon />
       </HeaderWrapper>
     </Wrapper>
   );
 };
+
 export default Header;
 
 const Wrapper = styled.div`
@@ -36,7 +71,16 @@ const Wrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   background-color: #f9fafb;
-  color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
+const Title = styled.div`
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 const Icon = styled.div`
