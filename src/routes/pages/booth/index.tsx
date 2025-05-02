@@ -10,8 +10,10 @@ import { StaticBottomSheet } from '../../../components/BottomSheet/variants/Stat
 import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { fetchBoothList } from '../../../services/apis/booth/boothList';
+import { useHeader } from '../../../context/HeaderContext';
 
 export const Booth = () => {
+  const { setHideHeader } = useHeader();
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
   const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
   const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
@@ -30,8 +32,13 @@ export const Booth = () => {
     getBoothList();
   }, [selectedDate]);
 
+  useEffect(() => {
+    setHideHeader(!!selectedItem);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedItem]);
+
   return (
-    <BaseLayer>
+    <BaseLayer backgroundImgSrc="1.png">
       {/* 리스트 바텀시트 */}
       {!selectedItem && (
         <>
@@ -84,6 +91,6 @@ const OptionContainer = styled.div`
 
 const GoBackButtonContainer = styled.div`
   position: absolute;
-  left: 7px;
+  left: 15px;
   top: 20px;
 `;

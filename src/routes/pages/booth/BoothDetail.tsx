@@ -6,10 +6,12 @@ import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
+import { useHeader } from '../../../context/HeaderContext';
 
 export const BoothDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { setHideHeader } = useHeader();
   const { dayBoothNum } = useParams<{ dayBoothNum: string }>();
   const [boothDetail, setBoothDetail] = useState<BoothDetailRawData | null>(null);
   const selectedDate = location.state?.selectedDate;
@@ -22,6 +24,11 @@ export const BoothDetail = () => {
     };
     getBoothDetail();
   }, [dayBoothNum, selectedDate]);
+
+  useEffect(() => {
+    setHideHeader(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!boothDetail) {
     return <div>Loading...</div>;
