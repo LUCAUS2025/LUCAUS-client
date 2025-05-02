@@ -1,12 +1,8 @@
-import styled from 'styled-components';
-import { useMenu } from '../context/MenuContext';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useMenu } from '../../context/MenuContext';
 
-interface TheHeaderProps {
-  title?: string;
-}
-
-export const Header = ({ title = '오늘의 공연' }: TheHeaderProps) => {
+export const HomeHeader = () => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
 
@@ -17,16 +13,17 @@ export const Header = ({ title = '오늘의 공연' }: TheHeaderProps) => {
 
   return (
     <Wrapper>
-      <HeaderWrapper onClick={() => navigate('/')}>
+      <Header onClick={() => navigate('/')}>
         <Icon onClick={openMenu} className="left-icon"></Icon>
+        <img style={{ height: '36px' }} src="/images/common/logo.webp" alt="logo" />
         <Icon></Icon>
-      </HeaderWrapper>
+      </Header>
     </Wrapper>
   );
 };
-export default Header;
+export default HomeHeader;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   position: fixed;
   width: 100%;
   top: 0;
@@ -34,9 +31,15 @@ const Wrapper = styled.div`
   z-index: 3;
 `;
 
-const HeaderWrapper = styled.div`
-  background-color: #f9fafb;
+const Header = styled.div`
+  background-color: #1447e6;
   color: white;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 3%;
 `;
 
 const Icon = styled.div`
@@ -45,10 +48,6 @@ const Icon = styled.div`
   height: 30px;
 
   &.left-icon {
-    background-image: url('./images/home/icon-L.webp');
-  }
-
-  &:not(.left-icon) {
-    background-image: none;
+    background-image: url('/images/home/icon-L.webp');
   }
 `;

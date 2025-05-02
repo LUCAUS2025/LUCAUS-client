@@ -1,10 +1,10 @@
 import React from 'react';
-import { TheHeader } from '../../components/TheHeader';
 import { Outlet } from 'react-router-dom';
 import { TheFooter } from '../../components/TheFooter';
 import styled from 'styled-components';
 import { MenuProvider } from '../../context/MenuContext';
 import TheSidebar from '../../components/TheSidebar';
+import TheHeader from '../../components/TheHeader';
 
 export const DefaultLayout = () => {
   return (
