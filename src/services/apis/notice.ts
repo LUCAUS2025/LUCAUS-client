@@ -24,3 +24,13 @@ export async function getNotices(page = 1, size = 10) {
     throw error;
   }
 }
+
+export async function getNotice(noticeId: number) {
+  try {
+    const response = await axiosInstance.get(`/notices/${noticeId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching notice:', error);
+    throw error;
+  }
+}
