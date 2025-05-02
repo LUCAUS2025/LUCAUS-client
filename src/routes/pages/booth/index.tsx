@@ -60,6 +60,7 @@ export const Booth = () => {
             componentProps={{
               item: selectedItem,
               onClose: () => setSelectedItem(null),
+              selectedDate: selectedDate.value as number,
             }}
             isBottomSheetHeader={true}
             overlapFooter={false}
@@ -76,7 +77,7 @@ const OptionContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
-  left: 10px;
+  left: 16px;
   top: 20px;
   position: absolute;
 `;
