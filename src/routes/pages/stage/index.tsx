@@ -7,6 +7,12 @@ import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { dateOptions, Option } from '../../../data/options';
 
 const stageOptions = ['버스킹', '응원제', '본무대', '아티스트'];
+export const stagedateOptions = ['13일', '14일', '22일', '23일'];
+// stagedateOptions를 Option 타입으로 변환
+const customDateOptions: Option[] = stagedateOptions.map((date) => ({
+  label: date,
+  value: date,
+}));
 
 export const Stage = () => {
   const navigate = useNavigate();
@@ -39,7 +45,12 @@ export const Stage = () => {
   return (
     <>
       <DropDownContainer>
-        <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
+        <DateDropDown
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          darkMode={false}
+          customData={customDateOptions} // customData를 stagedateOptions로 설정
+        />
         <DropDownContainer style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
           {stageOptions.map((option) => (
             <OptionItem key={option} selected={selectedStage === option} onClick={() => handleStageSelect(option)}>
