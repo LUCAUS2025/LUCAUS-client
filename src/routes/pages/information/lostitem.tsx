@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDate } from '../../../components/common/formatData';
-import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
-import { LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
+import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 import { dateOptions, itemsOptions, Option } from '../../../data/options';
 
 interface LostItemProps {
@@ -71,7 +70,7 @@ const LostItem = () => {
 
       <SectionTitle>내 분실물 찾기</SectionTitle>
       <DropDowns>
-        <DateDropDown selectedDate={selectDate} setSelectedDate={setSelectDate} darkMode={false} />
+        <LostDateDropDown selectedDate={selectDate} setSelectedDate={setSelectDate} darkMode={false} />
         <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
       <ItemList>

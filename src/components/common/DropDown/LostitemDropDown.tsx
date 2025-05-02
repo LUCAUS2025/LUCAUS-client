@@ -28,7 +28,12 @@ interface DateDropDownProps {
   customData?: Option[];
 }
 
-export const LostDateDropDown: React.FC<DateDropDownProps> = ({ selectedDate, setSelectedDate, darkMode, customData }) => {
+export const LostDateDropDown: React.FC<DateDropDownProps> = ({
+  selectedDate,
+  setSelectedDate,
+  darkMode,
+  customData,
+}) => {
   return (
     <>
       <DropDown
