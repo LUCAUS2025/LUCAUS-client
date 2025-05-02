@@ -15,15 +15,15 @@ import { DetailOperatingInfo } from '../itemDetailComponents/DetailOperatingInfo
 import { DetailReview } from '../itemDetailComponents/DetailReview';
 import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
-import { useLocation, useParams } from 'react-router-dom';
-import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
+import { BoothDetailRawData } from '../../../services/apis/booth/boothDetail';
 
-export const BoothDetailContent = () => {
-  const location = useLocation();
-  const { dayBoothNum } = useParams<{ dayBoothNum: string }>();
+interface BoothDetailContentProps {
+  boothDetail: BoothDetailRawData;
+  selectedDate: number;
+}
+
+export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDetail, selectedDate }) => {
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
-  const selectedDate = location.state?.selectedDate;
-  const [boothDetail, setBoothDetail] = useState<BoothDetailRawData | null>(null);
 
   const openReviewSheet = () => {
     setIsReviewSheetOpen(true);
@@ -32,20 +32,6 @@ export const BoothDetailContent = () => {
   const closeReviewSheet = () => {
     setIsReviewSheetOpen(false);
   };
-
-  useEffect(() => {
-    const getBoothDetail = async () => {
-      const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
-      const booth = result?.[0];
-      setBoothDetail(booth ?? null);
-      console.log(result);
-    };
-    getBoothDetail();
-  }, [dayBoothNum, selectedDate]);
-
-  if (!boothDetail) {
-    return <div>Loading...</div>; // 또는 Skeleton
-  }
 
   return (
     <Wrapper>

@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
 import { BoothDetailContent } from '../../../components/BottomSheet/innerContent/BoothDetailContent';
 import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { GoBackButton } from '../../../components/common/GoBackButton';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
 
 export const BoothDetail = () => {
+  const location = useLocation();
+  const { dayBoothNum } = useParams<{ dayBoothNum: string }>();
+  const [boothDetail, setBoothDetail] = useState<BoothDetailRawData | null>(null);
+  const selectedDate = location.state?.selectedDate;
+
   const navigate = useNavigate();
 
-  // id는 params로 가져오기
-  const tempBooth = {
-    id: 1,
-    title: '너 내 친구가 되어라',
-    keywords: ['게임&체험'],
-    dates: [19, 20],
-    time: '10:00 ~ 재료 소진 시까지',
-    place: '운영 일자',
-  };
+  useEffect(() => {
+    const getBoothDetail = async () => {
+      const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
+      const booth = result?.[0];
+      setBoothDetail(booth ?? null);
+      console.log(result);
+    };
+    getBoothDetail();
+  }, [dayBoothNum, selectedDate]);
+
+  if (!boothDetail) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -28,7 +38,7 @@ export const BoothDetail = () => {
         <StaticBottomSheet
           size={'large'}
           ContentComponent={BoothDetailContent}
-          componentProps={{ id: tempBooth.id }}
+          componentProps={{ boothDetail, selectedDate }}
           isBottomSheetHeader={false}
           overlapFooter={false}
         />
