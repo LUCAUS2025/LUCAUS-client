@@ -3,7 +3,7 @@ import { Title } from '../../routes/pages/stage';
 import { useNavigate } from 'react-router-dom';
 import { getNotices } from '../../services/apis/notice';
 import { useEffect, useState } from 'react';
-import { formatDate } from '../common/formatData';
+import { formatDateNoTime } from '../common/formatData';
 
 interface Notice {
   id: number;
@@ -47,7 +47,7 @@ const HomeNotice = () => {
         <NoticeCard key={index}>
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
           <NoticeContent>{notice.content}</NoticeContent>
-          <NoticeDate>{formatDate(notice.uploadDateTime)}</NoticeDate>
+          <NoticeDate>{formatDateNoTime(notice.uploadDateTime)}</NoticeDate>
         </NoticeCard>
       ))}
     </NoticeSection>
@@ -90,6 +90,9 @@ const NoticeContent = styled.div`
   font-size: 16px;
   color: #6b7280;
   margin-top: 4px;
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis;
 `;
 
 const NoticeDate = styled.div`
