@@ -54,9 +54,9 @@ const HeaderWrapper = styled.div`
   color: black;
   display: flex;
   align-items: center;
-  // justify-content: space-between;
   height: 60px;
   padding: 0 3%;
+  gap: 10px;
 `;
 
 const Title = styled.div`
@@ -70,7 +70,7 @@ const Icon = styled.div`
   height: 30px;
 
   &.left-icon {
-    background-image: url('./images/home/icon-L.webp');
+    background-image: url('./images/home/icon-L-black.webp');
   }
 
   &:not(.left-icon) {
