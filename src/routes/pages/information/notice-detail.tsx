@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Item, ItemDate, ItemDetail, ItemImage, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
 import { useEffect, useState } from 'react';
-import { getNotices } from '../../../services/apis/notice';
+import { getNotice } from '../../../services/apis/notice';
 import { formatDate } from '../../../components/common/formatData';
 
 interface Notice {
@@ -16,41 +16,40 @@ interface Notice {
 const NoticeDetail = () => {
   const { id } = useParams();
   const noticeId = Number(id);
-  const [notices, setNotices] = useState<Notice[]>([]);
-  const item = notices.find((item) => item.id === noticeId);
+  const [notice, setNotice] = useState<Notice | null>(null);
 
   useEffect(() => {
-    getNotices()
+    getNotice(noticeId)
       .then((res) => {
-        if (res.result?.content?.length > 0) {
-          setNotices(res.result.content);
+        if (res) {
+          setNotice(res.result);
         } else {
-          setNotices([]);
+          console.error('Notice not found');
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.error('Error fetching notice:', err);
       });
-  }, []);
+  }, [noticeId]);
 
-  if (!item) {
-    return <div>해당 공지사항을 찾을 수 없습니다.</div>;
+  if (!notice) {
+    return <div>공지사항을 불러오는 중입니다...</div>;
   }
 
   return (
     <>
       <ItemList>
-        <Item key={item.id}>
+        <Item key={notice.id}>
           <ItemInfo>
-            <ItemName>{item.title ?? '제목 없음'}</ItemName>
+            <ItemName>{notice.title ?? '제목 없음'}</ItemName>
             <Line>
-              <Tag>{item.category}</Tag>
-              <ItemDate>등록 일시 | {formatDate(item.uploadDateTime)}</ItemDate>
+              <Tag>{notice.category}</Tag>
+              <ItemDate>등록 일시 | {formatDate(notice.uploadDateTime)}</ItemDate>
             </Line>
           </ItemInfo>
         </Item>
       </ItemList>
-      <div>{item.content}</div>
+      <div>{notice.content}</div>
     </>
   );
 };
