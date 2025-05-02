@@ -38,7 +38,7 @@ export const Booth = () => {
   }, [selectedItem]);
 
   return (
-    <BaseLayer backgroundImgSrc="1.png">
+    <BaseLayer>
       {/* 리스트 바텀시트 */}
       {!selectedItem && (
         <>
