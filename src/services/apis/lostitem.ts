@@ -24,7 +24,12 @@ export interface GetLostItemsResponse {
 export async function getLostItems(params: GetLostItemsParams): Promise<GetLostItemsResponse> {
   try {
     const response = await axiosInstance.get<GetLostItemsResponse>('/lost-items', {
-      params,
+      params: {
+        category: params.category,
+        date: params.date,
+        page: 1,
+        size: 10,
+      },
     });
     return response.data;
   } catch (error) {
