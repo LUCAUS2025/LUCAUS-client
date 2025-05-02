@@ -1,31 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { GoBackButton } from '../../../components/common/GoBackButton';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
 import { FoodTruckDetailContent } from '../../../components/BottomSheet/innerContent/FoodTruckDetailContent';
 import styled from 'styled-components';
+import { fetchFoodTruckDetail, FoodTruckDetailRawData } from '../../../services/apis/foodTruck/foodTruckDetail';
 
 export const FoodTruckDetail = () => {
   const navigate = useNavigate();
-  const tempBooth = {
-    id: 1,
-    title: '닭꼬치 묵고 떠블로 가~!',
-    dates: [19, 20],
-    time: '10:00 ~ 재료 소진 시까지',
-    place: '운영 일자',
-  };
+  const location = useLocation();
+  const { dayFoodTruckNum } = useParams<{ dayFoodTruckNum: string }>();
+  const [foodTruckDetail, setFoodTruckDetail] = useState<FoodTruckDetailRawData | null>(null);
+  const selectedDate = location.state?.selectedDate;
+
+  useEffect(() => {
+    const getFoodTruckDetail = async () => {
+      const result = await fetchFoodTruckDetail(selectedDate, Number(dayFoodTruckNum));
+      const foodTruck = result?.[0];
+      setFoodTruckDetail(foodTruck ?? null);
+    };
+    getFoodTruckDetail();
+  }, [dayFoodTruckNum, selectedDate]);
+
+  if (!foodTruckDetail) {
+    return <div>loading...</div>;
+  }
 
   return (
     <>
-      <BaseLayer>
+      <BaseLayer backgroundImgSrc={foodTruckDetail.cover}>
         <GoBackButtonContainer>
           <GoBackButton onClick={() => navigate(-1)} />
         </GoBackButtonContainer>
         <StaticBottomSheet
           size={'large'}
           ContentComponent={FoodTruckDetailContent}
-          componentProps={{ id: tempBooth.id }}
+          componentProps={{ foodTruckDetail, selectedDate }}
           isBottomSheetHeader={false}
           overlapFooter={false}
         />

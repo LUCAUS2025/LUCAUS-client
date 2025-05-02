@@ -1,11 +1,17 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { keywordBaseStyle } from '../../../styles/keyword';
+import { dateOptions } from '../../../data/options';
 
-export const DetailOperatingInfo = () => {
+interface DetailOperatingInfoProps {
+  type: 'booth' | 'foodTruck';
+  selectedDate: number;
+  location: string;
+}
+
+export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({ type, selectedDate, location }) => {
   return (
     <Wrapper>
-      <Title>부스 운영</Title>
       <InfoContainer>
         <InfoItem>
           <LabelContainer>
@@ -25,14 +31,21 @@ export const DetailOperatingInfo = () => {
             <LabelIcon src="/images/common/clockDark.webp"></LabelIcon>
             <InfoLabel>운영 시간</InfoLabel>
           </LabelContainer>
-          <InfoText>10:00 ~ 재료 소진 시 까지</InfoText>
+          {type === 'booth' && selectedDate !== undefined && dateOptions[2] ? (
+            Number(selectedDate) <= Number(dateOptions[2].value) ? (
+              <InfoText>10:00 ~ 18:00</InfoText>
+            ) : (
+              <InfoText>10:00 ~ 14:00</InfoText>
+            )
+          ) : null}
+          {type === 'foodTruck' && <InfoText>10:00 ~ 19:00 (재료 소진 시 조기 마감)</InfoText>}
         </InfoItem>
         <InfoItem>
           <LabelContainer>
             <LabelIcon src="/images/common/locationDark.webp"></LabelIcon>
             <InfoLabel>부스 위치</InfoLabel>
           </LabelContainer>
-          <InfoText>운영 일자</InfoText>
+          <InfoText>{location}</InfoText>
         </InfoItem>
       </InfoContainer>
     </Wrapper>

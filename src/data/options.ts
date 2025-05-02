@@ -3,6 +3,11 @@ export interface Option {
   value: number | string;
 }
 
+export interface OptionOnlyNumber {
+  label: string;
+  value: number;
+}
+
 export const dateOptions: Option[] = [
   { label: '19 일', value: 19 },
   { label: '20 일', value: 20 },
@@ -23,4 +28,12 @@ export const itemsOptions: Option[] = [
   { label: '의류', value: 'CLOTHING' },
   { label: '지갑/카드', value: 'WALLET_CARD' },
   { label: '기타', value: 'OTHERS' },
+];
+
+export const lostdateOptions: Option[] = [
+  { label: '19 일', value: '2025-05-19' },
+  { label: '20 일', value: '2025-05-20' },
+  { label: '21 일', value: '2025-05-21' },
+  { label: '22 일', value: '2025-05-22' },
+  { label: '23 일', value: '2025-05-23' },
 ];

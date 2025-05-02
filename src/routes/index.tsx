@@ -1,4 +1,3 @@
-import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { DefaultLayout } from './layouts/DefaultLayout';
 import { Home } from './pages/Home';
@@ -14,6 +13,8 @@ import NoticeDetail from './pages/information/notice-detail';
 import BarrierFree from './pages/information/barrierfree';
 import { FoodTruckDetail } from './pages/foodTruck/FoodTruckDetail';
 import Entry from './pages/information/entry';
+import StampEntrance from './pages/stamp';
+import StampBoard from './pages/stamp/stampBoard';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
         element: <Booth />,
       },
       {
-        path: '/booth/:id',
+        path: '/booth/:dayBoothNum',
         element: <BoothDetail />,
       },
       {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
         element: <FoodTruck />,
       },
       {
-        path: '/foodTruck/:id',
+        path: '/foodTruck/:dayFoodTruckNum',
         element: <FoodTruckDetail />,
       },
       {
@@ -70,6 +71,14 @@ const router = createBrowserRouter([
       {
         path: '/entry',
         element: <Entry />,
+      },
+      {
+        path: '/stamp/auth',
+        element: <StampEntrance />,
+      },
+      {
+        path: '/stamp/board',
+        element: <StampBoard />,
       },
     ],
   },

@@ -15,8 +15,14 @@ import { DetailOperatingInfo } from '../itemDetailComponents/DetailOperatingInfo
 import { DetailReview } from '../itemDetailComponents/DetailReview';
 import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
+import { BoothDetailRawData } from '../../../services/apis/booth/boothDetail';
 
-export const BoothDetailContent = () => {
+interface BoothDetailContentProps {
+  boothDetail: BoothDetailRawData;
+  selectedDate: number;
+}
+
+export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDetail, selectedDate }) => {
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
 
   const openReviewSheet = () => {
@@ -33,21 +39,21 @@ export const BoothDetailContent = () => {
         <HeaderContainer>
           <TitleContainer>
             <ItemTitle>
-              <ItemId>#1&nbsp;</ItemId>너 내 친구가 되어라
+              <ItemId>#{boothDetail?.dayBoothNum}&nbsp;</ItemId>
+              {boothDetail?.name}
             </ItemTitle>
-            <ItemHost>LIKELION CAU</ItemHost>
+            <ItemHost>{boothDetail?.owner}</ItemHost>
             <Keywords>
-              <Keyword>#게임</Keyword>
-              <Keyword>#체험</Keyword>
+              {boothDetail?.categories?.map((keyword, idx) => <Keyword key={idx}>{keyword}</Keyword>)}
             </Keywords>
           </TitleContainer>
-          <ItemDescription>
-            랜덤으로 짝이 된 참가자와 미션을 완료하면 새로운 인연과 깜짝 선물이 함께! 서로의 MBTI를 맞혀보거나 간단한
-            게임을 즐기며 자연스럽게 친해져 보세요. 혼자 와도 걱정 NO! 이 부스를 나오면 친구 한 명쯤은 생겨 있을걸요?
-          </ItemDescription>
+          <ItemDescription>{boothDetail?.info}</ItemDescription>
         </HeaderContainer>
-        <DetailOperatingInfo />
-        <DetailReview type={'booth'} onOpenReview={openReviewSheet} />
+        <OperatingContainer>
+          <OperatingTitle>부스 운영</OperatingTitle>
+          <DetailOperatingInfo type={'booth'} selectedDate={selectedDate} location={boothDetail?.location} />
+        </OperatingContainer>
+        <DetailReview type={'booth'} onOpenReview={openReviewSheet} reviewData={boothDetail.boothReview} />
       </DetailWrapper>
       {/* 리뷰 바텀시트 */}
       {isReviewSheetOpen && (
@@ -65,4 +71,17 @@ const Wrapper = styled.div`
   flex: 1;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+`;
+
+const OperatingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const OperatingTitle = styled.div`
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: -0.26px;
 `;

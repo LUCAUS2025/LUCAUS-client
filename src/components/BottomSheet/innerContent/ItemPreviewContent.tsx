@@ -1,21 +1,22 @@
 import React from 'react';
-import { CommonItem } from '../../../data/boothFood';
+import { BoothOrFoodTruckItem } from '../../../data/boothFood';
 import styled from 'styled-components';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { useNavigate } from 'react-router-dom';
 
 interface ItemPreviewContentProps {
-  item: CommonItem;
+  item: BoothOrFoodTruckItem;
   onClose: () => void;
+  selectedDate: number;
 }
 
-export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, onClose }) => {
+export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, onClose, selectedDate }) => {
   const navigate = useNavigate();
   const goDetail = () => {
     if (item.type === 'booth') {
-      navigate(`/booth/${item.id}`);
+      navigate(`/booth/${item.dayBoothNum}`, { state: { selectedDate } });
     } else if (item.type === 'foodTruck') {
-      navigate(`/foodTruck/${item.id}`);
+      navigate(`/foodTruck/${item.dayBoothNum}`, { state: { selectedDate } });
     }
   };
 
@@ -23,15 +24,14 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
     <Wrapper>
       <TitleContainer>
         <Title>
-          #{item.id}&nbsp;
-          {item.title}
+          #{item.dayBoothNum}&nbsp;
+          {item.name}
         </Title>
-        {'description' in item && <Description>{item.description}</Description>}
+        {item.type === 'booth' && <Description>{item.info}</Description>}
       </TitleContainer>
       <ItemKeywords>
-        {item.keywords.map((key, idx) => (
-          <Keyword key={idx}>#{key}</Keyword>
-        ))}
+        {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
+        {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
       </ItemKeywords>
       <ButtonContainer>
         <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>
