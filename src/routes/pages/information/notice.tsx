@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Item, ItemDate, ItemDetail, ItemInfo, ItemList, ItemName, Line, Tag } from './lostitem';
+import { Item, ItemDate, ItemDetail, ItemInfo, ItemName, Line, Tag } from './lostitem';
 import { useEffect, useState } from 'react';
 import { getNotices } from '../../../services/apis/notice';
 import { formatDate } from '../../../components/common/formatData';
@@ -37,23 +37,30 @@ const Notice = () => {
   };
 
   return (
-    <ItemList>
-      {notices.map((item) => (
-        <ClickableItem key={item.id} onClick={() => handleItemClick(item.id)}>
-          <ItemInfo>
-            <ItemNameRow>
-              <RedDot />
-              <ItemName>{item.title ?? '제목 없음'}</ItemName>
-            </ItemNameRow>
-            <ItemDetail>{item.content}</ItemDetail>
-            <Line>
-              <Tag>{item.category}</Tag>
-              <ItemDate>등록 일시 | {formatDate(item.uploadDateTime)}</ItemDate>
-            </Line>
-          </ItemInfo>
-        </ClickableItem>
-      ))}
-    </ItemList>
+    <div>
+      {notices.map((item) => {
+        const uploadTime = new Date(item.uploadDateTime);
+        const now = new Date();
+        const diffInHours = (now.getTime() - uploadTime.getTime()) / (1000 * 60 * 60); // 밀리초 → 시간 변환
+        const isRecent = diffInHours < 24;
+
+        return (
+          <ClickableItem key={item.id} onClick={() => handleItemClick(item.id)}>
+            <ItemInfo>
+              <ItemNameRow>
+                {isRecent && <RedDot />}
+                <ItemName>{item.title ?? '제목 없음'}</ItemName>
+              </ItemNameRow>
+              <ItemDetail>{item.content}</ItemDetail>
+              <Line>
+                <Tag>{item.category}</Tag>
+                <ItemDate>등록 일시 | {formatDate(item.uploadDateTime)}</ItemDate>
+              </Line>
+            </ItemInfo>
+          </ClickableItem>
+        );
+      })}
+    </div>
   );
 };
 
