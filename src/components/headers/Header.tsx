@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 import { useMenu } from '../../context/MenuContext';
 import { Wrapper } from './HomeHeader';
 
@@ -8,10 +8,8 @@ export const Header = () => {
   const navigate = useNavigate();
   const { toggleMenu } = useMenu();
   const location = useLocation();
-  useEffect(() => {
-    console.log('params:', location.pathname);
-  }, []);
 
+  // 경로에 따라 타이틀 정의
   const title = useMemo(() => {
     const path = location.pathname;
 
@@ -28,8 +26,24 @@ export const Header = () => {
     if (path.startsWith('/stamp/board')) return '광장기획전 스탬프';
     if (path.startsWith('/stamp/auth')) return '로그인';
 
-    return '오늘의 공연'; // default
+    return '오늘의 공연';
   }, [location.pathname]);
+
+  // arrow 아이콘을 보여줄 경로
+  const arrowPaths = ['/guide', '/entry', '/notice', '/lostitem', '/barrierfree', '/stamp/auth'];
+
+  // 현재 경로가 arrow 아이콘 대상인지 판단
+  const showArrowIcon = arrowPaths.some((path) => location.pathname.startsWith(path));
+
+  // 아이콘 클릭 핸들러
+  const handleIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (showArrowIcon) {
+      navigate(-1); // 이전 페이지로
+    } else {
+      toggleMenu(); // 메뉴 열기
+    }
+  };
 
   const openMenu = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -39,7 +53,7 @@ export const Header = () => {
   return (
     <Wrapper>
       <HeaderWrapper>
-        <Icon onClick={openMenu} className="left-icon" />
+        <Icon onClick={handleIconClick} className={`left-icon ${showArrowIcon ? 'arrow-icon' : ''}`} />
         <Title>{title}</Title>
         <Icon />
       </HeaderWrapper>
@@ -71,6 +85,10 @@ const Icon = styled.div`
 
   &.left-icon {
     background-image: url('./images/home/icon-L-black.webp');
+  }
+
+  &.left-icon.arrow-icon {
+    background-image: url('./images/home/icon-L-arrow.webp');
   }
 
   &:not(.left-icon) {
