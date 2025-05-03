@@ -4,7 +4,8 @@ import { LineUp } from '../../../components/stage/lineUp';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
-import { dateOptions, Option } from '../../../data/options';
+import { Option } from '../../../data/options';
+import Footer from '../../../components/home/Footer';
 
 const stagedateOptions = ['13일', '14일', '22일', '23일'];
 
@@ -56,7 +57,7 @@ export const Stage = () => {
   const isSelectedDate = (date: string) => selectedDate.value === date;
 
   return (
-    <>
+    <Container>
       <DropDownContainer>
         <DateDropDown
           selectedDate={selectedDate}
@@ -64,13 +65,13 @@ export const Stage = () => {
           darkMode={false}
           customData={customDateOptions}
         />
-        <DropDownContainer style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+        <OptionItemContainer style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
           {availableStages.map((option) => (
             <OptionItem key={option} selected={selectedStage === option} onClick={() => handleStageSelect(option)}>
               {option}
             </OptionItem>
           ))}
-        </DropDownContainer>
+        </OptionItemContainer>
       </DropDownContainer>
 
       <img
@@ -138,7 +139,8 @@ export const Stage = () => {
           <LineUp />
         </div>
       )}
-    </>
+      <Footer />
+    </Container>
   );
 };
 
@@ -167,7 +169,15 @@ const DropDownContainer = styled.div`
   width: 100%;
   background-color: #fafafa;
   position: fixed;
-  border: 1px solid #d1d5db;
+`;
+
+const OptionItemContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  overflow-x: auto;
 `;
 
 const OptionItem = styled.div<{ selected: boolean }>`
@@ -184,4 +194,8 @@ const OptionItem = styled.div<{ selected: boolean }>`
   &:hover {
     background-color: #f3f4f6;
   }
+`;
+
+const Container = styled.div`
+  // padding: 2rem;
 `;

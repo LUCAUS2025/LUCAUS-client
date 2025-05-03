@@ -1,6 +1,5 @@
 import { Thumbnail } from '../../components/home/thumbnail';
 import { Banner } from '../../components/home/banner';
-import Toast from '../../components/home/Toast';
 import { Subtitle, Title } from './stage';
 import HomeNotice from '../../components/home/HomeNotice';
 import Footer from '../../components/home/Footer';
@@ -11,7 +10,6 @@ export const Home = () => {
       <Banner />
       <Title>이 무대 절대 놓치지 마세요!</Title>
       <Subtitle>올해 축제를 빛낼 아티스트들을 지금 확인하세요</Subtitle>
-      <Toast />
       <Thumbnail />
 
       <HomeNotice />
