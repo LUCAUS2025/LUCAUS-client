@@ -5,7 +5,7 @@ import { BlackButton } from '../../../components/common/BaseButton';
 
 const BarrierFree = () => {
   return (
-    <>
+    <Wrapper>
       <SectionTitle>배리어프리 서비스 신청</SectionTitle>
       <Box>
         <div>
@@ -22,32 +22,19 @@ const BarrierFree = () => {
         <br />
         설명글 텍스트
       </Description>
-    </>
+    </Wrapper>
   );
 };
 export default BarrierFree;
 
-const MapImage = styled.div` ... `;
-const Description = styled.div` ... `;
+const Wrapper = styled.div`
+  padding: 12px;
+`;
 
-// const Ticketing: React.FC = () => {
-//   return (
-//     <>
-//       <Box>
-//         <div>
-//           축제 공연 티켓팅
-//           <br />
-//           지금 바로 예매하세요!
-//         </div>
-//         <BlackButton>바로가기</BlackButton>
-//       </Box>
-//       <SectionTitle>관람 구역 지도</SectionTitle>
-//       <MapImage />
-//       <Description>
-//         티켓팅 방식 및 입장 정책에 대한
-//         <br />
-//         설명글 텍스트
-//       </Description>
-//     </>
-//   );
-// };
+const MapImage = styled.div`
+  height: 275px;
+  background: url('/images/information/map.png') no-repeat center center;
+  background-size: cover;
+`;
+
+const Description = styled.div` ... `;
