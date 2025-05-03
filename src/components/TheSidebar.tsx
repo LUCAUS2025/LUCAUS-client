@@ -19,6 +19,9 @@ const TheSidebar = () => {
           <MenuItem href="/guide/watching">관람 가이드</MenuItem>
           <MenuHeading>거리문화제</MenuHeading>
           <MenuItem href="/booth">부스배치도</MenuItem>
+          <MenuHeading>광장기획전</MenuHeading>
+          <MenuItem href="/stamp/board">광장기획전 소개</MenuItem>
+          <MenuItem href="/stamp/board">스탬프</MenuItem>
           <MenuHeading>푸드트럭</MenuHeading>
           <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
           <MenuHeading>정보</MenuHeading>
