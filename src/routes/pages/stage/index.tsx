@@ -57,7 +57,7 @@ export const Stage = () => {
   const isSelectedDate = (date: string) => selectedDate.value === date;
 
   return (
-    <Container>
+    <>
       <DropDownContainer>
         <DateDropDown
           selectedDate={selectedDate}
@@ -74,73 +74,75 @@ export const Stage = () => {
         </OptionItemContainer>
       </DropDownContainer>
 
-      <img
-        src="/images/home/stage/ticket.png"
-        onClick={() => navigate('/guide/ticketing')}
-        style={{ width: '100%' }}
-        alt="티켓 안내"
-      />
+      <Container>
+        <img
+          src="/images/home/stage/ticket.png"
+          onClick={() => navigate('/guide/ticketing')}
+          style={{ width: '100%' }}
+          alt="티켓 안내"
+        />
 
-      {/* 버스킹 */}
-      {(isSelectedDate('13일') || isSelectedDate('14일')) && (
-        <div ref={buskingRef}>
-          <Title>버스킹</Title>
-          <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
-          <Thumbnail />
-        </div>
-      )}
+        {/* 버스킹 */}
+        {(isSelectedDate('13일') || isSelectedDate('14일')) && (
+          <div ref={buskingRef}>
+            <Title>버스킹</Title>
+            <Subtitle>숨겨진 보컬 천재들의 뜨거운 강연을 만나보세요.</Subtitle>
+            <Thumbnail />
+          </div>
+        )}
 
-      {isSelectedDate('22일') && (
-        <div ref={buskingRef}>
-          <Title>청룡가요제</Title>
-          <Subtitle>좌우로 넘겨보며 청룡가요제를 즐겨보세요!</Subtitle>
-          <Thumbnail />
-        </div>
-      )}
+        {isSelectedDate('22일') && (
+          <div ref={buskingRef}>
+            <Title>청룡가요제</Title>
+            <Subtitle>좌우로 넘겨보며 청룡가요제를 즐겨보세요!</Subtitle>
+            <Thumbnail />
+          </div>
+        )}
 
-      {/* 무대기획전 */}
-      {isSelectedDate('22일') && (
-        <div>
-          <Title>무대기획전</Title>
-          <img
-            src="/images/home/stage/ticket.png"
-            alt="무대기획전 포스터"
-            style={{ width: '100%', borderRadius: '12px' }}
-          />
-        </div>
-      )}
+        {/* 무대기획전 */}
+        {isSelectedDate('22일') && (
+          <div>
+            <Title>무대기획전</Title>
+            <img
+              src="/images/home/stage/ticket.png"
+              alt="무대기획전 포스터"
+              style={{ width: '100%', borderRadius: '12px' }}
+            />
+          </div>
+        )}
 
-      {/* 응원제 */}
-      {isSelectedDate('23일') && (
-        <div ref={cheeringRef}>
-          <Title>응원제</Title>
-          <img
-            src="/images/home/stage/ticket.png"
-            alt="응원제 포스터"
-            style={{ width: '100%', borderRadius: '12px' }}
-          />
-        </div>
-      )}
+        {/* 응원제 */}
+        {isSelectedDate('23일') && (
+          <div ref={cheeringRef}>
+            <Title>응원제</Title>
+            <img
+              src="/images/home/stage/ticket.png"
+              alt="응원제 포스터"
+              style={{ width: '100%', borderRadius: '12px' }}
+            />
+          </div>
+        )}
 
-      {/* 본무대 */}
-      {(isSelectedDate('22일') || isSelectedDate('23일')) && (
-        <div ref={mainStageRef}>
-          <Title>본무대 라인업</Title>
-          <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
-          <LineUp />
-        </div>
-      )}
+        {/* 본무대 */}
+        {(isSelectedDate('22일') || isSelectedDate('23일')) && (
+          <div ref={mainStageRef}>
+            <Title>본무대 라인업</Title>
+            <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
+            <LineUp />
+          </div>
+        )}
 
-      {/* 아티스트 */}
-      {(isSelectedDate('22일') || isSelectedDate('23일')) && (
-        <div ref={artistRef}>
-          <Title>아티스트 라인업</Title>
-          <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-          <LineUp />
-        </div>
-      )}
+        {/* 아티스트 */}
+        {(isSelectedDate('22일') || isSelectedDate('23일')) && (
+          <div ref={artistRef}>
+            <Title>아티스트 라인업</Title>
+            <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
+            <LineUp />
+          </div>
+        )}
+      </Container>
       <Footer />
-    </Container>
+    </>
   );
 };
 
@@ -168,6 +170,7 @@ const DropDownContainer = styled.div`
   width: 100%;
   background-color: #fafafa;
   position: fixed;
+  height: 40px;
 `;
 
 const OptionItemContainer = styled.div`
@@ -196,5 +199,5 @@ const OptionItem = styled.div<{ selected: boolean }>`
 `;
 
 const Container = styled.div`
-  // padding: 2rem;
+  padding: 64px 16px 70px 16px;
 `;
