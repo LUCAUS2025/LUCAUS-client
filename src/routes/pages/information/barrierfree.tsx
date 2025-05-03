@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box, SectionTitle } from '../../../components/stage/Watching';
 import { BlackButton } from '../../../components/common/BaseButton';
+import { Description } from '../../../components/stage/Ticketing';
 
 const BarrierFree = () => {
   return (
@@ -36,5 +37,3 @@ export const TestMapImage = styled.div`
   background: url('/images/information/map.png') no-repeat center center;
   background-size: cover;
 `;
-
-const Description = styled.div` ... `;
