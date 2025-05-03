@@ -54,7 +54,7 @@ export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({ 
       {/*리뷰 바텀시트*/}
       {isReviewSheetOpen && (
         <PortalBottomSheet
-          componentProps={{ onClose: closeReviewSheet, type: 'foodTruck' }}
+          componentProps={{ onClose: closeReviewSheet, type: 'foodTruck', currentId: foodTruckDetail?.foodTruckId }}
           contentComponent={ReviewFormContent}
           onClose={closeReviewSheet}
         />

@@ -6,10 +6,12 @@ import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
+import { useHeader } from '../../../context/HeaderContext';
 
 export const BoothDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { setHideHeader } = useHeader();
   const { dayBoothNum } = useParams<{ dayBoothNum: string }>();
   const [boothDetail, setBoothDetail] = useState<BoothDetailRawData | null>(null);
   const selectedDate = location.state?.selectedDate;
@@ -23,13 +25,22 @@ export const BoothDetail = () => {
     getBoothDetail();
   }, [dayBoothNum, selectedDate]);
 
+  useEffect(() => {
+    setHideHeader(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!boothDetail) {
     return <div>Loading...</div>;
   }
 
+  if (!boothDetail.cover) {
+    return <div>loading...</div>;
+  }
+
   return (
     <>
-      <BaseLayer>
+      <BaseLayer backgroundImgSrc={boothDetail.cover}>
         <GoBackButtonContainer>
           <GoBackButton onClick={() => navigate(-1)} />
         </GoBackButtonContainer>
@@ -47,7 +58,7 @@ export const BoothDetail = () => {
 
 const GoBackButtonContainer = styled.div`
   position: absolute;
-  left: 7px;
+  left: 16px;
   top: 20px;
 `;
 

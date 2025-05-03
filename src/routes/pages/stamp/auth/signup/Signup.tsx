@@ -132,29 +132,60 @@ const Signup = ({ setWhichView }: Props) => {
 
   return (
     <SignupBox>
-      <InputLine>
-        <div>ID</div>
-        <input value={signupData.id} onChange={(e) => handleInputChange('id', e.target.value)} />
-      </InputLine>
-      {errorState.isIdError && <ErrorLine>{errorState.idErrorMessage}</ErrorLine>}
+      <IntroBox>광장기획전 항해 시작하기</IntroBox>
+      <InfoBox>
+        <div>로그인 정보</div>
+        <InputLine>
+          <div>아이디</div>
+          <InputAndError>
+            <StyledInput
+              placeholder="아이디를 입력해주세요"
+              value={signupData.id}
+              onChange={(e) => handleInputChange('id', e.target.value)}
+            />
+            {errorState.isIdError ? <ErrorLine>{errorState.idErrorMessage}</ErrorLine> : <EmptyBox />}
+          </InputAndError>
+        </InputLine>
 
-      <InputLine>
-        <div>PW</div>
-        <input type="password" value={signupData.pw} onChange={(e) => handleInputChange('pw', e.target.value)} />
-      </InputLine>
-      {errorState.isPwError && <ErrorLine>{errorState.pwErrorMessage}</ErrorLine>}
+        <InputLine>
+          <div>비밀번호</div>
+          <InputAndError>
+            <StyledInput
+              placeholder="비밀번호를 입력해주세요"
+              type="password"
+              value={signupData.pw}
+              onChange={(e) => handleInputChange('pw', e.target.value)}
+            />
+            {errorState.isPwError ? <ErrorLine>{errorState.pwErrorMessage}</ErrorLine> : <EmptyBox />}
+          </InputAndError>
+        </InputLine>
+      </InfoBox>
 
-      <InputLine>
-        <div>이름</div>
-        <input value={signupData.name} onChange={(e) => handleInputChange('name', e.target.value)} />
-      </InputLine>
-      {errorState.isNameError && <ErrorLine>{errorState.nameErrorMessage}</ErrorLine>}
+      <InfoBox>
+        <InputLine>
+          <div>이름</div>
+          <InputAndError>
+            <StyledInput
+              placeholder="이름을 입력해주세요"
+              value={signupData.name}
+              onChange={(e) => handleInputChange('name', e.target.value)}
+            />
+            {errorState.isNameError ? <ErrorLine>{errorState.nameErrorMessage}</ErrorLine> : <EmptyBox />}
+          </InputAndError>
+        </InputLine>
 
-      <InputLine>
-        <div>학번</div>
-        <input value={signupData.studentId} onChange={(e) => handleInputChange('studentId', e.target.value)} />
-      </InputLine>
-      {errorState.isStudentIdError && <ErrorLine>{errorState.studentIdErrorMessage}</ErrorLine>}
+        <InputLine>
+          <div>학번</div>
+          <InputAndError>
+            <StyledInput
+              placeholder="학번을 입력해주세요"
+              value={signupData.studentId}
+              onChange={(e) => handleInputChange('studentId', e.target.value)}
+            />
+            {errorState.isStudentIdError ? <ErrorLine>{errorState.studentIdErrorMessage}</ErrorLine> : <EmptyBox />}
+          </InputAndError>
+        </InputLine>
+      </InfoBox>
 
       <button onClick={handleClickSignup}>키 모으러 가기</button>
 
@@ -185,17 +216,68 @@ const SignupBox = styled.div`
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 20px;
+  position: absolute;
+  z-index: 1px;
+  height: calc(100vh - 120px);
+  background-color: rgba(255, 255, 255, 0.5);
+`;
+
+const IntroBox = styled.div`
+  display: flex;
+  font-size: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  width: 100%;
+  height: 100px;
 `;
 
 const InputLine = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  width: 100%;
+`;
+
+const StyledInput = styled.input`
+  width: 70%;
+  min-width: 260px;
+  height: 40px;
+  border: 1px solid #d1d5dc;
+  border-radius: 12px;
+  padding-left: 12px;
+`;
+
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  color: #364153;
+  font-weight: 700;
+  font-size: 14px;
+  gap: 5px;
+`;
+
+const InputAndError = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
 `;
 
 const ErrorLine = styled.div`
-  color: red;
-  font-size: 14px;
+  color: #fb2c36;
+  font-size: 10px;
+  height: 15px;
+  padding-left: 10px;
+`;
+
+const EmptyBox = styled.div`
+  height: 15px;
+  width: 90%;
 `;
 
 const SpinnerWrapper = styled.div`

@@ -6,8 +6,10 @@ import { StaticBottomSheet } from '../../../components/BottomSheet/variants/Stat
 import { FoodTruckDetailContent } from '../../../components/BottomSheet/innerContent/FoodTruckDetailContent';
 import styled from 'styled-components';
 import { fetchFoodTruckDetail, FoodTruckDetailRawData } from '../../../services/apis/foodTruck/foodTruckDetail';
+import { useHeader } from '../../../context/HeaderContext';
 
 export const FoodTruckDetail = () => {
+  const { setHideHeader } = useHeader();
   const navigate = useNavigate();
   const location = useLocation();
   const { dayFoodTruckNum } = useParams<{ dayFoodTruckNum: string }>();
@@ -23,13 +25,18 @@ export const FoodTruckDetail = () => {
     getFoodTruckDetail();
   }, [dayFoodTruckNum, selectedDate]);
 
+  useEffect(() => {
+    setHideHeader(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!foodTruckDetail) {
     return <div>loading...</div>;
   }
 
   return (
     <>
-      <BaseLayer backgroundImgSrc={foodTruckDetail.cover}>
+      <BaseLayer backgroundImgSrc={foodTruckDetail?.cover}>
         <GoBackButtonContainer>
           <GoBackButton onClick={() => navigate(-1)} />
         </GoBackButtonContainer>
@@ -47,6 +54,6 @@ export const FoodTruckDetail = () => {
 
 const GoBackButtonContainer = styled.div`
   position: absolute;
-  left: 7px;
+  left: 16px;
   top: 20px;
 `;

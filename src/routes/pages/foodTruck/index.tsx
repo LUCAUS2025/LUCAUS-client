@@ -10,8 +10,10 @@ import { GoBackButton } from '../../../components/common/GoBackButton';
 import { StaticBottomSheet } from '../../../components/BottomSheet/variants/StaticBottomSheet';
 import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
 import { fetchFoodTruckList } from '../../../services/apis/foodTruck/foodTruckList';
+import { useHeader } from '../../../context/HeaderContext';
 
 export const FoodTruck = () => {
+  const { setHideHeader } = useHeader();
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
   const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
   const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
@@ -29,6 +31,12 @@ export const FoodTruck = () => {
     };
     getFoodTruckList();
   }, [selectedDate]);
+
+  // 헤더 안보이도록
+  useEffect(() => {
+    setHideHeader(!!selectedItem);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedItem]);
 
   return (
     <BaseLayer>
@@ -81,6 +89,6 @@ export const OptionContainer = styled.div`
 
 const GoBackButtonContainer = styled.div`
   position: absolute;
-  left: 7px;
+  left: 15px;
   top: 20px;
 `;
