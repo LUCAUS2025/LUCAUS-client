@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Auth from './auth';
 import Intro from './intro';
 
 const StampEntrance = () => {
   const [selectedIndex, setSelectedIndex] = useState<string>('stamp');
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search); // 쿼리 파라미터 파싱
+  const tab = searchParams.get('tab'); // 'tab' 파라미터 값 가져오기
+  useEffect(() => {
+    if (tab === 'intro') {
+      setSelectedIndex('intro');
+    } else if (tab === 'stamp') {
+      setSelectedIndex('stamp');
+    }
+  }, [location.search]); // location.search가 변경될 때마다 실행
 
   const handleClickIndex = (index: string) => {
     setSelectedIndex(index);
