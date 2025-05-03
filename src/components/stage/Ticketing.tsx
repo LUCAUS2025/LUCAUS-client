@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box, SectionTitle } from './Watching';
 import { BlackButton } from '../common/BaseButton';
+import { TestMapImage } from '../../routes/pages/information/barrierfree';
 
 const MapImage = styled.div` ... `;
-const Description = styled.div` ... `;
+export const Description = styled.div`
+  margin-top: 16px;
+`;
 
 const Ticketing: React.FC = () => {
   return (
@@ -18,7 +21,7 @@ const Ticketing: React.FC = () => {
         <BlackButton>바로가기</BlackButton>
       </Box>
       <SectionTitle>관람 구역 지도</SectionTitle>
-      <MapImage />
+      <TestMapImage />
       <Description>
         티켓팅 방식 및 입장 정책에 대한
         <br />

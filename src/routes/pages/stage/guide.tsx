@@ -24,8 +24,10 @@ const Guide = () => {
           공연 관람 가이드
         </Tab>
       </Tabs>
-      {currentTab === 'ticketing' && <Ticketing />}
-      {currentTab === 'watching' && <Watchiing />}
+      <Wrapper>
+        {currentTab === 'ticketing' && <Ticketing />}
+        {currentTab === 'watching' && <Watchiing />}
+      </Wrapper>
     </>
   );
 };
@@ -50,4 +52,7 @@ const Tab = styled.div<{ active?: boolean }>`
     font-weight: bold;
     border-bottom: 2px solid #1447e6;
   }
+`;
+const Wrapper = styled.div`
+  padding: 0 16px 16px 16px;
 `;
