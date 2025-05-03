@@ -24,7 +24,7 @@ export const Header = () => {
     if (path.includes('lostitem')) return '분실물 안내';
     if (path.includes('barrierfree')) return '배리어프리';
     if (path.startsWith('/stamp/board')) return '광장기획전 스탬프';
-    if (path.startsWith('/stamp/auth')) return '로그인';
+    if (path.startsWith('/stamp/auth')) return '광장기획전 스탬프';
 
     return '오늘의 공연';
   }, [location.pathname]);
