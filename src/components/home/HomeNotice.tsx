@@ -21,7 +21,7 @@ const HomeNotice = () => {
   const getNotice = () => {
     getNotices()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.result && res.result.content && res.result.content.length > 0) {
           setNotices(res.result.content);
         } else {
@@ -43,7 +43,7 @@ const HomeNotice = () => {
         <Title>최근 공지사항</Title>
         <MoreButton onClick={() => navigate('/notice')}>더보기</MoreButton>
       </SectionHeader>
-      {notices.map((notice, index) => (
+      {notices.slice(0, 2).map((notice, index) => (
         <NoticeCard key={index}>
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
           <NoticeContent>{notice.content}</NoticeContent>
