@@ -76,7 +76,7 @@ export const Stage = () => {
       <img
         src="/images/home/stage/ticket.png"
         onClick={() => navigate('/guide/ticketing')}
-        style={{ width: '80%' }}
+        style={{ width: '100%' }}
         alt="티켓 안내"
       />
 
@@ -164,6 +164,10 @@ const DropDownContainer = styled.div`
   padding: 0.5rem;
   border-radius: 0.5rem;
   gap: 0.5rem;
+  width: 100%;
+  background-color: #fafafa;
+  position: fixed;
+  border: 1px solid #d1d5db;
 `;
 
 const OptionItem = styled.div<{ selected: boolean }>`

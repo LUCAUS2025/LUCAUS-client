@@ -1,10 +1,9 @@
-import React from 'react';
 import { Thumbnail } from '../../components/home/thumbnail';
-import styled from 'styled-components';
 import { Banner } from '../../components/home/banner';
 import Toast from '../../components/home/Toast';
 import { Subtitle, Title } from './stage';
 import HomeNotice from '../../components/home/HomeNotice';
+import Footer from '../../components/home/Footer';
 
 export const Home = () => {
   return (
@@ -21,17 +20,7 @@ export const Home = () => {
       <Subtitle>꼭 가봐야할 부스를 추천해드려요.</Subtitle>
       <Thumbnail />
 
-      <Bottom>
-        <div style={{ fontSize: '20px' }}>축제기획단 X 멋쟁이사자처럼 중앙대학교</div>
-        <br />© 2025 CAU LIKELION All rights reserved.
-      </Bottom>
+      <Footer />
     </>
   );
 };
-
-const Bottom = styled.div`
-  background-color: #e0efff;
-  color: #364153;
-  text-align: center;
-  padding: 20px;
-`;

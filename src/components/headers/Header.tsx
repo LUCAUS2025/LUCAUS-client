@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useMenu } from '../../context/MenuContext';
 import { Wrapper } from './HomeHeader';
 
