@@ -199,5 +199,5 @@ const OptionItem = styled.div<{ selected: boolean }>`
 `;
 
 const Container = styled.div`
-  padding: 64px 16px 70px 16px;
+  padding: 64px 16px 30px 16px;
 `;
