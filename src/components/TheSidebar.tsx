@@ -47,7 +47,7 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
   transition: transform 0.3s ease-in-out;
-  z-index: 10;
+  z-index: 1000;
 `;
 
 const Overlay = styled.div<{ isOpen: boolean }>`
