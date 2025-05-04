@@ -11,6 +11,7 @@ interface LostItemProps {
   detail: string;
   date: string;
   image: string;
+  ownerFound: boolean;
 }
 
 const LostItem = () => {
@@ -44,6 +45,7 @@ const LostItem = () => {
             date: item.updatedDateTime,
             image: item.photoUrl,
             detail: `습득 장소 : ${item.place}`,
+            ownerFound: item.ownerFound,
           }));
           setLostItems(items);
         } else {
@@ -75,19 +77,21 @@ const LostItem = () => {
       </DropDowns>
       <ItemList>
         {lostItems.length > 0 ? (
-          lostItems.map((item, idx) => (
-            <Item key={idx}>
-              <ItemImage src={item.image || ''} />
-              <ItemInfo>
-                <ItemName>{item.name}</ItemName>
-                <ItemDetail>{item.detail}</ItemDetail>
-                <Line>
-                  <Tag>{translateCategory(item.category)}</Tag>
-                  <ItemDate>접수 일자 | {formatDate(item.date)}</ItemDate>
-                </Line>
-              </ItemInfo>
-            </Item>
-          ))
+          lostItems
+            .filter((item) => item.ownerFound == false) // ownerFound가 false인 항목만 필터링
+            .map((item, idx) => (
+              <Item key={idx}>
+                <ItemImage src={item.image || ''} />
+                <ItemInfo>
+                  <ItemName>{item.name}</ItemName>
+                  <ItemDetail>{item.detail}</ItemDetail>
+                  <Line>
+                    <Tag>{translateCategory(item.category)}</Tag>
+                    <ItemDate>접수 일자 | {formatDate(item.date)}</ItemDate>
+                  </Line>
+                </ItemInfo>
+              </Item>
+            ))
         ) : (
           <NoItemsMessage>현재까지 등록된 분실물이 없습니다.</NoItemsMessage>
         )}

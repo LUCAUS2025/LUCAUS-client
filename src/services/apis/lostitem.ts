@@ -8,6 +8,7 @@ export interface GetLostItemsParams {
 }
 
 export interface LostItem {
+  ownerFound: boolean;
   category: string;
   name: string;
   updatedDateTime: string;
