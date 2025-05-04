@@ -25,4 +25,8 @@ export const CardImage = styled.img`
   object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+  &:first-child {
+    margin-left: 16px; // 첫 번째 이미지에만 왼쪽 패딩 추가
+  }
 `;
