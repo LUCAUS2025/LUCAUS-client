@@ -20,6 +20,7 @@ const AuthPage = ({ setWhichView }: Props) => {
           <Button
             onClick={() => {
               setWhichView('login');
+              window.location.href = '/stamp/login';
             }}
           >
             <ButtonText>내 도장판 확인</ButtonText>
@@ -29,6 +30,7 @@ const AuthPage = ({ setWhichView }: Props) => {
             <MakeBoardText
               onClick={() => {
                 setWhichView('signup');
+                window.location.href = '/stamp/signup';
               }}
             >
               도장판 만들러 가기

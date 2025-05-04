@@ -57,7 +57,7 @@ export const useSignupError = () => {
     }
     if (signupData.studentId.length < 8) {
       newErrorState.isStudentIdError = true;
-      newErrorState.studentIdErrorMessage = '학번형식이 불일치 합니다.';
+      newErrorState.studentIdErrorMessage = '학번은 숫자 8자리 이상이어야 합니다.';
       hasError = true;
     }
 
