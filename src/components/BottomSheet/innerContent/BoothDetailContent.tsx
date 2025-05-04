@@ -51,7 +51,12 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDet
         </HeaderContainer>
         <OperatingContainer>
           <OperatingTitle>부스 운영</OperatingTitle>
-          <DetailOperatingInfo type={'booth'} selectedDate={selectedDate} location={boothDetail?.location} />
+          <DetailOperatingInfo
+            type={'booth'}
+            selectedDate={selectedDate}
+            location={boothDetail?.location}
+            opDateList={boothDetail?.opDateList}
+          />
         </OperatingContainer>
         <DetailReview type={'booth'} onOpenReview={openReviewSheet} reviewData={boothDetail.boothReview} />
       </DetailWrapper>

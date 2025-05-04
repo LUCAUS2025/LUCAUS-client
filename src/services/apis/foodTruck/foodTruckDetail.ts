@@ -12,6 +12,7 @@ export interface FoodTruckDetailRawData {
   foodTruckReviews: FoodTruckReviewItem[];
   menus: FoodTruckMenuItem[];
   foodTruckId: number;
+  opDateList: number[];
 }
 
 interface FoodTruckDetail {
