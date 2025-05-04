@@ -22,15 +22,15 @@ export const Information = () => {
           </InfoBox>
           <CardList>
             <InfoCard onClick={() => navigate('/lostitem')}>
-              <CardImg />
+              <CardImg src="/images/information/findIcon.webp" />
               <CardText>분실물 안내</CardText>
             </InfoCard>
             <InfoCard onClick={() => navigate('/barrierfree')}>
-              <CardImg />
+              <CardImg src="/images/information/barrierIcon.webp" />
               <CardText>배리어프리</CardText>
             </InfoCard>
             <InfoCard onClick={() => navigate('/entry')}>
-              <CardImg />
+              <CardImg src="/images/information/mapIcon.webp" />
               <CardText>이동 정책</CardText>
             </InfoCard>
           </CardList>
