@@ -34,7 +34,8 @@ const foodTruckReviewOptions: ReviewOption[] = [
 
 export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type, currentId }) => {
   const [selected, setSelected] = useState<number[]>([]);
-  const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success'>('ready');
+  const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success' | 'fail'>('ready');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const toggleSelected = (idx: number) => {
     setSelected((prev) => (prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]));
@@ -56,9 +57,12 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
             onClose();
           }, 1500);
         } else {
-          alert(result?.message || '리뷰 전송에 실패했습니다.');
-          setReviewStatus('ready');
-          onClose();
+          setReviewStatus('fail');
+          setErrorMessage(result?.message);
+          setReviewStatus('fail');
+          setTimeout(() => {
+            onClose();
+          }, 2300);
         }
       } else if (type === 'foodTruck') {
         const result = await postFoodTruckReview(currentId, selectedTags);
@@ -68,17 +72,21 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
             onClose();
           }, 1500);
         } else {
-          alert(result?.message || '리뷰 전송에 실패했습니다.');
-          setReviewStatus('ready');
-          onClose();
+          setErrorMessage(result?.message);
+          setReviewStatus('fail');
+          setTimeout(() => {
+            onClose();
+          }, 2300);
         }
       }
     } catch (error: unknown) {
       const axiosError = error as AxiosError<{ message: string }>;
       const message = axiosError.response?.data?.message || '알 수 없는 오류가 발생했습니다.';
-      alert(message);
-      setReviewStatus('ready');
-      onClose();
+      setErrorMessage(message);
+      setReviewStatus('fail');
+      setTimeout(() => {
+        onClose();
+      }, 2500);
     }
   };
   const options = type === 'booth' ? boothReviewOptions : foodTruckReviewOptions;
@@ -121,6 +129,17 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
             <SubmittingAnimation>
               <LoadingSpinner />
             </SubmittingAnimation>
+          </TitleContainer>
+        </>
+      )}
+      {reviewStatus === 'fail' && errorMessage.length && (
+        <>
+          <TitleContainer>
+            <Title>리뷰 전송 실패</Title>
+            <SubText>{errorMessage}</SubText>
+            <CompleteAnimation>
+              <Complete src="/images/common/fail.webp" />
+            </CompleteAnimation>
           </TitleContainer>
         </>
       )}
