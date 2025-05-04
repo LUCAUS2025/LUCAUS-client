@@ -7,9 +7,15 @@ interface DetailOperatingInfoProps {
   type: 'booth' | 'foodTruck';
   selectedDate: number;
   location: string;
+  opDateList: number[];
 }
 
-export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({ type, selectedDate, location }) => {
+export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
+  type,
+  selectedDate,
+  location,
+  opDateList,
+}) => {
   return (
     <Wrapper>
       <InfoContainer>
@@ -19,11 +25,11 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({ type, 
             <InfoLabel>운영 일자</InfoLabel>
           </LabelContainer>
           <DateContainer>
-            <Date active={true}>19</Date>
-            <Date active={true}>20</Date>
-            <Date active={false}>21</Date>
-            <Date active={false}>22</Date>
-            <Date active={false}>23</Date>
+            <Date active={opDateList?.includes(dateOptions[0].value as number)}>{dateOptions[0].value}</Date>
+            <Date active={opDateList?.includes(dateOptions[1].value as number)}>{dateOptions[1].value}</Date>
+            <Date active={opDateList?.includes(dateOptions[2].value as number)}>{dateOptions[2].value}</Date>
+            <Date active={opDateList?.includes(dateOptions[3].value as number)}>{dateOptions[3].value}</Date>
+            <Date active={opDateList?.includes(dateOptions[4].value as number)}>{dateOptions[4].value}</Date>
           </DateContainer>
         </InfoItem>
         <InfoItem>
@@ -31,13 +37,14 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({ type, 
             <LabelIcon src="/images/common/clockDark.webp"></LabelIcon>
             <InfoLabel>운영 시간</InfoLabel>
           </LabelContainer>
-          {type === 'booth' && selectedDate !== undefined && dateOptions[2] ? (
+          {/* {type === 'booth' && selectedDate !== undefined && dateOptions[2] ? (
             Number(selectedDate) <= Number(dateOptions[2].value) ? (
               <InfoText>10:00 ~ 18:00</InfoText>
             ) : (
               <InfoText>10:00 ~ 14:00</InfoText>
             )
-          ) : null}
+          ) : null} */}
+          {type === 'booth' && <InfoText>10:00 ~ 17:00</InfoText>}
           {type === 'foodTruck' && <InfoText>10:00 ~ 19:00 (재료 소진 시 조기 마감)</InfoText>}
         </InfoItem>
         <InfoItem>

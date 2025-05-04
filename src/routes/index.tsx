@@ -15,6 +15,8 @@ import { FoodTruckDetail } from './pages/foodTruck/FoodTruckDetail';
 import Entry from './pages/information/entry';
 import StampEntrance from './pages/stamp';
 import StampBoard from './pages/stamp/stampBoard';
+import Signup from './pages/stamp/auth/signup/Signup';
+import Login from './pages/stamp/auth/login/Login';
 
 const router = createBrowserRouter([
   {
@@ -79,6 +81,14 @@ const router = createBrowserRouter([
       {
         path: '/stamp/board',
         element: <StampBoard />,
+      },
+      {
+        path: '/stamp/signup',
+        element: <Signup />,
+      },
+      {
+        path: '/stamp/login',
+        element: <Login />,
       },
     ],
   },

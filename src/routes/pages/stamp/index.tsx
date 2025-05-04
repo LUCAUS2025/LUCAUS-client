@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Auth from './auth';
 import Intro from './intro';
@@ -22,44 +22,46 @@ const StampEntrance = () => {
   // 회원가입 or 로그인 화면 선택
   const [whichView, setWhichView] = useState<string>('default');
 
+  const navigate = useNavigate();
+
   const handleClickIndex = (index: string) => {
     setSelectedIndex(index);
+    navigate(`?tab=${index}`);
   };
 
   return (
     <Wrapper>
-      {whichView == 'default' ? (
-        <>
-          <IndexBox>
-            <EachIndex
-              onClick={() => {
-                handleClickIndex('intro');
-              }}
-              isSelected={selectedIndex === 'intro'}
-            >
-              광장기획전 소개
-            </EachIndex>
-            <EachIndex
-              onClick={() => {
-                handleClickIndex('stamp');
-              }}
-              isSelected={selectedIndex === 'stamp'}
-            >
-              스탬프
-            </EachIndex>
-          </IndexBox>
-          {selectedIndex == 'stamp' ? <Auth setWhichView={setWhichView} /> : <Intro />}
-        </>
-      ) : (
-        <EmptyBox></EmptyBox>
-      )}
-      {whichView == 'signup' && <Signup setWhichView={setWhichView} />}
-      {whichView == 'login' && <Login setWhichView={setWhichView} />}
+      <ContentBox>
+        {whichView == 'default' && (
+          <>
+            <IndexBox>
+              <EachIndex
+                onClick={() => {
+                  handleClickIndex('intro');
+                }}
+                isSelected={selectedIndex === 'intro'}
+              >
+                광장기획전 소개
+              </EachIndex>
+              <EachIndex
+                onClick={() => {
+                  handleClickIndex('stamp');
+                }}
+                isSelected={selectedIndex === 'stamp'}
+              >
+                스탬프
+              </EachIndex>
+            </IndexBox>
+            {selectedIndex == 'stamp' ? <Auth setWhichView={setWhichView} /> : <Intro />}
+          </>
+        )}
+      </ContentBox>
+
       <WaveWrapper>
         <WaveBox>
           <WaveImg src="/images/wave/wave.png" alt="wave" />
         </WaveBox>
-        <ColorBox />
+        <ColorBox isDefault={whichView} />
       </WaveWrapper>
     </Wrapper>
   );
@@ -74,18 +76,16 @@ interface EachIndexProps {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 40px - 83px);
   justify-content: space-between;
+  overflow-y: auto;
   position: relative;
-`;
-
-const EmptyBox = styled.div`
-  min-height: 276px;
-  max-height: 276px;
 `;
 
 const IndexBox = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 10%;
 `;
 
 const EachIndex = styled.div<EachIndexProps>`
@@ -100,19 +100,29 @@ const EachIndex = styled.div<EachIndexProps>`
   border-bottom: ${({ isSelected }) => (isSelected ? '2px solid #1447e6' : '2px solid #ffffff')};
 `;
 
-const ColorBox = styled.div`
+interface ColorBoxProps {
+  isDefault: string;
+}
+
+const ColorBox = styled.div<ColorBoxProps>`
   width: 100%;
-  min-height: calc(100vh - 200px - 230px - 120px - 80px - 40px);
-  background-color: #e0efff;
+  flex-grow: 1;
+  min-height: calc(100vh - 200px - 230px - 120px - 80px - 120px);
+  background-color: ${({ isDefault }) => (isDefault == 'default' ? '#e0efff' : '#F3F9FF')};
 `;
 
 const WaveWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 40px;
+  justify-content: flex-end;
+  pointer-events: none;
 `;
 
 const WaveBox = styled.div`
@@ -128,4 +138,9 @@ const WaveBox = styled.div`
 const WaveImg = styled.img`
   display: flex;
   width: 100%;
+`;
+
+const ContentBox = styled.div`
+  position: relative;
+  z-index: 1;
 `;

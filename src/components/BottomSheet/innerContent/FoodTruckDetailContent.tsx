@@ -47,7 +47,12 @@ export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({ 
         </MenuContainer>
         <OperatingContainer>
           <OperatingTitle>푸드트럭 운영</OperatingTitle>
-          <DetailOperatingInfo type={'foodTruck'} selectedDate={selectedDate} location={foodTruckDetail.location} />
+          <DetailOperatingInfo
+            type={'foodTruck'}
+            selectedDate={selectedDate}
+            location={foodTruckDetail.location}
+            opDateList={foodTruckDetail?.opDateList}
+          />
         </OperatingContainer>
         <DetailReview type={'foodTruck'} onOpenReview={openReviewSheet} reviewData={foodTruckDetail.foodTruckReviews} />
       </DetailWrapper>

@@ -14,7 +14,7 @@ export const Header = () => {
     const path = location.pathname;
 
     if (path === '/') return '청람';
-    if (path.startsWith('/guide')) return '오늘의 공연';
+    if (path.includes('guide')) return '오늘의 공연';
     if (path.includes('stage')) return '오늘의 공연';
     if (path.includes('booth')) return '거리문화제';
     if (path.includes('foodTruck')) return '푸드트럭';
@@ -23,17 +23,17 @@ export const Header = () => {
     if (path.includes('notice')) return '공지사항';
     if (path.includes('lostitem')) return '분실물 안내';
     if (path.includes('barrierfree')) return '배리어프리';
-    if (path.startsWith('/stamp/board')) return '광장기획전 스탬프';
-    if (path.startsWith('/stamp/auth')) return '로그인';
+    if (path.includes('/stamp/board')) return '광장기획전 스탬프';
+    if (path.includes('/stamp/auth')) return '광장기획전 스탬프';
 
     return '오늘의 공연';
   }, [location.pathname]);
 
   // arrow 아이콘을 보여줄 경로
-  const arrowPaths = ['/guide', '/entry', '/notice', '/lostitem', '/barrierfree', '/stamp/auth'];
+  const arrowPaths = ['guide', 'entry', 'notice', 'lostitem', 'barrierfree', 'stamp'];
 
   // 현재 경로가 arrow 아이콘 대상인지 판단
-  const showArrowIcon = arrowPaths.some((path) => location.pathname.startsWith(path));
+  const showArrowIcon = arrowPaths.some((path) => location.pathname.includes(path));
 
   // 아이콘 클릭 핸들러
   const handleIconClick = (e: React.MouseEvent) => {
