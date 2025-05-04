@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { getOneRecentNotice } from '../../../services/apis/notice';
 
 export const Information = () => {
   const navigate = useNavigate();
+  const [recentNotice, setRecentNotice] = useState();
+
+  useEffect(() => {
+    const getNotice = async () => {
+      const result = await getOneRecentNotice();
+      setRecentNotice(result.result.content[0].title);
+    };
+    getNotice();
+  }, []);
+
+  if (!recentNotice) {
+    return <div>loading...</div>;
+  }
 
   return (
     <Wrapper>
@@ -17,7 +31,7 @@ export const Information = () => {
             <InfoTitleImg src="images/information/idea.webp" />
             <InfoTitleCol onClick={() => navigate('/notice')}>
               <InfoBoxTitle>총학생회 공지</InfoBoxTitle>
-              <InfoBoxDescription>배리어 프리존 안내</InfoBoxDescription>
+              <InfoBoxDescription>{recentNotice}</InfoBoxDescription>
             </InfoTitleCol>
           </InfoBox>
           <CardList>
