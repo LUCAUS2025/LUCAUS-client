@@ -17,6 +17,7 @@ export const Card = styled.div`
   overflow-y: auto; // 세로 스크롤 활성화
   max-height: 240px; // 높이를 제한하여 스크롤이 작동하도록 설정
   padding: 0 0 1rem 0;
+  margin: 0 -16px 0 -16px;
 `;
 
 export const CardImage = styled.img`
