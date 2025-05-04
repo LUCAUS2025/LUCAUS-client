@@ -8,6 +8,16 @@ export interface OptionOnlyNumber {
   value: number;
 }
 
+export const dateYearOption = {
+  label: '2025년',
+  value: 2025,
+};
+
+export const dateMonthOption = {
+  label: '5월',
+  value: 0o5,
+};
+
 export const dateOptions: Option[] = [
   { label: '19 일', value: 19 },
   { label: '20 일', value: 20 },

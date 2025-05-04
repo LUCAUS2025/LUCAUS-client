@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Ticketing from '../../../components/stage/Ticketing';
 import Watchiing from '../../../components/stage/Watching';
+import { Wrapper16 } from '../Home';
 
 const Guide = () => {
   const { tab } = useParams<{ tab: string }>();
@@ -24,8 +25,10 @@ const Guide = () => {
           공연 관람 가이드
         </Tab>
       </Tabs>
-      {currentTab === 'ticketing' && <Ticketing />}
-      {currentTab === 'watching' && <Watchiing />}
+      <Wrapper16>
+        {currentTab === 'ticketing' && <Ticketing />}
+        {currentTab === 'watching' && <Watchiing />}
+      </Wrapper16>
     </>
   );
 };

@@ -1,47 +1,43 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 import Signup from './signup/Signup';
 import Login from './login/Login';
 import WaveTest1 from './wave/WaveTest1';
 
-const AuthPage = () => {
-  const [whichView, setWhichView] = useState<string>('default');
+interface Props {
+  setWhichView: React.Dispatch<SetStateAction<string>>;
+}
 
+const AuthPage = ({ setWhichView }: Props) => {
   return (
     <>
-      <IntroBox>
-        <div>광장기획전 ~~</div>
-        <div>지금 바로 항해를 시작하시겠습니까?</div>
-      </IntroBox>
-      {whichView == 'default' && (
+      <TopWrapper>
+        <IntroBox>
+          <div>광장기획전 부스를 돌며 열쇠를 모아</div>
+          <div>항해를 시작해 보세요!</div>
+        </IntroBox>
         <ButtonBox>
           <Button
             onClick={() => {
-              setWhichView('signup');
-            }}
-          >
-            <div>처음</div>
-            <div>방문했어요</div>
-          </Button>
-          <Button
-            onClick={() => {
               setWhichView('login');
+              window.location.href = '/stamp/login';
             }}
           >
-            <div>이전에 모았던</div>
-            <div>스탬프를</div>
-            <div>확인할래요</div>
+            <ButtonText>내 도장판 확인</ButtonText>
           </Button>
+          <MakeBoardTextLine>
+            <div>첫 방문이라면?</div>
+            <MakeBoardText
+              onClick={() => {
+                setWhichView('signup');
+                window.location.href = '/stamp/signup';
+              }}
+            >
+              도장판 만들러 가기
+            </MakeBoardText>
+          </MakeBoardTextLine>
         </ButtonBox>
-        //<WaveTest1 />
-      )}
-      {whichView == 'signup' && <Signup setWhichView={setWhichView} />}
-      {whichView == 'login' && <Login setWhichView={setWhichView} />}
-
-      <GuideTextBox>
-        <div>입력하신 정보는 광장기획전 참여 상품 응모에 활용됩니다.</div>
-        <div>학번과 이름을 정확히 입력해주세요.</div>
-      </GuideTextBox>
+      </TopWrapper>
     </>
   );
 };
@@ -54,44 +50,64 @@ const IntroBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 150px;
-  border: 1px solid red;
+  font-weight: 600;
   width: 100%;
+  margin-top: 50px;
+  gap: 5px;
 `;
 
 const ButtonBox = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  min-height: 215px;
-  max-height: 350px;
+  min-height: 86px;
+  max-height: 86px;
   height: 35%;
   width: 100%;
-  background-color: red;
-`;
-
-const GuideTextBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: blue;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  gap: 20px;
 `;
 
 const Button = styled.button`
-  min-width: 166px;
-  width: 40%;
-  max-width: 200px;
-  min-height: 212px;
-  height: 90%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 343px;
+  width: 343px;
+  //max-width: 200px;
+  min-height: 48px;
+  height: 48px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
-  background-color: blue;
-  color: white;
-  border: none;
+  background-color: #f9fafb;
+  border: 1px solid #1447e6;
   cursor: pointer;
+`;
+
+const ButtonText = styled.div`
+  font-size: 14px;
+  color: #1447e6;
+  font-weight: 600;
+`;
+
+const MakeBoardTextLine = styled.div`
+  font-size: 12px;
+  color: #364153;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MakeBoardText = styled.div`
+  font-size: 12px;
+  color: #364153;
+  cursor: pointer;
+  text-decoration: underline;
+`;
+
+const TopWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 210px;
+  width: 100%;
 `;
