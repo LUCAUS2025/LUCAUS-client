@@ -1,7 +1,7 @@
 // 모달 백그라운드와 기본 틀까지만 제공
 // child node로 세부 내용 전달
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { styled } from 'styled-components';
 
 interface ModalProps {
@@ -10,6 +10,15 @@ interface ModalProps {
 }
 
 const Modal = ({ isShort, children }: ModalProps) => {
+  useEffect(() => {
+    // 모달 열릴 때 스크롤 비활성화
+    document.body.style.overflow = 'hidden';
+
+    // 모달 닫힐 때 원래 상태로 복원
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
   return (
     <Wrapper>
       <ModalBox isShort={isShort}>{children}</ModalBox>
@@ -37,11 +46,15 @@ const ModalBox = styled.div<{
 }>`
   background-color: white;
   border-radius: 12px;
-  width: 318px;
-  height: ${({ isShort }) => (isShort ? '254px' : '417')};
+  width: 343px;
+  height: ${({ isShort }) => (isShort ? '280px' : '417')};
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   overflow: auto;
-  padding: 24px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
