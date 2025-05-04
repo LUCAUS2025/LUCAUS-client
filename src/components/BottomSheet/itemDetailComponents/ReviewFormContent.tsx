@@ -86,7 +86,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
       setReviewStatus('fail');
       setTimeout(() => {
         onClose();
-      }, 2500);
+      }, 2300);
     }
   };
   const options = type === 'booth' ? boothReviewOptions : foodTruckReviewOptions;
