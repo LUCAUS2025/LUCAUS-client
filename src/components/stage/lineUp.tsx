@@ -8,7 +8,7 @@ const ArtistScroll = styled.div`
   overflow-x: auto;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  gap: 2rem;
+  gap: 1rem;
 `;
 
 const ArtistItem = styled.div<{ selected: boolean }>`
@@ -48,6 +48,9 @@ const ArtistImage = styled.img`
 const ArtistName = styled.div`
   font-size: 0.75rem;
   margin-top: 0.25rem;
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis;
 `;
 
 const ListButtonWrapper = styled.div`
