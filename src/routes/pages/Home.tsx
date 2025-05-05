@@ -5,14 +5,36 @@ import HomeNotice from '../../components/home/HomeNotice';
 import Footer from '../../components/home/Footer';
 import styled from 'styled-components';
 
+import { useEffect, useState } from 'react';
+
 export const Home = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const today = new Date();
+    const startDate = new Date('2025-05-19'); // 시작 날짜
+    const endDate = new Date('2025-05-21'); // 종료 날짜
+    endDate.setHours(23, 59, 59, 999); // 종료 날짜의 끝 시간 설정
+
+    // 오늘 날짜가 범위 내에 있는지 확인
+    if (today >= startDate && today <= endDate) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  }, []);
+
   return (
     <>
       <Wrapper16>
         <Banner />
-        <Title>광장기획전</Title>
-        <Subtitle>지금 바로 열쇠를 모아 항해를 시작해보세요!</Subtitle>
-        <Image src="/images/home/banner/1.png" alt="광장기획전 포스터" />
+        {isVisible && ( // 조건부 렌더링
+          <>
+            <Title>광장기획전</Title>
+            <Subtitle>지금 바로 열쇠를 모아 항해를 시작해보세요!</Subtitle>
+            <Image src="/images/home/banner/1.png" alt="광장기획전 포스터" />
+          </>
+        )}
 
         <Title>이 무대 절대 놓치지 마세요!</Title>
         <Subtitle>올해 축제를 빛낼 아티스트들을 지금 확인하세요</Subtitle>
