@@ -19,8 +19,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   min-height: 40vh;
-  //overflow: hidden;
-  //padding: 0;
+  overflow: hidden;
 `;
 
 const Background = styled.div<{ $backgroundImgSrc?: string }>`
