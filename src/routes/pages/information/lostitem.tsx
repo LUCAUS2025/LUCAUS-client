@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDate } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
-import { dateOptions, itemsOptions, Option } from '../../../data/options';
+import { dateOptions, itemsOptions, lostdateOptions, Option } from '../../../data/options';
 
 interface LostItemProps {
   category: string;
@@ -16,7 +16,7 @@ interface LostItemProps {
 
 const LostItem = () => {
   const [lostItems, setLostItems] = useState<LostItemProps[]>([]);
-  const [selectDate, setSelectDate] = useState<Option>(dateOptions[0]); // 날짜 선택 상태
+  const [selectDate, setSelectDate] = useState<Option>(lostdateOptions[0]); // 날짜 선택 상태
   const [selectItem, setSelectItem] = useState<Option>(itemsOptions[0]); // 분실물 선택 상태
 
   const translateCategory = (category: string) => {
