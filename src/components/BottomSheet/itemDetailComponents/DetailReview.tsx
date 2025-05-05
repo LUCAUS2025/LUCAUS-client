@@ -5,7 +5,7 @@ import { ReviewItem } from '../../review/ReviewBarItem';
 import { CommonItem } from '../../../data/boothFood';
 import { BoothReviewItem } from '../../../services/apis/booth/boothDetail';
 import { FoodTruckReviewItem } from '../../../services/apis/foodTruck/foodTruckDetail';
-import { mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
+import { mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
 
 interface DetailReviewProps {
   type: CommonItem['type'];
