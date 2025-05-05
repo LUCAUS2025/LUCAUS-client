@@ -59,13 +59,13 @@ export const Banner = () => {
 
 const images = [
   '/images/home/banner/1.png',
+  '/images/home/banner/2.png',
+  '/images/home/banner/3.png',
   '/images/home/banner/1.png',
+  '/images/home/banner/2.png',
+  '/images/home/banner/3.png',
   '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
+  '/images/home/banner/2.png',
 ];
 
 const CarouselContainer = styled.div`
