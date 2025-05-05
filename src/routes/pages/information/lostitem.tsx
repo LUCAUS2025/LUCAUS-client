@@ -165,6 +165,10 @@ export const ItemName = styled.div`
 export const ItemDetail = styled.div`
   font-size: 14px;
   color: #4b5563;
+
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis;
 `;
 
 export const Tag = styled.span`
