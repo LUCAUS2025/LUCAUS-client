@@ -108,7 +108,7 @@ export const OptionContainer = styled.div`
   flex-direction: row;
   gap: 10px;
   left: 16px;
-  top: 20px;
+  top: 80px;
   position: absolute;
 `;
 
