@@ -197,6 +197,8 @@ const DropDowns = styled.div`
   display: flex;
   gap: 16px;
   margin-bottom: 16px;
+  flex-direction: row;
+  // position: fixed;
 `;
 
 const NoItemsMessage = styled.div`
