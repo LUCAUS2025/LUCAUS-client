@@ -96,14 +96,13 @@ export default StampBoardBox;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #d9d9d9;
   min-width: 343px;
-  min-height: 450px;
-  height: 90%;
-  width: 90%;
+  height: 100vh;
+  width: 100%;
   max-height: 700px;
   justify-content: space-evenly;
   align-items: center;
+  border: 1px solid black;
 `;
 
 const SideBoothLine = styled.div`

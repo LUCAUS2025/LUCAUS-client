@@ -19,7 +19,7 @@ const AuthPage = ({ setWhichView }: Props) => {
         <ButtonBox>
           <Button
             onClick={() => {
-              setWhichView('login');
+              //setWhichView('login');
               window.location.href = '/stamp/login';
             }}
           >
@@ -29,7 +29,7 @@ const AuthPage = ({ setWhichView }: Props) => {
             <div>첫 방문이라면?</div>
             <MakeBoardText
               onClick={() => {
-                setWhichView('signup');
+                //setWhichView('signup');
                 window.location.href = '/stamp/signup';
               }}
             >

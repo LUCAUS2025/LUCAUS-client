@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { DateDropDown } from '../../../../components/common/DropDown/DateDropDown';
 import { Option } from '../../../../data/options';
-import EachBooth from './EachBooth';
 import Modal from '../../../../components/Modal/Modal';
 import StampBoardBox from './StampBoardBox';
 import BeforGetStampModalContent from './boothStampModal/BeforGetStampModalContent';
 import AfterGetStampModalContent from './boothStampModal/AfterGetStampModalContent';
 import { stampBoardInfo } from '../../../../services/apis/stamp/stampBoardInfo';
 import { userInfo } from '../../../../services/apis/stamp/userInfo';
+import RewardGaugeBar from './guageBar/RewardGaugeBer';
+import NewRewardGaugeBar from './guageBar/NewRewardGaugeBar';
 
 interface BoothClear {
   boothId: number;
@@ -118,28 +119,32 @@ const StampBoard = () => {
 
   return (
     <Wrapper>
-      <MyInfoLine>
-        <DateDropDown
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-          darkMode={false}
-          customData={dateOptions}
-        />
-        <div>내정보</div>
-        <MyInfoBox>
-          <div>{userData?.name}</div>
-          <div>{userData?.studentId}</div>
-        </MyInfoBox>
-      </MyInfoLine>
-      <IntroRewardLine>
-        <IntroButton>광장기획전 소개</IntroButton>
-        <RewardBox>
-          {isRewarded[1] ? <div>1단계수령</div> : <EachReward>1단계미수령</EachReward>}
-          {isRewarded[2] ? <div>2단계수령</div> : <EachReward>2단계미수령</EachReward>}
-          {isRewarded[3] ? <div>3단계수령</div> : <EachReward>3단계미수령</EachReward>}
-        </RewardBox>
-      </IntroRewardLine>
-      <ContentBox>
+      <OutContentBox>
+        <MyInfoLine>
+          <DateDropDown
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            darkMode={false}
+            customData={dateOptions}
+          />
+          <MyInfoBox>
+            <div>{userData?.name}</div>
+            <div>|</div>
+            <div>{userData?.studentId}</div>
+          </MyInfoBox>
+        </MyInfoLine>
+        <IntroRewardLine>
+          <IntroBox>
+            <div>부스를 돌며 열쇠를 모아</div>
+            <div>항해를 시작해 보세요!</div>
+          </IntroBox>
+          <RewardBox>
+            <div>상품 응모까지...</div>
+            <BarWrapper>
+              <NewRewardGaugeBar isCleared={isCleared} isRewarded={isRewarded} />
+            </BarWrapper>
+          </RewardBox>
+        </IntroRewardLine>
         <StampBoardBox
           isCleared={isCleared}
           setSelectedBooth={setSelectedBooth}
@@ -148,27 +153,34 @@ const StampBoard = () => {
           isRewarded={isRewarded}
           setStampData={setStampData}
         ></StampBoardBox>
-      </ContentBox>
-      {openModal && (
-        <Modal isShort={true}>
-          {isCleared[selectedBooth] ? (
-            <AfterGetStampModalContent
-              BoothInfo={BoothInfo}
-              selectedBooth={selectedBooth}
-              setOpenModal={setOpenModal}
-            />
-          ) : (
-            <BeforGetStampModalContent
-              BoothInfo={BoothInfo}
-              selectedBooth={selectedBooth}
-              setOpenModal={setOpenModal}
-              setIsCleared={setIsCleared}
-              selectedDate={selectedDate}
-              setStampData={setStampData}
-            />
-          )}
-        </Modal>
-      )}
+        {openModal && (
+          <Modal isShort={true}>
+            {isCleared[selectedBooth] ? (
+              <AfterGetStampModalContent
+                BoothInfo={BoothInfo}
+                selectedBooth={selectedBooth}
+                setOpenModal={setOpenModal}
+              />
+            ) : (
+              <BeforGetStampModalContent
+                BoothInfo={BoothInfo}
+                selectedBooth={selectedBooth}
+                setOpenModal={setOpenModal}
+                setIsCleared={setIsCleared}
+                selectedDate={selectedDate}
+                setStampData={setStampData}
+              />
+            )}
+          </Modal>
+        )}
+      </OutContentBox>
+
+      <WaveWrapper>
+        <WaveBox>
+          <WaveImg src="/images/wave/wave_op.png" alt="wave_op" />
+        </WaveBox>
+        <ColorBox />
+      </WaveWrapper>
     </Wrapper>
   );
 };
@@ -178,6 +190,10 @@ export default StampBoard;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 40px - 83px);
+  justify-content: space-between;
+  overflow-y: auto;
+  position: relative;
 `;
 
 const MyInfoLine = styled.div`
@@ -190,42 +206,93 @@ const MyInfoLine = styled.div`
 const MyInfoBox = styled.div`
   display: flex;
   flex-direction: row;
+  height: 32px;
+  width: 155px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #101828;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
 `;
 
 const IntroRewardLine = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
 
 const RewardBox = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 202px;
+  flex-direction: column;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
+  color: #364153;
+  font-size: 14px;
+  font-weight: 600;
 `;
 
-const EachReward = styled.div`
+const BarWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 33%;
-  justify-content: space-between;
+  width: 100%;
+  margin-right: 20px;
+`;
+
+const OutContentBox = styled.div`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+
+const ColorBox = styled.div`
+  width: 100%;
+  flex-grow: 1;
+  min-height: calc(100vh - 300px);
+  background-color: #f3f9ff;
+`;
+
+const WaveWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
 `;
 
-const IntroButton = styled.button`
-  width: 118px;
-  height: 36px;
-`;
-
-// 이거로 반응형 구현
-const ContentBox = styled.div`
+const WaveBox = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 230px;
+  overflow-y: hidden;
+`;
+
+const WaveImg = styled.img`
+  display: flex;
+  width: 100%;
+`;
+
+const IntroBox = styled.div`
+  display: flex;
+  font-size: 20px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 120px - 70px);
-  overflow-y: auto;
+  font-weight: 600;
+  width: 100%;
+  height: 100px;
 `;

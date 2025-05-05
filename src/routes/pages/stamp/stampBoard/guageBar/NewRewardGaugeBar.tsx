@@ -1,0 +1,112 @@
+import { styled } from 'styled-components';
+import ShipIcon from './ShipIcon';
+
+interface Props {
+  isCleared: Record<number, boolean>;
+  isRewarded: Record<number, boolean>;
+}
+
+// 1,2일차 - 3/5/7
+// 3일차 - 2/4/6
+
+const NewRewardGaugeBar = ({ isCleared, isRewarded }: Props) => {
+  // 초기값이 비어있는 경우 방어
+  const isClearedValues = Object.values(isCleared);
+  const clearedCount = isClearedValues.length > 0 ? isClearedValues.filter(Boolean).length : 0;
+
+  // 조건 기반 게이지 계산
+  let progressPercent = '0%';
+  if (clearedCount === 1) progressPercent = '8%';
+  else if (clearedCount === 2) progressPercent = '15%';
+  else if (clearedCount === 3) progressPercent = '30%';
+  else if (clearedCount === 4) progressPercent = '45%';
+  else if (clearedCount === 5) progressPercent = '60%';
+  else if (clearedCount === 6) progressPercent = '77%';
+  else if (clearedCount >= 7) progressPercent = '90%';
+  return (
+    <GaugeWrapper>
+      <GaugeBarBackground />
+      <GaugeBarFill style={{ width: progressPercent }} />
+      <StepContainer>
+        <StepCircle active={isRewarded[1]}>
+          <ShipIcon color={isRewarded[1] ? '#1447E6' : '#D1D5DC'} />
+        </StepCircle>
+        <StepCircle active={isRewarded[2]}>
+          <ShipIcon color={isRewarded[2] ? '#1447E6' : '#D1D5DC'} />
+        </StepCircle>
+        <StepCircle active={isRewarded[3]}>
+          <ShipIcon color={isRewarded[3] ? '#1447E6' : '#D1D5DC'} />
+        </StepCircle>
+      </StepContainer>
+    </GaugeWrapper>
+  );
+};
+
+export default NewRewardGaugeBar;
+
+const GaugeWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const GaugeBarBackground = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 90%;
+  height: 24px;
+  background-color: #d0d5dd;
+  border-radius: 24px;
+  transform: translateY(-50%);
+  z-index: 0;
+`;
+
+const GaugeBarFill = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  height: 24px;
+  background-color: #1447e6;
+  border-radius: 24px;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: width 0.3s ease;
+`;
+
+const GaugeBar = styled.div<{ active: boolean }>`
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 90%;
+  height: 24px;
+  background-color: ${({ active }) => (active ? '#1447e6' : '#d0d5dd')};
+  border-radius: 24px;
+  transform: translateY(-50%);
+  z-index: 0;
+`;
+
+const StepCircle = styled.div<{ active: boolean }>`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid ${({ active }) => (active ? '#1447e6' : '#d0d5dd')};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+`;
+
+const StepContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 25%;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+`;
