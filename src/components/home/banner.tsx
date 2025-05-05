@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -12,6 +12,14 @@ export const Banner = () => {
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 2000); // 2초마다 실행
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+  }, []);
 
   return (
     <CarouselContainer>
@@ -51,13 +59,13 @@ export const Banner = () => {
 
 const images = [
   '/images/home/banner/1.png',
+  '/images/home/banner/2.png',
+  '/images/home/banner/3.png',
   '/images/home/banner/1.png',
+  '/images/home/banner/2.png',
+  '/images/home/banner/3.png',
   '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/1.png',
+  '/images/home/banner/2.png',
 ];
 
 const CarouselContainer = styled.div`

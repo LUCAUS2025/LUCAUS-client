@@ -41,6 +41,7 @@ const AppDom = styled.div`
   height: 100vh;
   margin: 0 auto;
   font-family: 'Pretendard-Regular';
+  background-color: white;
 
   @media (max-width: 600px) {
     width: 100vw;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getOneRecentNotice } from '../../../services/apis/notice';
+import { mediaSmall_description, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
 
 export const Information = () => {
   const navigate = useNavigate();
@@ -134,6 +135,8 @@ const Title = styled.div`
   line-height: 125%;
   letter-spacing: -0.26px;
   color: #030712;
+
+  ${mediaSmall_title}
 `;
 const TitleImg = styled.img`
   width: 40px;
@@ -161,6 +164,8 @@ const Description = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #6a7282;
+
+  ${mediaSmall_description}
 `;
 const InfoContainer = styled.div`
   display: flex;
@@ -183,6 +188,8 @@ const InfoBoxTitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
+
+  ${mediaSmall_subTitle}
 `;
 const InfoBoxDescription = styled.div`
   font-family: Pretendard;
@@ -190,6 +197,8 @@ const InfoBoxDescription = styled.div`
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall_description}
 `;
 const CardList = styled.div`
   display: flex;
@@ -220,6 +229,8 @@ const CardText = styled.div`
   letter-spacing: -0.26px;
   text-align: center;
   color: #101828;
+
+  ${mediaSmall_subTitle}
 `;
 const InquiryContainer = styled.div`
   display: flex;
@@ -236,13 +247,16 @@ const BoxContainer = styled.div`
   flex-direction: column;
   gap: 8px;
 `;
+
 const InfoBoxText = styled.div`
   font-family: Pretendard;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
+
+  ${mediaSmall_description}
 `;
 const Subtitle = styled.div`
   font-family: Pretendard;
@@ -251,6 +265,8 @@ const Subtitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
+
+  ${mediaSmall_subTitle}
 `;
 const InfoBoxImg = styled.img`
   width: 32px;

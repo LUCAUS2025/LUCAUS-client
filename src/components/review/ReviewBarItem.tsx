@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mediaSmall } from '../../styles/responsive';
 
 interface ReviewBarItemProps {
   item: ReviewItem;
@@ -80,6 +81,10 @@ const Label = styled.div<{ value: number; percent: number }>`
   vertical-align: middle;
 
   color: ${({ percent }) => (percent >= 50 ? '#f9fafb' : '#000000')};
+
+  ${mediaSmall`
+    font-size: 13px;
+  `}
 `;
 
 const Value = styled.div`

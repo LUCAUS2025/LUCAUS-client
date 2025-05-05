@@ -30,6 +30,10 @@ export const ItemTitle = styled.div`
   letter-spacing: -0.26px;
   display: flex;
   flex-direction: row;
+
+  @media (max-width: 380px) {
+    font-size: 18px;
+  }
 `;
 
 export const ItemId = styled.div``;
@@ -39,6 +43,10 @@ export const ItemHost = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
+
+  @media (max-width: 380px) {
+    font-size: 13px;
+  }
 `;
 
 export const Keywords = styled.div`
@@ -49,6 +57,10 @@ export const Keywords = styled.div`
 
 export const Keyword = styled.div`
   ${keywordBaseStyle};
+
+  @media (max-width: 380px) {
+    font-size: 11px;
+  }
 `;
 
 export const ItemDescription = styled.div`
@@ -57,4 +69,8 @@ export const ItemDescription = styled.div`
   line-height: 150%;
   margin-bottom: 8px;
   color: #364153;
+
+  @media (max-width: 380px) {
+    font-size: 13px;
+  }
 `;

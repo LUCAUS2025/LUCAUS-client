@@ -16,6 +16,7 @@ import { DetailReview } from '../itemDetailComponents/DetailReview';
 import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
 import { BoothDetailRawData } from '../../../services/apis/booth/boothDetail';
+import { mediaSmall_title } from '../../../styles/responsive';
 
 interface BoothDetailContentProps {
   boothDetail: BoothDetailRawData;
@@ -89,4 +90,6 @@ const OperatingTitle = styled.div`
   font-size: 20px;
   line-height: 125%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall_title}
 `;
