@@ -144,6 +144,7 @@ const StampBoard = () => {
               <NewRewardGaugeBar isCleared={isCleared} isRewarded={isRewarded} />
             </BarWrapper>
           </RewardBox>
+          <GetRewardText>상품 수령하기</GetRewardText>
         </IntroRewardLine>
         <StampBoardBox
           isCleared={isCleared}
@@ -152,6 +153,7 @@ const StampBoard = () => {
           selectedDate={selectedDate}
           isRewarded={isRewarded}
           setStampData={setStampData}
+          boothInfo={BoothInfo}
         ></StampBoardBox>
         {openModal && (
           <Modal isShort={true}>
@@ -177,7 +179,7 @@ const StampBoard = () => {
 
       <WaveWrapper>
         <WaveBox>
-          <WaveImg src="/images/wave/wave_op.png" alt="wave_op" />
+          <WaveImg src="/images/wave/wave_default.png" alt="wave_op" />
         </WaveBox>
         <ColorBox />
       </WaveWrapper>
@@ -190,7 +192,7 @@ export default StampBoard;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 40px - 83px);
+  height: calc(100vh - 40px - 83px);
   justify-content: space-between;
   overflow-y: auto;
   position: relative;
@@ -253,7 +255,7 @@ const OutContentBox = styled.div`
 const ColorBox = styled.div`
   width: 100%;
   flex-grow: 1;
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - 200px - 230px - 120px - 40px);
   background-color: #f3f9ff;
 `;
 
@@ -295,4 +297,10 @@ const IntroBox = styled.div`
   font-weight: 600;
   width: 100%;
   height: 100px;
+`;
+
+const GetRewardText = styled.div`
+  color: #6a7282;
+  font-size: 14px;
+  font-weight: 400;
 `;
