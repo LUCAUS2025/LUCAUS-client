@@ -6,9 +6,12 @@ import Footer from '../../components/home/Footer';
 import styled from 'styled-components';
 
 import { useEffect, useState } from 'react';
+import Toast from '../../components/home/Toast';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const today = new Date();
@@ -32,10 +35,14 @@ export const Home = () => {
           <>
             <Title>광장기획전</Title>
             <Subtitle>지금 바로 열쇠를 모아 항해를 시작해보세요!</Subtitle>
-            <Image src="/images/home/banner/1.png" alt="광장기획전 포스터" />
+            <Image
+              src="/images/home/banner/1.png"
+              alt="광장기획전 포스터"
+              onClick={() => navigate('/stamp/auth?tab=intro')}
+            />
           </>
         )}
-
+        <Toast />
         <Title>이 무대 절대 놓치지 마세요!</Title>
         <Subtitle>올해 축제를 빛낼 아티스트들을 지금 확인하세요</Subtitle>
         <Thumbnail />
