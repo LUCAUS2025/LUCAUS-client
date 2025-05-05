@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
+import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
 
 interface ContentProps {
   theTitle?: string;
@@ -13,6 +14,10 @@ interface ContentProps {
 export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescription, data, setSelectedItem }) => {
   const booths = data?.filter((item): item is BoothItem => item.type === 'booth');
   const foodTrucks = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <Wrapper>
@@ -36,7 +41,7 @@ export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescripti
                     </ItemKeywords>
                   </ItemTextContainer>
                   <RecommendContainer>
-                    <RecommendNum>{item.recommendNum}</RecommendNum>
+                    <RecommendNum>{item.recommendNum ?? 0}</RecommendNum>
                     <RecommendIcon src="images/common/thumbsUp.webp" />
                   </RecommendContainer>
                 </ItemContent>
@@ -44,7 +49,6 @@ export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescripti
             ))}
           </List>
         )}
-
         {/* 푸드트럭 리스트 */}
         {foodTrucks && foodTrucks.length > 0 && (
           <List>
@@ -61,7 +65,7 @@ export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescripti
                     </ItemKeywords>
                   </ItemTextContainer>
                   <RecommendContainer>
-                    <RecommendNum>{item.recommendNum}</RecommendNum>
+                    <RecommendNum>{item.recommendNum ?? 0}</RecommendNum>
                     <RecommendIcon src="images/common/thumbsUp.webp" />
                   </RecommendContainer>
                 </ItemContent>
@@ -88,6 +92,8 @@ const TitleContainer = styled.div`
 const Title = styled.div`
   font-size: 20px;
   font-weight: 600;
+
+  ${mediaSmall_title}
 `;
 const Description = styled.div`
   font-size: 12px;
@@ -102,6 +108,10 @@ const List = styled.div`
 const Item = styled.div`
   display: flex;
   flex-direction: row;
+
+  &:hover {
+    background: #e7f1ff;
+  }
 `;
 const ItemContent = styled.div`
   padding: 12px 16px;
@@ -118,6 +128,8 @@ const ItemTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 4px;
+
+  ${mediaSmall_subTitle}
 `;
 const ItemDescription = styled.div`
   margin-bottom: 4px;
@@ -160,4 +172,9 @@ const RecommendNum = styled.div`
 const RecommendIcon = styled.img`
   width: 16px;
   height: 16px;
+
+  ${mediaSmall`
+    width: 14px;
+    height: 14px;
+  `}
 `;

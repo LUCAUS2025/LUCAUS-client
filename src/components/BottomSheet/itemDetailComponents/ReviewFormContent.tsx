@@ -164,6 +164,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   padding: 10px 20px 20px 20px;
+
+  @media (max-width: 380px) {
+    gap: 13px;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -196,6 +200,10 @@ const OptionsContainer = styled.div`
   justify-content: center;
   margin-top: 8px;
   gap: 24px;
+
+  @media (max-width: 380px) {
+    gap: 20px;
+  }
 `;
 
 const Option = styled.div`
@@ -231,6 +239,10 @@ const Label = styled.div`
   vertical-align: middle;
   color: #101828;
   white-space: pre-line;
+
+  @media (max-width: 380px) {
+    font-size: 11px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -238,6 +250,10 @@ const ButtonContainer = styled.div`
   width: 100%;
   gap: 12px;
   margin-top: 12px;
+
+  @media (max-width: 380px) {
+    gap: 10px;
+  }
 `;
 
 const CancelButton = styled.button`
@@ -248,6 +264,10 @@ const CancelButton = styled.button`
   background-color: #d1d5dc;
   color: #6a7282;
   font-size: 14px;
+
+  @media (max-width: 380px) {
+    height: 40px;
+  }
 `;
 
 const SubmitButton = styled.button<{ disabled: boolean }>`
@@ -259,6 +279,10 @@ const SubmitButton = styled.button<{ disabled: boolean }>`
   color: #f9fafb;
   font-size: 14px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+
+  @media (max-width: 380px) {
+    height: 40px;
+  }
 `;
 
 const SubmittingAnimation = styled.div`

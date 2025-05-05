@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
 import { BottomSheetHeader } from '../layout/BottomSheetHeader';
+import { mediaBig } from '../../../styles/responsive';
 
 interface StaticBottomSheetProps<T> {
   size: 'small' | 'middle' | 'large';
@@ -35,17 +36,11 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
   ${({ size }) => {
     switch (size) {
       case 'small':
-        return `
-          top: 56%;
-        `;
+        return smallSizeStyle;
       case 'middle':
-        return `
-          top: 52%;
-        `;
+        return middleSizeStyle;
       case 'large':
-        return `
-          top: 35%;
-        `;
+        return largeSizeStyle;
       default:
         return '';
     }
@@ -60,4 +55,28 @@ const ContentWrapper = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   min-height: 0;
+`;
+
+const smallSizeStyle = css`
+  top: 56%;
+
+  ${mediaBig`
+    top: 63%;
+  `}
+`;
+
+const middleSizeStyle = css`
+  top: 52%;
+
+  ${mediaBig`
+    top: 60%;
+  `}
+`;
+
+const largeSizeStyle = css`
+  top: 34%;
+
+  ${mediaBig`
+    top: 33%;
+  `}
 `;

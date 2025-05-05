@@ -3,6 +3,13 @@ import styled from 'styled-components';
 import { BaseButton } from '../../../components/common/BaseButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  mediaBig,
+  mediaSmall,
+  mediaSmall_description,
+  mediaSmall_subTitle,
+  mediaSmall_title,
+} from '../../../styles/responsive';
 
 const Entry = () => {
   const [entryType, setEntryType] = useState<string | null>(null); // 입장 정책 -  통행 가능 / 통행 불가능 / 무대관람석 표시
@@ -156,8 +163,16 @@ const Wrapper = styled.div`
 
 const MapSection = styled.div`
   position: relative;
-  height: 60vh;
+  height: 62vh;
   width: 100%;
+
+  ${mediaSmall`
+    height: 58vh;
+  `}
+
+  ${mediaBig`
+    height: 64vh;
+  `}
 `;
 
 const BackgroundMapContainer = styled.div`
@@ -217,6 +232,8 @@ const LocationBtn = styled(BaseButton)<{ active: boolean }>`
   border-color: ${({ active }) => (active ? '#1447e6' : '#d1d5dc')};
   color: ${({ active }) => (active ? '#1447e6' : '#364153')};
   white-space: nowrap;
+
+  ${mediaSmall_description}
 `;
 
 const OptionBtnContainer = styled.div`
@@ -237,7 +254,6 @@ const OptionBtn = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  height: 35vh - 60px; // footer 길이 만큼 빼줌
   padding: 0px 16px 18px 16px;
   display: flex;
   flex-direction: column;
@@ -257,6 +273,8 @@ const Title = styled.div`
   line-height: 125%;
   letter-spacing: -0.26px;
   color: #030712;
+
+  ${mediaSmall_title}
 `;
 
 const Description = styled.div`
@@ -266,4 +284,6 @@ const Description = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #6a7282;
+
+  ${mediaSmall_description}
 `;
