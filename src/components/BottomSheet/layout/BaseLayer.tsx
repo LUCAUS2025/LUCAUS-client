@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   width: 100%;
   min-height: 40vh;
   overflow: hidden;
+  position: fixed;
 `;
 
 const Background = styled.div<{ $backgroundImgSrc?: string }>`
