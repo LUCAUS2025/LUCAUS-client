@@ -35,6 +35,7 @@ export const FoodTruck = () => {
   // 헤더 안보이도록
   useEffect(() => {
     setHideHeader(!!selectedItem);
+    return () => setHideHeader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
 
