@@ -70,7 +70,7 @@ const ClickableItem = styled(Item)`
   position: relative;
   cursor: pointer;
   transition: background-color 0.2s;
-  
+
   &:hover {
     background-color: #f9fafb;
   }
