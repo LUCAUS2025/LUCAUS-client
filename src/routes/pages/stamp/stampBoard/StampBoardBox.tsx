@@ -4,6 +4,15 @@ import EachBooth from './EachBooth';
 import Modal from '../../../../components/Modal/Modal';
 import RewardInfoModal from './rewardStampModal/RewardInfoModal';
 import PwPushModal from './rewardStampModal/PwPushModal';
+import StampKey from './keyIcons/StampKey';
+import StampKnife from './keyIcons/StampKnife';
+import StampHook from './keyIcons/StampHook';
+import StampSkeleton from './keyIcons/StampSkeleton';
+import StampHandle from './keyIcons/StampHandle';
+import StampMap from './keyIcons/StampMap';
+import StampIsland from './keyIcons/StampIsland';
+import StampShip from './keyIcons/StampShip';
+import StampTreasure from './keyIcons/StampTreasure';
 
 interface BoothClear {
   boothId: number;
@@ -42,12 +51,6 @@ const StampBoardBox = ({
     setOpenModal(true);
   };
 
-  // 축기단 부스 모달 오픈 여부
-  const [openRewardModal, setOpenRewardModal] = useState(false);
-
-  // 축기단 부스 모달 스탭
-  const [rewardStampStep, setRewardStampStep] = useState(1);
-
   return (
     <Wrapper>
       <BoothLine>
@@ -58,6 +61,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[0]}
           customPadding={'20px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[1] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampKey color={isCleared[11] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
         <EachBooth
           isCleared={isCleared}
@@ -66,6 +77,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[1]}
           customPadding={'0px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[2] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampKnife color={isCleared[12] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
       </BoothLine>
       <BoothLine>
@@ -76,6 +95,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[2]}
           customPadding={'0px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[3] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampHook color={isCleared[13] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
         <EachBooth
           isCleared={isCleared}
@@ -84,6 +111,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[3]}
           customPadding={'50px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[4] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampSkeleton color={isCleared[14] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
         <EachBooth
           isCleared={isCleared}
@@ -92,6 +127,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[4]}
           customPadding={'10px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[5] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampHandle color={isCleared[15] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
         <EachBooth
           isCleared={isCleared}
@@ -100,6 +143,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[5]}
           customPadding={'30px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[6] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampMap color={isCleared[16] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
       </BoothLine>
       <BoothLine>
@@ -110,6 +161,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[6]}
           customPadding={'30px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[7] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampIsland color={isCleared[17] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
         <EachBooth
           isCleared={isCleared}
@@ -118,6 +177,14 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[7]}
           customPadding={'0px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[8] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampShip color={isCleared[18] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
         <EachBooth
           isCleared={isCleared}
@@ -126,25 +193,16 @@ const StampBoardBox = ({
           onClick={handleClickBooth}
           boothName={boothInfo[8]}
           customPadding={'30px'}
+          childNode={
+            selectedDate.value == 1 ? (
+              <StampKey color={isCleared[9] ? '#1447E6' : '#D0DAFA'} />
+            ) : (
+              <StampTreasure color={isCleared[19] ? '#1447E6' : '#D0DAFA'} />
+            )
+          }
+          boardType={selectedDate.value == 1 ? 1 : 2}
         />
       </BoothLine>
-
-      {openRewardModal &&
-        (rewardStampStep == 1 ? (
-          <Modal isShort={false}>
-            <RewardInfoModal setOpenRewardModal={setOpenRewardModal} setRewardStampStep={setRewardStampStep} />
-          </Modal>
-        ) : (
-          <Modal isShort={true}>
-            <PwPushModal
-              setOpenRewardModal={setOpenRewardModal}
-              setRewardStampStep={setRewardStampStep}
-              selectedDate={selectedDate}
-              isRewarded={isRewarded}
-              setStampData={setStampData}
-            />
-          </Modal>
-        ))}
     </Wrapper>
   );
 };
