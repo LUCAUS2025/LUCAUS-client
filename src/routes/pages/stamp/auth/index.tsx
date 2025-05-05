@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Signup from './signup/Signup';
 import Login from './login/Login';
@@ -9,6 +9,11 @@ interface Props {
 }
 
 const AuthPage = ({ setWhichView }: Props) => {
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      window.location.href = '/stamp/board';
+    }
+  }, []);
   return (
     <>
       <TopWrapper>
@@ -19,7 +24,7 @@ const AuthPage = ({ setWhichView }: Props) => {
         <ButtonBox>
           <Button
             onClick={() => {
-              setWhichView('login');
+              //setWhichView('login');
               window.location.href = '/stamp/login';
             }}
           >
@@ -29,7 +34,7 @@ const AuthPage = ({ setWhichView }: Props) => {
             <div>첫 방문이라면?</div>
             <MakeBoardText
               onClick={() => {
-                setWhichView('signup');
+                //setWhichView('signup');
                 window.location.href = '/stamp/signup';
               }}
             >

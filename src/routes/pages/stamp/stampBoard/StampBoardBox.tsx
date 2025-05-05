@@ -24,6 +24,7 @@ interface Props {
   selectedDate: { label: string; value: number | string };
   isRewarded: Record<number, boolean>;
   setStampData: React.Dispatch<SetStateAction<StampBoardDayData[]>>;
+  boothInfo: string[];
 }
 
 const StampBoardBox = ({
@@ -33,6 +34,7 @@ const StampBoardBox = ({
   selectedDate,
   isRewarded,
   setStampData,
+  boothInfo,
 }: Props) => {
   // 부스 클릭시 실행할 함수
   const handleClickBooth = (index: number) => {
@@ -48,29 +50,85 @@ const StampBoardBox = ({
 
   return (
     <Wrapper>
-      <SideBoothLine>
-        <EachBooth isCleared={isCleared} index={1} isCenterBooth={false} onClick={handleClickBooth} />
-        <EachBooth isCleared={isCleared} index={2} isCenterBooth={false} onClick={handleClickBooth} />
-        <EachBooth isCleared={isCleared} index={3} isCenterBooth={false} onClick={handleClickBooth} />
-        <EachBooth isCleared={isCleared} index={4} isCenterBooth={false} onClick={handleClickBooth} />
-      </SideBoothLine>
-      <CenterBoothLine>
-        <WideBooth>축구골대</WideBooth>
-        <EachBooth isCleared={isCleared} index={5} isCenterBooth={true} onClick={handleClickBooth} />
-        <WideBooth
-          onClick={() => {
-            setOpenRewardModal(true);
-          }}
-        >
-          축기단부스
-        </WideBooth>
-      </CenterBoothLine>
-      <SideBoothLine>
-        <EachBooth isCleared={isCleared} index={6} isCenterBooth={false} onClick={handleClickBooth} />
-        <EachBooth isCleared={isCleared} index={7} isCenterBooth={false} onClick={handleClickBooth} />
-        <EachBooth isCleared={isCleared} index={8} isCenterBooth={false} onClick={handleClickBooth} />
-        <EachBooth isCleared={isCleared} index={9} isCenterBooth={false} onClick={handleClickBooth} />
-      </SideBoothLine>
+      <BoothLine>
+        <EachBooth
+          isCleared={isCleared}
+          index={1}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[0]}
+          customPadding={'20px'}
+        />
+        <EachBooth
+          isCleared={isCleared}
+          index={2}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[1]}
+          customPadding={'0px'}
+        />
+      </BoothLine>
+      <BoothLine>
+        <EachBooth
+          isCleared={isCleared}
+          index={3}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[2]}
+          customPadding={'0px'}
+        />
+        <EachBooth
+          isCleared={isCleared}
+          index={4}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[3]}
+          customPadding={'50px'}
+        />
+        <EachBooth
+          isCleared={isCleared}
+          index={5}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[4]}
+          customPadding={'10px'}
+        />
+        <EachBooth
+          isCleared={isCleared}
+          index={6}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[5]}
+          customPadding={'30px'}
+        />
+      </BoothLine>
+      <BoothLine>
+        <EachBooth
+          isCleared={isCleared}
+          index={7}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[6]}
+          customPadding={'30px'}
+        />
+        <EachBooth
+          isCleared={isCleared}
+          index={8}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[7]}
+          customPadding={'0px'}
+        />
+        <EachBooth
+          isCleared={isCleared}
+          index={9}
+          isCenterBooth={false}
+          onClick={handleClickBooth}
+          boothName={boothInfo[8]}
+          customPadding={'30px'}
+        />
+      </BoothLine>
+
       {openRewardModal &&
         (rewardStampStep == 1 ? (
           <Modal isShort={false}>
@@ -95,39 +153,23 @@ export default StampBoardBox;
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  background-color: #d9d9d9;
+  flex-direction: column;
   min-width: 343px;
-  min-height: 450px;
-  height: 90%;
-  width: 90%;
-  max-height: 700px;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-const SideBoothLine = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
-  height: 75%;
-  justify-content: space-between;
-`;
-
-const CenterBoothLine = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
-  height: 90%;
+  width: 100%;
+  min-height: 20vh;
+  height: calc(100vh - 200px - 190px - 70px);
   justify-content: space-between;
   align-items: center;
+  overflow-y: auto;
+  margin-top: 40px;
+  max-height: 400px;
 `;
 
-const WideBooth = styled.div`
+const BoothLine = styled.div`
+  width: 100%;
   display: flex;
-  width: 107px;
-  height: 38px;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 1px solid blue;
+  gap: 4vw;
 `;

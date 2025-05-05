@@ -32,29 +32,27 @@ const StampEntrance = () => {
   return (
     <Wrapper>
       <ContentBox>
-        {whichView == 'default' && (
-          <>
-            <IndexBox>
-              <EachIndex
-                onClick={() => {
-                  handleClickIndex('intro');
-                }}
-                isSelected={selectedIndex === 'intro'}
-              >
-                광장기획전 소개
-              </EachIndex>
-              <EachIndex
-                onClick={() => {
-                  handleClickIndex('stamp');
-                }}
-                isSelected={selectedIndex === 'stamp'}
-              >
-                스탬프
-              </EachIndex>
-            </IndexBox>
-            {selectedIndex == 'stamp' ? <Auth setWhichView={setWhichView} /> : <Intro />}
-          </>
-        )}
+        <>
+          <IndexBox>
+            <EachIndex
+              onClick={() => {
+                handleClickIndex('intro');
+              }}
+              isSelected={selectedIndex === 'intro'}
+            >
+              광장기획전 소개
+            </EachIndex>
+            <EachIndex
+              onClick={() => {
+                handleClickIndex('stamp');
+              }}
+              isSelected={selectedIndex === 'stamp'}
+            >
+              스탬프
+            </EachIndex>
+          </IndexBox>
+          {selectedIndex == 'stamp' ? <Auth setWhichView={setWhichView} /> : <Intro />}
+        </>
       </ContentBox>
 
       <WaveWrapper>
