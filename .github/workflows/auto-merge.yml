@@ -5,6 +5,7 @@ on:
     - cron: '59 13 * * *' # 한국시간 22:59 = UTC 14:59
     - cron: '59 14 * * *' # 한국시간 23:59 = UTC 14:59
     - cron: '03 15 * * *' # 한국시간 23:59 = UTC 14:59
+    - cron: '05 15 * * *' # 한국시간 23:59 = UTC 14:59
   workflow_dispatch:
 
 permissions:
