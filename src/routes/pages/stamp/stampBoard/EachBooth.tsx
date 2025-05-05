@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { styled } from 'styled-components';
 import StampKey from './keyIcons/StampKey';
 
@@ -9,11 +9,18 @@ interface Props {
   onClick: (index: number) => void;
   boothName: string;
   customPadding: string;
+  childNode?: ReactNode;
+  boardType: number;
 }
 
-const EachBooth = ({ isCleared, index, onClick, boothName, customPadding }: Props) => {
-  const cleared = isCleared[index];
-
+const EachBooth = ({ isCleared, index, onClick, boothName, customPadding, childNode, boardType }: Props) => {
+  let realIndex;
+  if (boardType == 2) {
+    realIndex = index + 10;
+  } else {
+    realIndex = index;
+  }
+  const cleared = isCleared[realIndex];
   return (
     <Wrapper
       customPadding={customPadding}
@@ -21,9 +28,7 @@ const EachBooth = ({ isCleared, index, onClick, boothName, customPadding }: Prop
         onClick(index);
       }}
     >
-      <StepCircle active={cleared}>
-        <StampKey color={cleared ? '#1447E6' : '#D0DAFA'} />
-      </StepCircle>
+      <StepCircle active={cleared}>{childNode}</StepCircle>
       <BoothName>{boothName}</BoothName>
     </Wrapper>
   );
@@ -43,8 +48,8 @@ const Wrapper = styled.div<{ customPadding: string }>`
 `;
 
 const StepCircle = styled.div<{ active: boolean }>`
-  width: 58px;
-  height: 58px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   background-color: white;
   border: 6px solid ${({ active }) => (active ? '#1447e6' : '#ffffff')};
