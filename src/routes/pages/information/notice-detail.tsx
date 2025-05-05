@@ -52,7 +52,12 @@ const NoticeDetail = () => {
       </ItemList>
       <ItemContent>
         <ItemImage src={notice.photoUrl || ''} />
-        {notice.content}
+        {notice.content.split('\n').map((line, index) => (
+          <span key={index}>
+            {line}
+            <br />
+          </span>
+        ))}
       </ItemContent>
     </>
   );
