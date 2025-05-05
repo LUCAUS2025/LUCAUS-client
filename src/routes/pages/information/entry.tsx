@@ -1,53 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../../../components/common/BaseButton';
 import { mediaBig, mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
 
 const Entry = () => {
-  const [entryType, setEntryType] = useState<'passable' | 'barrierFree' | null>(null);
+  const [entryType, setEntryType] = useState<'passable' | 'barrierFree'>('passable');
   const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'freeSquare' | '104Stairway'>('mainGateArea');
 
   const handleEntryType = (type: 'passable' | 'barrierFree') => {
-    setEntryType((prev) => (prev === type ? null : type));
+    if (entryType !== type) {
+      setEntryType(type);
+    }
   };
 
   const handleFocusArea = (area: 'mainGateArea' | 'freeSquare' | '104Stairway') => {
     if (focusedArea !== area) {
       setFocusedArea(area);
-      setEntryType(null); // 다른 것 선택시 입장 정책 초기화
     }
   };
 
   const getMapLayerCombination = () => {
+    // 지도 배경 이미지 매핑
     const areaMap: Record<string, string> = {
-      mainGateArea: 'images/information/entryMap.webp',
-      freeSquare: '',
-      '104Stairway': '',
+      mainGateArea: 'images/information/frontEntry.webp', // 정문일대 지도
+      freeSquare: 'images/information/freeSquare.webp', // 해방광장 지도
+      '104Stairway': 'images/information/104Stairway.webp', // 104관 계단 지도
     };
 
-    const entryLayers: Record<string, string> = {
-      passable: 'images/layers/passableLayer.png',
-      barrierFree: 'images/layers/barrierFreeLayer.png',
+    // 지도 레이어 이미지 매핑 (entryType + focusedArea 조합)
+    const entryLayers: Record<string, Record<string, string>> = {
+      passable: {
+        mainGateArea: 'images/layers/passable_mainGate.png', // 정문일대 통행정책
+        freeSquare: 'images/layers/passable_freeSquare.png', // 해방광장 통행정책
+        '104Stairway': 'images/layers/passable_104Stairway.png', // 104관 계단 통행정책
+      },
+      barrierFree: {
+        mainGateArea: 'images/layers/barrierFree_mainGate.png', // 정문일대 배리어프리
+        freeSquare: 'images/layers/barrierFree_freeSquare.png', // 해방광장 배리어프리
+        '104Stairway': 'images/layers/barrierFree_104Stairway.png', // 104관 계단 배리어프리
+      },
     };
 
-    const backgroundMap = focusedArea ? areaMap[focusedArea] : 'images/information/entryMap.webp';
-    const entryMapLayer = entryType ? entryLayers[entryType] : '';
+    const legandImages: Record<string, string> = {
+      passable: 'images/legends/passableLegend.png', // 통행정책 범례
+      barrierFree: 'images/legends/barrierFreeLegend.png', // 배리어프리 범례
+    };
 
-    return { backgroundMap, entryMapLayer };
+    const backgroundMap = areaMap[focusedArea];
+    const entryMapLayer = entryLayers[entryType][focusedArea];
+    const legandImage = legandImages[entryType];
+
+    return { backgroundMap, entryMapLayer, legandImage };
   };
 
-  const { backgroundMap, entryMapLayer } = getMapLayerCombination();
+  const { backgroundMap, entryMapLayer, legandImage } = getMapLayerCombination();
 
   return (
     <Wrapper>
       <MapSection>
         <BackgroundMapContainer>
           <BackgroundMap src={backgroundMap} alt="지도" />
-          {entryType && <EntryMapLayer src={entryMapLayer} alt="입장정책" />}
+          <LegandImg src={legandImage} alt="범례" />
+          <EntryMapLayer src={entryMapLayer} alt="입장정책" />
         </BackgroundMapContainer>
         <OptionBtnContainer>
-          <OptionBtn onClick={() => handleEntryType('passable')}></OptionBtn>
-          <OptionBtn onClick={() => handleEntryType('barrierFree')}></OptionBtn>
+          <OptionBtn active={entryType === 'passable'} onClick={() => handleEntryType('passable')}>
+            <OptionBtnIcon>🚶🏻‍♂️</OptionBtnIcon>
+            <OptionBtnText>통행정책</OptionBtnText>
+          </OptionBtn>
+          <OptionBtn active={entryType === 'barrierFree'} onClick={() => handleEntryType('barrierFree')}>
+            <OptionBtnIcon>👨🏻‍🦽</OptionBtnIcon>
+            <OptionBtnText>배리어프리</OptionBtnText>
+          </OptionBtn>
         </OptionBtnContainer>
       </MapSection>
       <ContentContainer>
@@ -87,51 +111,50 @@ const Wrapper = styled.div`
 
 const MapSection = styled.div`
   position: relative;
-  height: 62vh;
   width: 100%;
-
-  ${mediaSmall`
-    height: 58vh;
-  `}
-
-  ${mediaBig`
-    height: 64vh;
-  `}
+  overflow: hidden;
 `;
 
 const BackgroundMapContainer = styled.div`
   width: 100%;
-  height: 100%;
   position: relative;
-  overflow: visible;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
 `;
 
 const BackgroundMap = styled.img`
-  height: 100%;
-  width: auto;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
   object-position: center;
-  overflow: visible;
   z-index: 1;
-  position: absolute;
+  position: relative;
+`;
+
+const LegandImg = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  z-index: 1;
+  top: 0;
+  left: 0;
 `;
 
 const EntryMapLayer = styled.img`
-  height: 100%;
-  width: auto;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
   object-position: center;
-  overflow: visible;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
-  opacity: 0.5;
+  top: 0;
+  left: 0;
 `;
 
 const LocationContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 26px;
-  //justify-content: center;
 `;
 
 const LocationBtns = styled.div`
@@ -151,20 +174,53 @@ const LocationBtn = styled(BaseButton)<{ active: boolean }>`
 `;
 
 const OptionBtnContainer = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  bottom: 25px;
+  top: 370px;
   right: 21px;
+  z-index: 4;
+
+  ${mediaSmall`
+    top: 350px;
+  `}
+  ${mediaBig`
+    top: 395px;
+  `}
 `;
 
-const OptionBtn = styled.div`
+const OptionBtn = styled.div<{ active: boolean }>`
   z-index: 3;
   width: 48px;
   height: 48px;
-  background-color: #a5a5a5;
-  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0px 0px 12px 0px #00000033;
+  border: 1.5px solid #d1d5dc;
+  background-color: #fafafa;
+  border-radius: 4px;
+
+  border-color: ${({ active }) => (active ? '#1447e6' : '#d1d5dc')};
+`;
+
+const OptionBtnIcon = styled.div`
+  font-size: 28px;
+`;
+
+const OptionBtnText = styled.div`
+  font-size: 10px;
+  color: #364153;
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 150%;
+  letter-spacing: -0.26px;
+  text-align: center;
+  vertical-align: middle;
 `;
 
 const ContentContainer = styled.div`
