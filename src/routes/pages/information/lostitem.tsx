@@ -24,7 +24,7 @@ const LostItem = () => {
       WALLET_CARD: '지갑/카드',
       ELECTRONICS: '전자기기',
       CLOTHING: '의류',
-      DAILY_NECESSITIES: '생활용품',
+      DAILY_NECESSITIES: '잡화',
       COSMETICS: '화장품',
       OTHERS: '기타',
       TOTAL: '전체',
@@ -76,7 +76,7 @@ const LostItem = () => {
         <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
       <ItemList>
-        {lostItems.filter((item) => item.ownerFound === false).length > 0 ? (
+        {lostItems.length > 0 ? (
           lostItems
             .filter((item) => item.ownerFound === false) // ownerFound가 false인 항목만 필터링
             .map((item, idx) => (

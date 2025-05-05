@@ -84,5 +84,4 @@ const ItemImage = styled.img`
   width: 100%;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid #d1d5dc;
 `;
