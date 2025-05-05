@@ -6,6 +6,7 @@ import { DetailReview } from '../itemDetailComponents/DetailReview';
 import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
 import { FoodTruckDetailRawData } from '../../../services/apis/foodTruck/foodTruckDetail';
+import { mediaSmall } from '../../../styles/responsive';
 interface FoodTruckDetailContentProps {
   foodTruckDetail: FoodTruckDetailRawData;
   selectedDate: number;
@@ -85,6 +86,10 @@ const OperatingTitle = styled.div`
   font-size: 20px;
   line-height: 125%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall`
+    font-size: 18px;
+  `}
 `;
 
 const MenuContainer = styled.div`
@@ -105,12 +110,20 @@ const MenuTitle = styled.div`
   font-size: 20px;
   line-height: 150%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall`
+    font-size: 18px;
+  `}
 `;
 const MenuText = styled.div`
   font-weight: 600;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall`
+    font-size: 15px;
+  `}
 `;
 const MenuPrice = styled.div`
   font-family: Pretendard;
@@ -119,4 +132,8 @@ const MenuPrice = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   text-align: right;
+
+  ${mediaSmall`
+    font-size: 13px;
+  `}
 `;

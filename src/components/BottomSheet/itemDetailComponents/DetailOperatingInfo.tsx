@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { dateOptions } from '../../../data/options';
+import { mediaSmall, mediaSmall_description, mediaSmall_subTitle } from '../../../styles/responsive';
 
 interface DetailOperatingInfoProps {
   type: 'booth' | 'foodTruck';
@@ -65,13 +66,6 @@ const Wrapper = styled.div`
   gap: 12px;
   margin-bottom: 8px;
 `;
-const Title = styled.div`
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 125%;
-  letter-spacing: -0.26px;
-  color: #030712;
-`;
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -93,10 +87,17 @@ const InfoLabel = styled.div`
   font-size: 16px;
   line-height: 150%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall_subTitle}
 `;
 const LabelIcon = styled.img`
   width: 20px;
   height: 20px;
+
+  ${mediaSmall`
+    width: 18px;
+    height: 18px;
+  `}
 `;
 const DateContainer = styled.div`
   display: flex;
@@ -115,10 +116,12 @@ const Date = styled.div<{ active: boolean }>`
   justify-content: center;
   padding: 2px 4px;
 
+  ${mediaSmall_description}
+
   ${({ active }) =>
     active
       ? css`
-          font-size: 14px !important;
+          font-size: 14px;
           ${keywordBaseStyle}
         `
       : css`
@@ -131,4 +134,6 @@ const InfoText = styled.div`
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall_description}
 `;

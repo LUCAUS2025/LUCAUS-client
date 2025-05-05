@@ -34,6 +34,7 @@ export const Booth = () => {
 
   useEffect(() => {
     setHideHeader(!!selectedItem);
+    return () => setHideHeader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
 
