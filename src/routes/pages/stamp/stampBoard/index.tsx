@@ -8,8 +8,10 @@ import BeforGetStampModalContent from './boothStampModal/BeforGetStampModalConte
 import AfterGetStampModalContent from './boothStampModal/AfterGetStampModalContent';
 import { stampBoardInfo } from '../../../../services/apis/stamp/stampBoardInfo';
 import { userInfo } from '../../../../services/apis/stamp/userInfo';
-import RewardGaugeBar from './guageBar/RewardGaugeBer';
-import NewRewardGaugeBar from './guageBar/NewRewardGaugeBar';
+import RewardGaugeBar from './gaugeBar/RewardGaugeBer';
+import NewRewardGaugeBar from './gaugeBar/NewRewardGaugeBar';
+import RewardInfoModal from './rewardStampModal/RewardInfoModal';
+import PwPushModal from './rewardStampModal/PwPushModal';
 
 interface BoothClear {
   boothId: number;
@@ -117,6 +119,12 @@ const StampBoard = () => {
     }
   }, [selectedDate, stampData]);
 
+  // 축기단 부스 모달 오픈 여부
+  const [openRewardModal, setOpenRewardModal] = useState(false);
+
+  // 축기단 부스 모달 스탭
+  const [rewardStampStep, setRewardStampStep] = useState(1);
+
   return (
     <Wrapper>
       <OutContentBox>
@@ -141,10 +149,10 @@ const StampBoard = () => {
           <RewardBox>
             <div>상품 응모까지...</div>
             <BarWrapper>
-              <NewRewardGaugeBar isCleared={isCleared} isRewarded={isRewarded} />
+              <NewRewardGaugeBar isCleared={isCleared} isRewarded={isRewarded} boardType={selectedDate.value} />
             </BarWrapper>
           </RewardBox>
-          <GetRewardText>상품 수령하기</GetRewardText>
+          <GetRewardText onClick={() => setOpenRewardModal(true)}>상품 수령하기</GetRewardText>
         </IntroRewardLine>
         <StampBoardBox
           isCleared={isCleared}
@@ -175,6 +183,23 @@ const StampBoard = () => {
             )}
           </Modal>
         )}
+
+        {openRewardModal &&
+          (rewardStampStep == 1 ? (
+            <Modal isShort={false}>
+              <RewardInfoModal setOpenRewardModal={setOpenRewardModal} setRewardStampStep={setRewardStampStep} />
+            </Modal>
+          ) : (
+            <Modal isShort={true}>
+              <PwPushModal
+                setOpenRewardModal={setOpenRewardModal}
+                setRewardStampStep={setRewardStampStep}
+                selectedDate={selectedDate}
+                isRewarded={isRewarded}
+                setStampData={setStampData}
+              />
+            </Modal>
+          ))}
       </OutContentBox>
 
       <WaveWrapper>

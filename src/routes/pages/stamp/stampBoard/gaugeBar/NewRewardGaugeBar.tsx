@@ -4,25 +4,38 @@ import ShipIcon from './ShipIcon';
 interface Props {
   isCleared: Record<number, boolean>;
   isRewarded: Record<number, boolean>;
+  boardType: number | string;
 }
 
 // 1,2일차 - 3/5/7
 // 3일차 - 2/4/6
 
-const NewRewardGaugeBar = ({ isCleared, isRewarded }: Props) => {
+const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
   // 초기값이 비어있는 경우 방어
   const isClearedValues = Object.values(isCleared);
   const clearedCount = isClearedValues.length > 0 ? isClearedValues.filter(Boolean).length : 0;
 
-  // 조건 기반 게이지 계산
   let progressPercent = '0%';
-  if (clearedCount === 1) progressPercent = '8%';
-  else if (clearedCount === 2) progressPercent = '15%';
-  else if (clearedCount === 3) progressPercent = '30%';
-  else if (clearedCount === 4) progressPercent = '45%';
-  else if (clearedCount === 5) progressPercent = '60%';
-  else if (clearedCount === 6) progressPercent = '77%';
-  else if (clearedCount >= 7) progressPercent = '90%';
+  if (boardType == 1) {
+    // 조건 기반 게이지 계산
+    if (clearedCount === 1) progressPercent = '8%';
+    else if (clearedCount === 2) progressPercent = '15%';
+    else if (clearedCount === 3) progressPercent = '30%';
+    else if (clearedCount === 4) progressPercent = '45%';
+    else if (clearedCount === 5) progressPercent = '60%';
+    else if (clearedCount === 6) progressPercent = '77%';
+    else if (clearedCount >= 7) progressPercent = '90%';
+  } else {
+    // type 2인 경우
+    // 조건 기반 게이지 계산
+    if (clearedCount === 1) progressPercent = '14%';
+    else if (clearedCount === 2) progressPercent = '30%';
+    else if (clearedCount === 3) progressPercent = '44%';
+    else if (clearedCount === 4) progressPercent = '60%';
+    else if (clearedCount === 5) progressPercent = '75%';
+    else if (clearedCount >= 6) progressPercent = '90%';
+  }
+
   return (
     <GaugeWrapper>
       <GaugeBarBackground />
