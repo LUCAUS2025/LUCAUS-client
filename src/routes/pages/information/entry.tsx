@@ -1,154 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../../../components/common/BaseButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
-import {
-  mediaBig,
-  mediaSmall,
-  mediaSmall_description,
-  mediaSmall_subTitle,
-  mediaSmall_title,
-} from '../../../styles/responsive';
+import { mediaBig, mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
 
 const Entry = () => {
-  const [entryType, setEntryType] = useState<string | null>(null); // 입장 정책 -  통행 가능 / 통행 불가능 / 무대관람석 표시
-  const [magnifiedType, setMagnifiedType] = useState<string | null>(null); // 확대 여부 - 해방광장(freeSquare) / 104관 계단(104Stairway)
+  const [entryType, setEntryType] = useState<'passable' | 'barrierFree' | null>(null);
+  const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'freeSquare' | '104Stairway'>('mainGateArea');
 
-  const handleEntryType = (clickedEntryType: string) => {
-    // 같은 것 한번 더 누르면 layer 지워지도록
-    if (entryType === clickedEntryType) {
-      setEntryType(null);
-    } else {
-      setEntryType(clickedEntryType);
+  const handleEntryType = (type: 'passable' | 'barrierFree') => {
+    setEntryType((prev) => (prev === type ? null : type));
+  };
+
+  const handleFocusArea = (area: 'mainGateArea' | 'freeSquare' | '104Stairway') => {
+    if (focusedArea !== area) {
+      setFocusedArea(area);
+      setEntryType(null); // 다른 것 선택시 입장 정책 초기화
     }
   };
 
-  const handleMagnified = (clickMagnifiedType: string) => {
-    if (magnifiedType === clickMagnifiedType) {
-      setMagnifiedType(null);
-    } else {
-      setMagnifiedType(clickMagnifiedType);
-      setEntryType(null); // 돋보기 시 현재 입장 정책 지움
-    }
-  };
-
-  // 배경 / 확대 조합에 따라 지도 배경과 입장정책 layer src 넣기!!
   const getMapLayerCombination = () => {
-    if (!magnifiedType) {
-      // magnifiedType 없을 때
-      if (entryType === 'passable') {
-        return {
-          backgroundMap: 'images/information/entryMap.webp', // 기본 배경
-          entryMapLayer: 'images/freeSquareMap.png', // passable일 때
-        };
-      } else if (entryType === 'impassable') {
-        return {
-          backgroundMap: 'images/information/entryMap.webp', // 기본 배경
-          entryMapLayer: '', // impassable일 때는 EntryMapLayer 없음
-        };
-      } else if (entryType === 'seatArea') {
-        return {
-          backgroundMap: 'images/information/entryMap.webp', // 기본 배경
-          entryMapLayer: '', // 무대 관람석일 때는 EntryMapLayer 없음
-        };
-      }
-    } else {
-      // magnifiedType 있을 때
-      if (magnifiedType === 'freeSquare') {
-        if (entryType === null) {
-          return {
-            backgroundMap: 'images/freeSquareBackground.png', // 확대시 해방광장 배경
-            entryMapLayer: '',
-          };
-        } else if (entryType === 'passable') {
-          return {
-            backgroundMap: 'images/freeSquareBackground.png', // 확대시 해방광장 배경
-            entryMapLayer: '',
-          };
-        } else if (entryType === 'impassable') {
-          return {
-            backgroundMap: 'images/freeSquareBackground.png', // 확대시 해방광장 배경
-            entryMapLayer: '',
-          };
-        } else if (entryType === 'seatArea') {
-          return {
-            backgroundMap: 'images/freeSquareBackground.png', // 확대시 해방광장 배경
-            entryMapLayer: '',
-          };
-        }
-      } else if (magnifiedType === '104Stairway') {
-        if (entryType === null) {
-          return {
-            backgroundMap: 'images/104StairwayBackground.png', // 확대시 104관 계단 배경
-            entryMapLayer: '',
-          };
-        } else if (entryType === 'passable') {
-          return {
-            backgroundMap: 'images/104StairwayBackground.png', // 확대시 104관 계단 배경
-            entryMapLayer: '',
-          };
-        } else if (entryType === 'impassable') {
-          return {
-            backgroundMap: 'images/104StairwayBackground.png', // 확대시 104관 계단 배경
-            entryMapLayer: '',
-          };
-        } else if (entryType === 'seatArea') {
-          return {
-            backgroundMap: 'images/104StairwayBackground.png', // 확대시 104관 계단 배경
-            entryMapLayer: '',
-          };
-        }
-      }
-    }
-    // 기본값
-    return {
-      backgroundMap: 'images/information/entryMap.webp',
-      entryMapLayer: '',
+    const areaMap: Record<string, string> = {
+      mainGateArea: 'images/information/entryMap.webp',
+      freeSquare: '',
+      '104Stairway': '',
     };
+
+    const entryLayers: Record<string, string> = {
+      passable: 'images/layers/passableLayer.png',
+      barrierFree: 'images/layers/barrierFreeLayer.png',
+    };
+
+    const backgroundMap = focusedArea ? areaMap[focusedArea] : 'images/information/entryMap.webp';
+    const entryMapLayer = entryType ? entryLayers[entryType] : '';
+
+    return { backgroundMap, entryMapLayer };
   };
 
-  const { backgroundMap, entryMapLayer } = getMapLayerCombination() || { backgroundMap: '', entryMapLayer: '' };
+  const { backgroundMap, entryMapLayer } = getMapLayerCombination();
 
   return (
-    <>
-      <Wrapper>
-        <MapSection>
-          <BackgroundMapContainer>
-            <BackgroundMap src={backgroundMap} alt="지도" />
-            {entryType && <EntryMapLayer src={entryMapLayer} alt="입장정책" />}
-          </BackgroundMapContainer>
-          <OptionBtnContainer>
-            <OptionBtn onClick={() => handleEntryType('passable')}></OptionBtn>
-            <OptionBtn onClick={() => handleEntryType('impassable')}></OptionBtn>
-            <OptionBtn onClick={() => handleEntryType('seatArea')}></OptionBtn>
-          </OptionBtnContainer>
-        </MapSection>
-        <ContentContainer>
-          <TitleContainer>
-            <Title>캠퍼스 내 이동 안내</Title>
-            <Description>
-              안전을 위해 캠퍼스 내 일부 통행 구역을 제한합니다. <br />
-              통행 가능 구역을 확인하시어 안전한 이동 부탁드립니다.
-            </Description>
-          </TitleContainer>
-          <LocationContainer>
-            <LocationLabel>정문 일대 약도</LocationLabel>
-            <LocationBtns>
-              <MagnifierIcon active={magnifiedType}>
-                <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
-              </MagnifierIcon>
-              <LocationBtn active={magnifiedType === 'freeSquare'} onClick={() => handleMagnified('freeSquare')}>
-                해방광장
-              </LocationBtn>
-              <LocationBtn active={magnifiedType === '104Stairway'} onClick={() => handleMagnified('104Stairway')}>
-                104관 계단
-              </LocationBtn>
-            </LocationBtns>
-          </LocationContainer>
-        </ContentContainer>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <MapSection>
+        <BackgroundMapContainer>
+          <BackgroundMap src={backgroundMap} alt="지도" />
+          {entryType && <EntryMapLayer src={entryMapLayer} alt="입장정책" />}
+        </BackgroundMapContainer>
+        <OptionBtnContainer>
+          <OptionBtn onClick={() => handleEntryType('passable')}></OptionBtn>
+          <OptionBtn onClick={() => handleEntryType('barrierFree')}></OptionBtn>
+        </OptionBtnContainer>
+      </MapSection>
+      <ContentContainer>
+        <TitleContainer>
+          <Title>캠퍼스 내 이동 안내</Title>
+          <Description>
+            안전을 위해 캠퍼스 내 일부 통행 구역을 제한합니다. <br />
+            통행 가능 구역을 확인하시어 안전한 이동 부탁드립니다.
+          </Description>
+        </TitleContainer>
+        <LocationContainer>
+          <LocationBtns>
+            <LocationBtn active={focusedArea === 'mainGateArea'} onClick={() => handleFocusArea('mainGateArea')}>
+              정문 일대
+            </LocationBtn>
+            <LocationBtn active={focusedArea === 'freeSquare'} onClick={() => handleFocusArea('freeSquare')}>
+              해방광장
+            </LocationBtn>
+            <LocationBtn active={focusedArea === '104Stairway'} onClick={() => handleFocusArea('104Stairway')}>
+              104관 계단
+            </LocationBtn>
+          </LocationBtns>
+        </LocationContainer>
+      </ContentContainer>
+    </Wrapper>
   );
 };
 
@@ -207,11 +131,7 @@ const LocationContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 26px;
-  justify-content: center;
-`;
-
-const LocationLabel = styled(BaseButton)`
-  border: none;
+  //justify-content: center;
 `;
 
 const LocationBtns = styled.div`
@@ -220,12 +140,6 @@ const LocationBtns = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-`;
-
-const MagnifierIcon = styled.div<{ active: string | null }>`
-  border-right: 1px solid #d1d5dc;
-  padding: 2px 11px 2px 11px;
-  color: ${({ active }) => (active ? '#1447e6' : '#d1d5dc')};
 `;
 
 const LocationBtn = styled(BaseButton)<{ active: boolean }>`
