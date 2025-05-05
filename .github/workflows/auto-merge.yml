@@ -22,9 +22,7 @@ jobs:
 
           git remote set-url origin https://x-access-token:${{ secrets.PERSONAL_TOKEN }}@github.com/LUCAUS2025/LUCAUS-client.git
 
-          git pull origin main
-          git pull origin develop  
-          git fetch origin
           git checkout main
+          git pull --no-rebase origin main
           git merge origin/develop --no-edit || echo "Nothing to merge"
           git push origin main
