@@ -18,7 +18,7 @@ export const BaseLayer: React.FC<BaseLayerProps> = ({ children, backgroundImgSrc
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 40vh;
+  //min-height: 40vh;
   overflow: hidden;
 `;
 
@@ -30,13 +30,14 @@ const Background = styled.div<{ $backgroundImgSrc?: string }>`
   background-position: center;
   background-repeat: no-repeat;
 
-  //user-select: none;
-  //-webkit-user-drag: none;
-  //pointer-events: none;
-  //touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  touch-action: none;
 `;
 
 const Content = styled.div`
   position: relative;
   z-index: 1;
+  overflow-y: auto;
 `;
