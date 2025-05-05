@@ -76,9 +76,9 @@ const LostItem = () => {
         <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
       <ItemList>
-        {lostItems.length > 0 ? (
+        {lostItems.filter((item) => item.ownerFound === false).length > 0 ? (
           lostItems
-            .filter((item) => item.ownerFound == false) // ownerFound가 false인 항목만 필터링
+            .filter((item) => item.ownerFound === false) // ownerFound가 false인 항목만 필터링
             .map((item, idx) => (
               <Item key={idx}>
                 <ItemImage src={item.image || ''} />
@@ -93,7 +93,7 @@ const LostItem = () => {
               </Item>
             ))
         ) : (
-          <NoItemsMessage>현재까지 등록된 분실물이 없습니다.</NoItemsMessage>
+          <NoItemsMessage>현재 등록된 분실물이 없습니다</NoItemsMessage>
         )}
       </ItemList>
     </BigContainer>
