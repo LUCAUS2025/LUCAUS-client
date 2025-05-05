@@ -150,13 +150,13 @@ export default Stage;
 
 // 스타일 컴포넌트
 export const Title = styled.div`
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 0.25rem;
 `;
 
 export const Subtitle = styled.div`
-  font-size: 0.875rem;
+  font-size: 16px;
   color: #6b7280;
   margin-bottom: 1rem;
 `;
