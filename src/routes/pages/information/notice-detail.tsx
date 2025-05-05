@@ -52,7 +52,12 @@ const NoticeDetail = () => {
       </ItemList>
       <ItemContent>
         <ItemImage src={notice.photoUrl || ''} />
-        {notice.content}
+        {notice.content.split('\n').map((line, index) => (
+          <span key={index}>
+            {line}
+            <br />
+          </span>
+        ))}
       </ItemContent>
     </>
   );
@@ -79,5 +84,4 @@ const ItemImage = styled.img`
   width: 100%;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid #d1d5dc;
 `;

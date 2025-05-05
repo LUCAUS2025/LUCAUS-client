@@ -7,7 +7,7 @@ import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { Option } from '../../../data/options';
 import Footer from '../../../components/home/Footer';
 
-const stagedateOptions = ['13일', '14일', '22일', '23일'];
+const stagedateOptions = ['21일', '22일', '23일'];
 
 const customDateOptions: Option[] = stagedateOptions.map((date) => ({
   label: date,
@@ -15,8 +15,9 @@ const customDateOptions: Option[] = stagedateOptions.map((date) => ({
 }));
 
 const stageOptionsByDate: { [key: string]: string[] } = {
-  '13일': ['버스킹'],
-  '14일': ['버스킹'],
+  // '13일': ['버스킹'],
+  // '14일': ['버스킹'],
+  '21일': ['본무대'],
   '22일': ['버스킹', '무대기획전', '본무대', '아티스트'],
   '23일': ['응원제', '본무대', '아티스트'],
 };

@@ -33,7 +33,7 @@ export const placeOptions: Option[] = [
 
 export const itemsOptions: Option[] = [
   { label: '전체', value: 'TOTAL' },
-  { label: '생필품', value: 'DAILY_NECESSITIES' },
+  { label: '잡화', value: 'DAILY_NECESSITIES' },
   { label: '전자기기', value: 'ELECTRONICS' },
   { label: '의류', value: 'CLOTHING' },
   { label: '지갑/카드', value: 'WALLET_CARD' },
