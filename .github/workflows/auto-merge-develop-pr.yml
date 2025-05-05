@@ -1,0 +1,30 @@
+name: Auto Merge PR from Develop to Main
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  auto-merge:
+    if: github.event.pull_request.head.ref == 'develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure Git
+        run: |
+          git config --global user.name "jungsunbeen"
+          git config --global user.email "tjsqls041103@gmail.com"
+
+      - name: Enable auto-merge for PR
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: merge
