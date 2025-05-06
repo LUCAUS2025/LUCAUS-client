@@ -58,14 +58,14 @@ export const Banner = () => {
 };
 
 const images = [
-  '/images/home/banner/1.png',
-  '/images/home/banner/2.png',
-  '/images/home/banner/3.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/2.png',
-  '/images/home/banner/3.png',
-  '/images/home/banner/1.png',
-  '/images/home/banner/2.png',
+  '/images/home/banner/1.webp',
+  '/images/home/banner/2.webp',
+  '/images/home/banner/3.webp',
+  '/images/home/banner/1.webp',
+  '/images/home/banner/2.webp',
+  '/images/home/banner/3.webp',
+  '/images/home/banner/1.webp',
+  '/images/home/banner/2.webp',
 ];
 
 const CarouselContainer = styled.div`
