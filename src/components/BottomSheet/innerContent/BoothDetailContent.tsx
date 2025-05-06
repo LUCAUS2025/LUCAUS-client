@@ -45,7 +45,7 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDet
             </ItemTitle>
             <ItemHost>{boothDetail?.owner}</ItemHost>
             <Keywords>
-              {boothDetail?.categories?.map((keyword, idx) => <Keyword key={idx}>{keyword}</Keyword>)}
+              {boothDetail?.categories?.map((keyword, idx) => <Keyword key={idx}>#{keyword}</Keyword>)}
             </Keywords>
           </TitleContainer>
           <ItemDescription>{boothDetail?.info}</ItemDescription>

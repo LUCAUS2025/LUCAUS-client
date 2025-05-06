@@ -80,7 +80,8 @@ const Label = styled.div<{ value: number; percent: number }>`
   letter-spacing: -0.26px;
   vertical-align: middle;
 
-  color: ${({ percent }) => (percent >= 50 ? '#f9fafb' : '#000000')};
+  color: ${({ percent }) => (percent >= 33 ? '#f9fafb' : '#000000')};
+  font-weight: ${({ percent }) => (percent >= 33 ? '600' : '500')};
 
   ${mediaSmall`
     font-size: 13px;
