@@ -7,6 +7,7 @@ import { HeaderProvider, useHeader } from '../../context/HeaderContext';
 import TheSidebar from '../../components/TheSidebar';
 import TheHeader from '../../components/TheHeader';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const LayoutContent = () => {
   const { hideHeader } = useHeader();
@@ -32,6 +33,7 @@ export const DefaultLayout = () => {
         </HeaderProvider>
       </MenuProvider>
       <Analytics />
+      <SpeedInsights />
     </AppDom>
   );
 };
