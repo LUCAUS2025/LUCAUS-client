@@ -88,6 +88,7 @@ const StampBoard = () => {
         const responseUserInfo = await userInfo();
         setUserData(responseUserInfo.result);
       } catch (error) {
+        localStorage.removeItem('accessToken');
         alert('다시 로그인 해주세요.');
         // 데이터 가져오기 실패시 다시 로그인 화면으로
         window.location.href = '/stamp/auth';

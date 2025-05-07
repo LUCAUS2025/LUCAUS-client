@@ -62,6 +62,7 @@ const BeforGetStampModalContent = ({
         const responseStampInfo = await stampBoardInfo();
         setStampData(responseStampInfo.result);
       } catch (error) {
+        localStorage.removeItem('accessToken');
         alert('다시 로그인 해주세요.');
         // 데이터 가져오기 실패시 다시 로그인 화면으로
         window.location.href = '/stamp/auth';
@@ -73,10 +74,10 @@ const BeforGetStampModalContent = ({
       if (error.response?.data) {
         const errorCode = error.response.data.code;
         if (errorCode == 'COMMON500') {
-          alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
+          alert('예기치 못한 오류 발생. 다시 시도해주세요!');
           window.location.reload();
         } else if (errorCode == 'BOOTH404') {
-          alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
+          alert('예기치 못한 오류 발생. 다시 시도해주세요!');
           window.location.reload();
         } else if (errorCode == 'PW400') {
           setIsWrongPw(true);
