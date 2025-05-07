@@ -66,7 +66,7 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
 const Wrapper = styled.div<{ isLong?: boolean }>`
   z-index: 3;
   position: relative;
-    width: ${({ isLong }) => (isLong ? '120px' : '')};
+  width: ${({ isLong }) => (isLong ? '120px' : '')};
 `;
 const SelectedWrapper = styled(BaseButton)<{ $active: boolean }>`
   border: 1px solid ${({ $active }) => ($active ? '#101828' : '#d1d5dc')};

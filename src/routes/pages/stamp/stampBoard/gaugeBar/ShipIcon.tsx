@@ -1,5 +1,5 @@
 const ShipIcon = ({ color }: { color?: string }) => (
-  <svg width="45" height="45" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="40" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="20.6602" cy="20" r="19.5" fill="#F9FAFB" stroke={color} strokeWidth={1.5} />
     <g clipPath="url(#clip0_1800_7129)">
       <path
