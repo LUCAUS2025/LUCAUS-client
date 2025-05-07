@@ -24,12 +24,10 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
   return (
     <Wrapper>
       <TitleContainer>
-        <Title>
-          #{item.dayBoothNum}&nbsp;
-          {item.name}
-        </Title>
-        {item.type === 'booth' && <Description>{item.info}</Description>}
+        <Title>#{item.dayBoothNum}</Title>
+        <Title>{item.name}</Title>
       </TitleContainer>
+      {item.type === 'booth' && <Description>{item.owner}</Description>}
       <ItemKeywords>
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
         {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
@@ -61,7 +59,7 @@ const Wrapper = styled.div`
 `;
 const TitleContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
 
   ${mediaSmall`

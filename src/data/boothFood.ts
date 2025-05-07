@@ -6,7 +6,7 @@ export interface CommonItem {
 }
 
 export interface BoothItem extends CommonItem {
-  info: string;
+  owner: string;
   categories: string[];
   type: 'booth';
 }

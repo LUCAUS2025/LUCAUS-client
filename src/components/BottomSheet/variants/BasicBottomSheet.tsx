@@ -39,6 +39,7 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
   height: ${window.innerHeight * 0.9}px;
   display: flex;
   flex-direction: column;
+  background-color: #fafafa;
   //overflow: hidden;
 
   top: ${({ $sheetHeight }) => `calc(100% - ${$sheetHeight * 0.53}px)`};

@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
 import { BottomSheetHeader } from '../layout/BottomSheetHeader';
-import { mediaBig } from '../../../styles/responsive';
+import { mediaBig, mediaSmall } from '../../../styles/responsive';
 
 interface StaticBottomSheetProps<T> {
   size: 'small' | 'middle' | 'large';
@@ -61,7 +61,7 @@ const smallSizeStyle = css`
   top: 53%;
 
   ${mediaBig`
-    top: 63%;
+    top: 60%;
   `}
 `;
 
@@ -69,7 +69,11 @@ const middleSizeStyle = css`
   top: 52%;
 
   ${mediaBig`
-    top: 60%;
+    top: 58%;
+  `}
+
+  ${mediaSmall`
+    top: 48%;
   `}
 `;
 

@@ -23,7 +23,7 @@ export const ReviewBarItem: React.FC<ReviewBarItemProps> = ({ item, max }) => {
         <Label value={item.value} percent={percent}>
           {item.label}
         </Label>
-        <Value>{item.value}</Value>
+        <Value percent={percent}>{item.value}</Value>
       </Bar>
     </ItemWrapper>
   );
@@ -88,7 +88,7 @@ const Label = styled.div<{ value: number; percent: number }>`
   `}
 `;
 
-const Value = styled.div`
+const Value = styled.div<{ percent: number }>`
   position: absolute;
   width: 40px;
   text-align: right;
@@ -102,4 +102,6 @@ const Value = styled.div`
   letter-spacing: -0.26px;
   text-align: right;
   vertical-align: middle;
+  padding-right: 6px;
+  color: ${({ percent }) => (percent >= 97 ? 'white' : 'black')};
 `;

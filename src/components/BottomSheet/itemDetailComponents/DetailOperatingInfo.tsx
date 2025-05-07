@@ -33,21 +33,21 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
             <Date active={opDateList?.includes(dateOptions[4].value as number)}>{dateOptions[4].value}</Date>
           </DateContainer>
         </InfoItem>
+
         <InfoItem>
           <LabelContainer>
             <LabelIcon src="/images/common/clockDark.webp"></LabelIcon>
             <InfoLabel>운영 시간</InfoLabel>
           </LabelContainer>
-          {/* {type === 'booth' && selectedDate !== undefined && dateOptions[2] ? (
-            Number(selectedDate) <= Number(dateOptions[2].value) ? (
-              <InfoText>10:00 ~ 18:00</InfoText>
-            ) : (
-              <InfoText>10:00 ~ 14:00</InfoText>
-            )
-          ) : null} */}
-          {type === 'booth' && <InfoText>10:00 ~ 17:00</InfoText>}
-          {type === 'foodTruck' && <InfoText>10:00 ~ 19:00 (재료 소진 시 조기 마감)</InfoText>}
+          <TimeContainer>
+            <InfoTextWrapper>
+              {type === 'booth' && <InfoText>10:00 ~ 17:00</InfoText>}
+              {type === 'foodTruck' && <InfoText>10:00 ~ 19:00 (재료 소진 시 조기 마감)</InfoText>}
+            </InfoTextWrapper>
+            <TodayTime>{selectedDate}일 기준</TodayTime>
+          </TimeContainer>
         </InfoItem>
+
         <InfoItem>
           <LabelContainer>
             <LabelIcon src="/images/common/locationDark.webp"></LabelIcon>
@@ -66,22 +66,26 @@ const Wrapper = styled.div`
   gap: 12px;
   margin-bottom: 8px;
 `;
+
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
 `;
+
 const InfoItem = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
   align-items: center;
 `;
+
 const LabelContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
 `;
+
 const InfoLabel = styled.div`
   font-weight: 600;
   font-size: 16px;
@@ -90,6 +94,7 @@ const InfoLabel = styled.div`
 
   ${mediaSmall_subTitle}
 `;
+
 const LabelIcon = styled.img`
   width: 20px;
   height: 20px;
@@ -99,11 +104,13 @@ const LabelIcon = styled.img`
     height: 18px;
   `}
 `;
+
 const DateContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 12px;
 `;
+
 const Date = styled.div<{ active: boolean }>`
   font-weight: 400;
   font-size: 14px;
@@ -128,12 +135,39 @@ const Date = styled.div<{ active: boolean }>`
           color: #09090b;
         `}
 `;
+
 const InfoText = styled.div`
   color: #364153;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ${mediaSmall_description}
+`;
+
+const TimeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+`;
+
+const InfoTextWrapper = styled.div`
+  align-items: center;
+`;
+
+const TodayTime = styled.div`
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: -0.26px;
+  color: #6a7282;
+  display: flex;
+  align-items: center;
 `;
