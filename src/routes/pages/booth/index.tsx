@@ -63,7 +63,7 @@ export const Booth = () => {
   }, []);
 
   return (
-    <BaseLayer backgroundImgSrc="/images/booth/boothEntireMap.webp">
+    <BaseLayer backgroundImgSrc="/images/booth/tempStreet.png">
       {/* 리스트 바텀시트 */}
       {!selectedItem && (
         <>

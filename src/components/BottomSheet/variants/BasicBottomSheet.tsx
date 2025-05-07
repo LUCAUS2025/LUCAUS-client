@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BottomSheetHeader } from '../layout/BottomSheetHeader';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { ItemListContent } from '../innerContent/ItemListContent';
 import useBottomSheet from '../useBottomSheet';
 import { BoothOrFoodTruckItem } from '../../../data/boothFood';
 import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
+import { mediaBig, mediaSmall } from '../../../styles/responsive';
 
 interface BottomSheetProps {
   title?: string;
@@ -16,9 +17,10 @@ interface BottomSheetProps {
 
 export const BasicBottomSheet: React.FC<BottomSheetProps> = ({ title, description, data, setSelectedItem }) => {
   const { sheet, content } = useBottomSheet();
+  const sheetHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
 
   return (
-    <Wrapper ref={sheet}>
+    <Wrapper ref={sheet} $sheetHeight={sheetHeight}>
       <BottomSheetHeader />
       <BottomSheetContent ref={content}>
         <ItemListContent theTitle={title} theDescription={description} data={data} setSelectedItem={setSelectedItem} />
@@ -27,10 +29,10 @@ export const BasicBottomSheet: React.FC<BottomSheetProps> = ({ title, descriptio
   );
 };
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
   ${bottomSheetBaseStyle};
   //top: calc(100% - ${window.innerHeight * 0.4}px);
-  top: calc(100% - ${window.innerHeight * 0.4}px);
+  //top: calc(100% - ${window.innerHeight * 0.53}px);
   position: fixed;
   bottom: 100px;
   //max-height: calc(100vh - 60px);
@@ -38,6 +40,20 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   //overflow: hidden;
+
+  top: ${({ $sheetHeight }) => `calc(100% - ${$sheetHeight * 0.53}px)`};
+
+  ${({ $sheetHeight }) => css`
+    top: calc(100% - ${$sheetHeight * 0.53}px);
+
+    ${mediaSmall(`
+      top: calc(100% - ${$sheetHeight * 0.5}px);
+    `)}
+
+    ${mediaBig(`
+      top: calc(100% - ${$sheetHeight * 0.54}px);
+    `)}
+  `}
 `;
 
 const BottomSheetContent = styled.div`
