@@ -72,7 +72,7 @@ const GaugeBarBackground = styled.div`
   left: 5%;
   width: 90%;
   height: 24px;
-  background-color: #d0d5dd;
+  background-color: #f3f4f6;
   border-radius: 24px;
   transform: translateY(-50%);
   z-index: 0;
@@ -96,7 +96,7 @@ const GaugeBar = styled.div<{ active: boolean }>`
   left: 5%;
   width: 90%;
   height: 24px;
-  background-color: ${({ active }) => (active ? '#1447e6' : '#d0d5dd')};
+  background-color: ${({ active }) => (active ? '#1447e6' : '#F3F4F6')};
   border-radius: 24px;
   transform: translateY(-50%);
   z-index: 0;
@@ -107,11 +107,11 @@ const StepCircle = styled.div<{ active: boolean }>`
   height: 40px;
   border-radius: 50%;
   background-color: white;
-  border: 1px solid ${({ active }) => (active ? '#1447e6' : '#d0d5dd')};
+  //border: 1px solid ${({ active }) => (active ? '#1447e6' : '#D1D5DC')};
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 4;
 `;
 
 const StepContainer = styled.div`
@@ -121,5 +121,5 @@ const StepContainer = styled.div`
   margin-left: 25%;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 `;

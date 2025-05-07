@@ -8,9 +8,10 @@ interface DropDownProps {
   selectedOption: Option;
   setSelectedOption: (option: Option) => void;
   logoSrc: string;
+  isLong?: boolean;
 }
 
-export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, setSelectedOption, logoSrc }) => {
+export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, setSelectedOption, logoSrc, isLong }) => {
   const [active, setActive] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLDivElement | null>(null);
 
@@ -28,10 +29,10 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
   }, []);
 
   return (
-    <Wrapper onClick={() => setActive((prev) => !prev)} ref={dropDownRef}>
+    <Wrapper onClick={() => setActive((prev) => !prev)} ref={dropDownRef} isLong={isLong}>
       <SelectedWrapper>
         <Logo src={logoSrc} />
-        <SelectedText>{selectedOption.label}</SelectedText>
+        <SelectedText isLong={isLong}>{selectedOption.label}</SelectedText>
         <DownIcon src="/images/common/dropDown.webp" />
       </SelectedWrapper>
       <OptionList active={active}>
@@ -52,9 +53,10 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isLong?: boolean }>`
   position: relative;
   z-index: 8;
+  width: ${({ isLong }) => (isLong ? '120px' : '')};
 `;
 const SelectedWrapper = styled(BaseButton)`
   z-index: 2;
@@ -63,7 +65,9 @@ const Logo = styled.img`
   width: 16px;
   margin-bottom: 2.5px;
 `;
-const SelectedText = styled.div``;
+const SelectedText = styled.div<{ isLong?: boolean }>`
+  width: ${({ isLong }) => (isLong ? '40px' : '')};
+`;
 const DownIcon = styled.img`
   width: 20px;
 `;

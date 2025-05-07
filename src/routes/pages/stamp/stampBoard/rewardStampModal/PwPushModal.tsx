@@ -83,7 +83,7 @@ const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isR
         } else if (errorCode == 'REWARD4003') {
           setIsError({ error: true, message: '이미 상품을 수령하였습니다.' });
         } else if (errorCode == 'REWARD4002') {
-          alert('예기치 못한 오류 발생. 다시 시도해주세요');
+          alert('이미 상품을 수령했거나 상품 수령 조건을 충족하지 못했습니다.');
         }
       }
     }

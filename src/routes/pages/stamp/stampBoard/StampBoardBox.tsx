@@ -60,7 +60,7 @@ const StampBoardBox = ({
           isCenterBooth={false}
           onClick={handleClickBooth}
           boothName={boothInfo[0]}
-          customPadding={'20px'}
+          customPadding={'30px'}
           childNode={
             selectedDate.value == 1 ? (
               <StampKey color={isCleared[1] ? '#1447E6' : '#D0DAFA'} />
@@ -94,7 +94,7 @@ const StampBoardBox = ({
           isCenterBooth={false}
           onClick={handleClickBooth}
           boothName={boothInfo[2]}
-          customPadding={'0px'}
+          customPadding={'-10px'}
           childNode={
             selectedDate.value == 1 ? (
               <StampKey color={isCleared[3] ? '#1447E6' : '#D0DAFA'} />
@@ -110,7 +110,7 @@ const StampBoardBox = ({
           isCenterBooth={false}
           onClick={handleClickBooth}
           boothName={boothInfo[3]}
-          customPadding={'50px'}
+          customPadding={'30px'}
           childNode={
             selectedDate.value == 1 ? (
               <StampKey color={isCleared[4] ? '#1447E6' : '#D0DAFA'} />
@@ -126,7 +126,7 @@ const StampBoardBox = ({
           isCenterBooth={false}
           onClick={handleClickBooth}
           boothName={boothInfo[4]}
-          customPadding={'10px'}
+          customPadding={'0px'}
           childNode={
             selectedDate.value == 1 ? (
               <StampKey color={isCleared[5] ? '#1447E6' : '#D0DAFA'} />
@@ -142,7 +142,7 @@ const StampBoardBox = ({
           isCenterBooth={false}
           onClick={handleClickBooth}
           boothName={boothInfo[5]}
-          customPadding={'30px'}
+          customPadding={'20px'}
           childNode={
             selectedDate.value == 1 ? (
               <StampKey color={isCleared[6] ? '#1447E6' : '#D0DAFA'} />
