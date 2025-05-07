@@ -31,6 +31,11 @@ export const placeOptions: Option[] = [
   { label: '후문 일대', value: 'backDoor' },
 ];
 
+export const FoodTruckPlaceOptions: Option[] = [
+  { label: '303관 B1층', value: 'building303B1' },
+  { label: '후문 일대', value: 'backDoor' },
+];
+
 export const itemsOptions: Option[] = [
   { label: '전체', value: 'TOTAL' },
   { label: '생필품', value: 'DAILY_NECESSITIES' },

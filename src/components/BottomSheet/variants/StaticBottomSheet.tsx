@@ -58,7 +58,7 @@ const ContentWrapper = styled.div`
 `;
 
 const smallSizeStyle = css`
-  top: 53%;
+  top: 54%;
 
   ${mediaBig`
     top: 60%;

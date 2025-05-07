@@ -42,7 +42,7 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
           <TimeContainer>
             <InfoTextWrapper>
               {type === 'booth' && <InfoText>10:00 ~ 17:00</InfoText>}
-              {type === 'foodTruck' && <InfoText>10:00 ~ 19:00 (재료 소진 시 조기 마감)</InfoText>}
+              {type === 'foodTruck' && <InfoText>10:00 ~ 19:00 (재료 소진 시 마감)</InfoText>}
             </InfoTextWrapper>
             <TodayTime>{selectedDate}일 기준</TodayTime>
           </TimeContainer>
@@ -51,7 +51,8 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
         <InfoItem>
           <LabelContainer>
             <LabelIcon src="/images/common/locationDark.webp"></LabelIcon>
-            <InfoLabel>부스 위치</InfoLabel>
+            {type === 'booth' && <InfoLabel>부스 위치</InfoLabel>}
+            {type === 'foodTruck' && <InfoLabel>트럭 위치</InfoLabel>}
           </LabelContainer>
           <InfoText>{location}</InfoText>
         </InfoItem>
@@ -170,4 +171,5 @@ const TodayTime = styled.div`
   color: #6a7282;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 `;
