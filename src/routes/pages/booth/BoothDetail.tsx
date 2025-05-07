@@ -7,6 +7,7 @@ import { GoBackButton } from '../../../components/common/GoBackButton';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
 import { useHeader } from '../../../context/HeaderContext';
+import { LoadingPage } from '../LoadingPage';
 
 export const BoothDetail = () => {
   const navigate = useNavigate();
@@ -32,11 +33,11 @@ export const BoothDetail = () => {
   }, []);
 
   if (!boothDetail) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (!boothDetail.cover) {
-    return <div>loading...</div>;
+    return <LoadingPage />;
   }
 
   return (
