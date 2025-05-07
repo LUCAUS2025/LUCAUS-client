@@ -20,7 +20,7 @@ const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
     // 조건 기반 게이지 계산
     if (clearedCount === 1) progressPercent = '8%';
     else if (clearedCount === 2) progressPercent = '15%';
-    else if (clearedCount === 3) progressPercent = '30%';
+    else if (clearedCount === 3) progressPercent = '25%';
     else if (clearedCount === 4) progressPercent = '45%';
     else if (clearedCount === 5) progressPercent = '60%';
     else if (clearedCount === 6) progressPercent = '77%';
@@ -29,7 +29,7 @@ const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
     // type 2인 경우
     // 조건 기반 게이지 계산
     if (clearedCount === 1) progressPercent = '14%';
-    else if (clearedCount === 2) progressPercent = '30%';
+    else if (clearedCount === 2) progressPercent = '25%';
     else if (clearedCount === 3) progressPercent = '44%';
     else if (clearedCount === 4) progressPercent = '60%';
     else if (clearedCount === 5) progressPercent = '75%';
