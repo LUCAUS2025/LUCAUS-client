@@ -121,7 +121,7 @@ const StampBoard = () => {
   }, [selectedDate, stampData]);
 
   // 축기단 부스 모달 오픈 여부
-  const [openRewardModal, setOpenRewardModal] = useState(false);
+  const [openRewardInfoModal, setOpenRewardInfoModal] = useState(false);
 
   // 축기단 부스 모달 스탭
   const [rewardStampStep, setRewardStampStep] = useState(1);
@@ -135,6 +135,7 @@ const StampBoard = () => {
             setSelectedDate={setSelectedDate}
             darkMode={false}
             customData={dateOptions}
+            isLong={true}
           />
           <MyInfoBox>
             <div>{userData?.name}</div>
@@ -153,7 +154,7 @@ const StampBoard = () => {
               <NewRewardGaugeBar isCleared={isCleared} isRewarded={isRewarded} boardType={selectedDate.value} />
             </BarWrapper>
           </RewardBox>
-          <GetRewardText onClick={() => setOpenRewardModal(true)}>상품 수령하기</GetRewardText>
+          <GetRewardText onClick={() => setOpenRewardInfoModal(true)}>상품은 언제 받을 수 있나요?</GetRewardText>
         </IntroRewardLine>
         <StampBoardBox
           isCleared={isCleared}
@@ -185,22 +186,11 @@ const StampBoard = () => {
           </Modal>
         )}
 
-        {openRewardModal &&
-          (rewardStampStep == 1 ? (
-            <Modal isShort={false}>
-              <RewardInfoModal setOpenRewardModal={setOpenRewardModal} setRewardStampStep={setRewardStampStep} />
-            </Modal>
-          ) : (
-            <Modal isShort={true}>
-              <PwPushModal
-                setOpenRewardModal={setOpenRewardModal}
-                setRewardStampStep={setRewardStampStep}
-                selectedDate={selectedDate}
-                isRewarded={isRewarded}
-                setStampData={setStampData}
-              />
-            </Modal>
-          ))}
+        {openRewardInfoModal && (
+          <Modal isShort={false}>
+            <RewardInfoModal setOpenRewardInfoModal={setOpenRewardInfoModal} boardType={selectedDate.value} />
+          </Modal>
+        )}
       </OutContentBox>
 
       <WaveWrapper>
@@ -218,7 +208,7 @@ export default StampBoard;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 40px - 83px);
+  height: calc(100vh - 40px - 80px);
   justify-content: space-between;
   overflow-y: auto;
   position: relative;
@@ -326,7 +316,15 @@ const IntroBox = styled.div`
 `;
 
 const GetRewardText = styled.div`
-  color: #6a7282;
-  font-size: 14px;
+  color: var(--All-Colors-gray-500, #6a7282);
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
   font-weight: 400;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 `;

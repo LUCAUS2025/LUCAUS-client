@@ -235,7 +235,7 @@ const SignupBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: calc(100vh - 40px - 83px);
+  height: calc(100vh - 40px - 80px);
   overflow-y: auto;
 `;
 

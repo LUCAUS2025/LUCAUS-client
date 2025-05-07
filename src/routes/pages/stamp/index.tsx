@@ -33,7 +33,8 @@ const StampEntrance = () => {
     <Wrapper>
       <ContentBox>
         <>
-          <IndexBox>
+          <EmptyBox />
+          {/* <IndexBox>
             <EachIndex
               onClick={() => {
                 handleClickIndex('intro');
@@ -50,7 +51,7 @@ const StampEntrance = () => {
             >
               스탬프
             </EachIndex>
-          </IndexBox>
+          </IndexBox> */}
           {selectedIndex == 'stamp' ? <Auth setWhichView={setWhichView} /> : <Intro />}
         </>
       </ContentBox>
@@ -74,7 +75,7 @@ interface EachIndexProps {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 40px - 83px);
+  height: calc(100vh - 40px - 80px);
   justify-content: space-between;
   overflow-y: auto;
   position: relative;
@@ -96,6 +97,10 @@ const EachIndex = styled.div<EachIndexProps>`
   color: ${({ isSelected }) => (isSelected ? 'black' : '#888')};
   font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
   border-bottom: ${({ isSelected }) => (isSelected ? '2px solid #1447e6' : '2px solid #ffffff')};
+`;
+
+const EmptyBox = styled.div`
+  height: 64px;
 `;
 
 interface ColorBoxProps {
