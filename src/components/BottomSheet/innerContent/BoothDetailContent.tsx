@@ -16,6 +16,7 @@ import { DetailReview } from '../itemDetailComponents/DetailReview';
 import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
 import { BoothDetailRawData } from '../../../services/apis/booth/boothDetail';
+import { mediaSmall_title } from '../../../styles/responsive';
 
 interface BoothDetailContentProps {
   boothDetail: BoothDetailRawData;
@@ -44,14 +45,19 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDet
             </ItemTitle>
             <ItemHost>{boothDetail?.owner}</ItemHost>
             <Keywords>
-              {boothDetail?.categories?.map((keyword, idx) => <Keyword key={idx}>{keyword}</Keyword>)}
+              {boothDetail?.categories?.map((keyword, idx) => <Keyword key={idx}>#{keyword}</Keyword>)}
             </Keywords>
           </TitleContainer>
           <ItemDescription>{boothDetail?.info}</ItemDescription>
         </HeaderContainer>
         <OperatingContainer>
           <OperatingTitle>부스 운영</OperatingTitle>
-          <DetailOperatingInfo type={'booth'} selectedDate={selectedDate} location={boothDetail?.location} />
+          <DetailOperatingInfo
+            type={'booth'}
+            selectedDate={selectedDate}
+            location={boothDetail?.location}
+            opDateList={boothDetail?.opDateList}
+          />
         </OperatingContainer>
         <DetailReview type={'booth'} onOpenReview={openReviewSheet} reviewData={boothDetail.boothReview} />
       </DetailWrapper>
@@ -84,4 +90,6 @@ const OperatingTitle = styled.div`
   font-size: 20px;
   line-height: 125%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall_title}
 `;

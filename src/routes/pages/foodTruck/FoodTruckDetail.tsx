@@ -7,6 +7,7 @@ import { FoodTruckDetailContent } from '../../../components/BottomSheet/innerCon
 import styled from 'styled-components';
 import { fetchFoodTruckDetail, FoodTruckDetailRawData } from '../../../services/apis/foodTruck/foodTruckDetail';
 import { useHeader } from '../../../context/HeaderContext';
+import { LoadingPage } from '../LoadingPage';
 
 export const FoodTruckDetail = () => {
   const { setHideHeader } = useHeader();
@@ -27,11 +28,12 @@ export const FoodTruckDetail = () => {
 
   useEffect(() => {
     setHideHeader(true);
+    return () => setHideHeader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!foodTruckDetail) {
-    return <div>loading...</div>;
+    return <LoadingPage />;
   }
 
   return (

@@ -6,6 +6,7 @@ import { MenuProvider } from '../../context/MenuContext';
 import { HeaderProvider, useHeader } from '../../context/HeaderContext';
 import TheSidebar from '../../components/TheSidebar';
 import TheHeader from '../../components/TheHeader';
+import { Analytics } from '@vercel/analytics/react';
 
 const LayoutContent = () => {
   const { hideHeader } = useHeader();
@@ -30,6 +31,7 @@ export const DefaultLayout = () => {
           <LayoutContent />
         </HeaderProvider>
       </MenuProvider>
+      <Analytics />
     </AppDom>
   );
 };
@@ -39,6 +41,7 @@ const AppDom = styled.div`
   height: 100vh;
   margin: 0 auto;
   font-family: 'Pretendard-Regular';
+  background-color: white;
 
   @media (max-width: 600px) {
     width: 100vw;

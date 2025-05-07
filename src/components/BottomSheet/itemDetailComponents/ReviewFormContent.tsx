@@ -34,7 +34,8 @@ const foodTruckReviewOptions: ReviewOption[] = [
 
 export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type, currentId }) => {
   const [selected, setSelected] = useState<number[]>([]);
-  const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success'>('ready');
+  const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success' | 'fail'>('ready');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const toggleSelected = (idx: number) => {
     setSelected((prev) => (prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]));
@@ -56,9 +57,12 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
             onClose();
           }, 1500);
         } else {
-          alert(result?.message || '리뷰 전송에 실패했습니다.');
-          setReviewStatus('ready');
-          onClose();
+          setReviewStatus('fail');
+          setErrorMessage(result?.message);
+          setReviewStatus('fail');
+          setTimeout(() => {
+            onClose();
+          }, 2300);
         }
       } else if (type === 'foodTruck') {
         const result = await postFoodTruckReview(currentId, selectedTags);
@@ -68,17 +72,21 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
             onClose();
           }, 1500);
         } else {
-          alert(result?.message || '리뷰 전송에 실패했습니다.');
-          setReviewStatus('ready');
-          onClose();
+          setErrorMessage(result?.message);
+          setReviewStatus('fail');
+          setTimeout(() => {
+            onClose();
+          }, 2300);
         }
       }
     } catch (error: unknown) {
       const axiosError = error as AxiosError<{ message: string }>;
       const message = axiosError.response?.data?.message || '알 수 없는 오류가 발생했습니다.';
-      alert(message);
-      setReviewStatus('ready');
-      onClose();
+      setErrorMessage(message);
+      setReviewStatus('fail');
+      setTimeout(() => {
+        onClose();
+      }, 2300);
     }
   };
   const options = type === 'booth' ? boothReviewOptions : foodTruckReviewOptions;
@@ -101,7 +109,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
                 <IconWrapper selected={selected.includes(idx)} onClick={() => toggleSelected(idx)}>
                   {option.icon}
                 </IconWrapper>
-                <Label>{option.label}</Label>
+                <Label selected={selected.includes(idx)}>{option.label}</Label>
               </Option>
             ))}
           </OptionsContainer>
@@ -121,6 +129,17 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
             <SubmittingAnimation>
               <LoadingSpinner />
             </SubmittingAnimation>
+          </TitleContainer>
+        </>
+      )}
+      {reviewStatus === 'fail' && errorMessage.length && (
+        <>
+          <TitleContainer>
+            <Title>리뷰 전송 실패</Title>
+            <SubText>{errorMessage}</SubText>
+            <CompleteAnimation>
+              <Complete src="/images/common/fail.webp" />
+            </CompleteAnimation>
           </TitleContainer>
         </>
       )}
@@ -145,6 +164,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   padding: 10px 20px 20px 20px;
+
+  @media (max-width: 380px) {
+    gap: 13px;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -177,6 +200,10 @@ const OptionsContainer = styled.div`
   justify-content: center;
   margin-top: 8px;
   gap: 24px;
+
+  @media (max-width: 380px) {
+    gap: 20px;
+  }
 `;
 
 const Option = styled.div`
@@ -199,12 +226,12 @@ const IconWrapper = styled.div<{ selected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: ${({ selected }) => (selected ? '1px solid #1447e6' : '1px solid transparent')};
+  border: ${({ selected }) => (selected ? '1.3px solid #1447e6' : '1px solid transparent')};
   box-shadow: 0px 0px 12px 0px ${({ selected }) => (selected ? '#1447e633' : 'transparent')};
   box-sizing: border-box;
 `;
 
-const Label = styled.div`
+const Label = styled.div<{ selected: boolean }>`
   font-size: 12px;
   line-height: 150%;
   letter-spacing: -0.26px;
@@ -212,6 +239,11 @@ const Label = styled.div`
   vertical-align: middle;
   color: #101828;
   white-space: pre-line;
+  font-weight: ${({ selected }) => (selected ? '600' : '400')};
+
+  @media (max-width: 380px) {
+    font-size: 11px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -219,6 +251,10 @@ const ButtonContainer = styled.div`
   width: 100%;
   gap: 12px;
   margin-top: 12px;
+
+  @media (max-width: 380px) {
+    gap: 10px;
+  }
 `;
 
 const CancelButton = styled.button`
@@ -229,6 +265,10 @@ const CancelButton = styled.button`
   background-color: #d1d5dc;
   color: #6a7282;
   font-size: 14px;
+
+  @media (max-width: 380px) {
+    height: 40px;
+  }
 `;
 
 const SubmitButton = styled.button<{ disabled: boolean }>`
@@ -240,6 +280,10 @@ const SubmitButton = styled.button<{ disabled: boolean }>`
   color: #f9fafb;
   font-size: 14px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+
+  @media (max-width: 380px) {
+    height: 40px;
+  }
 `;
 
 const SubmittingAnimation = styled.div`

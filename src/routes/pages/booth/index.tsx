@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { BasicBottomSheet } from '../../../components/BottomSheet/variants/BasicBottomSheet';
 import styled from 'styled-components';
-import { dateOptions, Option, placeOptions } from '../../../data/options';
+import { dateMonthOption, dateOptions, dateYearOption, Option, placeOptions } from '../../../data/options';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
 import { BoothItem, BoothOrFoodTruckItem } from '../../../data/boothFood';
@@ -34,11 +34,36 @@ export const Booth = () => {
 
   useEffect(() => {
     setHideHeader(!!selectedItem);
+    return () => setHideHeader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
 
+  useEffect(() => {
+    const today = new Date();
+
+    const selectedYear = Number(dateYearOption.value);
+    const selectedMonth = Number(dateMonthOption.value);
+    const todayYear = today.getFullYear();
+    const todayMonth = today.getMonth() + 1;
+    const todayDate = today.getDate();
+    // 오늘이 지정된 연도/월이며, 축제 기간 날짜 옵션 내에 포함된다면
+    if (
+      todayYear === selectedYear &&
+      todayMonth === selectedMonth &&
+      dateOptions.some((option) => option.value === todayDate)
+    ) {
+      const todayOption = dateOptions.find((option) => option.value === todayDate);
+      if (todayOption) {
+        setSelectedDate(todayOption);
+      }
+    } else {
+      // 아니면 축제 첫째날로 설정
+      setSelectedDate(dateOptions[0]);
+    }
+  }, []);
+
   return (
-    <BaseLayer>
+    <BaseLayer backgroundImgSrc="/images/booth/tempStreet.png">
       {/* 리스트 바텀시트 */}
       {!selectedItem && (
         <>
@@ -85,7 +110,7 @@ const OptionContainer = styled.div`
   flex-direction: row;
   gap: 10px;
   left: 16px;
-  top: 20px;
+  top: 80px;
   position: absolute;
 `;
 

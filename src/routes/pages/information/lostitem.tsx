@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDate } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
-import { dateOptions, itemsOptions, Option } from '../../../data/options';
+import { itemsOptions, lostdateOptions, Option } from '../../../data/options';
 
 interface LostItemProps {
   category: string;
@@ -16,7 +16,7 @@ interface LostItemProps {
 
 const LostItem = () => {
   const [lostItems, setLostItems] = useState<LostItemProps[]>([]);
-  const [selectDate, setSelectDate] = useState<Option>(dateOptions[0]); // 날짜 선택 상태
+  const [selectDate, setSelectDate] = useState<Option>(lostdateOptions[0]); // 날짜 선택 상태
   const [selectItem, setSelectItem] = useState<Option>(itemsOptions[0]); // 분실물 선택 상태
 
   const translateCategory = (category: string) => {
@@ -24,7 +24,7 @@ const LostItem = () => {
       WALLET_CARD: '지갑/카드',
       ELECTRONICS: '전자기기',
       CLOTHING: '의류',
-      DAILY_NECESSITIES: '생활용품',
+      DAILY_NECESSITIES: '잡화',
       COSMETICS: '화장품',
       OTHERS: '기타',
       TOTAL: '전체',
@@ -78,7 +78,7 @@ const LostItem = () => {
       <ItemList>
         {lostItems.length > 0 ? (
           lostItems
-            .filter((item) => item.ownerFound == false) // ownerFound가 false인 항목만 필터링
+            .filter((item) => item.ownerFound === false) // ownerFound가 false인 항목만 필터링
             .map((item, idx) => (
               <Item key={idx}>
                 <ItemImage src={item.image || ''} />
@@ -93,7 +93,7 @@ const LostItem = () => {
               </Item>
             ))
         ) : (
-          <NoItemsMessage>현재까지 등록된 분실물이 없습니다.</NoItemsMessage>
+          <NoItemsMessage>현재 등록된 분실물이 없습니다</NoItemsMessage>
         )}
       </ItemList>
     </BigContainer>
@@ -165,6 +165,10 @@ export const ItemName = styled.div`
 export const ItemDetail = styled.div`
   font-size: 14px;
   color: #4b5563;
+
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis;
 `;
 
 export const Tag = styled.span`
@@ -193,6 +197,8 @@ const DropDowns = styled.div`
   display: flex;
   gap: 16px;
   margin-bottom: 16px;
+  flex-direction: row;
+  // position: fixed;
 `;
 
 const NoItemsMessage = styled.div`

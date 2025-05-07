@@ -14,6 +14,7 @@ interface DropDownProps {
 export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, setSelectedOption, logoSrc, isLong }) => {
   const [active, setActive] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLDivElement | null>(null);
+  const [delayedActive, setDelayedActive] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -28,9 +29,18 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
     };
   }, []);
 
+  const toggleDropDown = () => {
+    const willOpen = !active;
+    setActive(willOpen);
+    if (willOpen) {
+      setTimeout(() => setDelayedActive(true), 200); // item 요소 누르면 0.2초 뒤 적용..
+    } else {
+      setDelayedActive(false);
+    }
+  };
   return (
-    <Wrapper onClick={() => setActive((prev) => !prev)} ref={dropDownRef} isLong={isLong}>
-      <SelectedWrapper>
+    <Wrapper onClick={toggleDropDown} ref={dropDownRef} isLong={isLong}>
+      <SelectedWrapper $active={active}>
         <Logo src={logoSrc} />
         <SelectedText isLong={isLong}>{selectedOption.label}</SelectedText>
         <DownIcon src="/images/common/dropDown.webp" />
@@ -54,12 +64,14 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
 };
 
 const Wrapper = styled.div<{ isLong?: boolean }>`
+  z-index: 3;
   position: relative;
-  z-index: 8;
-  width: ${({ isLong }) => (isLong ? '120px' : '')};
+    width: ${({ isLong }) => (isLong ? '120px' : '')};
 `;
-const SelectedWrapper = styled(BaseButton)`
-  z-index: 2;
+const SelectedWrapper = styled(BaseButton)<{ $active: boolean }>`
+  border: 1px solid ${({ $active }) => ($active ? '#101828' : '#d1d5dc')};
+  box-shadow: ${({ $active }) => ($active ? '0px 0px 12px 0px #00000014' : 'none')};
+  z-index: 3;
 `;
 const Logo = styled.img`
   width: 16px;
@@ -76,13 +88,18 @@ const OptionList = styled.div<{ active: boolean }>`
   top: 90%;
   position: absolute;
   list-style-type: none;
-  display: ${({ active }) => (active ? 'block' : 'none')};
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 0px 0px 12px 0px #00000014;
   border: 1px solid #d1d5dc;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
+
+  max-height: ${({ active }) => (active ? '500px' : '0')};
+  opacity: ${({ active }) => (active ? 1 : 0)};
+  transform: ${({ active }) => (active ? 'translateY(0)' : 'translateY(-8px)')};
+  pointer-events: ${({ active }) => (active ? 'auto' : 'none')};
+  transition: all 0.2s ease;
 `;
 const OptionItem = styled.div`
   display: flex;
@@ -93,4 +110,7 @@ const OptionItem = styled.div`
   padding: 8px 12px 8px 12px;
   border-top: 1px solid #d1d5dc;
   background-color: #fafafa;
+  &:hover {
+    background-color: #e7f1ff;
+  }
 `;

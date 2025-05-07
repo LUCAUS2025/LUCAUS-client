@@ -8,6 +8,16 @@ export interface OptionOnlyNumber {
   value: number;
 }
 
+export const dateYearOption = {
+  label: '2025년',
+  value: 2025,
+};
+
+export const dateMonthOption = {
+  label: '5월',
+  value: 0o5,
+};
+
 export const dateOptions: Option[] = [
   { label: '19 일', value: 19 },
   { label: '20 일', value: 20 },
@@ -21,9 +31,14 @@ export const placeOptions: Option[] = [
   { label: '후문 일대', value: 'backDoor' },
 ];
 
+export const FoodTruckPlaceOptions: Option[] = [
+  { label: '303관 B1층', value: 'building303B1' },
+  { label: '후문 일대', value: 'backDoor' },
+];
+
 export const itemsOptions: Option[] = [
   { label: '전체', value: 'TOTAL' },
-  { label: '생필품', value: 'DAILY_NECESSITIES' },
+  { label: '잡화', value: 'DAILY_NECESSITIES' },
   { label: '전자기기', value: 'ELECTRONICS' },
   { label: '의류', value: 'CLOTHING' },
   { label: '지갑/카드', value: 'WALLET_CARD' },

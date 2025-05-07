@@ -7,7 +7,7 @@ import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { Option } from '../../../data/options';
 import Footer from '../../../components/home/Footer';
 
-const stagedateOptions = ['13일', '14일', '22일', '23일'];
+const stagedateOptions = ['21일', '22일', '23일'];
 
 const customDateOptions: Option[] = stagedateOptions.map((date) => ({
   label: date,
@@ -15,8 +15,9 @@ const customDateOptions: Option[] = stagedateOptions.map((date) => ({
 }));
 
 const stageOptionsByDate: { [key: string]: string[] } = {
-  '13일': ['버스킹'],
-  '14일': ['버스킹'],
+  // '13일': ['버스킹'],
+  // '14일': ['버스킹'],
+  '21일': ['본무대'],
   '22일': ['버스킹', '무대기획전', '본무대', '아티스트'],
   '23일': ['응원제', '본무대', '아티스트'],
 };
@@ -30,6 +31,7 @@ export const Stage = () => {
   const cheeringRef = useRef<HTMLDivElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
   const artistRef = useRef<HTMLDivElement>(null);
+  const mukiRef = useRef<HTMLDivElement>(null);
 
   const availableStages = stageOptionsByDate[selectedDate.value] || [];
 
@@ -46,6 +48,7 @@ export const Stage = () => {
       응원제: cheeringRef,
       본무대: mainStageRef,
       아티스트: artistRef,
+      무대기획전: mukiRef,
     };
 
     const targetRef = sectionRefs[option];
@@ -101,10 +104,10 @@ export const Stage = () => {
 
         {/* 무대기획전 */}
         {isSelectedDate('22일') && (
-          <div>
+          <div ref={mukiRef}>
             <Title>무대기획전</Title>
             <img
-              src="/images/home/stage/ticket.png"
+              src="/images/home/stage/mudaeki.png"
               alt="무대기획전 포스터"
               style={{ width: '100%', borderRadius: '12px' }}
             />
@@ -150,13 +153,13 @@ export default Stage;
 
 // 스타일 컴포넌트
 export const Title = styled.div`
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 0.25rem;
 `;
 
 export const Subtitle = styled.div`
-  font-size: 0.875rem;
+  font-size: 16px;
   color: #6b7280;
   margin-bottom: 1rem;
 `;

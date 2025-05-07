@@ -12,6 +12,7 @@ export interface BoothDetailRawData {
   categories: string[];
   boothReview: BoothReviewItem[];
   boothId: number;
+  opDateList: number[];
 }
 
 interface BoothDetail {

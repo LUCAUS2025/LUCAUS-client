@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { getOneRecentNotice } from '../../../services/apis/notice';
+import { mediaSmall_description, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
 
 export const Information = () => {
   const navigate = useNavigate();
+  const [recentNotice, setRecentNotice] = useState();
+
+  useEffect(() => {
+    const getNotice = async () => {
+      const result = await getOneRecentNotice();
+      setRecentNotice(result.result.content[0].title);
+    };
+    getNotice();
+  }, []);
+
+  if (!recentNotice) {
+    return <div>loading...</div>;
+  }
 
   return (
     <Wrapper>
@@ -13,24 +28,24 @@ export const Information = () => {
           <Description>축제 정보를 여기서 한번에 확인해보세요!</Description>
         </TitleContainer>
         <InfoContainer>
-          <InfoBox>
+          <InfoBox onClick={() => navigate('/notice')}>
             <InfoTitleImg src="images/information/idea.webp" />
-            <InfoTitleCol onClick={() => navigate('/notice')}>
+            <InfoTitleCol>
               <InfoBoxTitle>총학생회 공지</InfoBoxTitle>
-              <InfoBoxDescription>배리어 프리존 안내</InfoBoxDescription>
+              <InfoBoxDescription>{recentNotice}</InfoBoxDescription>
             </InfoTitleCol>
           </InfoBox>
           <CardList>
             <InfoCard onClick={() => navigate('/lostitem')}>
-              <CardImg />
+              <CardImg src="/images/information/findIcon.webp" />
               <CardText>분실물 안내</CardText>
             </InfoCard>
             <InfoCard onClick={() => navigate('/barrierfree')}>
-              <CardImg />
+              <CardImg src="/images/information/barrierIcon.webp" />
               <CardText>배리어프리</CardText>
             </InfoCard>
             <InfoCard onClick={() => navigate('/entry')}>
-              <CardImg />
+              <CardImg src="/images/information/mapIcon.webp" />
               <CardText>이동 정책</CardText>
             </InfoCard>
           </CardList>
@@ -70,21 +85,21 @@ export const Information = () => {
           <MakersContent>
             <Col>
               <Part>
-                <MakerText>기획</MakerText>
+                <MakerText>PM</MakerText>
                 <MakerText>조하정, 양채령</MakerText>
               </Part>
               <Part>
-                <MakerText>디자인</MakerText>
+                <MakerText>DE</MakerText>
                 <MakerText>노지우</MakerText>
               </Part>
             </Col>
             <Col>
               <Part>
-                <MakerText>프론트엔드</MakerText>
+                <MakerText>FE</MakerText>
                 <MakerText>정선빈, 황인영</MakerText>
               </Part>
               <Part>
-                <MakerText>백엔드</MakerText>
+                <MakerText>BE</MakerText>
                 <MakerText>김태진, 최은수</MakerText>
               </Part>
             </Col>
@@ -120,6 +135,8 @@ const Title = styled.div`
   line-height: 125%;
   letter-spacing: -0.26px;
   color: #030712;
+
+  ${mediaSmall_title}
 `;
 const TitleImg = styled.img`
   width: 40px;
@@ -147,6 +164,8 @@ const Description = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #6a7282;
+
+  ${mediaSmall_description}
 `;
 const InfoContainer = styled.div`
   display: flex;
@@ -169,6 +188,8 @@ const InfoBoxTitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
+
+  ${mediaSmall_subTitle}
 `;
 const InfoBoxDescription = styled.div`
   font-family: Pretendard;
@@ -176,6 +197,8 @@ const InfoBoxDescription = styled.div`
   font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.26px;
+
+  ${mediaSmall_description}
 `;
 const CardList = styled.div`
   display: flex;
@@ -206,6 +229,8 @@ const CardText = styled.div`
   letter-spacing: -0.26px;
   text-align: center;
   color: #101828;
+
+  ${mediaSmall_subTitle}
 `;
 const InquiryContainer = styled.div`
   display: flex;
@@ -222,13 +247,16 @@ const BoxContainer = styled.div`
   flex-direction: column;
   gap: 8px;
 `;
+
 const InfoBoxText = styled.div`
   font-family: Pretendard;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
+
+  ${mediaSmall_description}
 `;
 const Subtitle = styled.div`
   font-family: Pretendard;
@@ -237,6 +265,8 @@ const Subtitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
+
+  ${mediaSmall_subTitle}
 `;
 const InfoBoxImg = styled.img`
   width: 32px;
@@ -282,12 +312,12 @@ const MakersContent = styled.div`
 const Col = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 80px;
 `;
 const Part = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 20px;
   width: 100%;
 `;
 const MakerText = styled.div`
@@ -299,6 +329,5 @@ const MakerText = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
-  width: 100%;
   white-space: nowrap;
 `;

@@ -3,6 +3,7 @@ import { BoothOrFoodTruckItem } from '../../../data/boothFood';
 import styled from 'styled-components';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { useNavigate } from 'react-router-dom';
+import { mediaBig, mediaSmall, mediaSmall_title } from '../../../styles/responsive';
 
 interface ItemPreviewContentProps {
   item: BoothOrFoodTruckItem;
@@ -23,12 +24,10 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
   return (
     <Wrapper>
       <TitleContainer>
-        <Title>
-          #{item.dayBoothNum}&nbsp;
-          {item.name}
-        </Title>
-        {item.type === 'booth' && <Description>{item.info}</Description>}
+        <Title>#{item.dayBoothNum}</Title>
+        <Title>{item.name}</Title>
       </TitleContainer>
+      {item.type === 'booth' && <Description>{item.owner}</Description>}
       <ItemKeywords>
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
         {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
@@ -52,15 +51,26 @@ const Wrapper = styled.div`
   overflow-y: hidden;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: none;
+
+  ${mediaSmall`
+    gap: 9px;
+    padding: 10px 20px;
+  `}
 `;
 const TitleContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
+
+  ${mediaSmall`
+    gap: 6px;
+  `}
 `;
 const Title = styled.div`
   font-size: 20px;
   font-weight: 600;
+
+  ${mediaSmall_title}
 `;
 const Description = styled.div`
   font-size: 12px;
@@ -81,6 +91,10 @@ const ButtonContainer = styled.div`
   width: 100%;
   flex-direction: column;
   gap: 12px;
+
+  ${mediaSmall`
+    gap: 7.5px;
+  `}
 `;
 const DetailButton = styled.div`
   display: flex;
@@ -93,6 +107,11 @@ const DetailButton = styled.div`
   background-color: #1447e6;
   border-radius: 12px;
   width: 100%;
+
+  ${mediaSmall`
+    font-size: 13px;
+    height: 40px;
+  `}
 `;
 const CloseButton = styled.div`
   display: flex;
@@ -105,4 +124,9 @@ const CloseButton = styled.div`
   border-radius: 12px;
   background-color: #d1d5dc;
   width: 100%;
+
+  ${mediaSmall`
+    font-size: 13px;
+    height: 40px;
+  `}
 `;

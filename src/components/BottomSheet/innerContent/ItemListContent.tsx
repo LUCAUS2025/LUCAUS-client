@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
+import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
 
 interface ContentProps {
   theTitle?: string;
@@ -19,57 +20,56 @@ export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescripti
       <TitleContainer>
         <Title>{theTitle}</Title>
         <Description>{theDescription}</Description>
-        {/* 부스 리스트 */}
-        {booths && booths.length > 0 && (
-          <List>
-            {booths?.map((item) => (
-              <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
-                <ItemContent>
-                  <ItemId>#{item.dayBoothNum}</ItemId>
-                  <ItemTextContainer>
-                    <ItemTitle>{item.name}</ItemTitle>
-                    <ItemDescription>{item.info}</ItemDescription>
-                    <ItemKeywords>
-                      {item.categories.map((key, index) => (
-                        <Keyword key={index}>#{key}</Keyword>
-                      ))}
-                    </ItemKeywords>
-                  </ItemTextContainer>
-                  <RecommendContainer>
-                    <RecommendNum>{item.recommendNum}</RecommendNum>
-                    <RecommendIcon src="images/common/thumbsUp.webp" />
-                  </RecommendContainer>
-                </ItemContent>
-              </Item>
-            ))}
-          </List>
-        )}
-
-        {/* 푸드트럭 리스트 */}
-        {foodTrucks && foodTrucks.length > 0 && (
-          <List>
-            {foodTrucks?.map((item) => (
-              <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
-                <ItemContent>
-                  <ItemId>#{item.dayBoothNum}</ItemId>
-                  <ItemTextContainer>
-                    <ItemTitle>{item.name}</ItemTitle>
-                    <ItemKeywords>
-                      {item.representMenu.map((key, index) => (
-                        <Keyword key={index}>#{key}</Keyword>
-                      ))}
-                    </ItemKeywords>
-                  </ItemTextContainer>
-                  <RecommendContainer>
-                    <RecommendNum>{item.recommendNum}</RecommendNum>
-                    <RecommendIcon src="images/common/thumbsUp.webp" />
-                  </RecommendContainer>
-                </ItemContent>
-              </Item>
-            ))}
-          </List>
-        )}
       </TitleContainer>
+      {/* 부스 리스트 */}
+      {booths && booths.length > 0 && (
+        <List>
+          {booths?.map((item) => (
+            <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
+              <ItemContent>
+                <ItemId>#{item.dayBoothNum}</ItemId>
+                <ItemTextContainer>
+                  <ItemTitle>{item.name}</ItemTitle>
+                  <ItemDescription>{item.owner}</ItemDescription>
+                  <ItemKeywords>
+                    {item.categories.map((key, index) => (
+                      <Keyword key={index}>#{key}</Keyword>
+                    ))}
+                  </ItemKeywords>
+                </ItemTextContainer>
+                <RecommendContainer>
+                  <RecommendNum>{item.recommendNum ?? 0}</RecommendNum>
+                  <RecommendIcon src="images/common/thumbsUp.webp" />
+                </RecommendContainer>
+              </ItemContent>
+            </Item>
+          ))}
+        </List>
+      )}
+      {/* 푸드트럭 리스트 */}
+      {foodTrucks && foodTrucks.length > 0 && (
+        <List>
+          {foodTrucks?.map((item) => (
+            <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
+              <ItemContent>
+                <ItemId>#{item.dayBoothNum}</ItemId>
+                <ItemTextContainer>
+                  <ItemTitle>{item.name}</ItemTitle>
+                  <ItemKeywords>
+                    {item.representMenu.map((key, index) => (
+                      <Keyword key={index}>#{key}</Keyword>
+                    ))}
+                  </ItemKeywords>
+                </ItemTextContainer>
+                <RecommendContainer>
+                  <RecommendNum>{item.recommendNum ?? 0}</RecommendNum>
+                  <RecommendIcon src="images/common/thumbsUp.webp" />
+                </RecommendContainer>
+              </ItemContent>
+            </Item>
+          ))}
+        </List>
+      )}
     </Wrapper>
   );
 };
@@ -78,16 +78,19 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 12px 20px;
+  padding: 12px 0px;
 `;
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 0px 20px;
 `;
 const Title = styled.div`
   font-size: 20px;
   font-weight: 600;
+
+  ${mediaSmall_title}
 `;
 const Description = styled.div`
   font-size: 12px;
@@ -102,9 +105,13 @@ const List = styled.div`
 const Item = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 12px 20px;
+
+  &:hover {
+    background: #e7f1ff;
+  }
 `;
 const ItemContent = styled.div`
-  padding: 12px 16px;
   display: flex;
   flex-direction: row;
   gap: 12px;
@@ -118,10 +125,13 @@ const ItemTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 4px;
+
+  ${mediaSmall_subTitle}
 `;
 const ItemDescription = styled.div`
   margin-bottom: 4px;
   font-size: 12px;
+  color: #6a7282;
 `;
 const ItemKeywords = styled.div`
   display: flex;
@@ -160,4 +170,9 @@ const RecommendNum = styled.div`
 const RecommendIcon = styled.img`
   width: 16px;
   height: 16px;
+
+  ${mediaSmall`
+    width: 14px;
+    height: 14px;
+  `}
 `;
