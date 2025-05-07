@@ -42,6 +42,7 @@ const BackgroundImg = styled.img`
   width: 100%;
   object-fit: contain;
   z-index: -1;
+  //padding-top: 50px;
 
   user-select: none;
   -webkit-user-drag: none;
