@@ -20,39 +20,54 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
   return (
     <Wrapper>
       <InfoContainer>
+        {/* 운영 일자 */}
         <InfoItem>
           <LabelContainer>
-            <LabelIcon src="/images/common/dateDark.webp"></LabelIcon>
+            <LabelIcon src="/images/common/dateDark.webp" />
             <InfoLabel>운영 일자</InfoLabel>
           </LabelContainer>
           <DateContainer>
-            <Date active={opDateList?.includes(dateOptions[0].value as number)}>{dateOptions[0].value}</Date>
-            <Date active={opDateList?.includes(dateOptions[1].value as number)}>{dateOptions[1].value}</Date>
-            <Date active={opDateList?.includes(dateOptions[2].value as number)}>{dateOptions[2].value}</Date>
-            <Date active={opDateList?.includes(dateOptions[3].value as number)}>{dateOptions[3].value}</Date>
-            <Date active={opDateList?.includes(dateOptions[4].value as number)}>{dateOptions[4].value}</Date>
+            {dateOptions.map(({ value }) => (
+              <Date key={value} active={opDateList?.includes(value as number)}>
+                {value}
+              </Date>
+            ))}
           </DateContainer>
         </InfoItem>
 
-        <InfoItem>
-          <LabelContainer>
-            <LabelIcon src="/images/common/clockDark.webp"></LabelIcon>
-            <InfoLabel>운영 시간</InfoLabel>
-          </LabelContainer>
-          <TimeContainer>
-            <InfoTextWrapper>
-              {type === 'booth' && <InfoText>10:00 ~ 17:00</InfoText>}
-              {type === 'foodTruck' && <InfoText>10:00 ~ 19:00 (재료 소진 시 마감)</InfoText>}
-            </InfoTextWrapper>
-            <TodayTime>{selectedDate}일 기준</TodayTime>
-          </TimeContainer>
-        </InfoItem>
+        {/* 운영 시간 - booth와 foodTruck 분기 */}
+        {type === 'booth' ? (
+          <BoothTimeItem>
+            <LabelContainer>
+              <LabelIcon src="/images/common/clockDark.webp" />
+              <InfoLabel>운영 시간</InfoLabel>
+            </LabelContainer>
+            <BoothTimeRow>
+              <TimeText>10:00 ~ 17:00</TimeText>
+              <TodayTime>{selectedDate}일 기준</TodayTime>
+            </BoothTimeRow>
+          </BoothTimeItem>
+        ) : (
+          <FoodTruckTimeItem>
+            <LabelContainer>
+              <LabelIcon src="/images/common/clockDark.webp" />
+              <InfoLabel>운영 시간</InfoLabel>
+            </LabelContainer>
+            <FoodTruckTimeWrapper>
+              <FoodTruckTimeRow>
+                <FoodTruckTimeText>10:00 ~ 19:00</FoodTruckTimeText>
+                <TodayTime>{selectedDate}일 기준</TodayTime>
+              </FoodTruckTimeRow>
+              <TimeSubText>*재료 소진 시 조기 마감</TimeSubText>
+            </FoodTruckTimeWrapper>
+          </FoodTruckTimeItem>
+        )}
 
+        {/* 부스 위치 */}
         <InfoItem>
           <LabelContainer>
-            <LabelIcon src="/images/common/locationDark.webp"></LabelIcon>
-            {type === 'booth' && <InfoLabel>부스 위치</InfoLabel>}
-            {type === 'foodTruck' && <InfoLabel>트럭 위치</InfoLabel>}
+            <LabelIcon src="/images/common/locationDark.webp" />
+            <InfoLabel>{type === 'booth' ? '부스 위치' : '트럭 위치'}</InfoLabel>
           </LabelContainer>
           <InfoText>{location}</InfoText>
         </InfoItem>
@@ -81,10 +96,26 @@ const InfoItem = styled.div`
   align-items: center;
 `;
 
+const BoothTimeItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+`;
+
+const FoodTruckTimeItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+`;
+
 const LabelContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
+  min-width: 90px;
+  align-items: center;
 `;
 
 const InfoLabel = styled.div`
@@ -92,14 +123,12 @@ const InfoLabel = styled.div`
   font-size: 16px;
   line-height: 150%;
   letter-spacing: -0.26px;
-
   ${mediaSmall_subTitle}
 `;
 
 const LabelIcon = styled.img`
   width: 20px;
   height: 20px;
-
   ${mediaSmall`
     width: 18px;
     height: 18px;
@@ -115,26 +144,93 @@ const DateContainer = styled.div`
 const Date = styled.div<{ active: boolean }>`
   font-weight: 400;
   font-size: 14px;
-  line-height: 150%;
   letter-spacing: -0.26px;
+  line-height: 1;
   text-align: center;
   vertical-align: middle;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 4px;
+  width: 10px;
+  height: 10px;
+  padding: 10px;
+  text-align: center;
 
   ${mediaSmall_description}
 
   ${({ active }) =>
     active
       ? css`
-          font-size: 14px;
-          ${keywordBaseStyle}
+          color: #1447e6;
+          background-color: #e7f1ff;
+          border-radius: 50%;
         `
       : css`
           color: #09090b;
         `}
+`;
+
+const BoothTimeRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+`;
+
+const FoodTruckTimeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
+`;
+
+const FoodTruckTimeRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TimeText = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  color: #364153;
+  letter-spacing: -0.26px;
+
+  ${mediaSmall_description}
+`;
+
+const FoodTruckTimeText = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  color: #364153;
+  letter-spacing: -0.26px;
+  padding-top: 2px;
+
+  ${mediaSmall_description};
+`;
+
+const TodayTime = styled.div`
+  font-size: 12px;
+  font-weight: 400;
+  color: #6a7282;
+  white-space: nowrap;
+  letter-spacing: -0.26px;
+  ${mediaSmall`
+    font-size: 11px;
+  `}
+`;
+
+const TimeSubText = styled.div`
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #6a7282;
+  letter-spacing: -0.26px;
+  ${mediaSmall`
+    font-size: 11px;
+  `}
 `;
 
 const InfoText = styled.div`
@@ -146,30 +242,6 @@ const InfoText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  align-self: center;
   ${mediaSmall_description}
-`;
-
-const TimeContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex: 1;
-  align-items: center;
-`;
-
-const InfoTextWrapper = styled.div`
-  align-items: center;
-`;
-
-const TodayTime = styled.div`
-  font-family: Pretendard;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 150%;
-  letter-spacing: -0.26px;
-  color: #6a7282;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
 `;

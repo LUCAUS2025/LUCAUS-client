@@ -2,6 +2,7 @@ export interface CommonItem {
   dayBoothNum: number;
   name: string;
   recommendNum: number;
+  location: string;
   type: 'booth' | 'foodTruck';
 }
 

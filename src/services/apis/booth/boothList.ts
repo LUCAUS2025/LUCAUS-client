@@ -7,6 +7,7 @@ interface BoothListRawData {
   recommendNum: number;
   owner: string;
   categories: string[];
+  location: string;
 }
 
 function mapRawToBoothList(rawList: BoothListRawData[]): BoothItem[] {
@@ -16,6 +17,7 @@ function mapRawToBoothList(rawList: BoothListRawData[]): BoothItem[] {
     owner: raw.owner,
     categories: raw.categories,
     recommendNum: raw.recommendNum,
+    location: raw.location,
     type: 'booth',
   }));
 }

@@ -16,6 +16,7 @@ interface ReviewFormContentProps {
   onClose: () => void;
   type: CommonItem['type'];
   currentId: number;
+  onSubmit?: () => void;
 }
 
 const boothReviewOptions: ReviewOption[] = [
@@ -32,7 +33,7 @@ const foodTruckReviewOptions: ReviewOption[] = [
   { icon: '💨', label: '빨라요', tag: 'FAST' },
 ];
 
-export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type, currentId }) => {
+export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type, currentId, onSubmit }) => {
   const [selected, setSelected] = useState<number[]>([]);
   const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success' | 'fail'>('ready');
   const [errorMessage, setErrorMessage] = useState('');
@@ -53,6 +54,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
         const result = await postBoothReview(currentId, selectedTags);
         if (result?.isSuccess) {
           setReviewStatus('success');
+          onSubmit?.();
           setTimeout(() => {
             onClose();
           }, 1500);
@@ -68,6 +70,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
         const result = await postFoodTruckReview(currentId, selectedTags);
         if (result?.isSuccess) {
           setReviewStatus('success');
+          onSubmit?.();
           setTimeout(() => {
             onClose();
           }, 1500);

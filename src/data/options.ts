@@ -52,3 +52,15 @@ export const lostdateOptions: Option[] = [
   { label: '22 일', value: '2025-05-22' },
   { label: '23 일', value: '2025-05-23' },
 ];
+
+export const mapLocationToPlaceBooth = (location: string) => {
+  if (['해방광장', '정문', '빼빼로광장'].includes(location)) return 'freeSquare';
+  if (['후문', '후문일대'].includes(location)) return 'backDoor';
+  return null;
+};
+
+export const mapLocationToPlaceFoodTruck = (location: string) => {
+  if (['해방광장', '303관 B1층', '정문'].includes(location)) return 'building303B1';
+  if (['후문', '후문일대'].includes(location)) return 'backDoor';
+  return null;
+};
