@@ -21,7 +21,6 @@ export const BoothDetail = () => {
     const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
     const booth = result?.[0];
     setBoothDetail(booth ?? null);
-    console.log('[REVIEW]', result?.[0].boothReview);
   };
 
   const handleReviewSubmit = () => {
