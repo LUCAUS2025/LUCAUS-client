@@ -17,14 +17,13 @@ interface StampBoardDayData {
 }
 
 interface Props {
-  setOpenRewardModal: React.Dispatch<SetStateAction<boolean>>;
-  setRewardStampStep: React.Dispatch<SetStateAction<number>>;
+  setOpenRewardPwModal: React.Dispatch<SetStateAction<boolean>>;
   selectedDate: { label: string; value: number | string };
   isRewarded: Record<number, boolean>;
   setStampData: React.Dispatch<SetStateAction<StampBoardDayData[]>>;
 }
 
-const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isRewarded, setStampData }: Props) => {
+const PwPushModal = ({ setOpenRewardPwModal, selectedDate, isRewarded, setStampData }: Props) => {
   // 로딩표현
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,7 +54,7 @@ const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isR
     try {
       const response = await rewardStamp(selectedDate.value!, degree, pw);
       setIsLoading(false);
-      setOpenRewardModal(false);
+      setOpenRewardPwModal(false);
 
       // 갱신된 도장판 정보 받아오고 정보 업데이트
       try {
@@ -98,8 +97,7 @@ const PwPushModal = ({ setOpenRewardModal, setRewardStampStep, selectedDate, isR
       <div>
         <button
           onClick={() => {
-            setOpenRewardModal(false);
-            setRewardStampStep(1);
+            setOpenRewardPwModal(false);
           }}
         >
           닫기

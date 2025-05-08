@@ -1,16 +1,18 @@
 import { styled } from 'styled-components';
 import ShipIcon from './ShipIcon';
+import { SetStateAction } from 'react';
 
 interface Props {
   isCleared: Record<number, boolean>;
   isRewarded: Record<number, boolean>;
   boardType: number | string;
+  setOpenRewardPwModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
 // 1,2일차 - 3/5/7
 // 3일차 - 2/4/6
 
-const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
+const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType, setOpenRewardPwModal }: Props) => {
   // 초기값이 비어있는 경우 방어
   const isClearedValues = Object.values(isCleared);
   const clearedCount = isClearedValues.length > 0 ? isClearedValues.filter(Boolean).length : 0;
@@ -41,13 +43,13 @@ const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
       <GaugeBarBackground />
       <GaugeBarFill style={{ width: progressPercent }} />
       <StepContainer>
-        <StepCircle active={isRewarded[1]}>
+        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[1]}>
           <ShipIcon color={isRewarded[1] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
-        <StepCircle active={isRewarded[2]}>
+        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[2]}>
           <ShipIcon color={isRewarded[2] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
-        <StepCircle active={isRewarded[3]}>
+        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[3]}>
           <ShipIcon color={isRewarded[3] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
       </StepContainer>

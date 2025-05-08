@@ -62,6 +62,15 @@ const StampBoard = () => {
     7: false,
     8: false,
     9: false,
+    11: false,
+    12: false,
+    13: false,
+    14: false,
+    15: false,
+    16: false,
+    17: false,
+    18: false,
+    19: false,
   });
 
   // 상품 수령 여부
@@ -110,7 +119,7 @@ const StampBoard = () => {
         isClearedData[booth.boothId] = booth.isClear;
       });
       setIsCleared(isClearedData);
-
+      console.log(isClearedData);
       // 보상 받았는지 여부
       setIsRewarded({
         1: stampBoardDataWithType.firstReward,
@@ -120,11 +129,24 @@ const StampBoard = () => {
     }
   }, [selectedDate, stampData]);
 
-  // 축기단 부스 모달 오픈 여부
+  // 축기단 부스 상품 소개 모달 오픈 여부
   const [openRewardInfoModal, setOpenRewardInfoModal] = useState(false);
+
+  // 축기단 부스 pw 모달
+  const [openRewardPwModal, setOpenRewardPwModal] = useState(false);
 
   // 축기단 부스 모달 스탭
   const [rewardStampStep, setRewardStampStep] = useState(1);
+
+  // 내 정보 몇번 클릭했는지 관리
+  const [clickedNumInfo, setClickedNumInfo] = useState(0);
+
+  useEffect(() => {
+    if (clickedNumInfo == 3) {
+      localStorage.removeItem('accessToken');
+      window.location.reload();
+    }
+  }, [clickedNumInfo]);
 
   return (
     <Wrapper>
@@ -137,7 +159,7 @@ const StampBoard = () => {
             customData={dateOptions}
             isLong={true}
           />
-          <MyInfoBox>
+          <MyInfoBox onClick={() => setClickedNumInfo(clickedNumInfo + 1)}>
             <div>{userData?.name}</div>
             <div>|</div>
             <div>{userData?.studentId}</div>
@@ -151,7 +173,12 @@ const StampBoard = () => {
           <RewardBox>
             <div>상품 응모까지...</div>
             <BarWrapper>
-              <NewRewardGaugeBar isCleared={isCleared} isRewarded={isRewarded} boardType={selectedDate.value} />
+              <NewRewardGaugeBar
+                isCleared={isCleared}
+                isRewarded={isRewarded}
+                boardType={selectedDate.value}
+                setOpenRewardPwModal={setOpenRewardPwModal}
+              />
             </BarWrapper>
           </RewardBox>
           <GetRewardText onClick={() => setOpenRewardInfoModal(true)}>상품은 언제 받을 수 있나요?</GetRewardText>
@@ -167,28 +194,44 @@ const StampBoard = () => {
         ></StampBoardBox>
         {openModal && (
           <Modal isShort={true}>
-            {isCleared[selectedBooth] ? (
-              <AfterGetStampModalContent
-                BoothInfo={BoothInfo}
-                selectedBooth={selectedBooth}
-                setOpenModal={setOpenModal}
-              />
-            ) : (
-              <BeforGetStampModalContent
-                BoothInfo={BoothInfo}
-                selectedBooth={selectedBooth}
-                setOpenModal={setOpenModal}
-                setIsCleared={setIsCleared}
-                selectedDate={selectedDate}
-                setStampData={setStampData}
-              />
-            )}
+            {(() => {
+              const boothIndex = Number(selectedDate.value) === 2 ? selectedBooth + 10 : selectedBooth;
+
+              return isCleared[boothIndex] ? (
+                <AfterGetStampModalContent
+                  BoothInfo={BoothInfo}
+                  selectedBooth={boothIndex}
+                  setOpenModal={setOpenModal}
+                  boardType={selectedDate.value}
+                />
+              ) : (
+                <BeforGetStampModalContent
+                  BoothInfo={BoothInfo}
+                  selectedBooth={boothIndex}
+                  setOpenModal={setOpenModal}
+                  setIsCleared={setIsCleared}
+                  selectedDate={selectedDate}
+                  setStampData={setStampData}
+                />
+              );
+            })()}
           </Modal>
         )}
 
         {openRewardInfoModal && (
           <Modal isShort={false}>
             <RewardInfoModal setOpenRewardInfoModal={setOpenRewardInfoModal} boardType={selectedDate.value} />
+          </Modal>
+        )}
+
+        {openRewardPwModal && (
+          <Modal isShort={false}>
+            <PwPushModal
+              setOpenRewardPwModal={setOpenRewardPwModal}
+              selectedDate={selectedDate}
+              isRewarded={isRewarded}
+              setStampData={setStampData}
+            />
           </Modal>
         )}
       </OutContentBox>
