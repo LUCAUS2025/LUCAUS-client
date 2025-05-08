@@ -75,22 +75,26 @@ export default function useBottomSheet() {
     const dragDown = touchMove.movingDirection === 'down';
     const dragUp = touchMove.movingDirection === 'up';
     const fromContent = metrics.current.isContentAreaTouched;
-
-    const shouldSnapToTop = !fromContent
-      ? dragUp || Math.abs(dragDistance) < dragThreshold
-      : !dragDown || !(content.current!.scrollTop === 0 && dragDistance > dragThreshold);
-
-    sheet.current!.style.setProperty('transform', shouldSnapToTop ? `translateY(${MIN_Y - MAX_Y}px)` : 'translateY(0)');
-
     const getCurrentTranslateY = () => {
       const transform = sheet.current?.style.transform;
       const match = transform?.match(/translateY\((-?\d+(?:\.\d+)?)px\)/);
       return match ? parseFloat(match[1]) : 0;
     };
 
+    // 드래그가 끝난 후, 리스트가 스크롤 되도록
     if (content.current) {
-      content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
+      // 바텀시트가 올라와있을 때만 리스트 스크롤 가능하도록
+      // 화면 업데이트 직전 코드 실행할 수 있도록...-> 바텀시트 올리고 바로 리스트 스크롤 되도록
+      requestAnimationFrame(() => {
+        content.current!.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
+      });
     }
+
+    const shouldSnapToTop = !fromContent
+      ? dragUp || Math.abs(dragDistance) < dragThreshold
+      : !dragDown || !(content.current!.scrollTop === 0 && dragDistance > dragThreshold);
+
+    sheet.current!.style.setProperty('transform', shouldSnapToTop ? `translateY(${MIN_Y - MAX_Y}px)` : 'translateY(0)');
 
     metrics.current = {
       touchStart: { sheetY: 0, touchY: 0 },
@@ -116,11 +120,14 @@ export default function useBottomSheet() {
   }, [MIN_Y, MAX_Y]);
 
   useEffect(() => {
-    const handleContentTouchStart = () => {
-      metrics.current.isContentAreaTouched = true;
+    const handleContentTouchStart = (e: TouchEvent) => {
+      if (content.current?.contains(e.target as Node)) {
+        metrics.current.isContentAreaTouched = true;
+      }
     };
     const contentEl = content.current;
     if (contentEl) {
+      // 처음에는 스크롤을 막음
       contentEl.addEventListener('touchstart', handleContentTouchStart);
       contentEl.style.overflowY = 'hidden';
     }

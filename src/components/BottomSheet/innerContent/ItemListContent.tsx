@@ -30,7 +30,7 @@ export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescripti
                 <ItemId>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer>
                   <ItemTitle>{item.name}</ItemTitle>
-                  <ItemDescription>{item.info}</ItemDescription>
+                  <ItemDescription>{item.owner}</ItemDescription>
                   <ItemKeywords>
                     {item.categories.map((key, index) => (
                       <Keyword key={index}>#{key}</Keyword>
@@ -131,6 +131,7 @@ const ItemTitle = styled.div`
 const ItemDescription = styled.div`
   margin-bottom: 4px;
   font-size: 12px;
+  color: #6a7282;
 `;
 const ItemKeywords = styled.div`
   display: flex;

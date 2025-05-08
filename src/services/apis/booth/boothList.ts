@@ -5,7 +5,7 @@ interface BoothListRawData {
   dayBoothNum: number;
   name: string;
   recommendNum: number;
-  info: string;
+  owner: string;
   categories: string[];
 }
 
@@ -13,7 +13,7 @@ function mapRawToBoothList(rawList: BoothListRawData[]): BoothItem[] {
   return rawList.map((raw) => ({
     dayBoothNum: raw.dayBoothNum,
     name: raw.name,
-    info: raw.info,
+    owner: raw.owner,
     categories: raw.categories,
     recommendNum: raw.recommendNum,
     type: 'booth',

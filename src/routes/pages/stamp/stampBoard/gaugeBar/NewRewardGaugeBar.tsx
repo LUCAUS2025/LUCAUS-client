@@ -1,16 +1,18 @@
 import { styled } from 'styled-components';
 import ShipIcon from './ShipIcon';
+import { SetStateAction } from 'react';
 
 interface Props {
   isCleared: Record<number, boolean>;
   isRewarded: Record<number, boolean>;
   boardType: number | string;
+  setOpenRewardPwModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
 // 1,2일차 - 3/5/7
 // 3일차 - 2/4/6
 
-const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
+const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType, setOpenRewardPwModal }: Props) => {
   // 초기값이 비어있는 경우 방어
   const isClearedValues = Object.values(isCleared);
   const clearedCount = isClearedValues.length > 0 ? isClearedValues.filter(Boolean).length : 0;
@@ -20,7 +22,7 @@ const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
     // 조건 기반 게이지 계산
     if (clearedCount === 1) progressPercent = '8%';
     else if (clearedCount === 2) progressPercent = '15%';
-    else if (clearedCount === 3) progressPercent = '30%';
+    else if (clearedCount === 3) progressPercent = '25%';
     else if (clearedCount === 4) progressPercent = '45%';
     else if (clearedCount === 5) progressPercent = '60%';
     else if (clearedCount === 6) progressPercent = '77%';
@@ -29,7 +31,7 @@ const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
     // type 2인 경우
     // 조건 기반 게이지 계산
     if (clearedCount === 1) progressPercent = '14%';
-    else if (clearedCount === 2) progressPercent = '30%';
+    else if (clearedCount === 2) progressPercent = '25%';
     else if (clearedCount === 3) progressPercent = '44%';
     else if (clearedCount === 4) progressPercent = '60%';
     else if (clearedCount === 5) progressPercent = '75%';
@@ -41,13 +43,13 @@ const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType }: Props) => {
       <GaugeBarBackground />
       <GaugeBarFill style={{ width: progressPercent }} />
       <StepContainer>
-        <StepCircle active={isRewarded[1]}>
+        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[1]}>
           <ShipIcon color={isRewarded[1] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
-        <StepCircle active={isRewarded[2]}>
+        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[2]}>
           <ShipIcon color={isRewarded[2] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
-        <StepCircle active={isRewarded[3]}>
+        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[3]}>
           <ShipIcon color={isRewarded[3] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
       </StepContainer>
@@ -72,7 +74,7 @@ const GaugeBarBackground = styled.div`
   left: 5%;
   width: 90%;
   height: 24px;
-  background-color: #d0d5dd;
+  background-color: #f3f4f6;
   border-radius: 24px;
   transform: translateY(-50%);
   z-index: 0;
@@ -96,7 +98,7 @@ const GaugeBar = styled.div<{ active: boolean }>`
   left: 5%;
   width: 90%;
   height: 24px;
-  background-color: ${({ active }) => (active ? '#1447e6' : '#d0d5dd')};
+  background-color: ${({ active }) => (active ? '#1447e6' : '#F3F4F6')};
   border-radius: 24px;
   transform: translateY(-50%);
   z-index: 0;
@@ -107,11 +109,11 @@ const StepCircle = styled.div<{ active: boolean }>`
   height: 40px;
   border-radius: 50%;
   background-color: white;
-  border: 1px solid ${({ active }) => (active ? '#1447e6' : '#d0d5dd')};
+  //border: 1px solid ${({ active }) => (active ? '#1447e6' : '#D1D5DC')};
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 4;
 `;
 
 const StepContainer = styled.div`
@@ -121,5 +123,5 @@ const StepContainer = styled.div`
   margin-left: 25%;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 `;
