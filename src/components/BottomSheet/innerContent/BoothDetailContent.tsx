@@ -21,9 +21,14 @@ import { mediaSmall_title } from '../../../styles/responsive';
 interface BoothDetailContentProps {
   boothDetail: BoothDetailRawData;
   selectedDate: number;
+  handleReviewSubmit?: () => void;
 }
 
-export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDetail, selectedDate }) => {
+export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({
+  boothDetail,
+  selectedDate,
+  handleReviewSubmit,
+}) => {
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
 
   const openReviewSheet = () => {
@@ -64,7 +69,12 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({ boothDet
       {/* 리뷰 바텀시트 */}
       {isReviewSheetOpen && (
         <PortalBottomSheet
-          componentProps={{ onClose: closeReviewSheet, type: 'booth', currentId: boothDetail?.boothId }}
+          componentProps={{
+            onClose: closeReviewSheet,
+            type: 'booth',
+            currentId: boothDetail?.boothId,
+            ...(handleReviewSubmit && { onSubmit: handleReviewSubmit }),
+          }}
           contentComponent={ReviewFormContent}
           onClose={closeReviewSheet}
         />

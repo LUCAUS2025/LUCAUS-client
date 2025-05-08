@@ -10,9 +10,14 @@ import { mediaSmall } from '../../../styles/responsive';
 interface FoodTruckDetailContentProps {
   foodTruckDetail: FoodTruckDetailRawData;
   selectedDate: number;
+  handleReviewSubmit?: () => void;
 }
 
-export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({ foodTruckDetail, selectedDate }) => {
+export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({
+  foodTruckDetail,
+  selectedDate,
+  handleReviewSubmit,
+}) => {
   const [isReviewSheetOpen, setIsReviewSheetOpen] = useState(false);
 
   const openReviewSheet = () => {
@@ -60,7 +65,12 @@ export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({ 
       {/*리뷰 바텀시트*/}
       {isReviewSheetOpen && (
         <PortalBottomSheet
-          componentProps={{ onClose: closeReviewSheet, type: 'foodTruck', currentId: foodTruckDetail?.foodTruckId }}
+          componentProps={{
+            onClose: closeReviewSheet,
+            type: 'foodTruck',
+            currentId: foodTruckDetail?.foodTruckId,
+            ...(handleReviewSubmit && { onSubmit: handleReviewSubmit }),
+          }}
           contentComponent={ReviewFormContent}
           onClose={closeReviewSheet}
         />
