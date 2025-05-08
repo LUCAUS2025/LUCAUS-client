@@ -17,12 +17,17 @@ export const FoodTruckDetail = () => {
   const [foodTruckDetail, setFoodTruckDetail] = useState<FoodTruckDetailRawData | null>(null);
   const selectedDate = location.state?.selectedDate;
 
+  const getFoodTruckDetail = async () => {
+    const result = await fetchFoodTruckDetail(selectedDate, Number(dayFoodTruckNum));
+    const foodTruck = result?.[0];
+    setFoodTruckDetail(foodTruck ?? null);
+  };
+
+  const handleReviewSubmit = () => {
+    getFoodTruckDetail();
+  };
+
   useEffect(() => {
-    const getFoodTruckDetail = async () => {
-      const result = await fetchFoodTruckDetail(selectedDate, Number(dayFoodTruckNum));
-      const foodTruck = result?.[0];
-      setFoodTruckDetail(foodTruck ?? null);
-    };
     getFoodTruckDetail();
   }, [dayFoodTruckNum, selectedDate]);
 
@@ -36,6 +41,10 @@ export const FoodTruckDetail = () => {
     return <LoadingPage />;
   }
 
+  if (!foodTruckDetail.cover) {
+    return <LoadingPage />;
+  }
+
   return (
     <>
       <BaseLayer backgroundImgSrc={foodTruckDetail?.cover}>
@@ -45,7 +54,7 @@ export const FoodTruckDetail = () => {
         <StaticBottomSheet
           size={'large'}
           ContentComponent={FoodTruckDetailContent}
-          componentProps={{ foodTruckDetail, selectedDate }}
+          componentProps={{ foodTruckDetail, selectedDate, handleReviewSubmit }}
           isBottomSheetHeader={false}
           overlapFooter={false}
         />

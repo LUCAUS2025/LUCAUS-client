@@ -17,12 +17,17 @@ export const BoothDetail = () => {
   const [boothDetail, setBoothDetail] = useState<BoothDetailRawData | null>(null);
   const selectedDate = location.state?.selectedDate;
 
+  const getBoothDetail = async () => {
+    const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
+    const booth = result?.[0];
+    setBoothDetail(booth ?? null);
+  };
+
+  const handleReviewSubmit = () => {
+    getBoothDetail();
+  };
+
   useEffect(() => {
-    const getBoothDetail = async () => {
-      const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
-      const booth = result?.[0];
-      setBoothDetail(booth ?? null);
-    };
     getBoothDetail();
   }, [dayBoothNum, selectedDate]);
 
@@ -49,7 +54,7 @@ export const BoothDetail = () => {
         <StaticBottomSheet
           size={'large'}
           ContentComponent={BoothDetailContent}
-          componentProps={{ boothDetail, selectedDate }}
+          componentProps={{ boothDetail, selectedDate, handleReviewSubmit }}
           isBottomSheetHeader={false}
           overlapFooter={false}
         />

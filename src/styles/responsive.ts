@@ -27,6 +27,6 @@ export const mediaSmall_subTitle = css`
 
 export const mediaSmall_description = css`
   ${mediaSmall`
-    font-size: 12px;
+    font-size: 13px;
   `}
 `;

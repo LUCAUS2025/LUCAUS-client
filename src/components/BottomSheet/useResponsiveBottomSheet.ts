@@ -16,7 +16,7 @@ export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
     const isLarge = innerWidth >= 410;
 
     const MIN_Y = innerHeight * (isSmall ? 0.48 : isLarge ? 0.33 : 0.38); // 가장 아래일 때
-    const MAX_Y = innerHeight * (isSmall ? 0.78 : isLarge ? 0.63 : 0.67); // 가장 위로 올라왔을 때
+    const MAX_Y = innerHeight * (isSmall ? 0.79 : isLarge ? 0.63 : 0.67); // 가장 위로 올라왔을 때
 
     return {
       MIN_Y,

@@ -82,6 +82,8 @@ export const FoodTruck = () => {
             description={'매일 10시부터 19시, 맛의 향연을 즐겨보세요!'}
             data={foodTruckList || []}
             setSelectedItem={setSelectedItem}
+            selectedPlace={selectedPlace}
+            type="foodTruck"
           />
         </>
       )}

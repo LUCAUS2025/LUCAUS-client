@@ -6,6 +6,7 @@ interface FoodTruckListRawData {
   name: string;
   recommendNum: number;
   representMenu: string[];
+  location: string;
 }
 
 function mapRawToFoodTruckList(rawList: FoodTruckListRawData[]): FoodTruckItem[] {
@@ -14,6 +15,7 @@ function mapRawToFoodTruckList(rawList: FoodTruckListRawData[]): FoodTruckItem[]
     name: raw.name,
     recommendNum: raw.recommendNum,
     representMenu: raw.representMenu,
+    location: raw.location,
     type: 'foodTruck',
   }));
 }

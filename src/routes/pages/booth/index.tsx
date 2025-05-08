@@ -63,7 +63,7 @@ export const Booth = () => {
   }, []);
 
   return (
-    <BaseLayer backgroundImgSrc="/images/booth/tempStreet.png">
+    <BaseLayer backgroundImgSrc="/images/booth/tempStreet2.png">
       {/* 리스트 바텀시트 */}
       {!selectedItem && (
         <>
@@ -76,6 +76,8 @@ export const Booth = () => {
             description={'한눈에 보는 부스 배치도와 부스 리스트'}
             data={boothList || []}
             setSelectedItem={setSelectedItem}
+            selectedPlace={selectedPlace}
+            type="booth"
           />
         </>
       )}

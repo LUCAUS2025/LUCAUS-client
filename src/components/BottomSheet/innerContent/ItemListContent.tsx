@@ -1,19 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
+import { mapLocationToPlaceBooth, mapLocationToPlaceFoodTruck, Option } from '../../../data/options';
 
 interface ContentProps {
   theTitle?: string;
   theDescription?: string;
   data?: BoothOrFoodTruckItem[];
-  setSelectedItem: (item: BoothOrFoodTruckItem | null) => void;
+  setSelectedItem?: (item: BoothOrFoodTruckItem | null) => void;
+  selectedPlace?: Option;
+  type?: string;
 }
 
-export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescription, data, setSelectedItem }) => {
-  const booths = data?.filter((item): item is BoothItem => item.type === 'booth');
-  const foodTrucks = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
+export const ItemListContent: React.FC<ContentProps> = ({
+  theTitle,
+  theDescription,
+  data,
+  setSelectedItem,
+  selectedPlace,
+  type,
+}) => {
+  const boothsByDate = data?.filter((item): item is BoothItem => item.type === 'booth');
+  const foodTrucksByDate = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
+  const [boothsByDatePlace, setBoothsByDatePlace] = useState<BoothItem[]>();
+  const [foodTruckByDatePlace, setFoodTruckByDatePlace] = useState<FoodTruckItem[]>();
+
+  useEffect(() => {
+    if (type === 'booth') {
+      const filteredData = boothsByDate?.filter(
+        (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
+      );
+      setBoothsByDatePlace(filteredData);
+    } else if (type === 'foodTruck') {
+      const filteredData = foodTrucksByDate?.filter(
+        (item) => mapLocationToPlaceFoodTruck(item.location) === selectedPlace?.value,
+      );
+      setFoodTruckByDatePlace(filteredData);
+    }
+  }, [selectedPlace, data]);
 
   return (
     <Wrapper>
@@ -22,10 +48,10 @@ export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescripti
         <Description>{theDescription}</Description>
       </TitleContainer>
       {/* 부스 리스트 */}
-      {booths && booths.length > 0 && (
+      {boothsByDatePlace && boothsByDatePlace.length > 0 && (
         <List>
-          {booths?.map((item) => (
-            <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
+          {boothsByDatePlace?.map((item) => (
+            <Item key={item.dayBoothNum} onClick={() => setSelectedItem!(item)}>
               <ItemContent>
                 <ItemId>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer>
@@ -47,10 +73,10 @@ export const ItemListContent: React.FC<ContentProps> = ({ theTitle, theDescripti
         </List>
       )}
       {/* 푸드트럭 리스트 */}
-      {foodTrucks && foodTrucks.length > 0 && (
+      {foodTruckByDatePlace && foodTruckByDatePlace.length > 0 && (
         <List>
-          {foodTrucks?.map((item) => (
-            <Item key={item.dayBoothNum} onClick={() => setSelectedItem(item)}>
+          {foodTruckByDatePlace?.map((item) => (
+            <Item key={item.dayBoothNum} onClick={() => setSelectedItem!(item)}>
               <ItemContent>
                 <ItemId>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer>
