@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { Option } from '../../../data/options';
 import Footer from '../../../components/home/Footer';
+import ArtistlineUp from '../../../components/stage/ArtistlineUp';
 
 const stagedateOptions = ['21일', '22일', '23일'];
 
@@ -140,7 +141,7 @@ export const Stage = () => {
           <div ref={artistRef}>
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-            <LineUp />
+            <ArtistlineUp />
           </div>
         )}
       </Container>
