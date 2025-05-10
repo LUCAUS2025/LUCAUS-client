@@ -25,12 +25,14 @@ export const Header = () => {
     if (path.includes('barrierfree')) return '배리어프리';
     if (path.includes('/stamp/board')) return '광장기획전 스탬프';
     if (path.includes('/stamp/auth')) return '광장기획전 스탬프';
+    if (path.includes('/stamp/login')) return '로그인';
+    if (path.includes('/stamp/signup')) return '회원가입';
 
     return '오늘의 공연';
   }, [location.pathname]);
 
   // arrow 아이콘을 보여줄 경로
-  const arrowPaths = ['guide', 'entry', 'notice', 'lostitem', 'barrierfree', 'stamp'];
+  const arrowPaths = ['guide', 'entry', 'notice', 'lostitem', 'barrierfree', 'login', 'signup'];
 
   // 현재 경로가 arrow 아이콘 대상인지 판단
   const showArrowIcon = arrowPaths.some((path) => location.pathname.includes(path));
@@ -84,11 +86,11 @@ const Icon = styled.div`
   height: 30px;
 
   &.left-icon {
-    background-image: url('./images/home/icon-L-black.webp');
+    background-image: url('/images/home/icon-L-black.webp');
   }
 
   &.left-icon.arrow-icon {
-    background-image: url('./images/home/icon-L-arrow.webp');
+    background-image: url('/images/home/icon-L-arrow.webp');
   }
 
   &:not(.left-icon) {
