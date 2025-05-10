@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
-import { mapLocationToPlaceBooth, mapLocationToPlaceFoodTruck, Option } from '../../../data/options';
+import { mapLocationToPlaceBooth, Option } from '../../../data/options';
+import { useNavigate } from 'react-router-dom';
 
 interface ContentProps {
   theTitle?: string;
@@ -22,10 +23,11 @@ export const ItemListContent: React.FC<ContentProps> = ({
   selectedPlace,
   type,
 }) => {
+  const navigate = useNavigate();
   const boothsByDate = data?.filter((item): item is BoothItem => item.type === 'booth');
-  const foodTrucksByDate = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
+  const foodTruckList = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
   const [boothsByDatePlace, setBoothsByDatePlace] = useState<BoothItem[]>();
-  const [foodTruckByDatePlace, setFoodTruckByDatePlace] = useState<FoodTruckItem[]>();
+  //const [foodTruckByDatePlace, setFoodTruckByDatePlace] = useState<FoodTruckItem[]>();
 
   useEffect(() => {
     if (type === 'booth') {
@@ -33,11 +35,11 @@ export const ItemListContent: React.FC<ContentProps> = ({
         (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
       );
       setBoothsByDatePlace(filteredData);
-    } else if (type === 'foodTruck') {
-      const filteredData = foodTrucksByDate?.filter(
-        (item) => mapLocationToPlaceFoodTruck(item.location) === selectedPlace?.value,
-      );
-      setFoodTruckByDatePlace(filteredData);
+      // } else if (type === 'foodTruck') {
+      //   const filteredData = foodTrucksByDate?.filter(
+      //     (item) => mapLocationToPlaceFoodTruck(item.location) === selectedPlace?.value,
+      //   );
+      //   setFoodTruckByDatePlace(filteredData);
     }
   }, [selectedPlace, data]);
 
@@ -73,10 +75,10 @@ export const ItemListContent: React.FC<ContentProps> = ({
         </List>
       )}
       {/* 푸드트럭 리스트 */}
-      {foodTruckByDatePlace && foodTruckByDatePlace.length > 0 && (
+      {foodTruckList && (
         <List>
-          {foodTruckByDatePlace?.map((item) => (
-            <Item key={item.dayBoothNum} onClick={() => setSelectedItem!(item)}>
+          {foodTruckList?.map((item) => (
+            <Item key={item.dayBoothNum} onClick={() => navigate(`/foodTruck/${item.dayBoothNum}`)}>
               <ItemContent>
                 <ItemId>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer>
@@ -104,13 +106,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 12px 0px;
+  //padding: 12px 0px;
 `;
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 0px 20px;
+  padding: 0px 16px;
 `;
 const Title = styled.div`
   font-size: 20px;
