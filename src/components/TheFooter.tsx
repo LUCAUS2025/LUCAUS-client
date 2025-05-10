@@ -38,7 +38,7 @@ export const Wrapper = styled.div`
   width: 100%;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 3;
 `;
 
 const Buttons = styled.div`

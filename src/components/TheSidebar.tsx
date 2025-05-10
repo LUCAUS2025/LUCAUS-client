@@ -93,7 +93,7 @@ const MenuDom = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  height: calc(100% - 60px);
+  height: 100%;
 `;
 
 const MenuItem = styled.a`
