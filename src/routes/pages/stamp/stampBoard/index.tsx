@@ -12,6 +12,7 @@ import RewardGaugeBar from './gaugeBar/RewardGaugeBer';
 import NewRewardGaugeBar from './gaugeBar/NewRewardGaugeBar';
 import RewardInfoModal from './rewardStampModal/RewardInfoModal';
 import PwPushModal from './rewardStampModal/PwPushModal';
+import RewardedModal from './rewardStampModal/RewardedModal';
 
 interface BoothClear {
   boothId: number;
@@ -97,10 +98,10 @@ const StampBoard = () => {
         const responseUserInfo = await userInfo();
         setUserData(responseUserInfo.result);
       } catch (error) {
-        localStorage.removeItem('accessToken');
-        alert('로그아웃 되었습니다. 다시 로그인해주세요.');
-        // 데이터 가져오기 실패시 다시 로그인 화면으로
-        window.location.href = '/stamp/auth';
+        // localStorage.removeItem('accessToken');
+        // alert('로그아웃 되었습니다. 다시 로그인해주세요.');
+        // // 데이터 가져오기 실패시 다시 로그인 화면으로
+        // window.location.href = '/stamp/auth';
       }
     };
 
@@ -119,7 +120,6 @@ const StampBoard = () => {
         isClearedData[booth.boothId] = booth.isClear;
       });
       setIsCleared(isClearedData);
-      console.log(isClearedData);
       // 보상 받았는지 여부
       setIsRewarded({
         1: stampBoardDataWithType.firstReward,
@@ -140,6 +140,12 @@ const StampBoard = () => {
 
   // 내 정보 몇번 클릭했는지 관리
   const [clickedNumInfo, setClickedNumInfo] = useState(0);
+
+  // 축기단 부스 이미 수령한 경우
+  const [openRewardedModal, setOpenRewardedModal] = useState(false);
+
+  // 클릭한 축기단 상품 부스 번호
+  const [clickedRewardDegree, setClickedRewardDegree] = useState(1);
 
   useEffect(() => {
     if (clickedNumInfo == 3) {
@@ -178,6 +184,8 @@ const StampBoard = () => {
                 isRewarded={isRewarded}
                 boardType={selectedDate.value}
                 setOpenRewardPwModal={setOpenRewardPwModal}
+                setOpenRewardedModal={setOpenRewardedModal}
+                setClickedRewardDegree={setClickedRewardDegree}
               />
             </BarWrapper>
           </RewardBox>
@@ -232,6 +240,12 @@ const StampBoard = () => {
               isRewarded={isRewarded}
               setStampData={setStampData}
             />
+          </Modal>
+        )}
+
+        {openRewardedModal && (
+          <Modal isShort={false}>
+            <RewardedModal setOpenRewardedModal={setOpenRewardedModal} clickedRewardDegree={clickedRewardDegree} />
           </Modal>
         )}
       </OutContentBox>

@@ -2,6 +2,7 @@ import React, { SetStateAction, useState } from 'react';
 import { rewardStamp } from '../../../../../services/apis/stamp/rewardStamp';
 import { AxiosError } from 'axios';
 import { stampBoardInfo } from '../../../../../services/apis/stamp/stampBoardInfo';
+import { styled } from 'styled-components';
 
 interface BoothClear {
   boothId: number;
@@ -89,23 +90,109 @@ const PwPushModal = ({ setOpenRewardPwModal, selectedDate, isRewarded, setStampD
   };
 
   return (
-    <div>
-      <div>축제기획단 부스</div>
-      <div>상품 응모를 위해 축기단에게 화면을 보여주세요.</div>
-      <input type="password" value={pwData} onChange={(e) => handleInputChange(e.target.value)}></input>
-      {isError?.error && <div>{isError.message}</div>}
-      <div>
-        <button
+    <Wrapper>
+      <TitleWrapper>
+        <Title>축제기획단 부스</Title>
+        <SubTitle>상품 응모를 위해 축기단에게 화면을 보여주세요.</SubTitle>
+      </TitleWrapper>
+      <StyledInput
+        placeholder="비밀번호를 입력해주세요"
+        type="password"
+        value={pwData}
+        onChange={(e) => handleInputChange(e.target.value)}
+      ></StyledInput>
+      {isError?.error ? <ErrorLine>비밀번호가 일치하지 않습니다</ErrorLine> : <EmptyBox />}
+      <ButtonWrapper>
+        <StyledButton
           onClick={() => {
             setOpenRewardPwModal(false);
           }}
+          type={'cancle'}
         >
-          닫기
-        </button>
-        <button onClick={handleClickPwButton}>비밀번호 확인</button>
-      </div>
-    </div>
+          취소
+        </StyledButton>
+        <StyledButton onClick={handleClickPwButton} type={'confirm'}>
+          확인
+        </StyledButton>
+      </ButtonWrapper>
+    </Wrapper>
   );
 };
 
 export default PwPushModal;
+
+const Wrapper = styled.div`
+  width: 93%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80%;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+const Title = styled.div`
+  color: #030712;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+const SubTitle = styled.div`
+  color: #6a7282;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+`;
+
+const StyledInput = styled.input`
+  display: flex;
+  height: 48px;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #d1d5dc;
+  background: #fff;
+  padding-left: 12px;
+
+  color: #6a7282;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+`;
+
+const StyledButton = styled.button<{ type: string }>`
+  display: flex;
+  height: 48px;
+  width: 155px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 12px;
+  background-color: ${({ type }) => (type == 'confirm' ? '#1447e6' : '#D1D5DC')};
+  color: ${({ type }) => (type == 'confirm' ? '#ffffff' : '#6A7282')};
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ErrorLine = styled.div`
+  color: #fb2c36;
+  font-size: 10px;
+  height: 15px;
+  padding-left: 10px;
+  margin-top: -20px;
+`;
+
+const EmptyBox = styled.div`
+  height: 15px;
+  width: 90%;
+`;
