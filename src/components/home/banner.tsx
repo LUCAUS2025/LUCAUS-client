@@ -85,35 +85,41 @@ const CardContent = styled.div`
 `;
 
 const Image = styled.img`
-  width: 80%;
+  width: 90%;
   height: auto;
   object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0px 0px 40px 0px #00000033;
+  border-radius: 8px;
+  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
 `;
 
 const Button = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  padding: 8px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background 0.2s ease;
 
   &:hover {
-    background: #e0e0e0;
+    background: rgba(255, 255, 255, 1);
   }
 `;
 
 const LeftButton = styled(Button)`
-  left: 10px;
+  left: 16px;
 `;
 
 const RightButton = styled(Button)`
-  right: 10px;
+  right: 16px;
 `;
 
 const Indicators = styled.div`
@@ -153,13 +159,10 @@ const BackCardRight = styled.div`
   transform: translateY(-50%) translateX(30%);
   width: 60%;
   z-index: 1;
-  opacity: 0.2;
 `;
 
 const BackCardImage = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
-  filter: blur(1px);
-  border-radius: 16px;
 `;
