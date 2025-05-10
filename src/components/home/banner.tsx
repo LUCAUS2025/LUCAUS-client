@@ -67,8 +67,7 @@ const images = [
 
 // 스타일 정의
 const CarouselContainer = styled.div`
-  width: 100%;
-  margin: auto;
+  margin: 0 -16px;
 `;
 
 const Card = styled.div`
@@ -125,7 +124,10 @@ const RightButton = styled(Button)`
 const Indicators = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 8px;
+  margin-top: 12px;
+  gap: 6px;
+  position: relative;
+  z-index: 3;
 `;
 
 interface IndicatorProps {
@@ -133,16 +135,14 @@ interface IndicatorProps {
 }
 
 const Indicator = styled.div<IndicatorProps>`
-  width: 8px;
+  width: ${(props) => (props.active ? '24px' : '8px')};
   height: 8px;
-  margin: 0 4px;
-  border-radius: 50%;
+  border-radius: 8px;
   background: ${(props) => (props.active ? '#3b82f6' : '#d1d5db')};
-  transition: all 0.3s ease-in-out;
-  transform: ${(props) => (props.active ? 'scale(1.25)' : 'scale(1)')};
+  transition: all 0.3s ease;
 `;
 
-// 💡 양 옆 BackCard
+// 양 옆 BackCard
 const BackCardLeft = styled.div`
   position: absolute;
   left: 0;
