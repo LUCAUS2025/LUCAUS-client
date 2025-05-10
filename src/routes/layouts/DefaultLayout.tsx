@@ -12,14 +12,14 @@ const LayoutContent = () => {
   const { hideHeader } = useHeader();
 
   return (
-    <>
+    <LayoutDom>
       {!hideHeader && <TheHeader key="header-visible" />}
       <TheSidebar />
       <Content hideHeader={hideHeader}>
         <Outlet />
       </Content>
       <TheFooter />
-    </>
+    </LayoutDom>
   );
 };
 
@@ -36,14 +36,22 @@ export const DefaultLayout = () => {
   );
 };
 
+const LayoutDom = styled.div`
+  width: min(100vw, 600px);
+  @media (max-width: 600px) {
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+`;
+
 export const AppDom = styled.div`
-  width: min(100vw, 375px);
-  height: 667px;
+  width: min(100vw, 600px);
+  height: 100vh;
   margin: 0 auto;
   font-family: 'Pretendard-Regular';
   background-color: white;
 
-  @media (max-width: 375px) {
+  @media (max-width: 600px) {
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
   }

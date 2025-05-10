@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMenu } from '../../context/MenuContext';
+import { WrapperH } from './Header';
 
 export const HomeHeader = () => {
   const navigate = useNavigate();
@@ -12,24 +13,16 @@ export const HomeHeader = () => {
   };
 
   return (
-    <Wrapper>
+    <WrapperH>
       <Header onClick={() => navigate('/')}>
         <Icon onClick={openMenu} className="left-icon"></Icon>
         <img style={{ height: '36px' }} src="/images/common/logo.webp" alt="logo" />
         <Icon></Icon>
       </Header>
-    </Wrapper>
+    </WrapperH>
   );
 };
 export default HomeHeader;
-
-export const Wrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-`;
 
 const Header = styled.div`
   background-color: #1447e6;

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMemo } from 'react';
 import { useMenu } from '../../context/MenuContext';
-import { Wrapper } from './HomeHeader';
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -53,17 +52,28 @@ export const Header = () => {
   };
 
   return (
-    <Wrapper>
+    <WrapperH>
       <HeaderWrapper>
         <Icon onClick={handleIconClick} className={`left-icon ${showArrowIcon ? 'arrow-icon' : ''}`} />
         <Title>{title}</Title>
         <Icon />
       </HeaderWrapper>
-    </Wrapper>
+    </WrapperH>
   );
 };
 
 export default Header;
+
+export const WrapperH = styled.div`
+  position: fixed;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+`;
 
 const HeaderWrapper = styled.div`
   background-color: #f9fafb;
