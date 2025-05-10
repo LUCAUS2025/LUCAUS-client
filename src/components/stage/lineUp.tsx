@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
-import { Card, CardImage } from '../home/thumbnail';
+import { CardImage } from '../home/thumbnail';
 
 const ArtistScroll = styled.div`
   display: flex;
@@ -51,6 +51,20 @@ const ArtistName = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+const BannerScroll = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+`;
+
+const BannerItem = styled.div`
+  width: 284px;
+  height: 240px;
+  scroll-snap-align: center;
+  flex-shrink: 0;
 `;
 
 const ListButtonWrapper = styled.div`
@@ -116,16 +130,63 @@ const Tag = styled.span`
 const artists = [
   '멋쟁이 밴드처럼',
   '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
   '멋쟁이 사자처럼',
+  '멋쟁이 토끼처럼',
+  '멋쟁이 코끼리처럼',
+  '멋쟁이 여우처럼',
   '멋쟁이 판다처럼',
+];
+
+const bannerImages = [
+  'images/home/banner/1.webp',
+  'images/home/banner/2.webp',
+  'images/home/banner/3.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/2.webp',
+  'images/home/banner/3.webp',
+  'images/home/banner/2.webp',
 ];
 
 export const LineUp = () => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
+  const bannerContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const container = bannerContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const containerLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+
+      const center = containerLeft + containerWidth / 2;
+
+      const index = sectionRefs.current.findIndex((ref) => {
+        if (!ref) return false;
+        const left = ref.offsetLeft;
+        const right = left + ref.clientWidth;
+        return center >= left && center < right;
+      });
+
+      if (index !== -1 && index !== selected) {
+        setSelected(index);
+      }
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [selected]);
+
+  const scrollToIndex = (index: number) => {
+    sectionRefs.current[index]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'nearest',
+    });
+    setSelected(index);
+  };
 
   return (
     <>
@@ -136,14 +197,13 @@ export const LineUp = () => {
             <div>카테고리</div>
             <div>공연팀</div>
           </TableHeader>
-
           {[...Array(7)].map((_, i) => (
             <TableRow key={i}>
               <div>nn:nn - nn:nn</div>
               <div>
                 <Tag>{i === 1 ? '댄스' : '밴드'}</Tag>
               </div>
-              <div>SPYAIR</div>
+              <div>{artists[i]}</div>
             </TableRow>
           ))}
         </TableWrapper>
@@ -151,20 +211,27 @@ export const LineUp = () => {
         <>
           <ArtistScroll>
             {artists.map((name, index) => (
-              <ArtistItem key={index} selected={selected === index} onClick={() => setSelected(index)}>
+              <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index)}>
                 <ArtistImageWrapper selected={selected === index}>
-                  <ArtistImage src="images/home/banner/1.webp" alt="artist" />
+                  <ArtistImage src={bannerImages[index]} alt="artist" />
                 </ArtistImageWrapper>
                 <ArtistName>{name}</ArtistName>
               </ArtistItem>
             ))}
           </ArtistScroll>
 
-          <Card>
-            <CardImage src="images/home/banner/2.webp" alt="옥씨 부인전" />
-            <CardImage src="images/home/banner/2.webp" alt="옥씨 부인전" />
-            <CardImage src="images/home/banner/1.webp" alt="옥씨 부인전" />
-          </Card>
+          <BannerScroll ref={bannerContainerRef}>
+            {bannerImages.map((src, index) => (
+              <BannerItem
+                key={index}
+                ref={(el) => {
+                  sectionRefs.current[index] = el;
+                }}
+              >
+                <CardImage src={src} alt={`배너 ${index + 1}`} />
+              </BannerItem>
+            ))}
+          </BannerScroll>
         </>
       )}
 
