@@ -14,9 +14,17 @@ export const Banner = () => {
   };
 
   useEffect(() => {
+    const today = new Date();
+
+    const skipStart = new Date('2025-05-21');
+    const skipEnd = new Date('2025-05-23');
+
+    if (today >= skipStart && today <= skipEnd) return;
+
     const interval = setInterval(() => {
       nextSlide();
     }, 4000);
+
     return () => clearInterval(interval);
   }, []);
 
