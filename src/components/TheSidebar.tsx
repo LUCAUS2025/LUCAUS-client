@@ -14,21 +14,31 @@ const TheSidebar = () => {
         <CloseButton onClick={toggleMenu}>✕</CloseButton>
         <MenuDom>
           <MenuGap />
-          <MenuHeading>공연</MenuHeading>
-          <MenuItem href="/stage">오늘의 공연</MenuItem>
-          <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
-          <MenuItem href="/guide/watching">관람 가이드</MenuItem>
-          <MenuHeading>거리문화제</MenuHeading>
-          <MenuItem href="/booth">부스배치도</MenuItem>
-          <MenuHeading>광장기획전</MenuHeading>
-          <MenuItem href="/stamp/auth?tab=stamp">스탬프</MenuItem>
-          <MenuHeading>푸드트럭</MenuHeading>
-          <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
-          <MenuHeading>정보</MenuHeading>
-          <MenuItem href="/lostitem">분실물 안내</MenuItem>
-          <MenuItem href="/barrierfree">배리어프리</MenuItem>
-          <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
-          <MenuItem href="/notice">총학생회 공지사항</MenuItem>
+          <ItemContainer>
+            <MenuHeading>공연</MenuHeading>
+            <MenuItem href="/stage">오늘의 공연</MenuItem>
+            <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
+            <MenuItem href="/guide/watching">관람 가이드</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>거리문화제</MenuHeading>
+            <MenuItem href="/booth">부스배치도</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>광장기획전</MenuHeading>
+            <MenuItem href="/stamp/auth?tab=stamp">스탬프</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>푸드트럭</MenuHeading>
+            <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>정보</MenuHeading>
+            <MenuItem href="/lostitem">분실물 안내</MenuItem>
+            <MenuItem href="/barrierfree">배리어프리</MenuItem>
+            <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
+            <MenuItem href="/notice">총학생회 공지사항</MenuItem>
+          </ItemContainer>
         </MenuDom>
       </SidebarContainer>
     </>
@@ -38,7 +48,13 @@ const TheSidebar = () => {
 export default TheSidebar;
 
 const MenuGap = styled.div`
-  height: 60px;
+  padding-top: 60px;
+`;
+
+const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
 `;
 
 const SidebarContainer = styled.div<{ isOpen: boolean }>`
@@ -77,6 +93,8 @@ const CloseButton = styled.button`
 const MenuDom = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: calc(100% - 60px);
 `;
 
 const MenuItem = styled.a`
