@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const Thumbnail = () => {
   return (
     <Card>
-      <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-      <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-      <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+      <CardImage src="images/home/banner/1.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/banner/2.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/banner/3.webp" alt="옥씨 부인전" />
     </Card>
   );
 };
@@ -21,9 +21,9 @@ export const Card = styled.div`
 `;
 
 export const CardImage = styled.img`
-  width: 284px; // 이미지 너비 580px로 수정
-  // height: 200px; // 이미지 높이 240px로 수정
-  // object-fit: cover;
+  min-width: 284px; // 이미지 너비 580px로 수정
+  height: 200px; // 이미지 높이 240px로 수정
+  object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 

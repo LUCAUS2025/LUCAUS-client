@@ -38,7 +38,7 @@ export const DefaultLayout = () => {
   );
 };
 
-const AppDom = styled.div`
+export const AppDom = styled.div`
   width: min(100vw, 600px);
   height: 100vh;
   margin: 0 auto;

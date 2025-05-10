@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -14,18 +16,40 @@ export const Banner = () => {
   };
 
   useEffect(() => {
+    const today = new Date();
+
+    const skipStart = new Date('2025-05-21');
+    const skipEnd = new Date('2025-05-23');
+
+    if (today >= skipStart && today <= skipEnd) return;
+
     const interval = setInterval(() => {
       nextSlide();
-    }, 4000); // 4초마다 실행
+    }, 4000);
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+    return () => clearInterval(interval);
   }, []);
+
+  const prevIndex = (currentIndex - 1 + images.length) % images.length;
+  const nextIndex = (currentIndex + 1) % images.length;
 
   return (
     <CarouselContainer>
       <Card>
+        <BackCardLeft>
+          <BackCardImage src={images[prevIndex]} alt="Previous Slide" />
+        </BackCardLeft>
+        <BackCardRight>
+          <BackCardImage src={images[nextIndex]} alt="Next Slide" />
+        </BackCardRight>
+
         <CardContent>
-          <Image src={images[currentIndex]} alt="Dress Code" />
+          {currentIndex === 0 ? (
+            <Image onClick={() => navigate('/entry')} src={images[currentIndex]} alt="Dress Code" />
+          ) : (
+            <Image src={images[currentIndex]} alt="Dress Code" />
+          )}
+
           <LeftButton onClick={prevSlide}>
             <ChevronLeft size={24} color="#333" />
           </LeftButton>
@@ -34,29 +58,17 @@ export const Banner = () => {
           </RightButton>
         </CardContent>
       </Card>
+
       <Indicators>
         {images.map((_, index) => (
           <Indicator key={index} active={index === currentIndex} />
         ))}
       </Indicators>
-      {/* <BackCards>
-        {images.map((image, index) => {
-          const isPrevious = index === (currentIndex - 1 + images.length) % images.length;
-          const isNext = index === (currentIndex + 1) % images.length;
-
-          return (
-            (isPrevious || isNext) && (
-              <BackCard key={index} active={isPrevious || isNext}>
-                <BackCardImage src={image} alt={`Slide ${index}`} />
-              </BackCard>
-            )
-          );
-        })}
-      </BackCards> */}
     </CarouselContainer>
   );
 };
 
+// 이미지 리스트
 const images = [
   '/images/home/banner/1.webp',
   '/images/home/banner/2.webp',
@@ -68,61 +80,69 @@ const images = [
   '/images/home/banner/2.webp',
 ];
 
+// 스타일 정의
 const CarouselContainer = styled.div`
-  width: 100%;
-  // max-width: 500px;
-  margin: auto;
+  margin: 0 -16px;
 `;
 
 const Card = styled.div`
+  position: relative;
   overflow: hidden;
 `;
 
 const CardContent = styled.div`
   position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Image = styled.img`
-  width: 80%;
+  width: 90%;
   height: auto;
   object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0px 0px 40px 0px #00000033;
+  border-radius: 8px;
+  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
 `;
 
 const Button = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: white;
-  padding: 8px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border: none;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background 0.2s ease;
 
   &:hover {
-    background: #e0e0e0;
+    background: rgba(255, 255, 255, 1);
   }
 `;
 
 const LeftButton = styled(Button)`
-  left: 10px;
-  background: rgba(255, 255, 255, 0.5);
+  left: 16px;
 `;
 
 const RightButton = styled(Button)`
-  right: 10px;
-  background: rgba(255, 255, 255, 0.5);
+  right: 16px;
 `;
 
 const Indicators = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 8px;
+  margin-top: 12px;
+  gap: 6px;
+  position: relative;
+  z-index: 3;
 `;
 
 interface IndicatorProps {
@@ -130,33 +150,34 @@ interface IndicatorProps {
 }
 
 const Indicator = styled.div<IndicatorProps>`
-  width: 8px;
+  width: ${(props) => (props.active ? '24px' : '8px')};
   height: 8px;
-  margin: 0 4px;
-  border-radius: 50%;
+  border-radius: 8px;
   background: ${(props) => (props.active ? '#3b82f6' : '#d1d5db')};
-  transition: all 0.3s ease-in-out;
-  transform: ${(props) => (props.active ? 'scale(1.25)' : 'scale(1)')};
+  transition: all 0.3s ease;
 `;
 
-// const BackCards = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   z-index: -1;
-//   width: 100%;
-//   position: relative;
-// `;
+// 양 옆 BackCard
+const BackCardLeft = styled.div`
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-30%);
+  width: 60%;
+  z-index: 1;
+`;
 
-// const BackCard = styled.div<IndicatorProps>`
-//   overflow: hidden;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: absolute;
-//   background: rgba(0, 0, 0, 0.2);
-// `;
+const BackCardRight = styled.div`
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(30%);
+  width: 60%;
+  z-index: 1;
+`;
 
-// const BackCardImage = styled.img`
-//   width: 100%;
-//   height: 100%;
-// `;
+const BackCardImage = styled.img`
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+`;

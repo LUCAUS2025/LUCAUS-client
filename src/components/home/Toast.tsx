@@ -39,8 +39,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
   background-color: #f3f4f6;
-  padding: 12px 0 12px 12px;
+  padding: 12px 0 12px 0;
   border-radius: 12px;
   width: 100%;
   margin-top: 1rem;
