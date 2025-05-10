@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -43,9 +45,7 @@ export const Banner = () => {
 
         <CardContent>
           {currentIndex === 0 ? (
-            <a href="/entry">
-              <Image src={images[currentIndex]} alt="Dress Code" />
-            </a>
+            <Image onClick={() => navigate('/entry')} src={images[currentIndex]} alt="Dress Code" />
           ) : (
             <Image src={images[currentIndex]} alt="Dress Code" />
           )}
