@@ -28,7 +28,7 @@ const ArtistImageWrapper = styled.div<{ selected: boolean }>`
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  border: 2px solid transparent; //이거 안 하면 border가 울렁거림 ㅠㅠ
+  border: 2px solid transparent;
   overflow-y: auto;
   ${({ selected }) =>
     selected &&
@@ -48,8 +48,8 @@ const ArtistImage = styled.img`
 const ArtistName = styled.div`
   font-size: 0.75rem;
   margin-top: 0.25rem;
-  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
-  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 `;
 
@@ -75,9 +75,8 @@ const ListButton = styled.button`
   }
 `;
 
-// List view table 스타일
 const TableWrapper = styled.div`
-  background-color: #4b5563;
+  background-color: #6d6d6d;
   padding: 1rem;
   border-radius: 0.5rem;
   color: white;
@@ -85,17 +84,25 @@ const TableWrapper = styled.div`
 
 const TableHeader = styled.div`
   display: flex;
-  justify-content: space-between;
   font-weight: bold;
-  padding-bottom: 0.5rem;
+  padding: 0.75rem 0;
   border-bottom: 1px solid white;
+
+  > div {
+    flex: 1;
+    text-align: center;
+  }
 `;
 
 const TableRow = styled.div`
   display: flex;
-  justify-content: space-between;
   padding: 0.75rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  > div {
+    flex: 1;
+    text-align: center;
+  }
 `;
 
 const Tag = styled.span`
@@ -125,18 +132,18 @@ export const LineUp = () => {
       {isListView ? (
         <TableWrapper>
           <TableHeader>
-            <div style={{ flex: 2 }}>시간</div>
-            <div style={{ flex: 1 }}>카테고리</div>
-            <div style={{ flex: 2 }}>공연팀</div>
+            <div>시간</div>
+            <div>카테고리</div>
+            <div>공연팀</div>
           </TableHeader>
 
           {[...Array(7)].map((_, i) => (
             <TableRow key={i}>
-              <div style={{ flex: 2 }}>nn:nn - nn:nn</div>
-              <div style={{ flex: 1 }}>
+              <div>nn:nn - nn:nn</div>
+              <div>
                 <Tag>{i === 1 ? '댄스' : '밴드'}</Tag>
               </div>
-              <div style={{ flex: 2 }}>공연팀명</div>
+              <div>SPYAIR</div>
             </TableRow>
           ))}
         </TableWrapper>
@@ -170,3 +177,5 @@ export const LineUp = () => {
     </>
   );
 };
+
+export default LineUp;
