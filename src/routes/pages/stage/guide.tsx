@@ -39,7 +39,7 @@ const Tabs = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  font-size: 1.2rem;
+  font-size: 1rem;
 `;
 const Tab = styled.div<{ active?: boolean }>`
   padding: 16px;

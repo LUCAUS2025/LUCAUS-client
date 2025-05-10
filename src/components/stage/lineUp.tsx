@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
-import { Card, CardImage } from '../home/thumbnail';
+import { CardImage } from '../home/thumbnail';
 
 const ArtistScroll = styled.div`
   display: flex;
   overflow-x: auto;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 const ArtistItem = styled.div<{ selected: boolean }>`
@@ -22,13 +22,13 @@ const ArtistItem = styled.div<{ selected: boolean }>`
 `;
 
 const ArtistImageWrapper = styled.div<{ selected: boolean }>`
-  width: 5rem;
-  height: 5rem;
+  width: 54px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  border: 2px solid transparent; //이거 안 하면 border가 울렁거림 ㅠㅠ
+  border: 2px solid transparent;
   overflow-y: auto;
   ${({ selected }) =>
     selected &&
@@ -48,9 +48,23 @@ const ArtistImage = styled.img`
 const ArtistName = styled.div`
   font-size: 0.75rem;
   margin-top: 0.25rem;
-  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
-  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+const BannerScroll = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+`;
+
+const BannerItem = styled.div`
+  width: 284px;
+  height: 240px;
+  scroll-snap-align: center;
+  flex-shrink: 0;
 `;
 
 const ListButtonWrapper = styled.div`
@@ -75,9 +89,8 @@ const ListButton = styled.button`
   }
 `;
 
-// List view table 스타일
 const TableWrapper = styled.div`
-  background-color: #4b5563;
+  background-color: #6d6d6d;
   padding: 1rem;
   border-radius: 0.5rem;
   color: white;
@@ -85,17 +98,25 @@ const TableWrapper = styled.div`
 
 const TableHeader = styled.div`
   display: flex;
-  justify-content: space-between;
   font-weight: bold;
-  padding-bottom: 0.5rem;
+  padding: 0.75rem 0;
   border-bottom: 1px solid white;
+
+  > div {
+    flex: 1;
+    text-align: center;
+  }
 `;
 
 const TableRow = styled.div`
   display: flex;
-  justify-content: space-between;
   padding: 0.75rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  > div {
+    flex: 1;
+    text-align: center;
+  }
 `;
 
 const Tag = styled.span`
@@ -103,40 +124,86 @@ const Tag = styled.span`
   border: 1px solid white;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.875rem;
+  font-size: 12px;
 `;
 
 const artists = [
   '멋쟁이 밴드처럼',
   '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
-  '멋쟁이 호랑이처럼',
   '멋쟁이 사자처럼',
+  '멋쟁이 토끼처럼',
+  '멋쟁이 코끼리처럼',
+  '멋쟁이 여우처럼',
   '멋쟁이 판다처럼',
+];
+
+const bannerImages = [
+  'images/home/banner/1.webp',
+  'images/home/banner/2.webp',
+  'images/home/banner/3.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/2.webp',
+  'images/home/banner/3.webp',
+  'images/home/banner/2.webp',
 ];
 
 export const LineUp = () => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
+  const bannerContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const container = bannerContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const containerLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+
+      const center = containerLeft + containerWidth / 2;
+
+      const index = sectionRefs.current.findIndex((ref) => {
+        if (!ref) return false;
+        const left = ref.offsetLeft;
+        const right = left + ref.clientWidth;
+        return center >= left && center < right;
+      });
+
+      if (index !== -1 && index !== selected) {
+        setSelected(index);
+      }
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [selected]);
+
+  const scrollToIndex = (index: number) => {
+    sectionRefs.current[index]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'nearest',
+    });
+    setSelected(index);
+  };
 
   return (
     <>
       {isListView ? (
         <TableWrapper>
           <TableHeader>
-            <div style={{ flex: 2 }}>시간</div>
-            <div style={{ flex: 1 }}>카테고리</div>
-            <div style={{ flex: 2 }}>공연팀</div>
+            <div>시간</div>
+            <div>카테고리</div>
+            <div>공연팀</div>
           </TableHeader>
-
           {[...Array(7)].map((_, i) => (
             <TableRow key={i}>
-              <div style={{ flex: 2 }}>nn:nn - nn:nn</div>
-              <div style={{ flex: 1 }}>
+              <div>nn:nn - nn:nn</div>
+              <div>
                 <Tag>{i === 1 ? '댄스' : '밴드'}</Tag>
               </div>
-              <div style={{ flex: 2 }}>공연팀명</div>
+              <div>{artists[i]}</div>
             </TableRow>
           ))}
         </TableWrapper>
@@ -144,20 +211,27 @@ export const LineUp = () => {
         <>
           <ArtistScroll>
             {artists.map((name, index) => (
-              <ArtistItem key={index} selected={selected === index} onClick={() => setSelected(index)}>
+              <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index)}>
                 <ArtistImageWrapper selected={selected === index}>
-                  <ArtistImage src="images/home/banner/1.png" alt="artist" />
+                  <ArtistImage src={bannerImages[index]} alt="artist" />
                 </ArtistImageWrapper>
                 <ArtistName>{name}</ArtistName>
               </ArtistItem>
             ))}
           </ArtistScroll>
 
-          <Card>
-            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-          </Card>
+          <BannerScroll ref={bannerContainerRef}>
+            {bannerImages.map((src, index) => (
+              <BannerItem
+                key={index}
+                ref={(el) => {
+                  sectionRefs.current[index] = el;
+                }}
+              >
+                <CardImage src={src} alt={`배너 ${index + 1}`} />
+              </BannerItem>
+            ))}
+          </BannerScroll>
         </>
       )}
 
@@ -170,3 +244,5 @@ export const LineUp = () => {
     </>
   );
 };
+
+export default LineUp;

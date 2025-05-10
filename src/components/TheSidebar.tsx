@@ -13,22 +13,32 @@ const TheSidebar = () => {
       <SidebarContainer isOpen={isMenuOpen}>
         <CloseButton onClick={toggleMenu}>✕</CloseButton>
         <MenuDom>
-          <MenuHeading>공연</MenuHeading>
-          <MenuItem href="/stage">오늘의 공연</MenuItem>
-          <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
-          <MenuItem href="/guide/watching">관람 가이드</MenuItem>
-          <MenuHeading>거리문화제</MenuHeading>
-          <MenuItem href="/booth">부스배치도</MenuItem>
-          <MenuHeading>광장기획전</MenuHeading>
-          <MenuItem href="/stamp/auth?tab=intro">광장기획전 소개</MenuItem>
-          <MenuItem href="/stamp/auth?tab=stamp">스탬프</MenuItem>
-          <MenuHeading>푸드트럭</MenuHeading>
-          <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
-          <MenuHeading>정보</MenuHeading>
-          <MenuItem href="/lostitem">분실물 안내</MenuItem>
-          <MenuItem href="/barrierfree">배리어프리</MenuItem>
-          <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
-          <MenuItem href="/notice">총학생회 공지사항</MenuItem>
+          <MenuGap />
+          <ItemContainer>
+            <MenuHeading>공연</MenuHeading>
+            <MenuItem href="/stage">오늘의 공연</MenuItem>
+            <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
+            <MenuItem href="/guide/watching">관람 가이드</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>거리문화제</MenuHeading>
+            <MenuItem href="/booth">부스배치도</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>광장기획전</MenuHeading>
+            <MenuItem href="/stamp/auth?tab=stamp">스탬프</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>푸드트럭</MenuHeading>
+            <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
+          </ItemContainer>
+          <ItemContainer>
+            <MenuHeading>정보</MenuHeading>
+            <MenuItem href="/lostitem">분실물 안내</MenuItem>
+            <MenuItem href="/barrierfree">배리어프리</MenuItem>
+            <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
+            <MenuItem href="/notice">총학생회 공지사항</MenuItem>
+          </ItemContainer>
         </MenuDom>
       </SidebarContainer>
     </>
@@ -37,6 +47,16 @@ const TheSidebar = () => {
 
 export default TheSidebar;
 
+const MenuGap = styled.div`
+  padding-top: 50px;
+`;
+
+const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+`;
+
 const SidebarContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
@@ -44,10 +64,9 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   width: 280px;
   height: 100%;
   background-color: white;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
   transition: transform 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 100;
 `;
 
 const Overlay = styled.div<{ isOpen: boolean }>`
@@ -73,13 +92,15 @@ const CloseButton = styled.button`
 const MenuDom = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
 `;
 
 const MenuItem = styled.a`
   font-size: 16px;
   color: #333;
   text-decoration: none;
-  padding: 10px;
+  padding: 8px 16px;
   transition:
     font-size 0.3s ease,
     font-weight 0.3s ease;
@@ -89,5 +110,5 @@ const MenuItem = styled.a`
 `;
 
 const MenuHeading = styled.h3`
-  padding: 0 10px;
+  padding: 0 16px;
 `;
