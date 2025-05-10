@@ -54,7 +54,11 @@ export const Stage = () => {
 
     const targetRef = sectionRefs[option];
     if (targetRef?.current) {
-      targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const offsetTop = targetRef.current.offsetTop;
+      window.scrollTo({
+        top: offsetTop - 100, // 60px 위로 여유
+        behavior: 'smooth',
+      });
     }
   };
 
