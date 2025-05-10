@@ -12,14 +12,14 @@ const LayoutContent = () => {
   const { hideHeader } = useHeader();
 
   return (
-    <>
+    <LayoutDom>
       {!hideHeader && <TheHeader key="header-visible" />}
       <TheSidebar />
       <Content hideHeader={hideHeader}>
         <Outlet />
       </Content>
       <TheFooter />
-    </>
+    </LayoutDom>
   );
 };
 
@@ -35,6 +35,14 @@ export const DefaultLayout = () => {
     </AppDom>
   );
 };
+
+const LayoutDom = styled.div`
+  width: min(100vw, 600px);
+  @media (max-width: 600px) {
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+`;
 
 export const AppDom = styled.div`
   width: min(100vw, 600px);
