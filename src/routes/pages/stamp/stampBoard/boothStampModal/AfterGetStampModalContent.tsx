@@ -103,6 +103,7 @@ const StyledButton = styled.button`
   background-color: #d1d5dc;
   color: '#6A7282';
 `;
+
 const StepCircle = styled.div`
   width: 55px;
   height: 55px;
