@@ -61,8 +61,8 @@ const BannerScroll = styled.div`
 `;
 
 const BannerItem = styled.div`
-  width: 284px;
-  height: 240px;
+  min-width: 284px;
+  min-height: 240px;
   scroll-snap-align: center;
   flex-shrink: 0;
 `;

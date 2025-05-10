@@ -37,13 +37,13 @@ export const DefaultLayout = () => {
 };
 
 export const AppDom = styled.div`
-  width: min(100vw, 600px);
-  height: 100vh;
+  width: min(100vw, 375px);
+  height: 667px;
   margin: 0 auto;
   font-family: 'Pretendard-Regular';
   background-color: white;
 
-  @media (max-width: 600px) {
+  @media (max-width: 375px) {
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
   }
