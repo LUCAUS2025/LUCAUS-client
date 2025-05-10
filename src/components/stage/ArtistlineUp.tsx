@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { ListOrdered, Image as ImageIcon } from 'lucide-react';
 import { CardImage } from '../home/thumbnail';
 
 const ArtistScroll = styled.div`
