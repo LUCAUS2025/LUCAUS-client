@@ -250,6 +250,7 @@ const StyledInput = styled.input`
   border-radius: 12px;
   padding-left: 12px;
   margin-left: 10px;
+  font-size: 14px;
 `;
 
 const InfoBox = styled.div`

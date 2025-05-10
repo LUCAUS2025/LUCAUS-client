@@ -63,7 +63,7 @@ const PwPushModal = ({ setOpenRewardPwModal, selectedDate, isRewarded, setStampD
         setStampData(responseStampInfo.result);
       } catch (error) {
         localStorage.removeItem('accessToken');
-        alert('다시 로그인 해주세요.');
+        alert('로그아웃되었습니다. 다시 로그인해주세요.');
         // 데이터 가져오기 실패시 다시 로그인 화면으로
         window.location.href = '/stamp/auth';
       }
