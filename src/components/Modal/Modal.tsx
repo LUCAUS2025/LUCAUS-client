@@ -47,7 +47,7 @@ const ModalBox = styled.div<{
   background-color: white;
   border-radius: 12px;
   width: 343px;
-  height: ${({ isShort }) => (isShort ? '280px' : '417')};
+  height: ${({ isShort }) => (isShort ? '280px' : '260px')};
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   overflow: auto;
   display: flex;

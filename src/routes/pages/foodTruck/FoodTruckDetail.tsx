@@ -7,6 +7,7 @@ import { FoodTruckDetailContent } from '../../../components/BottomSheet/innerCon
 import styled from 'styled-components';
 import { fetchFoodTruckDetail, FoodTruckDetailRawData } from '../../../services/apis/foodTruck/foodTruckDetail';
 import { useHeader } from '../../../context/HeaderContext';
+import { LoadingPage } from '../LoadingPage';
 
 export const FoodTruckDetail = () => {
   const { setHideHeader } = useHeader();
@@ -16,12 +17,17 @@ export const FoodTruckDetail = () => {
   const [foodTruckDetail, setFoodTruckDetail] = useState<FoodTruckDetailRawData | null>(null);
   const selectedDate = location.state?.selectedDate;
 
+  const getFoodTruckDetail = async () => {
+    const result = await fetchFoodTruckDetail(selectedDate, Number(dayFoodTruckNum));
+    const foodTruck = result?.[0];
+    setFoodTruckDetail(foodTruck ?? null);
+  };
+
+  const handleReviewSubmit = () => {
+    getFoodTruckDetail();
+  };
+
   useEffect(() => {
-    const getFoodTruckDetail = async () => {
-      const result = await fetchFoodTruckDetail(selectedDate, Number(dayFoodTruckNum));
-      const foodTruck = result?.[0];
-      setFoodTruckDetail(foodTruck ?? null);
-    };
     getFoodTruckDetail();
   }, [dayFoodTruckNum, selectedDate]);
 
@@ -32,7 +38,11 @@ export const FoodTruckDetail = () => {
   }, []);
 
   if (!foodTruckDetail) {
-    return <div>loading...</div>;
+    return <LoadingPage />;
+  }
+
+  if (!foodTruckDetail.cover) {
+    return <LoadingPage />;
   }
 
   return (
@@ -44,7 +54,7 @@ export const FoodTruckDetail = () => {
         <StaticBottomSheet
           size={'large'}
           ContentComponent={FoodTruckDetailContent}
-          componentProps={{ foodTruckDetail, selectedDate }}
+          componentProps={{ foodTruckDetail, selectedDate, handleReviewSubmit }}
           isBottomSheetHeader={false}
           overlapFooter={false}
         />

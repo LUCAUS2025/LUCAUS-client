@@ -146,7 +146,7 @@ export default Login;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 40px - 83px);
+  height: calc(100vh - 40px - 80px);
   justify-content: space-between;
   overflow-y: auto;
   position: relative;
@@ -250,6 +250,7 @@ const StyledInput = styled.input`
   border-radius: 12px;
   padding-left: 12px;
   margin-left: 10px;
+  font-size: 14px;
 `;
 
 const InfoBox = styled.div`

@@ -7,6 +7,7 @@ import { GoBackButton } from '../../../components/common/GoBackButton';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
 import { useHeader } from '../../../context/HeaderContext';
+import { LoadingPage } from '../LoadingPage';
 
 export const BoothDetail = () => {
   const navigate = useNavigate();
@@ -16,12 +17,17 @@ export const BoothDetail = () => {
   const [boothDetail, setBoothDetail] = useState<BoothDetailRawData | null>(null);
   const selectedDate = location.state?.selectedDate;
 
+  const getBoothDetail = async () => {
+    const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
+    const booth = result?.[0];
+    setBoothDetail(booth ?? null);
+  };
+
+  const handleReviewSubmit = () => {
+    getBoothDetail();
+  };
+
   useEffect(() => {
-    const getBoothDetail = async () => {
-      const result = await fetchBoothDetail(selectedDate, Number(dayBoothNum));
-      const booth = result?.[0];
-      setBoothDetail(booth ?? null);
-    };
     getBoothDetail();
   }, [dayBoothNum, selectedDate]);
 
@@ -32,11 +38,11 @@ export const BoothDetail = () => {
   }, []);
 
   if (!boothDetail) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (!boothDetail.cover) {
-    return <div>loading...</div>;
+    return <LoadingPage />;
   }
 
   return (
@@ -48,7 +54,7 @@ export const BoothDetail = () => {
         <StaticBottomSheet
           size={'large'}
           ContentComponent={BoothDetailContent}
-          componentProps={{ boothDetail, selectedDate }}
+          componentProps={{ boothDetail, selectedDate, handleReviewSubmit }}
           isBottomSheetHeader={false}
           overlapFooter={false}
         />

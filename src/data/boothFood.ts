@@ -2,11 +2,12 @@ export interface CommonItem {
   dayBoothNum: number;
   name: string;
   recommendNum: number;
+  location: string;
   type: 'booth' | 'foodTruck';
 }
 
 export interface BoothItem extends CommonItem {
-  info: string;
+  owner: string;
   categories: string[];
   type: 'booth';
 }

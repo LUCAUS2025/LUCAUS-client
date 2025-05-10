@@ -2,6 +2,7 @@ import React, { SetStateAction, useState } from 'react';
 import { gameStamp } from '../../../../../services/apis/stamp/gameStamp';
 import { AxiosError } from 'axios';
 import { stampBoardInfo } from '../../../../../services/apis/stamp/stampBoardInfo';
+import { styled } from 'styled-components';
 
 interface BoothClear {
   boothId: number;
@@ -62,7 +63,8 @@ const BeforGetStampModalContent = ({
         const responseStampInfo = await stampBoardInfo();
         setStampData(responseStampInfo.result);
       } catch (error) {
-        alert('다시 로그인 해주세요.');
+        localStorage.removeItem('accessToken');
+        alert('로그아웃되었습니다. 다시 로그인해주세요.');
         // 데이터 가져오기 실패시 다시 로그인 화면으로
         window.location.href = '/stamp/auth';
       }
@@ -73,10 +75,10 @@ const BeforGetStampModalContent = ({
       if (error.response?.data) {
         const errorCode = error.response.data.code;
         if (errorCode == 'COMMON500') {
-          alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
+          alert('예기치 못한 오류 발생. 다시 시도해주세요!');
           window.location.reload();
         } else if (errorCode == 'BOOTH404') {
-          alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
+          alert('예기치 못한 오류 발생. 다시 시도해주세요!');
           window.location.reload();
         } else if (errorCode == 'PW400') {
           setIsWrongPw(true);
@@ -88,31 +90,116 @@ const BeforGetStampModalContent = ({
   };
 
   return (
-    <>
-      <div>
-        <div>{BoothInfo[selectedBooth - 1]}</div>
-        <div>부스 체험 후 축기단에게 화면을 보여주세요.</div>
-      </div>
-      <input type="password" value={pwData} onChange={(e) => handleInputChange(e.target.value)}></input>
-      {isWrongPw && <div>잘못된 비밀번호</div>}
-      <div>
-        <button
+    <Wrapper>
+      <TitleWrapper>
+        <Title>{BoothInfo[selectedBooth - 1]}</Title>
+        <SubTitle>부스 체험 후 축기단에게 화면을 보여주세요.</SubTitle>
+      </TitleWrapper>
+      <StyledInput
+        placeholder="비밀번호를 입력해주세요"
+        type="password"
+        value={pwData}
+        onChange={(e) => handleInputChange(e.target.value)}
+      ></StyledInput>
+      {isWrongPw ? <ErrorLine>비밀번호가 일치하지 않습니다</ErrorLine> : <EmptyBox />}
+      <ButtonWrapper>
+        <StyledButton
           onClick={() => {
             setOpenModal(false);
           }}
+          type={'cancle'}
         >
-          닫기
-        </button>
-        <button
+          취소
+        </StyledButton>
+        <StyledButton
           onClick={() => {
             handleClickEnterPwButton();
           }}
+          type={'confirm'}
         >
-          비밀번호 확인
-        </button>
-      </div>
-    </>
+          확인
+        </StyledButton>
+      </ButtonWrapper>
+    </Wrapper>
   );
 };
 
 export default BeforGetStampModalContent;
+
+const Wrapper = styled.div`
+  width: 93%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80%;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+const Title = styled.div`
+  color: #030712;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+const SubTitle = styled.div`
+  color: #6a7282;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+`;
+
+const StyledInput = styled.input`
+  display: flex;
+  width: calc(100% - 12px);
+  height: 48px;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #d1d5dc;
+  background: #fff;
+  padding-left: 12px;
+
+  color: #6a7282;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: -15px;
+`;
+
+const StyledButton = styled.button<{ type: string }>`
+  display: flex;
+  height: 48px;
+  width: 155px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 12px;
+  background-color: ${({ type }) => (type == 'confirm' ? '#1447e6' : '#D1D5DC')};
+  color: ${({ type }) => (type == 'confirm' ? '#ffffff' : '#6A7282')};
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ErrorLine = styled.div`
+  color: #fb2c36;
+  font-size: 10px;
+  height: 15px;
+  padding-left: 10px;
+  margin-top: -20px;
+`;
+
+const EmptyBox = styled.div`
+  height: 15px;
+  width: 90%;
+`;

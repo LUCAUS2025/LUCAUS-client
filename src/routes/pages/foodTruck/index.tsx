@@ -3,7 +3,7 @@ import { BaseLayer } from '../../../components/BottomSheet/layout/BaseLayer';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { PlaceDropDown } from '../../../components/common/DropDown/PlaceDropDown';
 import { BasicBottomSheet } from '../../../components/BottomSheet/variants/BasicBottomSheet';
-import { dateMonthOption, dateOptions, dateYearOption, Option, placeOptions } from '../../../data/options';
+import { dateMonthOption, dateOptions, dateYearOption, FoodTruckPlaceOptions, Option } from '../../../data/options';
 import { BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import styled from 'styled-components';
 import { GoBackButton } from '../../../components/common/GoBackButton';
@@ -11,11 +11,12 @@ import { StaticBottomSheet } from '../../../components/BottomSheet/variants/Stat
 import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent/ItemPreviewContent';
 import { fetchFoodTruckList } from '../../../services/apis/foodTruck/foodTruckList';
 import { useHeader } from '../../../context/HeaderContext';
+import { DropDown } from '../../../components/common/DropDown/DropDown';
 
 export const FoodTruck = () => {
   const { setHideHeader } = useHeader();
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
-  const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
+  const [selectedPlace, setSelectedPlace] = useState<Option>(FoodTruckPlaceOptions[0]);
   const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
   const [foodTruckList, setFoodTruckList] = useState<FoodTruckItem[] | []>([]);
 
@@ -69,13 +70,20 @@ export const FoodTruck = () => {
         <>
           <OptionContainer>
             <DateDropDown selectedDate={selectedDate} setSelectedDate={setSelectedDate} darkMode={false} />
-            <PlaceDropDown selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace} />
+            <DropDown
+              options={FoodTruckPlaceOptions}
+              selectedOption={selectedPlace}
+              setSelectedOption={setSelectedPlace}
+              logoSrc="images/common/location.webp"
+            />
           </OptionContainer>
           <BasicBottomSheet
             title={'푸드트럭 지도'}
             description={'매일 10시부터 19시, 맛의 향연을 즐겨보세요!'}
             data={foodTruckList || []}
             setSelectedItem={setSelectedItem}
+            selectedPlace={selectedPlace}
+            type="foodTruck"
           />
         </>
       )}
@@ -108,7 +116,7 @@ export const OptionContainer = styled.div`
   flex-direction: row;
   gap: 10px;
   left: 16px;
-  top: 20px;
+  top: 80px;
   position: absolute;
 `;
 

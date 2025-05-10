@@ -5,7 +5,7 @@ import { ReviewItem } from '../../review/ReviewBarItem';
 import { CommonItem } from '../../../data/boothFood';
 import { BoothReviewItem } from '../../../services/apis/booth/boothDetail';
 import { FoodTruckReviewItem } from '../../../services/apis/foodTruck/foodTruckDetail';
-import { mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
+import { mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
 
 interface DetailReviewProps {
   type: CommonItem['type'];
@@ -86,12 +86,13 @@ const Description = styled.div`
 `;
 const WriteReviewButton = styled.div`
   align-self: flex-end;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 12px;
-  line-height: 150%;
+  line-height: 1.05;
   letter-spacing: -0.26px;
-  text-decoration: underline;
+  //text-decoration: underline;
   text-decoration-style: solid;
   text-decoration-thickness: 0%;
   text-decoration-skip-ink: auto;
+  border-bottom: 1px solid black;
 `;

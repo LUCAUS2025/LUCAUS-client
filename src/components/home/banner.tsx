@@ -16,7 +16,7 @@ export const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 2000); // 2초마다 실행
+    }, 4000); // 4초마다 실행
 
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
   }, []);
@@ -63,7 +63,9 @@ const images = [
   '/images/home/banner/3.webp',
   '/images/home/banner/1.webp',
   '/images/home/banner/2.webp',
-  '/images/home/banner/3.webp'
+  '/images/home/banner/3.webp',
+  '/images/home/banner/1.webp',
+  '/images/home/banner/2.webp',
 ];
 
 const CarouselContainer = styled.div`

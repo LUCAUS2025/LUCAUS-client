@@ -28,9 +28,9 @@ export const Information = () => {
           <Description>축제 정보를 여기서 한번에 확인해보세요!</Description>
         </TitleContainer>
         <InfoContainer>
-          <InfoBox>
+          <InfoBox onClick={() => navigate('/notice')}>
             <InfoTitleImg src="images/information/idea.webp" />
-            <InfoTitleCol onClick={() => navigate('/notice')}>
+            <InfoTitleCol>
               <InfoBoxTitle>총학생회 공지</InfoBoxTitle>
               <InfoBoxDescription>{recentNotice}</InfoBoxDescription>
             </InfoTitleCol>
@@ -85,21 +85,21 @@ export const Information = () => {
           <MakersContent>
             <Col>
               <Part>
-                <MakerText>기획</MakerText>
+                <MakerText>PM</MakerText>
                 <MakerText>조하정, 양채령</MakerText>
               </Part>
               <Part>
-                <MakerText>디자인</MakerText>
+                <MakerText>DE</MakerText>
                 <MakerText>노지우</MakerText>
               </Part>
             </Col>
             <Col>
               <Part>
-                <MakerText>프론트엔드</MakerText>
+                <MakerText>FE</MakerText>
                 <MakerText>정선빈, 황인영</MakerText>
               </Part>
               <Part>
-                <MakerText>백엔드</MakerText>
+                <MakerText>BE</MakerText>
                 <MakerText>김태진, 최은수</MakerText>
               </Part>
             </Col>
@@ -312,12 +312,12 @@ const MakersContent = styled.div`
 const Col = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 80px;
 `;
 const Part = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 20px;
   width: 100%;
 `;
 const MakerText = styled.div`
@@ -329,6 +329,5 @@ const MakerText = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #101828;
-  width: 100%;
   white-space: nowrap;
 `;

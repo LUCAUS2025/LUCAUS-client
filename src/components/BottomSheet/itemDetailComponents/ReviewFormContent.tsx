@@ -16,6 +16,7 @@ interface ReviewFormContentProps {
   onClose: () => void;
   type: CommonItem['type'];
   currentId: number;
+  onSubmit?: () => void;
 }
 
 const boothReviewOptions: ReviewOption[] = [
@@ -32,7 +33,7 @@ const foodTruckReviewOptions: ReviewOption[] = [
   { icon: '💨', label: '빨라요', tag: 'FAST' },
 ];
 
-export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type, currentId }) => {
+export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, type, currentId, onSubmit }) => {
   const [selected, setSelected] = useState<number[]>([]);
   const [reviewStatus, setReviewStatus] = useState<'ready' | 'submitting' | 'success' | 'fail'>('ready');
   const [errorMessage, setErrorMessage] = useState('');
@@ -53,6 +54,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
         const result = await postBoothReview(currentId, selectedTags);
         if (result?.isSuccess) {
           setReviewStatus('success');
+          onSubmit?.();
           setTimeout(() => {
             onClose();
           }, 1500);
@@ -68,6 +70,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
         const result = await postFoodTruckReview(currentId, selectedTags);
         if (result?.isSuccess) {
           setReviewStatus('success');
+          onSubmit?.();
           setTimeout(() => {
             onClose();
           }, 1500);
@@ -109,7 +112,7 @@ export const ReviewFormContent: React.FC<ReviewFormContentProps> = ({ onClose, t
                 <IconWrapper selected={selected.includes(idx)} onClick={() => toggleSelected(idx)}>
                   {option.icon}
                 </IconWrapper>
-                <Label>{option.label}</Label>
+                <Label selected={selected.includes(idx)}>{option.label}</Label>
               </Option>
             ))}
           </OptionsContainer>
@@ -226,12 +229,12 @@ const IconWrapper = styled.div<{ selected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: ${({ selected }) => (selected ? '1px solid #1447e6' : '1px solid transparent')};
+  border: ${({ selected }) => (selected ? '1.3px solid #1447e6' : '1px solid transparent')};
   box-shadow: 0px 0px 12px 0px ${({ selected }) => (selected ? '#1447e633' : 'transparent')};
   box-sizing: border-box;
 `;
 
-const Label = styled.div`
+const Label = styled.div<{ selected: boolean }>`
   font-size: 12px;
   line-height: 150%;
   letter-spacing: -0.26px;
@@ -239,6 +242,7 @@ const Label = styled.div`
   vertical-align: middle;
   color: #101828;
   white-space: pre-line;
+  font-weight: ${({ selected }) => (selected ? '600' : '400')};
 
   @media (max-width: 380px) {
     font-size: 11px;

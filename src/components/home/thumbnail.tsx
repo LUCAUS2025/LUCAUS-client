@@ -21,8 +21,9 @@ export const Card = styled.div`
 `;
 
 export const CardImage = styled.img`
-  width: 580px; // 이미지 너비 580px로 수정
-  object-fit: cover;
+  width: 284px; // 이미지 너비 580px로 수정
+  // height: 200px; // 이미지 높이 240px로 수정
+  // object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 
