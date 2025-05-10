@@ -60,6 +60,7 @@ export const Home = () => {
 
 export const Wrapper16 = styled.div`
   padding: 0 16px 0 16px;
+  background-color: white;
 `;
 
 const Image = styled.img`

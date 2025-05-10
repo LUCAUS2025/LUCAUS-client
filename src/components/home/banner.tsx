@@ -34,7 +34,14 @@ export const Banner = () => {
         </BackCardRight>
 
         <CardContent>
-          <Image src={images[currentIndex]} alt="Dress Code" />
+          {currentIndex === 0 ? (
+            <a href="/entry">
+              <Image src={images[currentIndex]} alt="Dress Code" />
+            </a>
+          ) : (
+            <Image src={images[currentIndex]} alt="Dress Code" />
+          )}
+
           <LeftButton onClick={prevSlide}>
             <ChevronLeft size={24} color="#333" />
           </LeftButton>
