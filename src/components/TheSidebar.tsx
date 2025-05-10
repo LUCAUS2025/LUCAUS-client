@@ -13,6 +13,7 @@ const TheSidebar = () => {
       <SidebarContainer isOpen={isMenuOpen}>
         <CloseButton onClick={toggleMenu}>✕</CloseButton>
         <MenuDom>
+          <MenuGap />
           <MenuHeading>공연</MenuHeading>
           <MenuItem href="/stage">오늘의 공연</MenuItem>
           <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
@@ -36,6 +37,10 @@ const TheSidebar = () => {
 
 export default TheSidebar;
 
+const MenuGap = styled.div`
+  height: 60px;
+`;
+
 const SidebarContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
@@ -46,7 +51,7 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
   transition: transform 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 100;
 `;
 
 const Overlay = styled.div<{ isOpen: boolean }>`
