@@ -8,7 +8,7 @@ const ArtistScroll = styled.div`
   overflow-x: auto;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 const ArtistItem = styled.div<{ selected: boolean }>`
@@ -22,8 +22,8 @@ const ArtistItem = styled.div<{ selected: boolean }>`
 `;
 
 const ArtistImageWrapper = styled.div<{ selected: boolean }>`
-  width: 5rem;
-  height: 5rem;
+  width: 54px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,7 +103,7 @@ const Tag = styled.span`
   border: 1px solid white;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.875rem;
+  font-size: 12px;
 `;
 
 const artists = [
@@ -146,7 +146,7 @@ export const LineUp = () => {
             {artists.map((name, index) => (
               <ArtistItem key={index} selected={selected === index} onClick={() => setSelected(index)}>
                 <ArtistImageWrapper selected={selected === index}>
-                  <ArtistImage src="images/home/banner/1.png" alt="artist" />
+                  <ArtistImage src="images/home/banner/1.webp" alt="artist" />
                 </ArtistImageWrapper>
                 <ArtistName>{name}</ArtistName>
               </ArtistItem>
@@ -154,9 +154,9 @@ export const LineUp = () => {
           </ArtistScroll>
 
           <Card>
-            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-            <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+            <CardImage src="images/home/banner/2.webp" alt="옥씨 부인전" />
+            <CardImage src="images/home/banner/2.webp" alt="옥씨 부인전" />
+            <CardImage src="images/home/banner/1.webp" alt="옥씨 부인전" />
           </Card>
         </>
       )}

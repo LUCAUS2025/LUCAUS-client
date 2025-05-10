@@ -155,13 +155,15 @@ export default Stage;
 export const Title = styled.div`
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 `;
 
 export const Subtitle = styled.div`
   font-size: 16px;
   color: #6b7280;
-  margin-bottom: 1rem;
+  margin-bottom: 24px;
+  margin-top: 0.5rem;
 `;
 
 const DropDownContainer = styled.div`
