@@ -48,13 +48,13 @@ const TheSidebar = () => {
 export default TheSidebar;
 
 const MenuGap = styled.div`
-  padding-top: 60px;
+  padding-top: 50px;
 `;
 
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 10px 0;
 `;
 
 const SidebarContainer = styled.div<{ isOpen: boolean }>`
@@ -64,7 +64,6 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
   width: 280px;
   height: 100%;
   background-color: white;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
   transition: transform 0.3s ease-in-out;
   z-index: 100;
@@ -101,7 +100,7 @@ const MenuItem = styled.a`
   font-size: 16px;
   color: #333;
   text-decoration: none;
-  padding: 10px;
+  padding: 8px 16px;
   transition:
     font-size 0.3s ease,
     font-weight 0.3s ease;
@@ -111,5 +110,5 @@ const MenuItem = styled.a`
 `;
 
 const MenuHeading = styled.h3`
-  padding: 0 10px;
+  padding: 0 16px;
 `;
