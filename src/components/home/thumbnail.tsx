@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const Thumbnail = () => {
   return (
     <Card>
-      <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-      <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
-      <CardImage src="images/home/banner/1.png" alt="옥씨 부인전" />
+      <CardImage src="images/home/banner/1.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/banner/2.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/banner/3.webp" alt="옥씨 부인전" />
     </Card>
   );
 };
