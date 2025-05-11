@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import styled from 'styled-components';
 import { ItemListContent } from '../../../components/BottomSheet/innerContent/ItemListContent';
+import { dateMonthOption, dateOptions, dateYearOption } from '../../../data/options';
+import { fetchFoodTruckList } from '../../../services/apis/foodTruck/foodTruckList';
 
 export const FoodTruck = () => {
   //const { setHideHeader } = useHeader();
-  //const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
+  const [selectedDate, setSelectedDate] = useState<number>(19);
   //const [selectedPlace, setSelectedPlace] = useState<Option>(FoodTruckPlaceOptions[0]);
   //const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
   const [foodTruckList, setFoodTruckList] = useState<FoodTruckItem[] | []>([]);
@@ -13,14 +15,45 @@ export const FoodTruck = () => {
   useEffect(() => {
     const getFoodTruckList = async () => {
       try {
-        //const foodTruckResponse = await fetchFoodTruckList(selectedDate.value as number);
-        // setFoodTruckList(foodTruckResponse ?? []);
+        const foodTruckResponse = await fetchFoodTruckList(selectedDate);
+        setFoodTruckList(foodTruckResponse ?? []);
+        console.log(foodTruckResponse);
       } catch (e) {
-        //console.log(e);
-        //alert('로딩에 실패하였습니다.');
+        console.log(e);
+        alert('로딩에 실패하였습니다.');
       }
     };
     getFoodTruckList();
+  }, []);
+
+  useEffect(() => {
+    const today = new Date();
+    const todayYear = today.getFullYear();
+    const todayMonth = today.getMonth() + 1;
+    const todayDate = today.getDate();
+    const selectedYear = Number(dateYearOption.value); // 2025
+    const selectedMonth = Number(dateMonthOption.value); // 5 (앞에 0o5여도 숫자 5로 인식됨)
+    const startDay = 19;
+    const endDay = 23;
+
+    let targetDate: number;
+
+    if (
+      todayYear === selectedYear &&
+      todayMonth === selectedMonth &&
+      todayDate >= startDay &&
+      todayDate <= endDay &&
+      dateOptions.some((option) => option.value === todayDate)
+    ) {
+      targetDate = todayDate;
+    } else {
+      targetDate = startDay;
+    }
+
+    const todayOption = dateOptions.find((option) => option.value === targetDate);
+    if (todayOption) {
+      setSelectedDate(targetDate);
+    }
   }, []);
 
   // 헤더 안보이도록

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
-import { mapLocationToPlaceBooth, Option } from '../../../data/options';
+import { dateMonthOption, dateOptions, dateYearOption, mapLocationToPlaceBooth, Option } from '../../../data/options';
 import { useNavigate } from 'react-router-dom';
 
 interface ContentProps {
@@ -27,6 +27,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
   const boothsByDate = data?.filter((item): item is BoothItem => item.type === 'booth');
   const foodTruckList = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
   const [boothsByDatePlace, setBoothsByDatePlace] = useState<BoothItem[]>();
+  const [selectedDate, setSelectedDate] = useState<number>(19);
   //const [foodTruckByDatePlace, setFoodTruckByDatePlace] = useState<FoodTruckItem[]>();
 
   useEffect(() => {
@@ -78,7 +79,10 @@ export const ItemListContent: React.FC<ContentProps> = ({
       {foodTruckList && (
         <List>
           {foodTruckList?.map((item) => (
-            <Item key={item.dayBoothNum} onClick={() => navigate(`/foodTruck/${item.dayBoothNum}`)}>
+            <Item
+              key={item.dayBoothNum}
+              onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`, { state: selectedDate })}
+            >
               <ItemContent>
                 <ItemId>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer>
@@ -128,7 +132,7 @@ const Description = styled.div`
 const List = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 20vh;
+  //padding-bottom: 20vh;
 `;
 const Item = styled.div`
   display: flex;
