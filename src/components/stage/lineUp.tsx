@@ -62,7 +62,7 @@ export const BannerScroll = styled.div`
 `;
 
 export const BannerItem = styled.div`
-  min-width: 76%;
+  min-width: 100%;
   object-fit: cover; // 이미지 비율 유지
   scroll-snap-align: center;
   // flex-shrink: 0;

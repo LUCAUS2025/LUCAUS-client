@@ -12,14 +12,24 @@ import {
 
 const artists = ['에스파', 'QWER', '아이브', '차은우', '아이유', '소녀시대', '데이식스'];
 
+const artistImage = [
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+];
+
 const bannerImages = [
-  'images/home/banner/1.webp',
-  'images/home/banner/2.webp',
-  'images/home/banner/3.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/2.webp',
-  'images/home/banner/3.webp',
-  'images/home/banner/2.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
 ];
 
 export const ArtistlineUp = () => {
@@ -68,7 +78,7 @@ export const ArtistlineUp = () => {
         {artists.map((name, index) => (
           <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index)}>
             <ArtistImageWrapper selected={selected === index}>
-              <ArtistImage src={bannerImages[index]} alt="artist" />
+              <ArtistImage src={artistImage[index]} alt="artist" />
             </ArtistImageWrapper>
             <ArtistName>{name}</ArtistName>
           </ArtistItem>
