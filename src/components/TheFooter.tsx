@@ -36,8 +36,11 @@ export const TheFooter = () => {
 export const Wrapper = styled.div`
   position: fixed;
   width: 100%;
-  bottom: 0;
+  max-width: 600px;
+  margin: 0 auto;
   left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 3;
 `;
 

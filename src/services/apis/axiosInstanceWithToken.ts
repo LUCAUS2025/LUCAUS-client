@@ -8,7 +8,7 @@ let axiosInstanceWithToken: ReturnType<typeof axios.create> | null = null;
 export const CreateAxiosInstanceWithToken = () => {
   if (!axiosInstanceWithToken) {
     axiosInstanceWithToken = axios.create({
-      baseURL: 'https://lucaus.kro.kr/api',
+      baseURL: 'https://lucaus.info/api',
     });
 
     axiosInstanceWithToken.interceptors.request.use(

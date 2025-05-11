@@ -92,7 +92,11 @@ const BeforGetStampModalContent = ({
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>{BoothInfo[selectedBooth - 1]}</Title>
+        {selectedDate.value == 1 ? (
+          <Title>{BoothInfo[selectedBooth - 1]}</Title>
+        ) : (
+          <Title>{BoothInfo[selectedBooth - 11]}</Title>
+        )}
         <SubTitle>부스 체험 후 축기단에게 화면을 보여주세요.</SubTitle>
       </TitleWrapper>
       <StyledInput
@@ -157,7 +161,6 @@ const SubTitle = styled.div`
 
 const StyledInput = styled.input`
   display: flex;
-  width: calc(100% - 12px);
   height: 48px;
   align-items: center;
   border-radius: 12px;

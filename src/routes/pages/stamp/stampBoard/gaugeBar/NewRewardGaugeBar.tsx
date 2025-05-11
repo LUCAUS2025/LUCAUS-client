@@ -1,21 +1,42 @@
 import { styled } from 'styled-components';
 import ShipIcon from './ShipIcon';
 import { SetStateAction } from 'react';
+import Modal from '../../../../../components/Modal/Modal';
+import RewardedModal from '../rewardStampModal/RewardedModal';
 
 interface Props {
   isCleared: Record<number, boolean>;
   isRewarded: Record<number, boolean>;
   boardType: number | string;
   setOpenRewardPwModal: React.Dispatch<SetStateAction<boolean>>;
+  setOpenRewardedModal: React.Dispatch<SetStateAction<boolean>>;
+  setClickedRewardDegree: React.Dispatch<SetStateAction<number>>;
 }
 
 // 1,2일차 - 3/5/7
 // 3일차 - 2/4/6
 
-const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType, setOpenRewardPwModal }: Props) => {
+const NewRewardGaugeBar = ({
+  isCleared,
+  isRewarded,
+  boardType,
+  setOpenRewardPwModal,
+  setOpenRewardedModal,
+  setClickedRewardDegree,
+}: Props) => {
   // 초기값이 비어있는 경우 방어
   const isClearedValues = Object.values(isCleared);
   const clearedCount = isClearedValues.length > 0 ? isClearedValues.filter(Boolean).length : 0;
+
+  const handleClickStepCircle = (i: number) => {
+    if (isRewarded[i]) {
+      setClickedRewardDegree(i);
+      setOpenRewardedModal(true);
+    } else {
+      setClickedRewardDegree(i);
+      setOpenRewardPwModal(true);
+    }
+  };
 
   let progressPercent = '0%';
   if (boardType == 1) {
@@ -43,13 +64,13 @@ const NewRewardGaugeBar = ({ isCleared, isRewarded, boardType, setOpenRewardPwMo
       <GaugeBarBackground />
       <GaugeBarFill style={{ width: progressPercent }} />
       <StepContainer>
-        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[1]}>
+        <StepCircle onClick={() => handleClickStepCircle(1)} active={isRewarded[1]}>
           <ShipIcon color={isRewarded[1] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
-        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[2]}>
+        <StepCircle onClick={() => handleClickStepCircle(2)} active={isRewarded[2]}>
           <ShipIcon color={isRewarded[2] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
-        <StepCircle onClick={() => setOpenRewardPwModal(true)} active={isRewarded[3]}>
+        <StepCircle onClick={() => handleClickStepCircle(3)} active={isRewarded[3]}>
           <ShipIcon color={isRewarded[3] ? '#1447E6' : '#D1D5DC'} />
         </StepCircle>
       </StepContainer>

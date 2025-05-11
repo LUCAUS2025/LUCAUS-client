@@ -166,6 +166,7 @@ const DropDownContainer = styled.div`
   align-items: center;
   padding: 0.5rem;
   gap: 0.5rem;
+  max-width: 584px;
   width: 100%;
   background-color: #fafafa;
   position: fixed;
