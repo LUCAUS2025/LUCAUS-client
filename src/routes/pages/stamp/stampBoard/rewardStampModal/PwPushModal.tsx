@@ -101,7 +101,7 @@ const PwPushModal = ({ setOpenRewardPwModal, selectedDate, isRewarded, setStampD
         value={pwData}
         onChange={(e) => handleInputChange(e.target.value)}
       ></StyledInput>
-      {isError?.error ? <ErrorLine>비밀번호가 일치하지 않습니다</ErrorLine> : <EmptyBox />}
+      {isError?.error ? <ErrorLine>{isError.message}</ErrorLine> : <EmptyBox />}
       <ButtonWrapper>
         <StyledButton
           onClick={() => {

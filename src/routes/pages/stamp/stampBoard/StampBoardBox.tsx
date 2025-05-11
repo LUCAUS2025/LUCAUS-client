@@ -56,7 +56,7 @@ const StampBoardBox = ({
           index={1}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[0]}
+          boothName={selectedDate.value == 1 ? boothInfo[0] : boothInfo[9]}
           customPadding={'30px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -72,7 +72,7 @@ const StampBoardBox = ({
           index={2}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[1]}
+          boothName={selectedDate.value == 1 ? boothInfo[1] : boothInfo[10]}
           customPadding={'0px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -90,7 +90,7 @@ const StampBoardBox = ({
           index={3}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[2]}
+          boothName={selectedDate.value == 1 ? boothInfo[2] : boothInfo[11]}
           customPadding={'-10px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -106,7 +106,7 @@ const StampBoardBox = ({
           index={4}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[3]}
+          boothName={selectedDate.value == 1 ? boothInfo[3] : boothInfo[12]}
           customPadding={'30px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -122,7 +122,7 @@ const StampBoardBox = ({
           index={5}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[4]}
+          boothName={selectedDate.value == 1 ? boothInfo[4] : boothInfo[13]}
           customPadding={'0px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -138,7 +138,7 @@ const StampBoardBox = ({
           index={6}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[5]}
+          boothName={selectedDate.value == 1 ? boothInfo[5] : boothInfo[14]}
           customPadding={'20px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -156,7 +156,7 @@ const StampBoardBox = ({
           index={7}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[6]}
+          boothName={selectedDate.value == 1 ? boothInfo[6] : boothInfo[15]}
           customPadding={'30px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -172,7 +172,7 @@ const StampBoardBox = ({
           index={8}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[7]}
+          boothName={selectedDate.value == 1 ? boothInfo[7] : boothInfo[16]}
           customPadding={'0px'}
           childNode={
             selectedDate.value == 1 ? (
@@ -188,7 +188,7 @@ const StampBoardBox = ({
           index={9}
           isCenterBooth={false}
           onClick={handleClickBooth}
-          boothName={boothInfo[8]}
+          boothName={selectedDate.value == 1 ? boothInfo[8] : boothInfo[17]}
           customPadding={'30px'}
           childNode={
             selectedDate.value == 1 ? (

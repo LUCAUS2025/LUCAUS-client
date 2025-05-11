@@ -1,5 +1,6 @@
 import { SetStateAction } from 'react';
 import { styled } from 'styled-components';
+import LucausLogo from '../keyIcons/LucausLogo';
 
 interface Props {
   setOpenRewardedModal: React.Dispatch<SetStateAction<boolean>>;
@@ -13,6 +14,7 @@ const RewardedModal = ({ setOpenRewardedModal, clickedRewardDegree }: Props) => 
         <Title>상품 수령/응모하기</Title>
         <SubTitle>{clickedRewardDegree}단계 상품 수령이 완료되었습니다.</SubTitle>
       </TitleWrapper>
+      <LucausLogo />
 
       <StyledButton
         onClick={() => {

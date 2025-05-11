@@ -95,7 +95,7 @@ const BeforGetStampModalContent = ({
         {selectedDate.value == 1 ? (
           <Title>{BoothInfo[selectedBooth - 1]}</Title>
         ) : (
-          <Title>{BoothInfo[selectedBooth - 11]}</Title>
+          <Title>{BoothInfo[selectedBooth - 2]}</Title>
         )}
         <SubTitle>부스 체험 후 축기단에게 화면을 보여주세요.</SubTitle>
       </TitleWrapper>
