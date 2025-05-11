@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const Thumbnail = () => {
   return (
     <Card>
-      <CardImage src="images/home/banner/1.webp" alt="옥씨 부인전" />
-      <CardImage src="images/home/banner/2.webp" alt="옥씨 부인전" />
-      <CardImage src="images/home/banner/3.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/stage/newjeans.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/stage/newjeans.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/stage/newjeans.webp" alt="옥씨 부인전" />
     </Card>
   );
 };
@@ -15,15 +15,15 @@ export const Card = styled.div`
   gap: 1rem;
   border-radius: 0.5rem;
   overflow-y: auto; // 세로 스크롤 활성화
-  max-height: 240px; // 높이를 제한하여 스크롤이 작동하도록 설정
   padding: 0 0 1rem 0;
   margin: 0 -16px 0 -16px;
 `;
 
 export const CardImage = styled.img`
-  min-width: 284px; // 이미지 너비 580px로 수정
-  height: 200px; // 이미지 높이 240px로 수정
-  object-fit: cover;
+  min-width: 76%;
+  max-width: 76%;
+  height: 100%;
+  object-fit: cover; // 이미지 비율 유지
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
-import { CardImage } from '../home/thumbnail';
+import { Card, CardImage } from '../home/thumbnail';
 
-const ArtistScroll = styled.div`
+export const ArtistScroll = styled.div`
   display: flex;
   overflow-x: auto;
   padding-bottom: 0.5rem;
@@ -11,7 +11,8 @@ const ArtistScroll = styled.div`
   gap: 0.5rem;
 `;
 
-const ArtistItem = styled.div<{ selected: boolean }>`
+export const ArtistItem = styled.div<{ selected: boolean }>`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,9 +22,9 @@ const ArtistItem = styled.div<{ selected: boolean }>`
   padding: 0.5rem;
 `;
 
-const ArtistImageWrapper = styled.div<{ selected: boolean }>`
-  width: 54px;
-  height: 54px;
+export const ArtistImageWrapper = styled.div<{ selected: boolean }>`
+  min-width: 86.4px;
+  object-fit: cover; // 이미지 비율 유지
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,14 +39,14 @@ const ArtistImageWrapper = styled.div<{ selected: boolean }>`
   box-shadow: 0px 0px 8px 0px #1447E633;
 `;
 
-const ArtistImage = styled.img`
+export const ArtistImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 9999px;
 `;
 
-const ArtistName = styled.div`
+export const ArtistName = styled.div`
   font-size: 0.75rem;
   margin-top: 0.25rem;
   white-space: nowrap;
@@ -53,18 +54,27 @@ const ArtistName = styled.div`
   text-overflow: ellipsis;
 `;
 
-const BannerScroll = styled.div`
+export const BannerScroll = styled.div`
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 1rem;
 `;
 
-const BannerItem = styled.div`
-  min-width: 284px;
-  min-height: 240px;
+export const BannerItem = styled.div`
+  min-width: 76%;
+  object-fit: cover; // 이미지 비율 유지
   scroll-snap-align: center;
-  flex-shrink: 0;
+  // flex-shrink: 0;
+`;
+
+export const CardContainer = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding: 0 0 1rem 0;
+  margin: 0 -16px 0 -16px;
 `;
 
 const ListButtonWrapper = styled.div`
@@ -137,14 +147,24 @@ const artists = [
   '멋쟁이 판다처럼',
 ];
 
+const artistImage = [
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+  'images/home/banner/1.webp',
+];
+
 const bannerImages = [
-  'images/home/banner/1.webp',
-  'images/home/banner/2.webp',
-  'images/home/banner/3.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/2.webp',
-  'images/home/banner/3.webp',
-  'images/home/banner/2.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
+  'images/home/stage/newjeans.webp',
 ];
 
 export const LineUp = () => {
@@ -213,14 +233,14 @@ export const LineUp = () => {
             {artists.map((name, index) => (
               <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index)}>
                 <ArtistImageWrapper selected={selected === index}>
-                  <ArtistImage src={bannerImages[index]} alt="artist" />
+                  <ArtistImage src={artistImage[index]} alt="artist" />
                 </ArtistImageWrapper>
                 <ArtistName>{name}</ArtistName>
               </ArtistItem>
             ))}
           </ArtistScroll>
 
-          <BannerScroll ref={bannerContainerRef}>
+          <Card ref={bannerContainerRef}>
             {bannerImages.map((src, index) => (
               <BannerItem
                 key={index}
@@ -231,7 +251,7 @@ export const LineUp = () => {
                 <CardImage src={src} alt={`배너 ${index + 1}`} />
               </BannerItem>
             ))}
-          </BannerScroll>
+          </Card>
         </>
       )}
 
