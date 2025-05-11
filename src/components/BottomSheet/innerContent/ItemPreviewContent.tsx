@@ -16,9 +16,10 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
   const goDetail = () => {
     if (item.type === 'booth') {
       navigate(`/booth/${item.dayBoothNum}`, { state: { selectedDate } });
-    } else if (item.type === 'foodTruck') {
-      navigate(`/foodTruck/${item.dayBoothNum}`, { state: { selectedDate } });
     }
+    // } else if (item.type === 'foodTruck') {
+    //   navigate(`/foodTruck/${item.dayBoothNum}`, { state: { selectedDate } });
+    // }
   };
 
   return (
@@ -30,7 +31,7 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
       {item.type === 'booth' && <Description>{item.owner}</Description>}
       <ItemKeywords>
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
-        {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
+        {/* {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)} */}
       </ItemKeywords>
       <ButtonContainer>
         <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>

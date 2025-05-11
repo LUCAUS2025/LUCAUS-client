@@ -15,7 +15,7 @@ export const FoodTruckDetail = () => {
   const location = useLocation();
   const { dayFoodTruckNum } = useParams<{ dayFoodTruckNum: string }>();
   const [foodTruckDetail, setFoodTruckDetail] = useState<FoodTruckDetailRawData | null>(null);
-  const selectedDate = location.state?.selectedDate;
+  const selectedDate = location.state;
 
   const getFoodTruckDetail = async () => {
     const result = await fetchFoodTruckDetail(selectedDate, Number(dayFoodTruckNum));
