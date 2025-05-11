@@ -28,7 +28,7 @@ const Toast = () => {
 
   return (
     <Container>
-      <Icon src="/images/common/info.webp" alt="information" />
+      <Icon src="/images/common/Info.webp" alt="information" />
       <Notice>{shortNotice}</Notice>
     </Container>
   );
