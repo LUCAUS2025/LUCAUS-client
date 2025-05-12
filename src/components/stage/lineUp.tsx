@@ -60,7 +60,8 @@ export const BannerScroll = styled.div`
   scroll-snap-type: x mandatory;
 
   /* 스크롤 스냅 제거 or 약화 */
-  // scroll-snap-type: none;
+  scroll-snap-type: none;
+  scroll-snap-align: start;
 `;
 
 export const BannerItem = styled.div`
@@ -193,16 +194,13 @@ export const LineUp = () => {
     if (!container) return;
 
     const handleScroll = () => {
-      const containerLeft = container.scrollLeft;
-      const containerWidth = container.clientWidth;
-
-      const center = containerLeft + containerWidth / 2;
+      const containerLeft = container.scrollLeft + 70;
 
       const index = sectionRefs.current.findIndex((ref) => {
         if (!ref) return false;
         const left = ref.offsetLeft;
         const right = left + ref.clientWidth;
-        return center >= left && center < right;
+        return containerLeft >= left && containerLeft < right;
       });
 
       if (index !== -1 && index !== selected) {
@@ -217,7 +215,7 @@ export const LineUp = () => {
   const scrollToIndex = (index: number) => {
     sectionRefs.current[index]?.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
+      block: 'start',
       inline: 'nearest',
     });
     setSelected(index);
