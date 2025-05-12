@@ -73,7 +73,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
       )}
       {/* 푸드트럭 리스트 */}
       {foodTruckList && (
-        <List>
+        <List style={{ paddingBottom: '60px' }}>
           {foodTruckList?.map((item) => (
             <Item
               key={item.dayBoothNum}

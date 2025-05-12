@@ -69,6 +69,7 @@ export const ItemDescription = styled.div`
   line-height: 150%;
   margin-bottom: 8px;
   color: #364153;
+  white-space: pre-line;
 
   @media (max-width: 380px) {
     font-size: 13px;
