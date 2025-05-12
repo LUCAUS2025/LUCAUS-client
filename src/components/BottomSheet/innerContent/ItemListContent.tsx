@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
-import { dateMonthOption, dateOptions, dateYearOption, mapLocationToPlaceBooth, Option } from '../../../data/options';
+import { mapLocationToPlaceBooth, Option } from '../../../data/options';
 import { useNavigate } from 'react-router-dom';
 
 interface ContentProps {
@@ -36,11 +36,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
         (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
       );
       setBoothsByDatePlace(filteredData);
-      // } else if (type === 'foodTruck') {
-      //   const filteredData = foodTrucksByDate?.filter(
-      //     (item) => mapLocationToPlaceFoodTruck(item.location) === selectedPlace?.value,
-      //   );
-      //   setFoodTruckByDatePlace(filteredData);
+      console.log(filteredData);
     }
   }, [selectedPlace, data]);
 

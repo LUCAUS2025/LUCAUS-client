@@ -13,7 +13,7 @@ const LayoutContent = () => {
 
   return (
     <LayoutDom>
-      {!hideHeader && <TheHeader key="header-visible" />}
+      {!hideHeader && <TheHeader />}
       <TheSidebar />
       <Content hideHeader={hideHeader}>
         <Outlet />
@@ -58,5 +58,5 @@ export const AppDom = styled.div`
 `;
 
 const Content = styled.div<{ hideHeader: boolean }>`
-  padding: ${({ hideHeader }) => (hideHeader ? '0px' : '60px')} 0px 60px 0px;
+  padding-top: ${({ hideHeader }) => (hideHeader ? '0px' : '60px')};
 `;

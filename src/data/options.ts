@@ -54,13 +54,13 @@ export const lostdateOptions: Option[] = [
 ];
 
 export const mapLocationToPlaceBooth = (location: string) => {
-  if (['해방광장', '정문', '빼빼로광장'].includes(location)) return 'freeSquare';
-  if (['후문', '후문일대'].includes(location)) return 'backDoor';
+  if (['해방광장 일대', '정문', '빼빼로광장'].includes(location)) return 'freeSquare';
+  if (['후문', '후문 일대'].includes(location)) return 'backDoor';
   return null;
 };
 
 export const mapLocationToPlaceFoodTruck = (location: string) => {
-  if (['해방광장', '303관 B1층', '정문'].includes(location)) return 'building303B1';
-  if (['후문', '후문일대'].includes(location)) return 'backDoor';
+  if (['해방광장 일대', '303관 B1층', '정문'].includes(location)) return 'building303B1';
+  if (['후문', '후문 일대'].includes(location)) return 'backDoor';
   return null;
 };

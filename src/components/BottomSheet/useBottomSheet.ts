@@ -90,8 +90,10 @@ export default function useBottomSheet() {
       // 바텀시트가 올라와있을 때만 리스트 스크롤 가능하도록
       // 화면 업데이트 직전 코드 실행할 수 있도록...-> 바텀시트 올리고 바로 리스트 스크롤 되도록
       requestAnimationFrame(() => {
+        const bottomSheetVisibleHeight = MAX_Y - MIN_Y - 50;
         if (!content.current) return;
         content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
+        content.current.style.paddingBottom = getCurrentTranslateY() < 0 ? `${bottomSheetVisibleHeight}px` : '0px'; // 올라와있을 때 padding bottom 추가
       });
     }
 

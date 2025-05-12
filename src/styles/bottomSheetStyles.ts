@@ -5,7 +5,7 @@ export const bottomSheetBaseStyle = css`
   display: flex;
   flex-direction: column;
   position: fixed;
-  bottom: 60px;
+  //bottom: 60px;
   z-index: 1;
   left: 0;
   right: 0;

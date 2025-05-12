@@ -58,9 +58,10 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
   //top: calc(100% - ${window.innerHeight * 0.4}px);
   //top: calc(100% - ${window.innerHeight * 0.53}px);
   position: fixed;
-  bottom: 100px;
-  //max-height: calc(100vh - 60px);
-  height: ${window.innerHeight * 0.9}px;
+  //bottom: 100px;
+  max-height: calc(100vh - 60px);
+  //height: ${window.innerHeight * 0.9}px;
+  //height: ${({ $sheetHeight }) => `${$sheetHeight - 60}px`};
   display: flex;
   flex-direction: column;
   background-color: #fafafa;
