@@ -164,6 +164,7 @@ const ItemKeywords = styled.div`
   display: flex;
   flex-direction: row;
   gap: 4px;
+  flex-wrap: wrap;
 `;
 const Keyword = styled.div`
   ${keywordBaseStyle}

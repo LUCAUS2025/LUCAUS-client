@@ -89,26 +89,26 @@ const middleSizeStyle = css`
 `;
 
 const largeSizeStyle = css`
-  top: 26%;
+  top: 29%;
 
   ${mediaSmall`
-    top: 24%;
+    top: 27%;
   `}
 
   ${mediaBig`
-    top: 28%;
+    top: 30%;
   `}
 
   ${mediaMediumPad`
-    top: 32%;
+    top: 34%;
   `}
 
   ${mediaLargePad`
-    top: 35%;
+    top: 38%;
   `}
 
   ${mediaLarggestPad`
-    top: 38%;
+    top: 41%;
   `}
 
   ${mediaAboveDesktop`
