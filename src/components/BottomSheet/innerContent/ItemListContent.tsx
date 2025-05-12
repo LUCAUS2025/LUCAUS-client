@@ -84,7 +84,6 @@ export const ItemListContent: React.FC<ContentProps> = ({
               onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`, { state: selectedDate })}
             >
               <ItemContent>
-                <ItemId>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer>
                   <ItemTitle>{item.name}</ItemTitle>
                   <ItemKeywords>
