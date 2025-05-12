@@ -6,7 +6,14 @@ import { ItemListContent } from '../innerContent/ItemListContent';
 import useBottomSheet from '../useBottomSheet';
 import { BoothOrFoodTruckItem } from '../../../data/boothFood';
 import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
-import { mediaBig, mediaSmall } from '../../../styles/responsive';
+import {
+  mediaAboveDesktop,
+  mediaBig,
+  mediaLargePad,
+  mediaLarggestPad,
+  mediaMediumPad,
+  mediaSmall,
+} from '../../../styles/responsive';
 import { Option } from '../../../data/options';
 
 interface BottomSheetProps {
@@ -70,6 +77,22 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
 
     ${mediaBig(`
       top: calc(100% - ${$sheetHeight * 0.54}px);
+    `)}
+
+    ${mediaMediumPad(`
+      top: calc(100% - ${$sheetHeight * 0.43}px);
+    `)}
+
+    ${mediaLargePad(`
+      top: calc(100% - ${$sheetHeight * 0.4}px);
+    `)}
+
+    ${mediaLarggestPad(`
+      top: calc(100% - ${$sheetHeight * 0.3}px);
+    `)}
+
+    ${mediaAboveDesktop(`
+      top: calc(100% - ${$sheetHeight * 0.24}px);
     `)}
   `}
 `;
