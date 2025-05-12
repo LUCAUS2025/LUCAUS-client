@@ -6,7 +6,14 @@ import { ItemListContent } from '../innerContent/ItemListContent';
 import useBottomSheet from '../useBottomSheet';
 import { BoothOrFoodTruckItem } from '../../../data/boothFood';
 import { bottomSheetBaseStyle } from '../../../styles/bottomSheetStyles';
-import { mediaBig, mediaSmall } from '../../../styles/responsive';
+import {
+  mediaAboveDesktop,
+  mediaBig,
+  mediaLargePad,
+  mediaLarggestPad,
+  mediaMediumPad,
+  mediaSmall,
+} from '../../../styles/responsive';
 import { Option } from '../../../data/options';
 
 interface BottomSheetProps {
@@ -51,9 +58,10 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
   //top: calc(100% - ${window.innerHeight * 0.4}px);
   //top: calc(100% - ${window.innerHeight * 0.53}px);
   position: fixed;
-  bottom: 100px;
-  //max-height: calc(100vh - 60px);
-  height: ${window.innerHeight * 0.9}px;
+  //bottom: 100px;
+  max-height: calc(100vh - 60px);
+  //height: ${window.innerHeight * 0.9}px;
+  //height: ${({ $sheetHeight }) => `${$sheetHeight - 60}px`};
   display: flex;
   flex-direction: column;
   background-color: #fafafa;
@@ -70,6 +78,22 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
 
     ${mediaBig(`
       top: calc(100% - ${$sheetHeight * 0.54}px);
+    `)}
+
+    ${mediaMediumPad(`
+      top: calc(100% - ${$sheetHeight * 0.43}px);
+    `)}
+
+    ${mediaLargePad(`
+      top: calc(100% - ${$sheetHeight * 0.4}px);
+    `)}
+
+    ${mediaLarggestPad(`
+      top: calc(100% - ${$sheetHeight * 0.3}px);
+    `)}
+
+    ${mediaAboveDesktop(`
+      top: calc(100% - ${$sheetHeight * 0.24}px);
     `)}
   `}
 `;

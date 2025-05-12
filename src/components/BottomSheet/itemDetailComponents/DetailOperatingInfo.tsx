@@ -44,7 +44,6 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
             </LabelContainer>
             <BoothTimeRow>
               <TimeText>10:00 ~ 17:00</TimeText>
-              <TodayTime>{selectedDate}일 기준</TodayTime>
             </BoothTimeRow>
           </BoothTimeItem>
         ) : (
@@ -68,7 +67,10 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
             <LabelIcon src="/images/common/locationDark.webp" />
             <InfoLabel>{type === 'booth' ? '부스 위치' : '트럭 위치'}</InfoLabel>
           </LabelContainer>
-          <InfoText>{location}</InfoText>
+          <BoothTimeRow>
+            <TimeText>{location}</TimeText>
+            {type === 'booth' && <TodayTime>{selectedDate}일 기준</TodayTime>}
+          </BoothTimeRow>
         </InfoItem>
       </InfoContainer>
     </Wrapper>

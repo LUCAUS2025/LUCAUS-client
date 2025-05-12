@@ -7,4 +7,5 @@ export const keywordBaseStyle = css`
   padding: 2px 4px;
   border-radius: 8px;
   font-size: 12px;
+  white-space: nowrap;
 `;
