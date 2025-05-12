@@ -15,11 +15,7 @@ export const Information = () => {
       setRecentNotice(result.result.content[0].title);
     };
     getNotice();
-  }, []);
-
-  if (!recentNotice) {
-    return <LoadingPage />;
-  }
+  }, [recentNotice]);
 
   return (
     <Wrapper>
