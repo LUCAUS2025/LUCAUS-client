@@ -63,6 +63,10 @@ const smallSizeStyle = css`
   ${mediaBig`
     top: 60%;
   `}
+
+  ${mediaSmall`
+    top: 52%;
+  `}
 `;
 
 const middleSizeStyle = css`

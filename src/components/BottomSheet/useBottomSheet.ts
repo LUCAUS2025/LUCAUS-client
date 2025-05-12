@@ -35,16 +35,18 @@ export default function useBottomSheet() {
 
   const canUserMoveBottomSheet = () => {
     const { touchMove, isContentAreaTouched } = metrics.current;
-    const scrollTop = content.current!.scrollTop;
+    if (!content.current) return;
+    const scrollTop = content.current?.scrollTop;
     if (!isContentAreaTouched) return true;
     return touchMove.movingDirection === 'down' ? scrollTop === 0 : false;
   };
 
   const handleTouchStart = (e: TouchEvent) => {
     const { touchStart } = metrics.current;
+    if (!sheet.current) return;
     touchStart.sheetY = sheet.current!.getBoundingClientRect().y;
     touchStart.touchY = e.touches[0].clientY;
-    sheet.current!.style.transition = '';
+    sheet.current.style.transition = '';
   };
 
   const handleTouchMove = (e: TouchEvent) => {
@@ -60,14 +62,16 @@ export default function useBottomSheet() {
 
     if (!metrics.current.isContentAreaTouched || canUserMoveBottomSheet()) {
       e.preventDefault();
-      sheet.current!.style.setProperty('transform', `translateY(${nextSheetY - MAX_Y}px)`);
+      if (!sheet.current) return;
+      sheet.current?.style.setProperty('transform', `translateY(${nextSheetY - MAX_Y}px)`);
     }
     if (content.current!.scrollTop === 0) metrics.current.scrollAtTopTouched = true;
     else metrics.current.scrollAtTopTouched = false;
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
-    sheet.current!.style.transition = 'transform 0.3s ease-out';
+    if (!sheet.current) return;
+    sheet.current.style.transition = 'transform 0.3s ease-out';
     const { touchMove, touchStart } = metrics.current;
     const dragThreshold = 80;
     const dragDistance = e.changedTouches[0].clientY - touchStart.touchY;
@@ -86,7 +90,8 @@ export default function useBottomSheet() {
       // 바텀시트가 올라와있을 때만 리스트 스크롤 가능하도록
       // 화면 업데이트 직전 코드 실행할 수 있도록...-> 바텀시트 올리고 바로 리스트 스크롤 되도록
       requestAnimationFrame(() => {
-        content.current!.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
+        if (!content.current) return;
+        content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
       });
     }
 
@@ -94,7 +99,8 @@ export default function useBottomSheet() {
       ? dragUp || Math.abs(dragDistance) < dragThreshold
       : !dragDown || !(content.current!.scrollTop === 0 && dragDistance > dragThreshold);
 
-    sheet.current!.style.setProperty('transform', shouldSnapToTop ? `translateY(${MIN_Y - MAX_Y}px)` : 'translateY(0)');
+    if (!sheet.current) return;
+    sheet.current?.style.setProperty('transform', shouldSnapToTop ? `translateY(${MIN_Y - MAX_Y}px)` : 'translateY(0)');
 
     metrics.current = {
       touchStart: { sheetY: 0, touchY: 0 },
@@ -117,7 +123,7 @@ export default function useBottomSheet() {
       sheetEl.removeEventListener('touchmove', handleTouchMove);
       sheetEl.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [MIN_Y, MAX_Y]);
+  }, []);
 
   useEffect(() => {
     const handleContentTouchStart = (e: TouchEvent) => {
