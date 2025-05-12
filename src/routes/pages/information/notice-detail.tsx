@@ -52,12 +52,7 @@ const NoticeDetail = () => {
       </ItemList>
       <ItemContent>
         <ItemImage src={notice.photoUrl || ''} />
-        {notice.content.split('\n').map((line, index) => (
-          <span key={index}>
-            {line}
-            <br />
-          </span>
-        ))}
+        {notice.content}
       </ItemContent>
     </>
   );
@@ -73,6 +68,7 @@ const ItemContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  white-space: pre-line;
 `;
 
 const ItemName = styled.div`
