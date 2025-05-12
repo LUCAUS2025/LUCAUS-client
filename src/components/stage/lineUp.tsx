@@ -58,14 +58,20 @@ export const BannerScroll = styled.div`
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  gap: 1rem;
+
+  /* 스크롤 스냅 제거 or 약화 */
+  scroll-snap-type: none;
+
+  /* 여러 개가 보이도록 */
+  flex-wrap: nowrap;
 `;
 
 export const BannerItem = styled.div`
-  min-width: 100%;
-  object-fit: cover; // 이미지 비율 유지
-  scroll-snap-align: center;
-  // flex-shrink: 0;
+  flex: 0 0 auto;
+  width: 76%;
+  margin-right: 1rem;
+  /* 여러 개가 한 줄에 보이게 */
+  scroll-snap-align: none;
 `;
 
 export const CardContainer = styled.div`
@@ -75,6 +81,18 @@ export const CardContainer = styled.div`
   gap: 1rem;
   padding: 0 0 1rem 0;
   margin: 0 -16px 0 -16px;
+`;
+
+export const BannerImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // 이미지 비율 유지
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+  &:first-child {
+    margin-left: 16px; // 첫 번째 이미지에만 왼쪽 패딩 추가
+  }
 `;
 
 const ListButtonWrapper = styled.div`
@@ -231,7 +249,7 @@ export const LineUp = () => {
         <>
           <ArtistScroll>
             {artists.map((name, index) => (
-              <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index)}>
+              <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index + 1)}>
                 <ArtistImageWrapper selected={selected === index}>
                   <ArtistImage src={artistImage[index]} alt="artist" />
                 </ArtistImageWrapper>
@@ -240,7 +258,7 @@ export const LineUp = () => {
             ))}
           </ArtistScroll>
 
-          <Card ref={bannerContainerRef}>
+          <BannerScroll ref={bannerContainerRef}>
             {bannerImages.map((src, index) => (
               <BannerItem
                 key={index}
@@ -248,10 +266,10 @@ export const LineUp = () => {
                   sectionRefs.current[index] = el;
                 }}
               >
-                <CardImage src={src} alt={`배너 ${index + 1}`} />
+                <BannerImage src={src} alt={`배너 ${index + 1}`} />
               </BannerItem>
             ))}
-          </Card>
+          </BannerScroll>
         </>
       )}
 

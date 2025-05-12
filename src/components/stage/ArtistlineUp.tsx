@@ -6,6 +6,7 @@ import {
   ArtistItem,
   ArtistName,
   ArtistScroll,
+  BannerImage,
   BannerItem,
   BannerScroll,
 } from './lineUp';
@@ -77,7 +78,7 @@ export const ArtistlineUp = () => {
       <ArtistScroll>
         {artists.map((name, index) => (
           <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index + 1)}>
-            <ArtistImageWrapper selected={selected === index && index !== 0}>
+            <ArtistImageWrapper selected={selected === index}>
               <ArtistImage src={artistImage[index]} alt="artist" />
             </ArtistImageWrapper>
             <ArtistName>{name}</ArtistName>
@@ -93,7 +94,7 @@ export const ArtistlineUp = () => {
               sectionRefs.current[index] = el;
             }}
           >
-            <CardImage src={src} alt={`배너 ${index + 1}`} />
+            <BannerImage src={src} alt={`배너 ${index + 1}`} />
           </BannerItem>
         ))}
       </BannerScroll>
