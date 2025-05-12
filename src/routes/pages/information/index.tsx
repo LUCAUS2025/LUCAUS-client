@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getOneRecentNotice } from '../../../services/apis/notice';
 import { mediaSmall_description, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
+import { LoadingPage } from '../LoadingPage';
 
 export const Information = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export const Information = () => {
   }, []);
 
   if (!recentNotice) {
-    return <div>loading...</div>;
+    return <LoadingPage />;
   }
 
   return (
