@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Item, ItemDate, ItemDetail, ItemInfo, ItemName, Line, Tag } from './lostitem';
 import { useEffect, useState } from 'react';
 import { getNotices } from '../../../services/apis/notice';
-import { formatDate } from '../../../components/common/formatData';
+import { formatDateForNotice } from '../../../components/common/formatData';
 
 interface Notice {
   id: number;
@@ -54,7 +54,7 @@ const Notice = () => {
               <ItemDetail>{item.content}</ItemDetail>
               <Line>
                 <Tag>{item.category}</Tag>
-                <ItemDate>등록 일시 | {formatDate(item.uploadDateTime)}</ItemDate>
+                <ItemDate>등록 일시 | {formatDateForNotice(item.uploadDateTime)}</ItemDate>
               </Line>
             </ItemInfo>
           </ClickableItem>
