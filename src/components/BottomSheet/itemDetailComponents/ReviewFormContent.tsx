@@ -21,9 +21,9 @@ interface ReviewFormContentProps {
 
 const boothReviewOptions: ReviewOption[] = [
   { icon: '👍', label: '완전\n추천해요', tag: 'RECOMMEND' },
-  { icon: '🍭', label: '간식이\n맛있어요', tag: 'DELICIOUS' },
-  { icon: '🤓', label: '콘텐츠가\n유익해요', tag: 'BENEFICIAL' },
   { icon: '🤣', label: '분위기가\n재밌어요', tag: 'FUN' },
+  { icon: '🤓', label: '콘텐츠가\n유익해요', tag: 'BENEFICIAL' },
+  { icon: '🍭', label: '간식이\n맛있어요', tag: 'DELICIOUS' },
 ];
 
 const foodTruckReviewOptions: ReviewOption[] = [

@@ -65,7 +65,7 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
-
+  align-items: center;
   ${mediaSmall`
     gap: 6px;
   `}
