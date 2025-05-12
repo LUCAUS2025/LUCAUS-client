@@ -76,7 +76,7 @@ export const ArtistlineUp = () => {
     <>
       <ArtistScroll>
         {artists.map((name, index) => (
-          <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index)}>
+          <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index + 1)}>
             <ArtistImageWrapper selected={selected === index && index !== 0}>
               <ArtistImage src={artistImage[index]} alt="artist" />
             </ArtistImageWrapper>
