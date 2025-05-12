@@ -14,7 +14,7 @@ const BarrierFree = () => {
           <br />
           신청하러 가기
         </div>
-        <BlackButton>바로가기</BlackButton>
+        <BlackButton onClick={() => window.open('https://forms.gle/7houdXBqaAQqcR477', '_blank')}>바로가기</BlackButton>
       </Box>
       <SectionTitle>배리어프리 지도</SectionTitle>
       <TestMapImage />

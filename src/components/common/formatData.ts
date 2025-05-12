@@ -16,3 +16,10 @@ export const formatDateNoTime = (datetime: string) => {
   const day = String(date.getDate()).padStart(2, '0');
   return `25.${month}.${day}`;
 };
+
+export const formatDateForNotice = (datetime: string) => {
+  const date = new Date(datetime);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${month}.${day}`;
+};

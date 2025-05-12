@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { useNavigate } from 'react-router-dom';
 import { mediaBig, mediaSmall, mediaSmall_title } from '../../../styles/responsive';
+import { truncateTo20, truncateTo35 } from '../../../utils/truncate';
 
 interface ItemPreviewContentProps {
   item: BoothOrFoodTruckItem;
@@ -26,9 +27,11 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
     <Wrapper>
       <TitleContainer>
         <Title>#{item.dayBoothNum}</Title>
-        <Title>{item.name}</Title>
+        <Title>{item.name.length > 20 ? truncateTo20(item.name) : item.name}</Title>
       </TitleContainer>
-      {item.type === 'booth' && <Description>{item.owner}</Description>}
+      {item.type === 'booth' && (
+        <Description>{item.owner.length > 35 ? truncateTo35(item.owner) : item.owner}</Description>
+      )}
       <ItemKeywords>
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
         {/* {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)} */}
@@ -62,7 +65,7 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
-
+  align-items: center;
   ${mediaSmall`
     gap: 6px;
   `}
@@ -82,6 +85,7 @@ const ItemKeywords = styled.div`
   display: flex;
   flex-direction: row;
   gap: 4px;
+  flex-wrap: wrap;
 `;
 const Keyword = styled.div`
   ${keywordBaseStyle}

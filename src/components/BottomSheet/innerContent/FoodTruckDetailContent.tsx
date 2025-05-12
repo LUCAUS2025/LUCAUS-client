@@ -33,10 +33,7 @@ export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({
       <DetailWrapper>
         <HeaderContainer>
           <TitleContainer>
-            <ItemTitle>
-              <ItemId>#{foodTruckDetail?.dayFoodTruckNum}&nbsp;</ItemId>
-              {foodTruckDetail?.name}
-            </ItemTitle>
+            <ItemTitle>{foodTruckDetail?.name}</ItemTitle>
           </TitleContainer>
         </HeaderContainer>
         <MenuContainer>

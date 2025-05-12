@@ -25,15 +25,15 @@ type IconMapping = {
 const iconMapping: IconMapping = {
   1: { all: <StampKey color="#1447e6" /> },
   2: {
-    11: <StampKey color="#1447e6" />,
-    12: <StampKnife color="#1447e6" />,
-    13: <StampHook color="#1447e6" />,
-    14: <StampSkeleton color="#1447e6" />,
-    15: <StampHandle color="#1447e6" />,
-    16: <StampMap color="#1447e6" />,
-    17: <StampIsland color="#1447e6" />,
+    11: <StampSkeleton color="#1447e6" />,
+    12: <StampIsland color="#1447e6" />,
+    13: <StampKnife color="#1447e6" />,
+    14: <StampTreasure color="#1447e6" />,
+    15: <StampKey color="#1447e6" />,
+    16: <StampHook color="#1447e6" />,
+    17: <StampMap color="#1447e6" />,
     18: <StampShip color="#1447e6" />,
-    19: <StampTreasure color="#1447e6" />,
+    19: <StampHandle color="#1447e6" />,
   },
 };
 
@@ -45,7 +45,8 @@ const AfterGetStampModalContent = ({ BoothInfo, selectedBooth, setOpenModal, boa
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>{BoothInfo[boothIndex - 1]}</Title>
+        {boardType == 1 ? <Title>{BoothInfo[boothIndex - 1]}</Title> : <Title>{BoothInfo[boothIndex - 2]}</Title>}
+
         <SubTitle>부스 참여를 완료하여 키를 획득하였습니다.</SubTitle>
       </TitleWrapper>
       <StepCircle>{icon}</StepCircle>

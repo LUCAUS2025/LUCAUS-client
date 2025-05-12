@@ -82,7 +82,7 @@ export const Stage = () => {
 
       <Container>
         <img
-          src="/images/home/stage/ticket.png"
+          src="/images/home/stage/ticket.webp"
           onClick={() => navigate('/guide/ticketing')}
           style={{ width: '100%' }}
           alt="티켓 안내"
@@ -101,7 +101,7 @@ export const Stage = () => {
           <div ref={mukiRef}>
             <Title>무대기획전</Title>
             <img
-              src="/images/home/stage/mudaeki.png"
+              src="/images/home/stage/mudaeki.webp"
               alt="무대기획전 포스터"
               style={{ width: '100%', borderRadius: '12px' }}
             />
@@ -113,7 +113,7 @@ export const Stage = () => {
           <div ref={cheeringRef}>
             <Title>응원제</Title>
             <img
-              src="/images/home/stage/ticket.png"
+              src="/images/home/stage/mudaeki.webp"
               alt="응원제 포스터"
               style={{ width: '100%', borderRadius: '12px' }}
             />
@@ -121,7 +121,7 @@ export const Stage = () => {
         )}
 
         {/* 본무대 */}
-        {(isSelectedDate('22일') || isSelectedDate('23일')) && (
+        {(isSelectedDate('21일') || isSelectedDate('22일') || isSelectedDate('23일')) && (
           <div ref={mainStageRef}>
             <Title>본무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>

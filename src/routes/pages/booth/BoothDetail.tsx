@@ -33,15 +33,13 @@ export const BoothDetail = () => {
 
   useEffect(() => {
     setHideHeader(true);
-    return () => setHideHeader(false);
+    return () => {
+      setHideHeader(false);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!boothDetail) {
-    return <LoadingPage />;
-  }
-
-  if (!boothDetail.cover) {
     return <LoadingPage />;
   }
 

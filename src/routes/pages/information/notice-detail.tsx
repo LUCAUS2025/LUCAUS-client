@@ -2,8 +2,9 @@ import { useParams } from 'react-router-dom';
 import { Item, ItemDate, ItemInfo, ItemList, Line, Tag } from './lostitem';
 import { useEffect, useState } from 'react';
 import { getNotice } from '../../../services/apis/notice';
-import { formatDate } from '../../../components/common/formatData';
+import { formatDateForNotice } from '../../../components/common/formatData';
 import styled from 'styled-components';
+import { LoadingPage } from '../LoadingPage';
 
 interface Notice {
   id: number;
@@ -34,7 +35,7 @@ const NoticeDetail = () => {
   }, [noticeId]);
 
   if (!notice) {
-    return <div>공지사항을 불러오는 중입니다...</div>;
+    return <LoadingPage />;
   }
 
   return (
@@ -45,19 +46,14 @@ const NoticeDetail = () => {
             <ItemName>{notice.title ?? '제목 없음'}</ItemName>
             <Line>
               <Tag>{notice.category}</Tag>
-              <ItemDate>등록 일시 | {formatDate(notice.uploadDateTime)}</ItemDate>
+              <ItemDate>등록 일시 | {formatDateForNotice(notice.uploadDateTime)}</ItemDate>
             </Line>
           </ItemInfo>
         </Item>
       </ItemList>
       <ItemContent>
         <ItemImage src={notice.photoUrl || ''} />
-        {notice.content.split('\n').map((line, index) => (
-          <span key={index}>
-            {line}
-            <br />
-          </span>
-        ))}
+        {notice.content}
       </ItemContent>
     </>
   );
@@ -73,6 +69,7 @@ const ItemContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  white-space: pre-line;
 `;
 
 const ItemName = styled.div`

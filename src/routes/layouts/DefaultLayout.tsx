@@ -14,7 +14,7 @@ const LayoutContent = () => {
 
   return (
     <LayoutDom>
-      {!hideHeader && <TheHeader key="header-visible" />}
+      {!hideHeader && <TheHeader />}
       <TheSidebar />
       <Content hideHeader={hideHeader}>
         <Outlet />

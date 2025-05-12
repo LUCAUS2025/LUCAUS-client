@@ -20,7 +20,11 @@ export const BaseLayer: React.FC<BaseLayerProps> = ({ children, backgroundImgSrc
 
   return (
     <Wrapper>
-      {backgroundImgSrc && <BackgroundImg src={backgroundImgSrc} alt="background" />}
+      {backgroundImgSrc && (
+        <BackgroundImgContainer>
+          <BackgroundImg src={backgroundImgSrc} alt="background" />
+        </BackgroundImgContainer>
+      )}
       <Content>{children}</Content>
     </Wrapper>
   );
@@ -28,21 +32,29 @@ export const BaseLayer: React.FC<BaseLayerProps> = ({ children, backgroundImgSrc
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
   z-index: 0;
+  //width: min(100vw, 600px);
+  /* @media (max-width: 600px) {
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+  } */
 `;
 
-const BackgroundImg = styled.img`
+const BackgroundImgContainer = styled.div`
   position: absolute;
-  inset: 0;
-  width: 100%;
-  object-fit: contain;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   z-index: -1;
-  //padding-top: 50px;
 
   user-select: none;
   -webkit-user-drag: none;
@@ -50,8 +62,17 @@ const BackgroundImg = styled.img`
   touch-action: none;
 `;
 
+const BackgroundImg = styled.img`
+  width: min(100vw, 600px);
+  height: auto;
+  object-fit: contain;
+  z-index: -1;
+`;
+
 const Content = styled.div`
   position: relative;
   z-index: 1;
   height: 100%;
+  width: min(100vw, 600px);
+  margin: 0 auto;
 `;
