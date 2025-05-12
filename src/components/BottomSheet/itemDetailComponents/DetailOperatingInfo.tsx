@@ -56,7 +56,6 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
             <FoodTruckTimeWrapper>
               <FoodTruckTimeRow>
                 <FoodTruckTimeText>10:00 ~ 19:00</FoodTruckTimeText>
-                <TodayTime>{selectedDate}일 기준</TodayTime>
               </FoodTruckTimeRow>
               <TimeSubText>*재료 소진 시 조기 마감</TimeSubText>
             </FoodTruckTimeWrapper>
