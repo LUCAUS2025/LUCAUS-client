@@ -60,10 +60,7 @@ export const BannerScroll = styled.div`
   scroll-snap-type: x mandatory;
 
   /* 스크롤 스냅 제거 or 약화 */
-  scroll-snap-type: none;
-
-  /* 여러 개가 보이도록 */
-  flex-wrap: nowrap;
+  // scroll-snap-type: none;
 `;
 
 export const BannerItem = styled.div`
