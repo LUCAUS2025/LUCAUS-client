@@ -55,7 +55,7 @@ const LostItem = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [selectDate, selectItem]);
+  }, []);
 
   return (
     <BigContainer>
@@ -72,7 +72,7 @@ const LostItem = () => {
 
       <SectionTitle>내 분실물 찾기</SectionTitle>
       <DropDowns>
-        <LostDateDropDown selectedDate={selectDate} setSelectedDate={setSelectDate} darkMode={false} />
+        <LostDateDropDown selectedDate={selectDate} setSelectedDate={setSelectDate} darkMode={true} />
         <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
       <ItemList>

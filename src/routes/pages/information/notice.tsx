@@ -27,6 +27,7 @@ const Notice = () => {
         } else {
           setNotices([]);
         }
+        // console.log(res.result);
       })
       .catch((err) => {
         console.error(err);
@@ -44,10 +45,24 @@ const Notice = () => {
   return (
     <div>
       {notices.map((item) => {
-        const uploadTime = new Date(item.uploadDateTime);
+        const uploadDate = new Date(item.uploadDateTime);
         const now = new Date();
-        const diffInHours = (now.getTime() - uploadTime.getTime()) / (1000 * 60 * 60); // 밀리초 → 시간 변환
-        const isRecent = diffInHours < 24;
+
+        // 오늘 날짜
+        const isToday =
+          uploadDate.getFullYear() === now.getFullYear() &&
+          uploadDate.getMonth() === now.getMonth() &&
+          uploadDate.getDate() === now.getDate();
+
+        // 어제 날짜
+        const yesterday = new Date(now);
+        yesterday.setDate(now.getDate() - 1);
+        const isYesterday =
+          uploadDate.getFullYear() === yesterday.getFullYear() &&
+          uploadDate.getMonth() === yesterday.getMonth() &&
+          uploadDate.getDate() === yesterday.getDate();
+
+        const isRecent = isToday || isYesterday;
 
         return (
           <ClickableItem key={item.id} onClick={() => handleItemClick(item.id)}>
