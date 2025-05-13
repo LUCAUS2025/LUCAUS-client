@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
-import { Card, CardImage } from '../home/thumbnail';
 
 export const ArtistScroll = styled.div`
   display: flex;
@@ -24,6 +23,8 @@ export const ArtistItem = styled.div<{ selected: boolean }>`
 
 export const ArtistImageWrapper = styled.div<{ selected: boolean }>`
   min-width: 86.4px;
+  width: 54px;
+  height: 54px;
   object-fit: cover; // 이미지 비율 유지
   display: flex;
   align-items: center;
