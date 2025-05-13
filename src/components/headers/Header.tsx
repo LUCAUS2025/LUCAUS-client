@@ -31,7 +31,7 @@ export const Header = () => {
   }, [location.pathname]);
 
   // arrow 아이콘을 보여줄 경로
-  const arrowPaths = ['guide', 'entry', 'notice', 'lostitem', 'barrierfree', 'login', 'signup'];
+  const arrowPaths = ['entry', 'notice', 'lostitem', 'barrierfree', 'login', 'signup'];
 
   // 현재 경로가 arrow 아이콘 대상인지 판단
   const showArrowIcon = arrowPaths.some((path) => location.pathname.includes(path));
