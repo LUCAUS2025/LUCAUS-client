@@ -23,8 +23,8 @@ export const ArtistItem = styled.div<{ selected: boolean }>`
 
 export const ArtistImageWrapper = styled.div<{ selected: boolean }>`
   min-width: 86.4px;
-  width: 54px;
-  height: 54px;
+  // width: 54px;
+  // height: 54px;
   object-fit: cover; // 이미지 비율 유지
   display: flex;
   align-items: center;
