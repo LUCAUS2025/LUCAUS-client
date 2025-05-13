@@ -21,6 +21,73 @@ const EachBooth = ({ isCleared, index, onClick, boothName, customPadding, childN
     realIndex = index;
   }
   const cleared = isCleared[realIndex];
+
+  let title;
+  if (boothName == '난파선 수리 대작전') {
+    title = (
+      <>
+        <span>난파선 수리</span>
+        <br />
+        <span>대작전</span>
+      </>
+    );
+  } else if (boothName == '금은보화를 얻어라!') {
+    title = (
+      <>
+        <span>금은보화를</span>
+        <br />
+        <span>얻어라!</span>
+      </>
+    );
+  } else if (boothName == '누가 맹수 소리를 내었는가') {
+    title = (
+      <>
+        <span>누가 맹수</span>
+        <br />
+        <span>소리를 내었는가</span>
+      </>
+    );
+  } else if (boothName == '바다 위 생존 상황!') {
+    title = (
+      <>
+        <span>바다 위</span>
+        <br />
+        <span>생존 상황!</span>
+      </>
+    );
+  } else if (boothName == '사랑은 돌아오는 거야') {
+    title = (
+      <>
+        <span>사랑은</span>
+        <br />
+        <span>돌아오는 거야</span>
+      </>
+    );
+  } else if (boothName == '바다 식구를 찾아라!') {
+    title = (
+      <>
+        <span>바다 식구를</span>
+        <br />
+        <span>찾아라!</span>
+      </>
+    );
+  } else if (boothName == '관찰력 100단 선원으로 살아남기!') {
+    title = (
+      <>
+        <span>관찰력 100단</span>
+        <br />
+        <span>선원으로</span>
+        <br />
+        <span>살아남기!</span>
+      </>
+    );
+  } else {
+    title = (
+      <>
+        <span>{boothName}</span>
+      </>
+    );
+  }
   return (
     <Wrapper
       customPadding={customPadding}
@@ -29,7 +96,7 @@ const EachBooth = ({ isCleared, index, onClick, boothName, customPadding, childN
       }}
     >
       <StepCircle active={cleared}>{childNode}</StepCircle>
-      <BoothName>{boothName}</BoothName>
+      <BoothName>{title}</BoothName>
     </Wrapper>
   );
 };
@@ -38,7 +105,7 @@ export default EachBooth;
 
 const Wrapper = styled.div<{ customPadding: string }>`
   display: flex;
-  width: 78px;
+  width: 80px;
   height: 90px;
   justify-content: start;
   align-items: center;

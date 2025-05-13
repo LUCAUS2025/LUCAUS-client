@@ -62,6 +62,20 @@ const StampBoard = () => {
     { label: '21일', value: 2 },
   ];
 
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportHeight(window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // ↓ Wrapper에 전달할 실제 높이 계산
+  const wrapperHeight = `${viewportHeight - 40 - 80}px`;
+
   // 현재 어떤 드롭다운 선택되었는지
   const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
 
@@ -174,7 +188,7 @@ const StampBoard = () => {
   }, [clickedNumInfo]);
 
   return (
-    <Wrapper>
+    <Wrapper height={wrapperHeight}>
       <OutContentBox>
         <MyInfoLine>
           <DateDropDown
@@ -281,10 +295,10 @@ const StampBoard = () => {
 
 export default StampBoard;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ height: string }>`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 40px - 80px);
+  height: ${(props) => props.height};
   justify-content: space-between;
   overflow-y: auto;
   position: relative;
