@@ -153,7 +153,7 @@ const Indicator = styled.div<IndicatorProps>`
   width: ${(props) => (props.active ? '24px' : '8px')};
   height: 8px;
   border-radius: 8px;
-  background: ${(props) => (props.active ? '#3b82f6' : '#d1d5db')};
+  background: ${(props) => (props.active ? '#1447e6' : '#d1d5db')};
   transition: all 0.3s ease;
 `;
 
