@@ -77,7 +77,6 @@ export const CardContainer = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 1rem;
-  padding: 0 0 1rem 0;
   margin: 0 -16px 0 -16px;
 `;
 
