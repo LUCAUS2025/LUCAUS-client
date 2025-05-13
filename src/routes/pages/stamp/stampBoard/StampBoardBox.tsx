@@ -212,7 +212,7 @@ const Wrapper = styled.div`
   min-width: 343px;
   width: 100%;
   min-height: 20vh;
-  height: calc(100vh - 200px - 190px - 70px);
+  height: calc(100vh - 200px - 190px - 120px);
   justify-content: space-between;
   align-items: center;
   overflow-y: auto;
