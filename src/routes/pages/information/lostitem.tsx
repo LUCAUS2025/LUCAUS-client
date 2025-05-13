@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getLostItems } from '../../../services/apis/lostitem';
-import { formatDate } from '../../../components/common/formatData';
+import { formatDateForNotice } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 import { itemsOptions, lostdateOptions, Option } from '../../../data/options';
 
@@ -87,7 +87,7 @@ const LostItem = () => {
                   <ItemDetail>{item.detail}</ItemDetail>
                   <Line>
                     <Tag>{translateCategory(item.category)}</Tag>
-                    <ItemDate>접수 일자 | {formatDate(item.date)}</ItemDate>
+                    <ItemDate>접수 일자 | {formatDateForNotice(item.date)}</ItemDate>
                   </Line>
                 </ItemInfo>
               </Item>

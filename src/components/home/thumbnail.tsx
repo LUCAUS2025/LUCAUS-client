@@ -13,7 +13,6 @@ export const Thumbnail = () => {
 export const Card = styled.div`
   display: flex;
   gap: 1rem;
-  border-radius: 0.5rem;
   overflow-y: auto; // 세로 스크롤 활성화
   padding: 0 0 1rem 0;
   margin: 0 -16px 0 -16px;
