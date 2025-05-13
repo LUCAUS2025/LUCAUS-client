@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Thumbnail = () => {
   return (
     <Card>
-      <CardImage src="images/home/stage/newjeans.webp" alt="옥씨 부인전" />
-      <CardImage src="images/home/stage/newjeans.webp" alt="옥씨 부인전" />
+      <CardImage src="images/home/artists/aespa.webp" alt="에스파 웹피" />
+      <CardImage src="images/home/artists/aespa.png" alt="에스파 피엔지" />
       <CardImage src="images/home/stage/newjeans.webp" alt="옥씨 부인전" />
     </Card>
   );
