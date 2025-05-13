@@ -32,7 +32,7 @@ const NoticeDetail = () => {
       .catch((err) => {
         console.error('Error fetching notice:', err);
       });
-  }, [noticeId]);
+  }, []);
 
   if (!notice) {
     return <LoadingPage />;
