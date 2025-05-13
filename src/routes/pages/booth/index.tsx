@@ -74,7 +74,7 @@ export const Booth = () => {
           </OptionContainer>
           <BasicBottomSheet
             title={'부스 배치도'}
-            description={'한눈에 보는 부스 배치도와 부스 리스트'}
+            description={'*한 단위체의 부스 연속 사용 시 앞번호로 표기됩니다.'}
             data={boothList}
             setSelectedItem={setSelectedItem}
             selectedPlace={selectedPlace}
