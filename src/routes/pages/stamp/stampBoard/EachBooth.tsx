@@ -39,7 +39,7 @@ export default EachBooth;
 const Wrapper = styled.div<{ customPadding: string }>`
   display: flex;
   width: 78px;
-  height: 100px;
+  height: 90px;
   justify-content: start;
   align-items: center;
   flex-direction: column;
