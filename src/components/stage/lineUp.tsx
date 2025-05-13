@@ -7,12 +7,14 @@ export const ArtistScroll = styled.div`
   overflow-x: auto;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  gap: 2rem;
+  gap: 10px;
   padding: 0 1rem;
+  white-space: pre-line;
 `;
 
 export const ArtistItem = styled.div<{ selected: boolean }>`
-  min-width: 54px;
+  min-width: 80px;
+  // min-width: 54px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +25,7 @@ export const ArtistItem = styled.div<{ selected: boolean }>`
 `;
 
 export const ArtistImageWrapper = styled.div<{ selected: boolean }>`
-  min-width: 54px;
+  width: 50px;
   object-fit: cover; // 이미지 비율 유지
   display: flex;
   align-items: center;
@@ -47,11 +49,12 @@ export const ArtistImage = styled.img`
 `;
 
 export const ArtistName = styled.div`
-  font-size: 0.75rem;
+  font-size: 12px;
   margin-top: 0.25rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: pre-line;
 `;
 
 export const BannerScroll = styled.div`
@@ -153,7 +156,7 @@ const Tag = styled.span`
 `;
 
 const artists = [
-  '멋쟁이 밴드처럼',
+  '김승재와\n흑백 건반들',
   '멋쟁이 호랑이처럼',
   '멋쟁이 사자처럼',
   '멋쟁이 토끼처럼',
