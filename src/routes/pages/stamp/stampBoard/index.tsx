@@ -357,6 +357,7 @@ const OutContentBox = styled.div`
   flex-direction: column;
   padding: 20px;
   overflow-y: hidden;
+  overflow-x: hidden;
 `;
 
 const ColorBox = styled.div`
