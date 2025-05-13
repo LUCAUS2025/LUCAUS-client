@@ -318,6 +318,7 @@ const Part = styled.div`
   width: 100%;
 `;
 const MakerText = styled.div`
+  width: 20px;
   display: flex;
   flex-direction: column;
   font-family: Pretendard;
@@ -327,4 +328,5 @@ const MakerText = styled.div`
   letter-spacing: -0.26px;
   color: #101828;
   white-space: nowrap;
+  box-sizing: i;
 `;
