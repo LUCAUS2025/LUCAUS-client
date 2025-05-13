@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Footer = () => {
   return (
-    <Bottom style={{ fontSize: '12px' }}>
-      <div style={{ fontSize: '20px' }}>축제기획단 X 멋쟁이사자처럼 중앙대학교</div>
+    <Bottom style={{ fontSize: '10px' }}>
+      <div style={{ fontSize: '14px' }}>축제기획단 X 멋쟁이사자처럼 중앙대학교</div>
       <br />© 2025 CAU LIKELION All rights reserved.
     </Bottom>
   );
