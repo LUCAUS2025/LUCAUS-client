@@ -9,6 +9,7 @@ export const ArtistScroll = styled.div`
   margin-bottom: 1rem;
   gap: 10px;
   padding: 0 1rem;
+  margin: 0 -16px 0 -16px;
   white-space: pre-line;
 `;
 
@@ -21,7 +22,7 @@ export const ArtistItem = styled.div<{ selected: boolean }>`
   cursor: pointer;
   color: ${({ selected }) => (selected ? '#101828' : '#6a7282')};
   font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
-  padding: 0.5rem;
+  padding-bottom: 0.5rem;
 `;
 
 export const ArtistImageWrapper = styled.div<{ selected: boolean }>`
@@ -55,13 +56,14 @@ export const ArtistName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-line;
+  text-align: center;
 `;
 
 export const BannerScroll = styled.div`
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-
+  margin: 0 -16px 0 -16px;
   /* 스크롤 스냅 제거 or 약화 */
   scroll-snap-type: none;
   scroll-snap-align: start;
@@ -157,9 +159,9 @@ const Tag = styled.span`
 
 const artists = [
   '김승재와\n흑백 건반들',
-  '멋쟁이 호랑이처럼',
-  '멋쟁이 사자처럼',
-  '멋쟁이 토끼처럼',
+  'movement',
+  '나상현씨 밴드',
+  'NCT DREAM',
   '멋쟁이 코끼리처럼',
   '멋쟁이 여우처럼',
   '멋쟁이 판다처럼',
