@@ -25,10 +25,8 @@ const LayoutContent = () => {
 };
 
 export const DefaultLayout = () => {
-  const notScroll = typeof window !== 'undefined' && window.location.href.includes('stamp/board');
-
   return (
-    <AppDom notScroll={notScroll}>
+    <AppDom>
       <MenuProvider>
         <HeaderProvider>
           <LayoutContent />
@@ -48,13 +46,12 @@ const LayoutDom = styled.div`
   }
 `;
 
-const AppDom = styled.div<{ notScroll: boolean }>`
+const AppDom = styled.div`
   width: min(100vw, 600px);
   height: 100vh;
   margin: 0 auto;
   font-family: 'Pretendard-Regular';
   background-color: white;
-  overflow-y: ${({ notScroll }) => (notScroll ? 'hidden' : 'auto')};
 
   @media (max-width: 600px) {
     width: 100vw;
