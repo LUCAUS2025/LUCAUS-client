@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
-import { Card, CardImage } from '../home/thumbnail';
 
 export const ArtistScroll = styled.div`
   display: flex;
   overflow-x: auto;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  gap: 0.5rem;
+  gap: 2rem;
+  padding: 0 1rem;
 `;
 
 export const ArtistItem = styled.div<{ selected: boolean }>`
-  width: 100%;
+  min-width: 54px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +23,7 @@ export const ArtistItem = styled.div<{ selected: boolean }>`
 `;
 
 export const ArtistImageWrapper = styled.div<{ selected: boolean }>`
-  min-width: 86.4px;
+  min-width: 54px;
   object-fit: cover; // 이미지 비율 유지
   display: flex;
   align-items: center;

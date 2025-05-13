@@ -31,7 +31,7 @@ const Notice = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [notices]);
+  }, []);
 
   const handleItemClick = (id: number) => {
     navigate(`/notice/${id}`);

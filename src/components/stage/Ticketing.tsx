@@ -18,7 +18,9 @@ const Ticketing: React.FC = () => {
           <br />
           지금 바로 예매하세요!
         </div>
-        <BlackButton>바로가기</BlackButton>
+        <BlackButton onClick={() => window.open('https://festival.cau.ac.kr/index.html', '_blank')}>
+          바로가기
+        </BlackButton>
       </Box>
       <SectionTitle>관람 구역 지도</SectionTitle>
       <TestMapImage />
