@@ -9,6 +9,7 @@ export const CreateAxiosInstanceWithToken = () => {
   if (!axiosInstanceWithToken) {
     axiosInstanceWithToken = axios.create({
       baseURL: 'https://lucaus.info/api',
+      withCredentials: true,
     });
 
     axiosInstanceWithToken.interceptors.request.use(
