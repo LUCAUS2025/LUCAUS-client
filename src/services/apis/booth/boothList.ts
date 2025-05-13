@@ -10,7 +10,7 @@ interface BoothListRawData {
   location: string;
 }
 
-function categoriesMapping(categoryList: string[]) {
+export function categoriesMapping(categoryList: string[]) {
   return categoryList.map((item: string) => {
     switch (item) {
       case 'SALE':

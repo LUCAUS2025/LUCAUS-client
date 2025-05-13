@@ -17,6 +17,7 @@ import { PortalBottomSheet } from '../variants/PortalBottomSheet';
 import { ReviewFormContent } from '../itemDetailComponents/ReviewFormContent';
 import { BoothDetailRawData } from '../../../services/apis/booth/boothDetail';
 import { mediaSmall_title } from '../../../styles/responsive';
+import { categoriesMapping } from '../../../services/apis/booth/boothList';
 
 interface BoothDetailContentProps {
   boothDetail: BoothDetailRawData;
@@ -50,7 +51,10 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({
             </ItemTitle>
             <ItemHost>{boothDetail?.owner}</ItemHost>
             <Keywords>
-              {boothDetail?.categories?.map((keyword, idx) => <Keyword key={idx}>#{keyword}</Keyword>)}
+              {boothDetail?.categories &&
+                categoriesMapping(boothDetail?.categories).map((keyword, idx) => (
+                  <Keyword key={idx}>#{keyword}</Keyword>
+                ))}
             </Keywords>
           </TitleContainer>
           <ItemDescription>{boothDetail?.info}</ItemDescription>
