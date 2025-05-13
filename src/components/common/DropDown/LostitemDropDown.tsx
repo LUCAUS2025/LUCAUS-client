@@ -15,7 +15,7 @@ export const LostitemDropDown: React.FC<LostitemDropDownProps> = ({ selectedItem
         options={itemsOptions}
         selectedOption={selectedItem}
         setSelectedOption={setSelectedItem}
-        logoSrc={darkMode ? '/images/common/dateDark.webp' : '/images/common/date.webp'}
+        logoSrc={darkMode ? '/images/information/lostitemdropdown.webp' : '/images/information/lostitemdropdown.webp'}
       />
     </>
   );
