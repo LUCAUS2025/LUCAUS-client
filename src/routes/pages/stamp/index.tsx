@@ -58,7 +58,7 @@ const StampEntrance = () => {
 
       <WaveWrapper>
         <WaveBox>
-          <WaveImg src="/images/wave/wave.png" alt="wave" />
+          <WaveImg src="/images/wave/wave_ship2.svg" alt="wave" />
         </WaveBox>
         <ColorBox isDefault={whichView} />
       </WaveWrapper>
