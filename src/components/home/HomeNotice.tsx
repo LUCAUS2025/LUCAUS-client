@@ -44,7 +44,7 @@ const HomeNotice = () => {
         <MoreButton onClick={() => navigate('/notice')}>더보기</MoreButton>
       </SectionHeader>
       {notices.slice(0, 2).map((notice, index) => (
-        <NoticeCard key={index}>
+        <NoticeCard key={index} onClick={() => navigate(`/notice/${notice.id}`)}>
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
           <NoticeContent>{notice.content}</NoticeContent>
           <NoticeDate>{formatDateNoTime(notice.uploadDateTime)}</NoticeDate>

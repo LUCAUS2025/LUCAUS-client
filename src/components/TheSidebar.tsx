@@ -30,7 +30,7 @@ const TheSidebar = () => {
           </ItemContainer>
           <ItemContainer>
             <MenuHeading>푸드트럭</MenuHeading>
-            <MenuItem href="/foodTruck">푸드트럭 지도</MenuItem>
+            <MenuItem href="/foodTruck">푸드트럭 안내</MenuItem>
           </ItemContainer>
           <ItemContainer>
             <MenuHeading>정보</MenuHeading>

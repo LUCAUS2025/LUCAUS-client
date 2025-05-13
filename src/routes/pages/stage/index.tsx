@@ -54,7 +54,7 @@ export const Stage = () => {
     if (targetRef?.current) {
       const offsetTop = targetRef.current.offsetTop;
       window.scrollTo({
-        top: offsetTop - 100, // 100px 위로 여유
+        top: offsetTop - 200, // 100px 위로 여유
         behavior: 'smooth',
       });
     }
@@ -193,9 +193,7 @@ const OptionItem = styled.div<{ selected: boolean }>`
   border: 1px solid ${({ selected }) => (selected ? '#1447E6' : '#D1D5DC')};
   box-shadow: 0px 0px 12px 0px #00000014;
   font-weight: 400;
-  &:hover {
-    background-color: #f3f4f6;
-  }
+  background-color: ${({ selected }) => (selected ? '#ffffff' : '#fafafa')};
 `;
 
 const Container = styled.div`
