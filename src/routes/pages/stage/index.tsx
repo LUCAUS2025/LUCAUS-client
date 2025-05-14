@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { Option } from '../../../data/options';
 import Footer from '../../../components/home/Footer';
-import ArtistlineUp from '../../../components/stage/ArtistlineUp';
 
 const stagedateOptions = ['21일', '22일', '23일'];
 
