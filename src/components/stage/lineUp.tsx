@@ -145,7 +145,6 @@ interface LineUpProps {
 export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
-  const [showListView, setShowListView] = useState(showListToggle);
 
   const bannerContainerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLImageElement | null)[]>([]);
@@ -231,7 +230,7 @@ export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: 
           </BannerScroll>
         </>
       )}
-      {showListView && (
+      {showListToggle && (
         <ListButtonWrapper>
           <ListButton onClick={() => setIsListView((prev) => !prev)}>
             {isListView ? <ImageIcon size={16} /> : <ListOrdered size={16} />}
