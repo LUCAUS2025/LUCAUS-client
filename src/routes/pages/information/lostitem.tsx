@@ -51,11 +51,12 @@ const LostItem = () => {
         } else {
           setLostItems([]);
         }
+        // console.log(res.result);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [selectDate, selectItem]);
 
   return (
     <BigContainer>
@@ -77,21 +78,19 @@ const LostItem = () => {
       </DropDowns>
       <ItemList>
         {lostItems.length > 0 ? (
-          lostItems
-            .filter((item) => item.ownerFound === false) // ownerFound가 false인 항목만 필터링
-            .map((item, idx) => (
-              <Item key={idx}>
-                <ItemImage src={item.image || ''} />
-                <ItemInfo>
-                  <ItemName>{item.name}</ItemName>
-                  <ItemDetail>{item.detail}</ItemDetail>
-                  <Line>
-                    <Tag>{translateCategory(item.category)}</Tag>
-                    <ItemDate>접수 일자 | {formatDateForNotice(item.date)}</ItemDate>
-                  </Line>
-                </ItemInfo>
-              </Item>
-            ))
+          lostItems.map((item, idx) => (
+            <Item key={idx}>
+              <ItemImage src={item.image || ''} />
+              <ItemInfo>
+                <ItemName>{item.name}</ItemName>
+                <ItemDetail>{item.detail}</ItemDetail>
+                <Line>
+                  <Tag>{translateCategory(item.category)}</Tag>
+                  <ItemDate>접수 일자 | {formatDateForNotice(item.date)}</ItemDate>
+                </Line>
+              </ItemInfo>
+            </Item>
+          ))
         ) : (
           <NoItemsMessage>현재 등록된 분실물이 없습니다</NoItemsMessage>
         )}
