@@ -64,25 +64,11 @@ export const BannerScroll = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   margin: 0 -16px 0 -16px;
-`;
-
-export const BannerItem = styled.div`
-  flex: 0 0 auto;
-  width: 76%;
-  margin-right: 1rem;
-  /* 여러 개가 한 줄에 보이게 */
-  scroll-snap-align: none;
-`;
-
-export const CardContainer = styled.div`
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  margin: 0 -16px 0 -16px;
+  gap: 1rem;
 `;
 
 export const BannerImage = styled.img`
-  width: 100%;
+  width: 76%;
   height: 100%;
   object-fit: cover; // 이미지 비율 유지
   border-radius: 0.5rem;
@@ -255,14 +241,14 @@ export const LineUp = () => {
 
           <BannerScroll ref={bannerContainerRef}>
             {bannerImages.map((src, index) => (
-              <BannerItem
+              <BannerImage
                 key={index}
+                src={src}
+                alt={`배너 ${index + 1}`}
                 ref={(el) => {
                   sectionRefs.current[index] = el;
                 }}
-              >
-                <BannerImage src={src} alt={`배너 ${index + 1}`} />
-              </BannerItem>
+              />
             ))}
           </BannerScroll>
         </>
