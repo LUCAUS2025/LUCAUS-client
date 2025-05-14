@@ -16,8 +16,8 @@ const customDateOptions: Option[] = stagedateOptions.map((date) => ({
 }));
 
 const stageOptionsByDate: { [key: string]: string[] } = {
-  '21일': ['본무대'],
-  '22일': ['청룡가요제', '무대기획전', '본무대', '아티스트'],
+  '21일': ['무대기획전', '아티스트'],
+  '22일': ['청룡가요제', '본무대', '아티스트'],
   '23일': ['응원제', '본무대', '아티스트'],
 };
 
@@ -97,7 +97,7 @@ export const Stage = () => {
         )}
 
         {/* 무대기획전 */}
-        {isSelectedDate('22일') && (
+        {isSelectedDate('21일') && (
           <div ref={mukiRef}>
             <Title>무대기획전</Title>
             <img
@@ -121,23 +121,30 @@ export const Stage = () => {
         )}
 
         {/* 본무대 */}
-        {(isSelectedDate('21일') || isSelectedDate('22일') || isSelectedDate('23일')) && (
+        {(isSelectedDate('22일') || isSelectedDate('23일')) && (
           <div ref={mainStageRef}>
             <Title>본무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
             <LineUp
-              artists={[
-                '김승재와\n흑백 건반들',
-                'movement',
-                '나상현씨 밴드',
-                'NCT DREAM',
-                '멋쟁이 코끼리처럼',
-                '멋쟁이 여우처럼',
-                '멋쟁이 판다처럼',
+              artists={['페어로근', 'Dance P.O.zz', '01OB']}
+              artistImages={['images/home/banner/1.webp', 'images/home/banner/1.webp', 'images/home/banner/1.webp']}
+              bannerImages={[
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
               ]}
+              showListToggle={true}
+            />
+          </div>
+        )}
+        {/* 본무대 */}
+        {isSelectedDate('23일') && (
+          <div ref={mainStageRef}>
+            <Title>본무대 라인업</Title>
+            <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
+            <LineUp
+              artists={['Movement', '김승재와\n흑백 건반들', '블루드래곤', 'A.M.P', '손니버스']}
               artistImages={[
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
                 'images/home/banner/1.webp',
                 'images/home/banner/1.webp',
                 'images/home/banner/1.webp',
@@ -150,8 +157,6 @@ export const Stage = () => {
                 'images/home/stage/newjeans.webp',
                 'images/home/stage/newjeans.webp',
                 'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
               ]}
               showListToggle={true}
             />
@@ -159,11 +164,28 @@ export const Stage = () => {
         )}
 
         {/* 아티스트 */}
-        {(isSelectedDate('22일') || isSelectedDate('23일')) && (
+        {(isSelectedDate('21일') || isSelectedDate('22일') || isSelectedDate('23일')) && (
           <div ref={artistRef}>
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
-            <ArtistlineUp />
+            <LineUp
+              artists={['Movement', '김승재와\n흑백 건반들', '블루드래곤', 'A.M.P', '손니버스']}
+              artistImages={[
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+              ]}
+              bannerImages={[
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+              ]}
+              showListToggle={false}
+            />
           </div>
         )}
       </Container>
