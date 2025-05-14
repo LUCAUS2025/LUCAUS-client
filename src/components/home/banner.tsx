@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -6,28 +6,54 @@ import { useNavigate } from 'react-router-dom';
 export const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const images = [
+    '/images/home/banner/1.webp',
+    '/images/home/banner/2.webp',
+    '/images/home/banner/3.webp',
+    '/images/home/banner/1.webp',
+    '/images/home/banner/2.webp',
+    '/images/home/banner/3.webp',
+    '/images/home/banner/1.webp',
+    '/images/home/banner/2.webp',
+  ];
+
+  const startAutoSlide = () => {
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    }, 4000);
+  };
+
+  const resetAutoSlide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    startAutoSlide();
+  };
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    resetAutoSlide();
   };
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    resetAutoSlide();
   };
 
   useEffect(() => {
     const today = new Date();
-
     const skipStart = new Date('2025-05-21');
     const skipEnd = new Date('2025-05-23');
 
     if (today >= skipStart && today <= skipEnd) return;
 
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 4000);
+    startAutoSlide();
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, []);
 
   const prevIndex = (currentIndex - 1 + images.length) % images.length;

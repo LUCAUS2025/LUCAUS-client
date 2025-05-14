@@ -20,7 +20,6 @@ const Toast = () => {
         console.error(err);
       });
   };
-  getToastMessage();
 
   useEffect(() => {
     getToastMessage();
@@ -28,7 +27,7 @@ const Toast = () => {
 
   return (
     <Container>
-      <Icon src="/images/common/Info.webp" alt="information" />
+      <Icon src="/images/common/Info.webp" alt="information" style={{ marginLeft: '4px' }} />
       <Notice>{shortNotice}</Notice>
     </Container>
   );
@@ -48,7 +47,7 @@ const Container = styled.div`
 `;
 
 const Notice = styled.div`
-  width: 80%;
+  width: 84%;
   font-size: 16px;
   color: #364153;
 `;
