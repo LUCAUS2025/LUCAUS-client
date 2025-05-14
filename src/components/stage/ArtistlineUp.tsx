@@ -7,7 +7,6 @@ import {
   ArtistName,
   ArtistScroll,
   BannerImage,
-  BannerItem,
   BannerScroll,
 } from './lineUp';
 
@@ -88,14 +87,14 @@ export const ArtistlineUp = () => {
 
       <BannerScroll ref={bannerContainerRef}>
         {bannerImages.map((src, index) => (
-          <BannerItem
+          <BannerImage
             key={index}
+            src={src}
+            alt={`배너 ${index + 1}`}
             ref={(el) => {
               sectionRefs.current[index] = el;
             }}
-          >
-            <BannerImage src={src} alt={`배너 ${index + 1}`} />
-          </BannerItem>
+          />
         ))}
       </BannerScroll>
     </>
