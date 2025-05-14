@@ -64,9 +64,8 @@ export const BannerScroll = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   margin: 0 -16px 0 -16px;
-  /* 스크롤 스냅 제거 or 약화 */
-  scroll-snap-type: none;
-  scroll-snap-align: start;
+  // scroll-snap-type: none;
+  // scroll-snap-align: start;
 `;
 
 export const BannerItem = styled.div`
@@ -81,7 +80,6 @@ export const CardContainer = styled.div`
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  gap: 1rem;
   margin: 0 -16px 0 -16px;
 `;
 
