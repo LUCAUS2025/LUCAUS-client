@@ -120,7 +120,7 @@ export const Stage = () => {
         )}
 
         {/* 본무대 */}
-        {(isSelectedDate('22일') || isSelectedDate('23일')) && (
+        {isSelectedDate('22일') && (
           <div ref={mainStageRef}>
             <Title>본무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
