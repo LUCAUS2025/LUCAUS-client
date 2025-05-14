@@ -20,7 +20,6 @@ const Toast = () => {
         console.error(err);
       });
   };
-  // getToastMessage();
 
   useEffect(() => {
     getToastMessage();
