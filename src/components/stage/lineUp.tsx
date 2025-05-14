@@ -175,11 +175,20 @@ export const LineUp = () => {
   const artistItemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const scrollToIndex = (index: number) => {
-    sectionRefs.current[index]?.scrollIntoView({
-      behavior: 'smooth',
-      inline: 'start',
-      block: 'nearest',
-    });
+    const el = sectionRefs.current[index];
+    if (el) {
+      const parent = bannerContainerRef.current;
+      if (parent) {
+        const left = el.offsetLeft - 16;
+        parent.scrollTo({ left, behavior: 'smooth' });
+      } else {
+        el.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'start',
+          block: 'nearest',
+        });
+      }
+    }
 
     artistItemRefs.current[index]?.scrollIntoView({
       behavior: 'smooth',
