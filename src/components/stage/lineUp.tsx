@@ -64,8 +64,6 @@ export const BannerScroll = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   margin: 0 -16px 0 -16px;
-  // scroll-snap-type: none;
-  // scroll-snap-align: start;
 `;
 
 export const BannerItem = styled.div`
