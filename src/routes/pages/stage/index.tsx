@@ -164,14 +164,29 @@ export const Stage = () => {
         )}
 
         {/* 아티스트 */}
-        {(isSelectedDate('21일') || isSelectedDate('22일') || isSelectedDate('23일')) && (
+        {isSelectedDate('21일') && (
           <div ref={artistRef}>
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
-              artists={['Movement', '김승재와\n흑백 건반들', '블루드래곤', 'A.M.P', '손니버스']}
+              artists={['쏜애플', '에스파', '정동원(JD1)']}
+              artistImages={['images/home/banner/1.webp', 'images/home/banner/1.webp', 'images/home/banner/1.webp']}
+              bannerImages={[
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+              ]}
+              showListToggle={false}
+            />
+          </div>
+        )}
+        {isSelectedDate('22일') && (
+          <div ref={artistRef}>
+            <Title>아티스트 라인업</Title>
+            <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
+            <LineUp
+              artists={['나상현씨밴드', '스테이씨', '창모', '행주']}
               artistImages={[
-                'images/home/banner/1.webp',
                 'images/home/banner/1.webp',
                 'images/home/banner/1.webp',
                 'images/home/banner/1.webp',
@@ -180,6 +195,21 @@ export const Stage = () => {
               bannerImages={[
                 'images/home/stage/newjeans.webp',
                 'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+              ]}
+              showListToggle={false}
+            />
+          </div>
+        )}
+        {isSelectedDate('23일') && (
+          <div ref={artistRef}>
+            <Title>아티스트 라인업</Title>
+            <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
+            <LineUp
+              artists={['YB', 'NCT DREAM', '다이나믹 듀오']}
+              artistImages={['images/home/banner/1.webp', 'images/home/banner/1.webp', 'images/home/banner/1.webp']}
+              bannerImages={[
                 'images/home/stage/newjeans.webp',
                 'images/home/stage/newjeans.webp',
                 'images/home/stage/newjeans.webp',
