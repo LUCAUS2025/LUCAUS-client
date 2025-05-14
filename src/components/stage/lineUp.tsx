@@ -135,37 +135,14 @@ const Tag = styled.span`
   font-size: 12px;
 `;
 
-const artists = [
-  '김승재와\n흑백 건반들',
-  'movement',
-  '나상현씨 밴드',
-  'NCT DREAM',
-  '멋쟁이 코끼리처럼',
-  '멋쟁이 여우처럼',
-  '멋쟁이 판다처럼',
-];
+interface LineUpProps {
+  artists: string[];
+  artistImages: string[];
+  bannerImages: string[];
+  showListToggle?: boolean; // 👉 리스트 토글 버튼 표시 여부
+}
 
-const artistImage = [
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-];
-
-const bannerImages = [
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-];
-
-export const LineUp = () => {
+export const LineUp = ({ artists, artistImages, bannerImages, showListToggle = true }: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
 
@@ -208,13 +185,13 @@ export const LineUp = () => {
             <div>카테고리</div>
             <div>공연팀</div>
           </TableHeader>
-          {[...Array(7)].map((_, i) => (
+          {artists.map((name, i) => (
             <TableRow key={i}>
               <div>nn:nn - nn:nn</div>
               <div>
                 <Tag>{i === 1 ? '댄스' : '밴드'}</Tag>
               </div>
-              <div>{artists[i]}</div>
+              <div>{name}</div>
             </TableRow>
           ))}
         </TableWrapper>
@@ -231,7 +208,7 @@ export const LineUp = () => {
                 }}
               >
                 <ArtistImageWrapper selected={selected === index}>
-                  <ArtistImage src={artistImage[index]} alt="artist" />
+                  <ArtistImage src={artistImages[index]} alt="artist" />
                 </ArtistImageWrapper>
                 <ArtistName>{name}</ArtistName>
               </ArtistItem>

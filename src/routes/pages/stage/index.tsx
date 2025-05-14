@@ -125,7 +125,36 @@ export const Stage = () => {
           <div ref={mainStageRef}>
             <Title>본무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
-            <LineUp />
+            <LineUp
+              artists={[
+                '김승재와\n흑백 건반들',
+                'movement',
+                '나상현씨 밴드',
+                'NCT DREAM',
+                '멋쟁이 코끼리처럼',
+                '멋쟁이 여우처럼',
+                '멋쟁이 판다처럼',
+              ]}
+              artistImages={[
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+                'images/home/banner/1.webp',
+              ]}
+              bannerImages={[
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+                'images/home/stage/newjeans.webp',
+              ]}
+              showListToggle={true}
+            />
           </div>
         )}
 
