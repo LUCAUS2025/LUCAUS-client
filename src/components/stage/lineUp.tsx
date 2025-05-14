@@ -139,12 +139,13 @@ interface LineUpProps {
   artists: string[];
   artistImages: string[];
   bannerImages: string[];
-  showListToggle?: boolean; // 👉 리스트 토글 버튼 표시 여부
+  showListToggle?: boolean;
 }
 
-export const LineUp = ({ artists, artistImages, bannerImages, showListToggle = true }: LineUpProps) => {
+export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
+  const [showListView, setShowListView] = useState(showListToggle);
 
   const bannerContainerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLImageElement | null)[]>([]);
@@ -230,13 +231,14 @@ export const LineUp = ({ artists, artistImages, bannerImages, showListToggle = t
           </BannerScroll>
         </>
       )}
-
-      <ListButtonWrapper>
-        <ListButton onClick={() => setIsListView((prev) => !prev)}>
-          {isListView ? <ImageIcon size={16} /> : <ListOrdered size={16} />}
-          {isListView ? '이미지 뷰' : '리스트 뷰'}
-        </ListButton>
-      </ListButtonWrapper>
+      {showListView && (
+        <ListButtonWrapper>
+          <ListButton onClick={() => setIsListView((prev) => !prev)}>
+            {isListView ? <ImageIcon size={16} /> : <ListOrdered size={16} />}
+            {isListView ? '이미지 뷰' : '리스트 뷰'}
+          </ListButton>
+        </ListButtonWrapper>
+      )}
     </>
   );
 };
