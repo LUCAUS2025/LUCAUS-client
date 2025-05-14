@@ -298,7 +298,7 @@ export default StampBoard;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 40px - 80px);
+  height: calc(100vh + 40px);
   justify-content: space-between;
   overflow-y: hidden;
   position: relative;
@@ -363,7 +363,7 @@ const OutContentBox = styled.div`
 const ColorBox = styled.div`
   width: 100%;
   flex-grow: 1;
-  min-height: calc(100vh - 200px - 230px - 120px - 40px);
+  min-height: calc(100vh - 200px - 230px - 40px);
   background-color: #f3f9ff;
 `;
 

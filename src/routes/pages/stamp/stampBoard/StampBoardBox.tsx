@@ -211,12 +211,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   min-width: 343px;
   width: 100%;
-  min-height: 20vh;
+  //min-height: 20vh;
   //height: calc(100vh - 200px - 190px - 35px);
   justify-content: space-between;
   align-items: center;
-  overflow-y: auto;
-  margin-top: 30px;
+  //overflow-y: auto;
+  margin-top: calc(10vh);
   max-height: 400px;
   gap: 5px;
 `;
