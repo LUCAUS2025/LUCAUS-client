@@ -17,7 +17,7 @@ const customDateOptions: Option[] = stagedateOptions.map((date) => ({
 const stageOptionsByDate: { [key: string]: string[] } = {
   '21일': ['무대기획전', '아티스트'],
   '22일': ['청룡가요제', '본무대', '아티스트'],
-  '23일': ['응원제', '본무대', '아티스트'],
+  '23일': ['응원한마당', '본무대', '아티스트'],
 };
 
 export const Stage = () => {
@@ -110,7 +110,8 @@ export const Stage = () => {
         {/* 응원제 */}
         {isSelectedDate('23일') && (
           <div ref={cheeringRef}>
-            <Title>응원제</Title>
+            <Title>응원한마당</Title>
+            <Subtitle>Hurrah-C의 뜨거운 응원과 하나 되는 함성!</Subtitle>
             <img
               src="/images/home/stage/mudaeki.webp"
               alt="응원제 포스터"
