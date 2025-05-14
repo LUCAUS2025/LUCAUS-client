@@ -47,7 +47,7 @@ const Container = styled.div`
 `;
 
 const Notice = styled.div`
-  width: 84%;
+  width: 89%;
   font-size: 16px;
   color: #364153;
 `;

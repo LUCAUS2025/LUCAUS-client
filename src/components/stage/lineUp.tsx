@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
 
@@ -15,7 +15,6 @@ export const ArtistScroll = styled.div`
 
 export const ArtistItem = styled.div<{ selected: boolean }>`
   min-width: 80px;
-  // min-width: 54px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +26,7 @@ export const ArtistItem = styled.div<{ selected: boolean }>`
 
 export const ArtistImageWrapper = styled.div<{ selected: boolean }>`
   width: 50px;
-  object-fit: cover; // 이미지 비율 유지
+  object-fit: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,19 +63,16 @@ export const BannerScroll = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   margin: 0 -16px 0 -16px;
-  gap: 1rem;
+  // gap: 1rem;
 `;
 
 export const BannerImage = styled.img`
   width: 76%;
   height: 100%;
-  object-fit: cover; // 이미지 비율 유지
+  object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-
-  &:first-child {
-    margin-left: 16px; // 첫 번째 이미지에만 왼쪽 패딩 추가
-  }
+  margin-left: 1rem;
 `;
 
 const ListButtonWrapper = styled.div`
@@ -139,71 +135,44 @@ const Tag = styled.span`
   font-size: 12px;
 `;
 
-const artists = [
-  '김승재와\n흑백 건반들',
-  'movement',
-  '나상현씨 밴드',
-  'NCT DREAM',
-  '멋쟁이 코끼리처럼',
-  '멋쟁이 여우처럼',
-  '멋쟁이 판다처럼',
-];
+interface LineUpProps {
+  artists: string[];
+  artistImages: string[];
+  bannerImages: string[];
+  showListToggle?: boolean;
+}
 
-const artistImage = [
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-  'images/home/banner/1.webp',
-];
-
-const bannerImages = [
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-  'images/home/stage/newjeans.webp',
-];
-
-export const LineUp = () => {
+export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
+
   const bannerContainerRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const container = bannerContainerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const containerLeft = container.scrollLeft + 70;
-
-      const index = sectionRefs.current.findIndex((ref) => {
-        if (!ref) return false;
-        const left = ref.offsetLeft;
-        const right = left + ref.clientWidth;
-        return containerLeft >= left && containerLeft < right;
-      });
-
-      if (index !== -1 && index !== selected) {
-        setSelected(index);
-      }
-    };
-
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [selected]);
+  const sectionRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const artistContainerRef = useRef<HTMLDivElement>(null);
+  const artistItemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const scrollToIndex = (index: number) => {
-    sectionRefs.current[index]?.scrollIntoView({
+    const el = sectionRefs.current[index];
+    if (el) {
+      const parent = bannerContainerRef.current;
+      if (parent) {
+        const left = el.offsetLeft - 16;
+        parent.scrollTo({ left, behavior: 'smooth' });
+      } else {
+        el.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'start',
+          block: 'nearest',
+        });
+      }
+    }
+
+    artistItemRefs.current[index]?.scrollIntoView({
       behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
+      inline: 'start',
+      block: 'nearest',
     });
+
     setSelected(index);
   };
 
@@ -216,23 +185,30 @@ export const LineUp = () => {
             <div>카테고리</div>
             <div>공연팀</div>
           </TableHeader>
-          {[...Array(7)].map((_, i) => (
+          {artists.map((name, i) => (
             <TableRow key={i}>
               <div>nn:nn - nn:nn</div>
               <div>
                 <Tag>{i === 1 ? '댄스' : '밴드'}</Tag>
               </div>
-              <div>{artists[i]}</div>
+              <div>{name}</div>
             </TableRow>
           ))}
         </TableWrapper>
       ) : (
         <>
-          <ArtistScroll>
+          <ArtistScroll ref={artistContainerRef}>
             {artists.map((name, index) => (
-              <ArtistItem key={index} selected={selected === index} onClick={() => scrollToIndex(index)}>
+              <ArtistItem
+                key={index}
+                selected={selected === index}
+                onClick={() => scrollToIndex(index)}
+                ref={(el) => {
+                  artistItemRefs.current[index] = el;
+                }}
+              >
                 <ArtistImageWrapper selected={selected === index}>
-                  <ArtistImage src={artistImage[index]} alt="artist" />
+                  <ArtistImage src={artistImages[index]} alt="artist" />
                 </ArtistImageWrapper>
                 <ArtistName>{name}</ArtistName>
               </ArtistItem>
@@ -248,18 +224,20 @@ export const LineUp = () => {
                 ref={(el) => {
                   sectionRefs.current[index] = el;
                 }}
+                onClick={() => scrollToIndex(index)}
               />
             ))}
           </BannerScroll>
         </>
       )}
-
-      <ListButtonWrapper>
-        <ListButton onClick={() => setIsListView((prev) => !prev)}>
-          {isListView ? <ImageIcon size={16} /> : <ListOrdered size={16} />}
-          {isListView ? '이미지 뷰' : '리스트 뷰'}
-        </ListButton>
-      </ListButtonWrapper>
+      {showListToggle && (
+        <ListButtonWrapper>
+          <ListButton onClick={() => setIsListView((prev) => !prev)}>
+            {isListView ? <ImageIcon size={16} /> : <ListOrdered size={16} />}
+            {isListView ? '이미지 뷰' : '리스트 뷰'}
+          </ListButton>
+        </ListButtonWrapper>
+      )}
     </>
   );
 };
