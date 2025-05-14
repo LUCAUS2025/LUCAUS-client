@@ -55,7 +55,7 @@ const LostItem = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [selectDate, selectItem]);
 
   return (
     <BigContainer>
