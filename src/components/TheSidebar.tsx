@@ -77,6 +77,7 @@ const Overlay = styled.div<{ isOpen: boolean }>`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  z-index: 50;
 `;
 
 const CloseButton = styled.button`
