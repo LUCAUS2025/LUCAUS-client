@@ -210,7 +210,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 343px;
-  width: 100%;
+  width: 90%;
   //min-height: 20vh;
   //height: calc(100vh - 200px - 190px - 35px);
   justify-content: space-between;
