@@ -46,7 +46,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
         <Description>{theDescription}</Description>
       </TitleContainer>
       {/* 부스 리스트 */}
-      {boothsByDatePlace && boothsByDatePlace.length > 0 && (
+      {boothsByDatePlace && boothsByDatePlace.length > 0 && type === 'booth' && (
         <List>
           {boothsByDatePlace?.map((item) => (
             <Item key={item.dayBoothNum} onClick={() => setSelectedItem!(item)}>
@@ -70,9 +70,11 @@ export const ItemListContent: React.FC<ContentProps> = ({
           ))}
         </List>
       )}
-      {boothsByDatePlace?.length === 0 && <Info>운영중인 부스가 없습니다.</Info>}
+      {(!boothsByDatePlace || boothsByDatePlace?.length === 0) && type === 'booth' && (
+        <Info>운영중인 부스가 없습니다.</Info>
+      )}
       {/* 푸드트럭 리스트 */}
-      {foodTruckList && (
+      {foodTruckList && type === 'foodTruck' && (
         <List>
           {foodTruckList?.map((item) => (
             <Item
@@ -97,7 +99,9 @@ export const ItemListContent: React.FC<ContentProps> = ({
           ))}
         </List>
       )}
-      {!foodTruckList && <Info>운영중인 푸드트럭이 없습니다.</Info>}
+      {(!foodTruckList || foodTruckList?.length === 0) && type === 'foodTruck' && (
+        <Info>운영중인 푸드트럭이 없습니다.</Info>
+      )}
     </Wrapper>
   );
 };
@@ -211,6 +215,6 @@ const Info = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 60px;
   color: #6a7282;
 `;
