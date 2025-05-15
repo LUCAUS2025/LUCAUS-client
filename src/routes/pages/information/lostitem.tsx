@@ -16,8 +16,11 @@ interface LostItemProps {
 
 const LostItem = () => {
   const [lostItems, setLostItems] = useState<LostItemProps[]>([]);
-  const [selectDate, setSelectDate] = useState<Option>(lostdateOptions[0]); // 날짜 선택 상태
-  const [selectItem, setSelectItem] = useState<Option>(itemsOptions[0]); // 분실물 선택 상태
+  const [selectDate, setSelectDate] = useState<Option>(lostdateOptions[0]);
+  const [selectItem, setSelectItem] = useState<Option>(itemsOptions[0]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const translateCategory = (category: string) => {
     const categoryMap: Record<string, string> = {
@@ -32,31 +35,64 @@ const LostItem = () => {
     return categoryMap[category] || '기타';
   };
 
-  useEffect(() => {
-    getLostItems({
-      date: String(selectDate.value),
-      category: String(selectItem.value),
-    })
-      .then((res) => {
-        if (res.result?.content?.length > 0) {
-          const items = res.result.content.map((item) => ({
-            category: item.category,
-            name: item.name,
-            date: item.updatedDateTime,
-            image: item.photoUrl,
-            detail: `습득 장소 : ${item.place}`,
-            ownerFound: item.ownerFound,
-          }));
-          setLostItems(items);
-        } else {
-          setLostItems([]);
-        }
-        // console.log(res.result);
-      })
-      .catch((err) => {
-        console.error(err);
+  const fetchLostItems = async () => {
+    if (isLoading || !hasMore) return;
+    setIsLoading(true);
+
+    try {
+      const res = await getLostItems({
+        date: String(selectDate.value),
+        category: String(selectItem.value),
+        page,
+        size: 10,
       });
+
+      const items = res.result.content.map((item) => ({
+        category: item.category,
+        name: item.name,
+        date: item.updatedDateTime,
+        image: item.photoUrl,
+        detail: `습득 장소 : ${item.place}`,
+        ownerFound: item.ownerFound,
+      }));
+
+      setLostItems((prev) => [...prev, ...items]);
+
+      if (res.result.content.length < 10) {
+        setHasMore(false);
+      } else {
+        setPage((prev) => prev + 1);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // 필터 변경 시 초기화
+  useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    setLostItems([]);
   }, [selectDate, selectItem]);
+
+  // 초기 로드
+  useEffect(() => {
+    fetchLostItems();
+  }, [selectDate, selectItem]);
+
+  // 무한 스크롤 감지
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop + 100 >= document.documentElement.offsetHeight) {
+        fetchLostItems();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [page, hasMore, isLoading]);
 
   return (
     <BigContainer>
@@ -68,7 +104,7 @@ const LostItem = () => {
       <Container>
         잃어버린 물건이 있어요 😭 <br />
         어떻게 찾아야하나요?
-        <Answer>이미 총학생회에 접수된 물건이라면 107관 총학생회실 방문 후 개인 신분 확인 뒤 수령가능합니다.</Answer>
+        <Answer>이미 총학생회에 접수된 물건이라면 107관 총학생회실 방문 후 개인 신분 확인 뒤 수령 가능합니다.</Answer>
       </Container>
 
       <SectionTitle>내 분실물 찾기</SectionTitle>
@@ -94,6 +130,7 @@ const LostItem = () => {
         ) : (
           <NoItemsMessage>현재 등록된 분실물이 없습니다</NoItemsMessage>
         )}
+        {isLoading && <NoItemsMessage>불러오는 중...</NoItemsMessage>}
       </ItemList>
     </BigContainer>
   );
@@ -133,7 +170,6 @@ const SectionTitle = styled.h3`
 export const ItemList = styled.div`
   display: flex;
   flex-direction: column;
-  // gap: 16px;
 `;
 
 export const Item = styled.div`
@@ -164,9 +200,8 @@ export const ItemName = styled.div`
 export const ItemDetail = styled.div`
   font-size: 14px;
   color: #4b5563;
-
-  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
-  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 `;
 
@@ -197,7 +232,6 @@ const DropDowns = styled.div`
   gap: 16px;
   margin-bottom: 16px;
   flex-direction: row;
-  // position: fixed;
 `;
 
 const NoItemsMessage = styled.div`
