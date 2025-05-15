@@ -28,8 +28,8 @@ export async function getLostItems(params: GetLostItemsParams): Promise<GetLostI
       params: {
         category: params.category,
         date: params.date,
-        page: 1,
-        size: 10,
+        page: params.page ?? 1,
+        size: params.size ?? 10,
       },
     });
     return response.data;
