@@ -11,6 +11,7 @@ import { ItemPreviewContent } from '../../../components/BottomSheet/innerContent
 import { GoBackButton } from '../../../components/common/GoBackButton';
 import { fetchBoothList } from '../../../services/apis/booth/boothList';
 import { useHeader } from '../../../context/HeaderContext';
+import { mapBoothMapImg, mapBoothMapMagnifiedImg } from '../../../utils/boothMapImgMapping';
 
 export const Booth = () => {
   const { setHideHeader } = useHeader();
@@ -18,15 +19,14 @@ export const Booth = () => {
   const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
   const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
   const [boothList, setBoothList] = useState<BoothItem[] | []>([]);
+  const [mapImg, setMapImg] = useState<string>('');
 
   useEffect(() => {
     const getBoothList = async () => {
       try {
         const boothListResponse = await fetchBoothList(selectedDate.value as number);
         setBoothList(boothListResponse ?? []);
-        console.log('응답', boothListResponse);
       } catch (e) {
-        console.log(e);
         alert('로딩에 실패하였습니다.');
       }
     };
@@ -38,6 +38,14 @@ export const Booth = () => {
     return () => setHideHeader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
+
+  useEffect(() => {
+    if (selectedItem && selectedItem?.dayBoothNum) {
+      setMapImg(mapBoothMapMagnifiedImg(selectedDate, selectedItem?.dayBoothNum, selectedPlace));
+    } else {
+      setMapImg(mapBoothMapImg(selectedDate, selectedPlace));
+    }
+  }, [selectedDate, selectedItem, selectedPlace]);
 
   useEffect(() => {
     const today = new Date();
@@ -64,7 +72,7 @@ export const Booth = () => {
   }, []);
 
   return (
-    <BaseLayer backgroundImgSrc="/images/booth/tempStreet2.png">
+    <BaseLayer backgroundImgSrc={mapImg}>
       {/* 리스트 바텀시트 */}
       {!selectedItem && (
         <>

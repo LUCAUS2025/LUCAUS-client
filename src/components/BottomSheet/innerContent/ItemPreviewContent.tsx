@@ -18,9 +18,6 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
     if (item.type === 'booth') {
       navigate(`/booth/${item.dayBoothNum}`, { state: { selectedDate } });
     }
-    // } else if (item.type === 'foodTruck') {
-    //   navigate(`/foodTruck/${item.dayBoothNum}`, { state: { selectedDate } });
-    // }
   };
 
   return (
@@ -34,7 +31,6 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
       )}
       <ItemKeywords>
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
-        {/* {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)} */}
       </ItemKeywords>
       <ButtonContainer>
         <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>
@@ -49,7 +45,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 12px;
   justify-content: center;
-  padding: 12px 20px;
+  padding: 0px 20px;
 
   /* 스크롤 막기 */
   overflow-y: hidden;
@@ -58,7 +54,7 @@ const Wrapper = styled.div`
 
   ${mediaSmall`
     gap: 9px;
-    padding: 10px 20px;
+    padding: 0px 20px;
   `}
 `;
 const TitleContainer = styled.div`
@@ -99,30 +95,30 @@ const ButtonContainer = styled.div`
 
   ${mediaSmall`
     gap: 7.5px;
+    flex-direction: row;
   `}
 `;
 const DetailButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
+  height: 44px;
   color: #f9fafb;
   font-size: 14px;
   font-weight: 400;
   background-color: #1447e6;
   border-radius: 12px;
   width: 100%;
-
   ${mediaSmall`
     font-size: 13px;
-    height: 40px;
+    height: 36px;
   `}
 `;
 const CloseButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
+  height: 44px;
   color: #6a7282;
   font-size: 14px;
   font-weight: 400;
@@ -132,6 +128,6 @@ const CloseButton = styled.div`
 
   ${mediaSmall`
     font-size: 13px;
-    height: 40px;
+    height: 36px;
   `}
 `;
