@@ -65,21 +65,30 @@ const ContentWrapper = styled.div`
 `;
 
 const smallSizeStyle = css`
-  top: 54%;
   ${mediaSmall`
-    top: 59%;
+    top: 63%;
   `}
 
+  top: 59%;
+
   ${mediaBig`
-    top: 56%;
+    top: 62%;
+  `}
+
+  ${mediaMediumPad`
+    top: 65%;
   `}
 
   ${mediaLargePad`
-    top: 58%;
+    top: 68%;
   `}
 
   ${mediaLarggestPad`
-    top: 60%;
+    top: 69%;
+  `}
+
+  ${mediaAboveDesktop`
+    top: 70%;
   `}
 `;
 

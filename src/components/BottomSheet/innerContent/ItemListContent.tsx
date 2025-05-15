@@ -70,6 +70,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
           ))}
         </List>
       )}
+      {boothsByDatePlace?.length === 0 && <Info>운영중인 부스가 없습니다.</Info>}
       {/* 푸드트럭 리스트 */}
       {foodTruckList && (
         <List>
@@ -96,6 +97,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
           ))}
         </List>
       )}
+      {!foodTruckList && <Info>운영중인 푸드트럭이 없습니다.</Info>}
     </Wrapper>
   );
 };
@@ -202,4 +204,13 @@ const RecommendIcon = styled.img`
     width: 14px;
     height: 14px;
   `}
+`;
+
+const Info = styled.div`
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  color: #6a7282;
 `;
