@@ -216,7 +216,8 @@ const Info = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px;
+  padding-top: 60px;
+  padding-bottom: 60vh;
   color: #6a7282;
 `;
 

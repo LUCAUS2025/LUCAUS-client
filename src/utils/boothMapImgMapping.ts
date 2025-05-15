@@ -55,8 +55,8 @@ export const mapBoothMapMagnifiedImg = (
     }
   } // 후문일대, 20일
   else if (selectedPlace.value === 'backDoor' && selectedDate.value === 20) {
-    if (40 <= selectedDayBoothNum && selectedDayBoothNum <= 44) {
-      return '/images/booth/magnified/backdoor-booth-map-tue-40-44.webp';
+    if (39 <= selectedDayBoothNum && selectedDayBoothNum <= 44) {
+      return '/images/booth/magnified/backdoor-booth-map-tue-39-44.webp';
     } else if (45 <= selectedDayBoothNum && selectedDayBoothNum <= 46) {
       return '/images/booth/magnified/backdoor-booth-map-tue-45-46.webp';
     } else if (47 <= selectedDayBoothNum && selectedDayBoothNum <= 54) {
@@ -69,8 +69,8 @@ export const mapBoothMapMagnifiedImg = (
   }
   // 후문일대, 20일 제외
   else if (selectedPlace.value === 'backDoor') {
-    if (40 <= selectedDayBoothNum && selectedDayBoothNum <= 44) {
-      return '/images/booth/magnified/backdoor-booth-map-40-44.webp';
+    if (39 <= selectedDayBoothNum && selectedDayBoothNum <= 44) {
+      return '/images/booth/magnified/backdoor-booth-map-39-44.webp';
     } else if (45 <= selectedDayBoothNum && selectedDayBoothNum <= 46) {
       return '/images/booth/magnified/backdoor-booth-map-45-46.webp';
     } else if (47 <= selectedDayBoothNum && selectedDayBoothNum <= 54) {
