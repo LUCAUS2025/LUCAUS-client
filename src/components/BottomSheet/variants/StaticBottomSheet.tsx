@@ -65,14 +65,30 @@ const ContentWrapper = styled.div`
 `;
 
 const smallSizeStyle = css`
-  top: 54%;
-
-  ${mediaBig`
-    top: 60%;
+  ${mediaSmall`
+    top: 63%;
   `}
 
-  ${mediaSmall`
-    top: 52%;
+  top: 59%;
+
+  ${mediaBig`
+    top: 62%;
+  `}
+
+  ${mediaMediumPad`
+    top: 65%;
+  `}
+
+  ${mediaLargePad`
+    top: 68%;
+  `}
+
+  ${mediaLarggestPad`
+    top: 69%;
+  `}
+
+  ${mediaAboveDesktop`
+    top: 70%;
   `}
 `;
 
@@ -96,19 +112,19 @@ const largeSizeStyle = css`
   `}
 
   ${mediaBig`
-    top: 30%;
+    top: 28%;
   `}
 
   ${mediaMediumPad`
-    top: 34%;
+    top: 29%;
   `}
 
   ${mediaLargePad`
-    top: 38%;
+    top: 30%;
   `}
 
   ${mediaLarggestPad`
-    top: 41%;
+    top: 36%;
   `}
 
   ${mediaAboveDesktop`
