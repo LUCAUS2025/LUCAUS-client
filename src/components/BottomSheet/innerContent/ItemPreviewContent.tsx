@@ -18,9 +18,6 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
     if (item.type === 'booth') {
       navigate(`/booth/${item.dayBoothNum}`, { state: { selectedDate } });
     }
-    // } else if (item.type === 'foodTruck') {
-    //   navigate(`/foodTruck/${item.dayBoothNum}`, { state: { selectedDate } });
-    // }
   };
 
   return (
@@ -34,7 +31,6 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
       )}
       <ItemKeywords>
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
-        {/* {item.type === 'foodTruck' && item.representMenu.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)} */}
       </ItemKeywords>
       <ButtonContainer>
         <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>
@@ -105,7 +101,7 @@ const DetailButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
+  height: 46px;
   color: #f9fafb;
   font-size: 14px;
   font-weight: 400;
@@ -115,14 +111,14 @@ const DetailButton = styled.div`
 
   ${mediaSmall`
     font-size: 13px;
-    height: 40px;
+    height: 38px;
   `}
 `;
 const CloseButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
+  height: 46px;
   color: #6a7282;
   font-size: 14px;
   font-weight: 400;
@@ -132,6 +128,6 @@ const CloseButton = styled.div`
 
   ${mediaSmall`
     font-size: 13px;
-    height: 40px;
+    height: 38px;
   `}
 `;

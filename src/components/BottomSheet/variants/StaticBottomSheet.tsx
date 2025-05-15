@@ -66,13 +66,20 @@ const ContentWrapper = styled.div`
 
 const smallSizeStyle = css`
   top: 54%;
-
-  ${mediaBig`
-    top: 60%;
+  ${mediaSmall`
+    top: 59%;
   `}
 
-  ${mediaSmall`
-    top: 52%;
+  ${mediaBig`
+    top: 56%;
+  `}
+
+  ${mediaLargePad`
+    top: 58%;
+  `}
+
+  ${mediaLarggestPad`
+    top: 60%;
   `}
 `;
 

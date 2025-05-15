@@ -36,7 +36,6 @@ export const ItemListContent: React.FC<ContentProps> = ({
         (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
       );
       setBoothsByDatePlace(filteredData);
-      console.log(filteredData);
     }
   }, [selectedPlace, data]);
 
