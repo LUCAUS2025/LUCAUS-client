@@ -50,7 +50,7 @@ const AppDom = styled.div`
   width: min(100vw, 600px);
   height: 100vh;
   margin: 0 auto;
-  font-family: 'Pretendard-Regular';
+  font-family: 'Pretendard';
   background-color: white;
 
   @media (max-width: 600px) {

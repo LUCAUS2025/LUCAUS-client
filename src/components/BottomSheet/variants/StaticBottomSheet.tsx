@@ -112,19 +112,19 @@ const largeSizeStyle = css`
   `}
 
   ${mediaBig`
-    top: 30%;
+    top: 28%;
   `}
 
   ${mediaMediumPad`
-    top: 34%;
+    top: 29%;
   `}
 
   ${mediaLargePad`
-    top: 38%;
+    top: 30%;
   `}
 
   ${mediaLarggestPad`
-    top: 41%;
+    top: 36%;
   `}
 
   ${mediaAboveDesktop`
