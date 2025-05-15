@@ -68,6 +68,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
               </ItemContent>
             </Item>
           ))}
+          <VoidSpace />
         </List>
       )}
       {(!boothsByDatePlace || boothsByDatePlace?.length === 0) && type === 'booth' && (
@@ -217,4 +218,8 @@ const Info = styled.div`
   align-items: center;
   padding: 60px;
   color: #6a7282;
+`;
+
+const VoidSpace = styled.div`
+  height: 160px;
 `;
