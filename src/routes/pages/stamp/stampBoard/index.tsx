@@ -309,6 +309,7 @@ const MyInfoLine = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
 const MyInfoBox = styled.div`
@@ -331,6 +332,7 @@ const IntroRewardLine = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
 const RewardBox = styled.div`
@@ -358,6 +360,8 @@ const OutContentBox = styled.div`
   padding: 20px;
   overflow-y: hidden;
   overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ColorBox = styled.div`
