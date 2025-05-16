@@ -89,10 +89,10 @@ export default function useBottomSheet() {
     if (content.current) {
       //바텀시트가 올라와있을 때만 리스트 스크롤 가능하도록
       //화면 업데이트 직전 코드 실행할 수 있도록...-> 바텀시트 올리고 바로 리스트 스크롤 되도록
-      requestAnimationFrame(() => {
-        if (!content.current) return;
-        content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
-      });
+      // requestAnimationFrame(() => {
+      //   if (!content.current) return;
+      //   content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
+      // });
     }
 
     const shouldSnapToTop = !fromContent
@@ -135,7 +135,7 @@ export default function useBottomSheet() {
     if (contentEl) {
       // 처음에는 스크롤을 막음
       contentEl.addEventListener('touchstart', handleContentTouchStart);
-      contentEl.style.overflowY = 'hidden';
+      //contentEl.style.overflowY = 'auto';
     }
   }, []);
 
