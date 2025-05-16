@@ -1,8 +1,22 @@
 import styled from 'styled-components';
 import { useMenu } from '../context/MenuContext';
+import { useEffect } from 'react';
 
 const TheSidebar = () => {
   const { isMenuOpen, toggleMenu } = useMenu();
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // 컴포넌트 언마운트 시 복원
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   return (
     <>

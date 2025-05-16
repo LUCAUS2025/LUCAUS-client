@@ -16,8 +16,8 @@ const customDateOptions: Option[] = stagedateOptions.map((date) => ({
 
 const stageOptionsByDate: { [key: string]: string[] } = {
   '21일': ['무대기획전', '아티스트'],
-  '22일': ['청룡가요제', '본무대', '아티스트'],
-  '23일': ['응원한마당', '본무대', '아티스트'],
+  '22일': ['청룡가요제', '학생무대', '아티스트'],
+  '23일': ['응원한마당', '학생무대', '아티스트'],
 };
 
 export const Stage = () => {
@@ -42,8 +42,8 @@ export const Stage = () => {
     setSelectedStage(option);
     const sectionRefs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
       청룡가요제: yongRef,
-      응원제: cheeringRef,
-      본무대: mainStageRef,
+      응원한마당: cheeringRef,
+      학생무대: mainStageRef,
       아티스트: artistRef,
       무대기획전: mukiRef,
     };
@@ -87,7 +87,7 @@ export const Stage = () => {
         />
 
         {isSelectedDate('22일') && (
-          <div ref={yongRef}>
+          <div ref={yongRef} style={{ marginTop: '-60px' }}>
             <Title>청룡가요제</Title>
             <Subtitle>숨겨진 보컬 천재들의 뜨거운 경연을 만나보세요.</Subtitle>
             <Thumbnail
@@ -103,7 +103,7 @@ export const Stage = () => {
 
         {/* 무대기획전 */}
         {isSelectedDate('21일') && (
-          <div ref={mukiRef}>
+          <div ref={mukiRef} style={{ marginTop: '-60px' }}>
             <Title>무대기획전</Title>
             <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
             <img
@@ -116,7 +116,7 @@ export const Stage = () => {
 
         {/* 응원제 */}
         {isSelectedDate('23일') && (
-          <div ref={cheeringRef}>
+          <div ref={cheeringRef} style={{ marginTop: '-60px' }}>
             <Title>응원한마당</Title>
             <Subtitle>Hurrah-C의 뜨거운 응원과 하나 되는 함성!</Subtitle>
             <img
@@ -130,7 +130,7 @@ export const Stage = () => {
         {/* 본무대 */}
         {isSelectedDate('22일') && (
           <div ref={mainStageRef}>
-            <Title>본무대 라인업</Title>
+            <Title>학생무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
             <LineUp
               artists={['페어로근', 'Dance P.O.zz', '01OB']}
@@ -153,7 +153,7 @@ export const Stage = () => {
         {/* 본무대 */}
         {isSelectedDate('23일') && (
           <div ref={mainStageRef}>
-            <Title>본무대 라인업</Title>
+            <Title>학생무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
             <LineUp
               artists={['Movement', '김승재와\n흑백 건반들', '블루드래곤', 'A.M.P', '손니버스']}
@@ -168,8 +168,8 @@ export const Stage = () => {
                 'images/home/stage/main-stage/23-5.webp',
                 'images/home/stage/main-stage/23-1.webp',
                 'images/home/stage/main-stage/23-2.webp',
-                'images/home/stage/main-stage/23-3.webp',
                 'images/home/stage/main-stage/23-4.webp',
+                'images/home/stage/main-stage/23-3.webp',
               ]}
               showListToggle={true}
               times={['17:22-17:37', '17:39-17:54', '17:56-18:11', '18:13-18:28', '18:30-18:45']}
@@ -196,6 +196,11 @@ export const Stage = () => {
                 'images/home/stage/artist-stage/21-3.webp',
               ]}
               showListToggle={false}
+              instagram={[
+                'https://www.instagram.com/thornapple_official/?hl=ko',
+                'https://www.instagram.com/aespa_official/',
+                'https://www.instagram.com/dongwon_15/',
+              ]}
             />
           </div>
         )}
@@ -218,6 +223,12 @@ export const Stage = () => {
                 'images/home/stage/artist-stage/22-7.webp',
               ]}
               showListToggle={false}
+              instagram={[
+                'https://www.instagram.com/band_nah/',
+                'https://www.instagram.com/stayc_highup/',
+                'https://www.instagram.com/changmo_/?hl=ko',
+                'https://www.instagram.com/hangzoo/',
+              ]}
             />
           </div>
         )}
@@ -238,6 +249,11 @@ export const Stage = () => {
                 'images/home/stage/artist-stage/23-10.webp',
               ]}
               showListToggle={false}
+              instagram={[
+                'https://www.instagram.com/yb_official_insta/',
+                'https://www.instagram.com/nct_dream/',
+                'https://www.instagram.com/gaekogeem/?hl=ko',
+              ]}
             />
           </div>
         )}
@@ -268,7 +284,8 @@ const DropDownContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
   gap: 0.5rem;
   max-width: 584px;
   width: 100%;

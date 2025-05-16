@@ -123,11 +123,18 @@ const TableHeader = styled.div`
 
 const TableRow = styled.div`
   display: flex;
+  align-items: center; // 수직 정렬 추가
+  justify-content: center;
   padding: 0.75rem 0;
   font-size: 1rem;
+  line-height: 1.4; // 줄 간격 약간 조정
   > div {
     flex: 1;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; // 여러 줄 텍스트를 위아래로 정렬
   }
 `;
 
@@ -147,9 +154,18 @@ interface LineUpProps {
   showListToggle?: boolean;
   times?: string[];
   categories?: string[];
+  instagram?: string[];
 }
 
-export const LineUp = ({ artists, artistImages, bannerImages, showListToggle, times, categories }: LineUpProps) => {
+export const LineUp = ({
+  artists,
+  artistImages,
+  bannerImages,
+  showListToggle,
+  times,
+  categories,
+  instagram,
+}: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
 
@@ -231,7 +247,12 @@ export const LineUp = ({ artists, artistImages, bannerImages, showListToggle, ti
                 ref={(el) => {
                   sectionRefs.current[index] = el;
                 }}
-                onClick={() => scrollToIndex(index)}
+                onClick={() => {
+                  const link = instagram?.[index];
+                  if (link) {
+                    window.open(link, '_blank');
+                  }
+                }}
               />
             ))}
           </BannerScroll>
