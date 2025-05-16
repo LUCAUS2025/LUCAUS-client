@@ -74,8 +74,8 @@ const ButtonBox = styled.div`
 `;
 
 const Button = styled.button`
-  min-width: 343px;
-  width: 343px;
+  //min-width: 343px;
+  width: 90%;
   //max-width: 200px;
   min-height: 48px;
   height: 48px;
