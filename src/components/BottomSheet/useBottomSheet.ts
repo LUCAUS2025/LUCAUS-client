@@ -71,7 +71,7 @@ export default function useBottomSheet() {
 
   const handleTouchEnd = (e: TouchEvent) => {
     if (!sheet.current) return;
-    sheet.current.style.transition = 'transform 0.3s ease-out';
+    //sheet.current.style.transition = 'transform 0.1s ease-out';
     const { touchMove, touchStart } = metrics.current;
     const dragThreshold = 80;
     const dragDistance = e.changedTouches[0].clientY - touchStart.touchY;
