@@ -36,7 +36,7 @@ export const Home = () => {
             <Title>광장기획전</Title>
             <Subtitle>지금 바로 열쇠를 모아 항해를 시작해보세요!</Subtitle>
             <Image
-              src="/images/home/banner/1.webp"
+              src="/images/home/gwangki.webp"
               alt="광장기획전 포스터"
               onClick={() => navigate('/stamp/auth?tab=intro')}
             />
