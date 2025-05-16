@@ -154,9 +154,18 @@ interface LineUpProps {
   showListToggle?: boolean;
   times?: string[];
   categories?: string[];
+  instagram?: string[];
 }
 
-export const LineUp = ({ artists, artistImages, bannerImages, showListToggle, times, categories }: LineUpProps) => {
+export const LineUp = ({
+  artists,
+  artistImages,
+  bannerImages,
+  showListToggle,
+  times,
+  categories,
+  instagram,
+}: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
 
@@ -238,7 +247,12 @@ export const LineUp = ({ artists, artistImages, bannerImages, showListToggle, ti
                 ref={(el) => {
                   sectionRefs.current[index] = el;
                 }}
-                onClick={() => scrollToIndex(index)}
+                onClick={() => {
+                  const link = instagram?.[index];
+                  if (link) {
+                    window.open(link, '_blank');
+                  }
+                }}
               />
             ))}
           </BannerScroll>
