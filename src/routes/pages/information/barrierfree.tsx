@@ -17,7 +17,13 @@ const BarrierFree = () => {
         <BlackButton onClick={() => window.open('https://forms.gle/7houdXBqaAQqcR477', '_blank')}>바로가기</BlackButton>
       </Box>
       <SectionTitle>배리어프리 지도</SectionTitle>
-      <TestMapImage />
+      <TestMapImage src="/images/information/barrierfree/범례.webp" alt="배리어프리 범례" />
+      <Text>정문 일대</Text>
+      <TestMapImage src="/images/information/barrierfree/정문일대.webp" alt="배리어프리 지도 정문일대" />
+      <Text>해방광장 일대</Text>
+      <TestMapImage src="/images/information/barrierfree/해방광장.webp" alt="배리어프리 지도 행방광장" />
+      <Text>후문 일대</Text>
+      <TestMapImage src="/images/information/barrierfree/후문일대.webp" alt="배리어프리 지도 후문일대" />
       <Description>
         <strong>[2025 LUCAUS 배리어프리존 안내]</strong>
         <br />
@@ -78,8 +84,14 @@ const Wrapper = styled.div`
   padding: 12px;
 `;
 
-export const TestMapImage = styled.div`
-  height: 275px;
-  background: url('/images/information/map.png') no-repeat center center;
+export const TestMapImage = styled.img`
+  width: 100%;
   background-size: cover;
+`;
+
+const Text = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
 `;

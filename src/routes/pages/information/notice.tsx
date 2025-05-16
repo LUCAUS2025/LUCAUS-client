@@ -75,7 +75,7 @@ const Notice = () => {
               <ItemDetail>{item.content}</ItemDetail>
               <Line>
                 <Tag>{item.category}</Tag>
-                <ItemDate>등록 일시 | {formatDateForNotice(item.uploadDateTime)}</ItemDate>
+                <ItemDate>등록 일자 | {formatDateForNotice(item.uploadDateTime)}</ItemDate>
               </Line>
             </ItemInfo>
           </ClickableItem>
