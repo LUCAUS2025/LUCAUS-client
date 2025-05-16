@@ -20,11 +20,13 @@ const Watchiing: React.FC = () => {
     <>
       <Box>
         <div>
-          공연 관람 시 유의사항
+          축제 공연 티켓팅
           <br />
-          지금 확인하세요!
+          지금 바로 예매하세요!
         </div>
-        <BlackButton>바로가기</BlackButton>
+        <BlackButton onClick={() => window.open('https://festival.cau.ac.kr/index.html', '_blank')}>
+          바로가기
+        </BlackButton>
       </Box>
       <SectionTitle>공연 관람시에 꼭 지켜주세요</SectionTitle>
       <TestMapImage />
