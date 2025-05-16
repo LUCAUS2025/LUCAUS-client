@@ -34,9 +34,7 @@ export const Stage = () => {
   const availableStages = stageOptionsByDate[selectedDate.value] || [];
 
   useEffect(() => {
-    if (!availableStages.includes(selectedStage)) {
-      setSelectedStage(availableStages[0]);
-    }
+    setSelectedStage(availableStages[0]);
     window.scrollTo(0, 0); // 날짜 변경 시 스크롤 최상단 이동
   }, [selectedDate]);
 
@@ -54,7 +52,7 @@ export const Stage = () => {
     if (targetRef?.current) {
       const offsetTop = targetRef.current.offsetTop;
       window.scrollTo({
-        top: offsetTop - 200, // 100px 위로 여유
+        top: offsetTop - 200,
         behavior: 'smooth',
       });
     }
