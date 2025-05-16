@@ -123,11 +123,18 @@ const TableHeader = styled.div`
 
 const TableRow = styled.div`
   display: flex;
+  align-items: center; // 수직 정렬 추가
+  justify-content: center;
   padding: 0.75rem 0;
   font-size: 1rem;
+  line-height: 1.4; // 줄 간격 약간 조정
   > div {
     flex: 1;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; // 여러 줄 텍스트를 위아래로 정렬
   }
 `;
 
