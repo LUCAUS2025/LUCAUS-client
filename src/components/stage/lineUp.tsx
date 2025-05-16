@@ -102,13 +102,14 @@ const ListButton = styled.button`
 `;
 
 const TableWrapper = styled.div`
-  background-color: #6d6d6d;
+  background-color: #f3f4f6;
   padding: 1rem;
   border-radius: 0.5rem;
-  color: white;
+  color: #00000;
 `;
 
 const TableHeader = styled.div`
+  color: #1447e6;
   display: flex;
   font-weight: bold;
   padding: 0.75rem 0;
@@ -123,7 +124,7 @@ const TableHeader = styled.div`
 const TableRow = styled.div`
   display: flex;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #d1d5dc;
 
   > div {
     flex: 1;
@@ -132,8 +133,8 @@ const TableRow = styled.div`
 `;
 
 const Tag = styled.span`
-  background: transparent;
-  border: 1px solid white;
+  background: #f3f4f6;
+  border: 1px solid #d1d5dc;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
   font-size: 12px;
