@@ -30,10 +30,10 @@ const ConfirmModalContent = ({ studentId, name, onCancel, onConfirm }: ConfirmMo
       </UserInfoBox>
       <ButtonLine>
         <StyledButton type={'cancle'} onClick={onCancel}>
-          수정하기
+          수정
         </StyledButton>
         <StyledButton type={'confirm'} onClick={onConfirm}>
-          네 맞아요
+          확인
         </StyledButton>
       </ButtonLine>
     </Wrapper>

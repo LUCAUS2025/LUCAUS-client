@@ -101,7 +101,7 @@ const PwPushModal = ({ setOpenRewardPwModal, selectedDate, isRewarded, setStampD
         value={pwData}
         onChange={(e) => handleInputChange(e.target.value)}
       ></StyledInput>
-      {isError?.error ? <ErrorLine>{isError.message}</ErrorLine> : <EmptyBox />}
+      {isError?.error ? <ErrorLine>{isError.message}</ErrorLine> : <ErrorLine />}
       <ButtonWrapper>
         <StyledButton
           onClick={() => {
@@ -163,6 +163,7 @@ const StyledInput = styled.input`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+  margin-top: -10px;
 `;
 
 const StyledButton = styled.button<{ type: string }>`
