@@ -145,6 +145,8 @@ export const Stage = () => {
                 'images/home/stage/main-stage/22-3.webp',
               ]}
               showListToggle={true}
+              times={['16:45-17:00', '17:02-17:17', '17:19-17:34']}
+              categories={['밴드', '댄스', '밴드']}
             />
           </div>
         )}
@@ -170,6 +172,8 @@ export const Stage = () => {
                 'images/home/stage/main-stage/23-4.webp',
               ]}
               showListToggle={true}
+              times={['17:22-17:37', '17:39-17:54', '17:56-18:11', '18:13-18:28', '18:30-18:45']}
+              categories={['댄스', '밴드', '밴드', '밴드', '댄스']}
             />
           </div>
         )}
