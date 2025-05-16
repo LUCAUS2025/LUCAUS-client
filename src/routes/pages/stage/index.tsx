@@ -87,7 +87,7 @@ export const Stage = () => {
         />
 
         {isSelectedDate('22일') && (
-          <div ref={yongRef}>
+          <div ref={yongRef} style={{ marginTop: '-60px' }}>
             <Title>청룡가요제</Title>
             <Subtitle>숨겨진 보컬 천재들의 뜨거운 경연을 만나보세요.</Subtitle>
             <Thumbnail
@@ -103,7 +103,7 @@ export const Stage = () => {
 
         {/* 무대기획전 */}
         {isSelectedDate('21일') && (
-          <div ref={mukiRef}>
+          <div ref={mukiRef} style={{ marginTop: '-60px' }}>
             <Title>무대기획전</Title>
             <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
             <img
@@ -116,7 +116,7 @@ export const Stage = () => {
 
         {/* 응원제 */}
         {isSelectedDate('23일') && (
-          <div ref={cheeringRef}>
+          <div ref={cheeringRef} style={{ marginTop: '-60px' }}>
             <Title>응원한마당</Title>
             <Subtitle>Hurrah-C의 뜨거운 응원과 하나 되는 함성!</Subtitle>
             <img
