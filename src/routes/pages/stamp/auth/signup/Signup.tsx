@@ -235,7 +235,7 @@ const SignupBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 40px - 80px);
+  //height: calc(100vh - 40px - 80px);
   overflow-y: auto;
 `;
 
@@ -262,7 +262,7 @@ const InputLine = styled.div`
 
 const StyledInput = styled.input`
   width: 90%;
-  min-width: 260px;
+  min-width: 230px;
   height: 48px;
   border: 1px solid #d1d5dc;
   border-radius: 12px;
@@ -327,7 +327,8 @@ const InfoBoxText = styled.div`
 
 const GetStampButton = styled.button`
   display: flex;
-  width: 343px;
+  //min-width: 343px;
+  width: 90%;
   height: 48px;
   justify-content: center;
   align-items: center;
@@ -366,6 +367,7 @@ const Wrapper = styled.div`
 const ContentBox = styled.div`
   position: relative;
   z-index: 1;
+  overflow-y: auto;
 `;
 
 const WaveWrapper = styled.div`

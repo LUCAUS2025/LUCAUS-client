@@ -103,7 +103,7 @@ const Login = () => {
             </InputLine>
           </InfoBox>
 
-          <GetStampButton onClick={handleLogin}>도장 모으러 가기</GetStampButton>
+          <GetStampButton onClick={handleLogin}>키 모으러 가기</GetStampButton>
 
           {openModal && (
             <Modal isShort={true}>
@@ -157,7 +157,7 @@ const LoginBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 40px - 83px);
+  //height: calc(100vh - 40px - 83px);
   overflow-y: auto;
 `;
 
@@ -244,7 +244,7 @@ const InputText = styled.div`
 
 const StyledInput = styled.input`
   width: 90%;
-  min-width: 260px;
+  min-width: 230px;
   height: 48px;
   border: 1px solid #d1d5dc;
   border-radius: 12px;
@@ -287,7 +287,8 @@ const EmptyBox = styled.div`
 
 const GetStampButton = styled.button`
   display: flex;
-  width: 343px;
+  //width: 343px;
+  width: 90%;
   height: 48px;
   justify-content: center;
   align-items: center;
