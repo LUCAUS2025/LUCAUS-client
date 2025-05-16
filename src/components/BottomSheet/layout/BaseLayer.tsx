@@ -37,6 +37,7 @@ const Wrapper = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
   z-index: 0;
+  background-color: #fafafa;
   //width: min(100vw, 600px);
   /* @media (max-width: 600px) {
     width: 100vw;

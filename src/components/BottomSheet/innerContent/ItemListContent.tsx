@@ -36,7 +36,6 @@ export const ItemListContent: React.FC<ContentProps> = ({
         (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
       );
       setBoothsByDatePlace(filteredData);
-      console.log(filteredData);
     }
   }, [selectedPlace, data]);
 
@@ -47,7 +46,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
         <Description>{theDescription}</Description>
       </TitleContainer>
       {/* 부스 리스트 */}
-      {boothsByDatePlace && boothsByDatePlace.length > 0 && (
+      {boothsByDatePlace && boothsByDatePlace.length > 0 && type === 'booth' && (
         <List>
           {boothsByDatePlace?.map((item) => (
             <Item key={item.dayBoothNum} onClick={() => setSelectedItem!(item)}>
@@ -69,10 +68,14 @@ export const ItemListContent: React.FC<ContentProps> = ({
               </ItemContent>
             </Item>
           ))}
+          <VoidSpace />
         </List>
       )}
+      {(!boothsByDatePlace || boothsByDatePlace?.length === 0) && type === 'booth' && (
+        <Info>운영중인 부스가 없습니다.</Info>
+      )}
       {/* 푸드트럭 리스트 */}
-      {foodTruckList && (
+      {foodTruckList && type === 'foodTruck' && (
         <List>
           {foodTruckList?.map((item) => (
             <Item
@@ -96,6 +99,9 @@ export const ItemListContent: React.FC<ContentProps> = ({
             </Item>
           ))}
         </List>
+      )}
+      {(!foodTruckList || foodTruckList?.length === 0) && type === 'foodTruck' && (
+        <Info>운영중인 푸드트럭이 없습니다.</Info>
       )}
     </Wrapper>
   );
@@ -203,4 +209,18 @@ const RecommendIcon = styled.img`
     width: 14px;
     height: 14px;
   `}
+`;
+
+const Info = styled.div`
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 60vh;
+  color: #6a7282;
+`;
+
+const VoidSpace = styled.div`
+  height: 160px;
 `;

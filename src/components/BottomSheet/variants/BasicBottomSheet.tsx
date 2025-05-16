@@ -60,7 +60,7 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
   position: fixed;
   //bottom: 100px;
   max-height: calc(100vh - 60px);
-  //height: ${window.innerHeight * 0.9}px;
+  height: ${window.innerHeight}px;
   //height: ${({ $sheetHeight }) => `${$sheetHeight - 60}px`};
   display: flex;
   flex-direction: column;
@@ -68,20 +68,21 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
   //overflow: hidden;
 
   top: ${({ $sheetHeight }) => `calc(100% - ${$sheetHeight * 0.53}px)`};
+  //bottom: 0;
 
   ${({ $sheetHeight }) => css`
     top: calc(100% - ${$sheetHeight * 0.53}px);
 
     ${mediaSmall(`
-      top: calc(100% - ${$sheetHeight * 0.48}px);
+      top: calc(100% - ${$sheetHeight * 0.47}px);
     `)}
 
     ${mediaBig(`
-      top: calc(100% - ${$sheetHeight * 0.54}px);
+      top: calc(100% - ${$sheetHeight * 0.53}px);
     `)}
 
     ${mediaMediumPad(`
-      top: calc(100% - ${$sheetHeight * 0.43}px);
+      top: calc(100% - ${$sheetHeight * 0.42}px);
     `)}
 
     ${mediaLargePad(`
@@ -99,8 +100,8 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
 `;
 
 const BottomSheetContent = styled.div`
-  height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   flex: 1;
+  //height: 100vh;
 `;
