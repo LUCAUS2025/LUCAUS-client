@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export const Banner = () => {
@@ -77,10 +76,10 @@ export const Banner = () => {
           )}
 
           <LeftButton onClick={prevSlide}>
-            <ChevronLeft size={24} color="#333" />
+            <Arrow src="images/common/left.webp" />
           </LeftButton>
           <RightButton onClick={nextSlide}>
-            <ChevronRight size={24} color="#333" />
+            <Arrow src="images/common/right.webp" />
           </RightButton>
         </CardContent>
       </Card>
@@ -95,6 +94,11 @@ export const Banner = () => {
 };
 
 // 이미지 리스트
+const Arrow = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
 const images = [
   '/images/home/banner/1.webp',
   '/images/home/banner/2.webp',
@@ -156,10 +160,14 @@ const Button = styled.button`
 
 const LeftButton = styled(Button)`
   left: 16px;
+  width: 36px;
+  height: 36px;
 `;
 
 const RightButton = styled(Button)`
   right: 16px;
+  width: 36px;
+  height: 36px;
 `;
 
 const Indicators = styled.div`
