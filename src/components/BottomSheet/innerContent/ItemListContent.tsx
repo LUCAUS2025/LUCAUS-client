@@ -39,6 +39,10 @@ export const ItemListContent: React.FC<ContentProps> = ({
     }
   }, [selectedPlace, data]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Wrapper>
       <TitleContainer>

@@ -21,6 +21,10 @@ export const Information = () => {
     getNotice();
   }, [recentNotice]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Wrapper>
       <FestivalInfo>
