@@ -76,10 +76,6 @@ export const Home = () => {
 
         <HomeNotice />
         <Margin />
-        <Title>놓칠 수 없는 부스</Title>
-        <Subtitle>꼭 가봐야할 부스를 추천해드려요.</Subtitle>
-        <Thumbnail artistImages={['/images/home/artists/21-1.webp']} />
-        <Margin />
       </Wrapper16>
       <Margin />
       <Footer />
