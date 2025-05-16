@@ -127,6 +127,7 @@ const MenuText = styled.div`
   font-size: 16px;
   line-height: 150%;
   letter-spacing: -0.26px;
+  color: #364153;
 
   ${mediaSmall`
     font-size: 15px;
@@ -139,6 +140,7 @@ const MenuPrice = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   text-align: right;
+  color: #364153;
 
   ${mediaSmall`
     font-size: 13px;

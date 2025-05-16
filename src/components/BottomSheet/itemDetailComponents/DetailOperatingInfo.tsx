@@ -125,6 +125,7 @@ const InfoLabel = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   ${mediaSmall_subTitle}
+  color: #364153;
 `;
 
 const LabelIcon = styled.img`

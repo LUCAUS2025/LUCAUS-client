@@ -33,8 +33,8 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
       </ItemKeywords>
       <ButtonContainer>
-        <CloseButton onClick={() => onClose()}>닫기</CloseButton>
         <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>
+        <CloseButton onClick={() => onClose()}>닫기</CloseButton>
       </ButtonContainer>
     </Wrapper>
   );
@@ -111,7 +111,8 @@ const DetailButton = styled.div`
   width: 100%;
   ${mediaSmall`
     font-size: 13px;
-    height: 36px;
+    height: 42px;
+    order: 2;
   `}
 `;
 const CloseButton = styled.div`
@@ -128,6 +129,7 @@ const CloseButton = styled.div`
 
   ${mediaSmall`
     font-size: 13px;
-    height: 36px;
+    height: 42px;
+    justify-self: flex-start;
   `}
 `;
