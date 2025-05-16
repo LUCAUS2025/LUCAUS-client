@@ -4,10 +4,10 @@ import { BaseButton } from '../../../components/common/BaseButton';
 import { mediaBig, mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
 
 const Entry = () => {
-  const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'freeSquare' | '104Stairway'>('mainGateArea');
+  const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'peperoSquare' | '104Stairway'>('mainGateArea');
   const [entryType, setEntryType] = useState<'passable' | 'barrierFree'>('passable');
 
-  const handleFocusArea = (area: 'mainGateArea' | 'freeSquare' | '104Stairway') => {
+  const handleFocusArea = (area: 'mainGateArea' | 'peperoSquare' | '104Stairway') => {
     if (focusedArea !== area) {
       setFocusedArea(area);
     }
@@ -22,16 +22,16 @@ const Entry = () => {
   const getMapLayerCombination = () => {
     const imageMap: Record<
       'passable' | 'barrierFree',
-      Record<'mainGateArea' | 'freeSquare' | '104Stairway', string>
+      Record<'mainGateArea' | 'peperoSquare' | '104Stairway', string>
     > = {
       passable: {
         mainGateArea: 'images/information/entry/frontEntry-passable.webp',
-        freeSquare: 'images/information/entry/freeSquare-passable.webp',
+        peperoSquare: 'images/information/entry/peperoSquare-passable.webp',
         '104Stairway': 'images/information/entry/104Stairway-passable.webp',
       },
       barrierFree: {
         mainGateArea: 'images/information/entry/frontEntry-barrierFree.webp',
-        freeSquare: 'images/information/entry/freeSquare-barrierFree.webp',
+        peperoSquare: 'images/information/entry/peperoSquare-barrierFree.webp',
         '104Stairway': 'images/information/entry/104Stairway-barrierFree.webp',
       },
     };
@@ -73,8 +73,8 @@ const Entry = () => {
             <LocationBtn active={focusedArea === 'mainGateArea'} onClick={() => handleFocusArea('mainGateArea')}>
               정문 일대
             </LocationBtn>
-            <LocationBtn active={focusedArea === 'freeSquare'} onClick={() => handleFocusArea('freeSquare')}>
-              해방광장
+            <LocationBtn active={focusedArea === 'peperoSquare'} onClick={() => handleFocusArea('peperoSquare')}>
+              빼빼로 광장
             </LocationBtn>
             <LocationBtn active={focusedArea === '104Stairway'} onClick={() => handleFocusArea('104Stairway')}>
               104관 계단
