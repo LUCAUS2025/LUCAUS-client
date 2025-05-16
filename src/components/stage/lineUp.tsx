@@ -145,9 +145,11 @@ interface LineUpProps {
   artistImages: string[];
   bannerImages: string[];
   showListToggle?: boolean;
+  times?: string[];
+  categories?: string[];
 }
 
-export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: LineUpProps) => {
+export const LineUp = ({ artists, artistImages, bannerImages, showListToggle, times, categories }: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
 
@@ -192,9 +194,9 @@ export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: 
           </TableHeader>
           {artists.map((name, i) => (
             <TableRow key={i}>
-              <div>nn:nn - nn:nn</div>
+              <div>{times?.[i] ?? 'nn:nn - nn:nn'}</div>
               <div>
-                <Tag>{i === 1 ? '댄스' : '밴드'}</Tag>
+                <Tag>{categories?.[i] ?? (i === 1 ? '댄스' : '밴드')}</Tag>
               </div>
               <div>{name}</div>
             </TableRow>
