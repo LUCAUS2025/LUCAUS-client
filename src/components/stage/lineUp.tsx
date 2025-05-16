@@ -8,7 +8,7 @@ export const ArtistScroll = styled.div`
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
   gap: 10px;
-  padding: 0 1rem;
+  padding: 1rem;
   margin: 0 -16px 0 -16px;
   white-space: pre-line;
 `;
