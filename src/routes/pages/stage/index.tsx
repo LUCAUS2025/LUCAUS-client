@@ -42,7 +42,7 @@ export const Stage = () => {
     setSelectedStage(option);
     const sectionRefs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
       청룡가요제: yongRef,
-      응원제: cheeringRef,
+      응원한마당: cheeringRef,
       학생무대: mainStageRef,
       아티스트: artistRef,
       무대기획전: mukiRef,
