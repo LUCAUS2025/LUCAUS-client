@@ -46,7 +46,7 @@ export default function useBottomSheet() {
     if (!sheet.current) return;
     touchStart.sheetY = sheet.current!.getBoundingClientRect().y;
     touchStart.touchY = e.touches[0].clientY;
-    sheet.current.style.transition = '';
+    //sheet.current.style.transition = '';
   };
 
   const handleTouchMove = (e: TouchEvent) => {
@@ -87,16 +87,12 @@ export default function useBottomSheet() {
 
     // 드래그가 끝난 후, 리스트가 스크롤 되도록
     if (content.current) {
-      // 바텀시트가 올라와있을 때만 리스트 스크롤 가능하도록
-      // 화면 업데이트 직전 코드 실행할 수 있도록...-> 바텀시트 올리고 바로 리스트 스크롤 되도록
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          const bottomSheetVisibleHeight = MAX_Y - MIN_Y - 50;
-          if (!content.current) return;
-          content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
-          //content.current.style.paddingBottom = getCurrentTranslateY() < 0 ? `${bottomSheetVisibleHeight * 1.5}px` : '0px'; // 올라와있을 때 padding bottom 추가
-        });
-      }, 0);
+      //바텀시트가 올라와있을 때만 리스트 스크롤 가능하도록
+      //화면 업데이트 직전 코드 실행할 수 있도록...-> 바텀시트 올리고 바로 리스트 스크롤 되도록
+      requestAnimationFrame(() => {
+        if (!content.current) return;
+        content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
+      });
     }
 
     const shouldSnapToTop = !fromContent
