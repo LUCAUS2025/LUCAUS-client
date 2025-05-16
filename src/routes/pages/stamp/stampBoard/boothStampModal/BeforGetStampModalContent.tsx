@@ -105,7 +105,7 @@ const BeforGetStampModalContent = ({
         value={pwData}
         onChange={(e) => handleInputChange(e.target.value)}
       ></StyledInput>
-      {isWrongPw ? <ErrorLine>비밀번호가 일치하지 않습니다</ErrorLine> : <EmptyBox />}
+      {isWrongPw ? <ErrorLine>비밀번호가 일치하지 않습니다</ErrorLine> : <ErrorLine />}
       <ButtonWrapper>
         <StyledButton
           onClick={() => {
@@ -172,7 +172,7 @@ const StyledInput = styled.input`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  margin-top: -15px;
+  margin-top: -10px;
 `;
 
 const StyledButton = styled.button<{ type: string }>`
@@ -200,9 +200,4 @@ const ErrorLine = styled.div`
   height: 15px;
   padding-left: 10px;
   margin-top: -20px;
-`;
-
-const EmptyBox = styled.div`
-  height: 15px;
-  width: 90%;
 `;
