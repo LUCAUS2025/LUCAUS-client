@@ -45,13 +45,26 @@ export const Home = () => {
         <Toast />
         <Title>이 무대 절대 놓치지 마세요!</Title>
         <Subtitle>올해 축제를 빛낼 아티스트들을 지금 확인하세요</Subtitle>
-        <Thumbnail />
+        <Thumbnail
+          artistImages={[
+            '/images/home/artists/21-1.webp',
+            '/images/home/artists/21-2.webp',
+            '/images/home/artists/21-3.webp',
+            '/images/home/artists/22-4.webp',
+            '/images/home/artists/22-5.webp',
+            '/images/home/artists/22-6.webp',
+            '/images/home/artists/22-7.webp',
+            '/images/home/artists/23-8.webp',
+            '/images/home/artists/23-9.webp',
+            '/images/home/artists/23-10.webp',
+          ]}
+        />
 
         <HomeNotice />
 
         <Title>놓칠 수 없는 부스</Title>
         <Subtitle>꼭 가봐야할 부스를 추천해드려요.</Subtitle>
-        <Thumbnail />
+        <Thumbnail artistImages={['/images/home/artists/21-1.webp']} />
       </Wrapper16>
       <Footer />
     </>

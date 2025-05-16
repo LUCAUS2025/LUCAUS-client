@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
-export const Thumbnail = () => {
+interface ThumbnailProps {
+  artistImages: string[];
+}
+
+export const Thumbnail = ({ artistImages }: ThumbnailProps) => {
   return (
     <Card>
-      <CardImage src="images/home/artists/aespa.webp" alt="에스파 웹피" />
-      <CardImage src="images/home/artists/aespa.png" alt="에스파 피엔지" />
-      <CardImage src="images/home/stage/newjeans.webp" alt="옥씨 부인전" />
+      {artistImages.map((src, idx) => (
+        <CardImage key={idx} src={src} alt={`썸네일 이미지 ${idx + 1}`} style={idx === 0 ? { marginLeft: 16 } : {}} />
+      ))}
     </Card>
   );
 };
@@ -13,7 +17,7 @@ export const Thumbnail = () => {
 export const Card = styled.div`
   display: flex;
   gap: 1rem;
-  overflow-y: auto; // 세로 스크롤 활성화
+  overflow-y: auto;
   padding: 0 0 1rem 0;
   margin: 0 -16px 0 -16px;
 `;
@@ -22,11 +26,7 @@ export const CardImage = styled.img`
   min-width: 76%;
   max-width: 76%;
   height: 100%;
-  object-fit: cover; // 이미지 비율 유지
+  object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-
-  &:first-child {
-    margin-left: 16px; // 첫 번째 이미지에만 왼쪽 패딩 추가
-  }
 `;
