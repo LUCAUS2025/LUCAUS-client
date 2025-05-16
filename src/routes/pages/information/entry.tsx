@@ -28,6 +28,10 @@ const Entry = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const getMapLayerCombination = () => {
     const imageMap: Record<
       'passable' | 'barrierFree',
