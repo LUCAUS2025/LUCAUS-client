@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BlackButton } from '../common/BaseButton';
-import { TestMapImage } from '../../routes/pages/information/barrierfree';
 import { Description } from './Ticketing';
 
 export const Box = styled.div`
