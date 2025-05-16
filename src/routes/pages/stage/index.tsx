@@ -164,6 +164,7 @@ export const Stage = () => {
                 'images/home/stage/main-artist/8.webp',
               ]}
               bannerImages={[
+                'images/home/stage/main-stage/23-5.webp',
                 'images/home/stage/main-stage/23-1.webp',
                 'images/home/stage/main-stage/23-2.webp',
                 'images/home/stage/main-stage/23-3.webp',
