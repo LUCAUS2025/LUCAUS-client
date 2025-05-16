@@ -20,9 +20,9 @@ const Watching: React.FC = () => {
     <>
       <Box>
         <div>
-          축제 공연 티켓팅
+          공연 입장 QR 코드
           <br />
-          지금 바로 예매하세요!
+          이곳에서 바로 확인하세요!
         </div>
         <BlackButton onClick={() => window.open('https://festival.cau.ac.kr/index.html', '_blank')}>
           바로가기
