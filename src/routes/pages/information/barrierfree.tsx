@@ -36,11 +36,11 @@ const BarrierFree = () => {
         <br />
         &nbsp;&nbsp;① 병명 또는 증상 포함
         <br />
-        &nbsp;&nbsp;- 치료내용 또는 향후 치료 계획에 대한 소견 포함
+        <strong>&nbsp;&nbsp;- 치료내용 또는 향후 치료 계획에 대한 소견 포함</strong>
         <br />
         &nbsp;&nbsp;② 치료기간에 2025년 5월 21일부터 5월 23일 포함
         <br />
-        &nbsp;&nbsp;- 의료기관 직인 포함
+        <strong>&nbsp;&nbsp;- 의료기관 직인 포함</strong>
         <br />
         * 상기 항목 중 하나라도 누락된 경우, 서류는 인정되지 않음.
         <br />

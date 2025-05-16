@@ -90,7 +90,7 @@ export const Stage = () => {
         {isSelectedDate('22일') && (
           <div ref={yongRef}>
             <Title>청룡가요제</Title>
-            <Subtitle>좌우로 넘겨보며 청룡가요제를 즐겨보세요!</Subtitle>
+            <Subtitle>숨겨진 보컬 천재들의 뜨거운 경연을 만나보세요.</Subtitle>
             <Thumbnail
               artistImages={[
                 '/images/home/stage/dragon/노을.webp',
@@ -106,6 +106,7 @@ export const Stage = () => {
         {isSelectedDate('21일') && (
           <div ref={mukiRef}>
             <Title>무대기획전</Title>
+            <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
             <img
               src="/images/home/stage/muki/21.webp"
               alt="무대기획전 포스터"
@@ -163,6 +164,7 @@ export const Stage = () => {
                 'images/home/stage/main-artist/8.webp',
               ]}
               bannerImages={[
+                'images/home/stage/main-stage/23-5.webp',
                 'images/home/stage/main-stage/23-1.webp',
                 'images/home/stage/main-stage/23-2.webp',
                 'images/home/stage/main-stage/23-3.webp',
