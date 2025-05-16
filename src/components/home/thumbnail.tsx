@@ -2,13 +2,25 @@ import styled from 'styled-components';
 
 interface ThumbnailProps {
   artistImages: string[];
+  instagram?: string[];
 }
 
-export const Thumbnail = ({ artistImages }: ThumbnailProps) => {
+export const Thumbnail = ({ artistImages, instagram }: ThumbnailProps) => {
   return (
     <Card>
       {artistImages.map((src, idx) => (
-        <CardImage key={idx} src={src} alt={`썸네일 이미지 ${idx + 1}`} style={idx === 0 ? { marginLeft: 16 } : {}} />
+        <CardImage
+          key={idx}
+          src={src}
+          alt={`썸네일 이미지 ${idx + 1}`}
+          style={idx === 0 ? { marginLeft: 16 } : {}}
+          onClick={() => {
+            const link = instagram?.[idx];
+            if (link) {
+              window.open(link, '_blank');
+            }
+          }}
+        />
       ))}
     </Card>
   );

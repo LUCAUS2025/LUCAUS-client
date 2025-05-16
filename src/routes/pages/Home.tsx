@@ -58,6 +58,18 @@ export const Home = () => {
             '/images/home/artists/23-9.webp',
             '/images/home/artists/23-10.webp',
           ]}
+          instagram={[
+            'https://www.instagram.com/thornapple_official/?hl=ko',
+            'https://www.instagram.com/aespa_official/',
+            'https://www.instagram.com/dongwon_15/',
+            'https://www.instagram.com/band_nah/',
+            'https://www.instagram.com/stayc_highup/',
+            'https://www.instagram.com/changmo_/?hl=ko',
+            'https://www.instagram.com/hangzoo/',
+            'https://www.instagram.com/yb_official_insta/',
+            'https://www.instagram.com/nct_dream/',
+            'https://www.instagram.com/gaekogeem/?hl=ko',
+          ]}
         />
 
         <HomeNotice />
