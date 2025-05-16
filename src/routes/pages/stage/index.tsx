@@ -302,4 +302,5 @@ const Container = styled.div`
   flex-direction: column;
   align-items: justify-content;
   min-height: 63vh;
+  gap: 60px;
 `;
