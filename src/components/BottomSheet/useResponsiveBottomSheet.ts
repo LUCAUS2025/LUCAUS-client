@@ -57,11 +57,11 @@ export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
 
     //가장 위로 올라왔을때
     const MAX_Y_MAP: Record<BottomSheetDimensions['screenSize'], number> = {
-      miniPhone: innerHeight * 0.9,
-      smallPhone: innerHeight * 0.8,
-      normalPhone: innerHeight * 0.73,
+      miniPhone: innerHeight * 0.85,
+      smallPhone: innerHeight * 0.77,
+      normalPhone: innerHeight * 0.7,
       largePhone: innerHeight * 0.68,
-      maxPhone: innerHeight * 0.76,
+      maxPhone: innerHeight * 0.75,
       miniTablet: innerHeight * 0.67,
       smallTablet: innerHeight * 0.72,
       largeTablet: innerHeight * 0.77,
