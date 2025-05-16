@@ -61,7 +61,7 @@ export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
       smallPhone: innerHeight * 0.77,
       normalPhone: innerHeight * 0.7,
       largePhone: innerHeight * 0.68,
-      maxPhone: innerHeight * 0.75,
+      maxPhone: innerHeight * 0.74,
       miniTablet: innerHeight * 0.67,
       smallTablet: innerHeight * 0.72,
       largeTablet: innerHeight * 0.77,
