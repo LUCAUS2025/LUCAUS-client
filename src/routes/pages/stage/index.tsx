@@ -52,7 +52,7 @@ export const Stage = () => {
     if (targetRef?.current) {
       const offsetTop = targetRef.current.offsetTop;
       window.scrollTo({
-        top: offsetTop - 200,
+        top: offsetTop - 180,
         behavior: 'smooth',
       });
     }
