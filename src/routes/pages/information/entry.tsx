@@ -4,14 +4,8 @@ import { BaseButton } from '../../../components/common/BaseButton';
 import { mediaBig, mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
 
 const Entry = () => {
-  const [entryType, setEntryType] = useState<'passable' | 'barrierFree'>('passable');
   const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'freeSquare' | '104Stairway'>('mainGateArea');
-
-  const handleEntryType = (type: 'passable' | 'barrierFree') => {
-    if (entryType !== type) {
-      setEntryType(type);
-    }
-  };
+  const [entryType, setEntryType] = useState<'passable' | 'barrierFree'>('passable');
 
   const handleFocusArea = (area: 'mainGateArea' | 'freeSquare' | '104Stairway') => {
     if (focusedArea !== area) {
@@ -19,49 +13,40 @@ const Entry = () => {
     }
   };
 
-  const getMapLayerCombination = () => {
-    // 지도 배경 이미지 매핑
-    const areaMap: Record<string, string> = {
-      mainGateArea: 'images/information/frontEntry.webp', // 정문일대 지도
-      freeSquare: 'images/information/freeSquare.webp', // 해방광장 지도
-      '104Stairway': 'images/information/104Stairway.webp', // 104관 계단 지도
-    };
-
-    // 지도 레이어 이미지 매핑 (entryType + focusedArea 조합)
-    const entryLayers: Record<string, Record<string, string>> = {
-      passable: {
-        mainGateArea: 'images/layers/passable_mainGate.png', // 정문일대 통행정책
-        freeSquare: 'images/layers/passable_freeSquare.png', // 해방광장 통행정책
-        '104Stairway': 'images/layers/passable_104Stairway.png', // 104관 계단 통행정책
-      },
-      barrierFree: {
-        mainGateArea: 'images/layers/barrierFree_mainGate.png', // 정문일대 배리어프리
-        freeSquare: 'images/layers/barrierFree_freeSquare.png', // 해방광장 배리어프리
-        '104Stairway': 'images/layers/barrierFree_104Stairway.png', // 104관 계단 배리어프리
-      },
-    };
-
-    const legandImages: Record<string, string> = {
-      passable: 'images/legends/passableLegend.png', // 통행정책 범례
-      barrierFree: 'images/legends/barrierFreeLegend.png', // 배리어프리 범례
-    };
-
-    const backgroundMap = areaMap[focusedArea];
-    const entryMapLayer = entryLayers[entryType][focusedArea];
-    const legandImage = legandImages[entryType];
-
-    return { backgroundMap, entryMapLayer, legandImage };
+  const handleEntryType = (type: 'passable' | 'barrierFree') => {
+    if (entryType !== type) {
+      setEntryType(type);
+    }
   };
 
-  const { backgroundMap, entryMapLayer, legandImage } = getMapLayerCombination();
+  const getMapLayerCombination = () => {
+    const imageMap: Record<
+      'passable' | 'barrierFree',
+      Record<'mainGateArea' | 'freeSquare' | '104Stairway', string>
+    > = {
+      passable: {
+        mainGateArea: 'images/information/entry/frontEntry-passable.webp',
+        freeSquare: 'images/information/entry/freeSquare-passable.webp',
+        '104Stairway': 'images/information/entry/104Stairway-passable.webp',
+      },
+      barrierFree: {
+        mainGateArea: 'images/information/entry/frontEntry-barrierFree.webp',
+        freeSquare: 'images/information/entry/freeSquare-barrierFree.webp',
+        '104Stairway': 'images/information/entry/104Stairway-barrierFree.webp',
+      },
+    };
+
+    const backgroundMap = imageMap[entryType][focusedArea];
+    return { backgroundMap };
+  };
+
+  const { backgroundMap } = getMapLayerCombination();
 
   return (
     <Wrapper>
       <MapSection>
         <BackgroundMapContainer>
           <BackgroundMap src={backgroundMap} alt="지도" />
-          <LegandImg src={legandImage} alt="범례" />
-          <EntryMapLayer src={entryMapLayer} alt="입장정책" />
         </BackgroundMapContainer>
         <OptionBtnContainer>
           <OptionBtn active={entryType === 'passable'} onClick={() => handleEntryType('passable')}>
@@ -78,9 +63,10 @@ const Entry = () => {
         <TitleContainer>
           <Title>캠퍼스 내 이동 안내</Title>
           <Description>
-            안전을 위해 캠퍼스 내 일부 통행 구역을 제한합니다. <br />
+            안전하고 원활한 축제를 위해 LUCAUS 본무대 기간 동안 캠퍼스 내 일부 구역을 통제할 예정입니다. <br />
             통행 가능 구역을 확인하시어 안전한 이동 부탁드립니다.
           </Description>
+          <Description>*당일 현장 상황에 따라 변동될 수 있습니다.</Description>
         </TitleContainer>
         <LocationContainer>
           <LocationBtns>
@@ -106,7 +92,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 `;
 
 const MapSection = styled.div`
@@ -123,54 +109,11 @@ const BackgroundMapContainer = styled.div`
 
 const BackgroundMap = styled.img`
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 60vh;
+  object-fit: cover;
   object-position: center;
   z-index: 1;
   position: relative;
-`;
-
-const LegandImg = styled.img`
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  z-index: 1;
-  top: 0;
-  left: 0;
-`;
-
-const EntryMapLayer = styled.img`
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  z-index: 3;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const LocationContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 26px;
-`;
-
-const LocationBtns = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-`;
-
-const LocationBtn = styled(BaseButton)<{ active: boolean }>`
-  border-color: ${({ active }) => (active ? '#1447e6' : '#d1d5dc')};
-  color: ${({ active }) => (active ? '#1447e6' : '#364153')};
-  white-space: nowrap;
-
-  ${mediaSmall_description}
 `;
 
 const OptionBtnContainer = styled.div`
@@ -216,18 +159,16 @@ const OptionBtnText = styled.div`
   color: #364153;
   font-family: Pretendard;
   font-weight: 400;
-  font-size: 10px;
   line-height: 150%;
   letter-spacing: -0.26px;
   text-align: center;
-  vertical-align: middle;
 `;
 
 const ContentContainer = styled.div`
   padding: 0px 16px 18px 16px;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 15px;
 `;
 
 const TitleContainer = styled.div`
@@ -254,6 +195,28 @@ const Description = styled.div`
   line-height: 150%;
   letter-spacing: -0.26px;
   color: #6a7282;
+
+  ${mediaSmall_description}
+`;
+
+const LocationContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+`;
+
+const LocationBtns = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+const LocationBtn = styled(BaseButton)<{ active: boolean }>`
+  border-color: ${({ active }) => (active ? '#1447e6' : '#d1d5dc')};
+  color: ${({ active }) => (active ? '#1447e6' : '#364153')};
+  white-space: nowrap;
 
   ${mediaSmall_description}
 `;
