@@ -44,7 +44,13 @@ const HomeNotice = () => {
         <MoreButton onClick={() => navigate('/notice')}>더보기</MoreButton>
       </SectionHeader>
       {notices.slice(0, 2).map((notice, index) => (
-        <NoticeCard key={index} onClick={() => navigate(`/notice/${notice.id}`)}>
+        <NoticeCard
+          key={index}
+          onClick={() => {
+            window.scrollTo(0, 0); // 추가된 부분
+            navigate(`/notice/${notice.id}`);
+          }}
+        >
           <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
           <NoticeContent>{notice.content}</NoticeContent>
           <NoticeDate>{formatDateNoTime(notice.uploadDateTime)}</NoticeDate>
@@ -56,7 +62,6 @@ const HomeNotice = () => {
 
 export default HomeNotice;
 
-// Styled Components
 const NoticeSection = styled.div`
   margin: 40px 0;
 `;
