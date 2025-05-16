@@ -73,6 +73,10 @@ export const BannerImage = styled.img`
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   margin-left: 1rem;
+
+  &:last-child {
+    margin-right: 1rem;
+  }
 `;
 
 const ListButtonWrapper = styled.div`
