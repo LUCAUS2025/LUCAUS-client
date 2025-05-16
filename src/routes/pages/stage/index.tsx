@@ -268,7 +268,8 @@ const DropDownContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
   gap: 0.5rem;
   max-width: 584px;
   width: 100%;
