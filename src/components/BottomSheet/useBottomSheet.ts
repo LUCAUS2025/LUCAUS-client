@@ -96,7 +96,7 @@ export default function useBottomSheet() {
           content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
           //content.current.style.paddingBottom = getCurrentTranslateY() < 0 ? `${bottomSheetVisibleHeight * 1.5}px` : '0px'; // 올라와있을 때 padding bottom 추가
         });
-      }, 10);
+      }, 0);
     }
 
     const shouldSnapToTop = !fromContent

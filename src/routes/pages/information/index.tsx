@@ -43,7 +43,7 @@ export const Information = () => {
             </InfoCard>
             <InfoCard onClick={() => navigate('/entry')}>
               <CardImg src="/images/information/mapIcon.webp" />
-              <CardText>이동 정책</CardText>
+              <CardText>통행 정책</CardText>
             </InfoCard>
           </CardList>
         </InfoContainer>

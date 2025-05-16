@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { keywordBaseStyle } from './keyword';
 
 export const DetailWrapper = styled.div`
-  padding: 36px 20px;
+  padding: 26px 20px;
   gap: 32px;
   display: flex;
   flex-direction: column;
