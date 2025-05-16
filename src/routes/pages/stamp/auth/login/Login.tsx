@@ -59,9 +59,11 @@ const Login = () => {
         if (errorCode == 'COMMON500') {
           alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
         } else if (errorCode == 'LOGIN404') {
-          setOpenModal(true);
+          //setOpenModal(true);
+          setIsError(true);
         } else if (errorCode == 'PW400') {
-          setOpenModal(true);
+          //setOpenModal(true);
+          setIsError(true);
         }
       } else {
         alert('예기치 못한 오류 발생. 로그인 다시 시도해주세요!');
@@ -105,7 +107,7 @@ const Login = () => {
 
           <GetStampButton onClick={handleLogin}>키 모으러 가기</GetStampButton>
 
-          {openModal && (
+          {/* {openModal && (
             <Modal isShort={true}>
               <>
                 <div>정보를 맞게 입력하셨나요?</div>
@@ -122,7 +124,7 @@ const Login = () => {
                 </button>
               </>
             </Modal>
-          )}
+          )} */}
           {isLoading && (
             <SpinnerWrapper>
               <LoadingSpinner />
