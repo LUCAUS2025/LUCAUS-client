@@ -37,6 +37,7 @@ export const Stage = () => {
     if (!availableStages.includes(selectedStage)) {
       setSelectedStage(availableStages[0]);
     }
+    window.scrollTo(0, 0); // 날짜 변경 시 스크롤 최상단 이동
   }, [selectedDate]);
 
   const handleStageSelect = (option: string) => {
