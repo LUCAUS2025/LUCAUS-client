@@ -9,6 +9,10 @@ export const Information = () => {
   const navigate = useNavigate();
   const [recentNotice, setRecentNotice] = useState();
 
+  const LIKELION_TEAM_URL = 'http://pf.kakao.com/_xbmxlin';
+  const CAU_TEAM_URL =
+    'https://pf.kakao.com/_xktxcxaxj?fbclid=PAQ0xDSwKT-VZleHRuA2FlbQIxMAABp7Gdg3IrrCCFS7aY3kW3oHtBs7PQiXYWaQ-ko1H5A1nMicrXTHP0o4mh2EYw_aem_y98EOBC7p8l5VyOlIqDYeA';
+
   useEffect(() => {
     const getNotice = async () => {
       const result = await getOneRecentNotice();
@@ -57,14 +61,14 @@ export const Information = () => {
         <BoxList>
           <BoxContainer>
             <Subtitle>축제에 관해서 궁금한 것이 있어요!</Subtitle>
-            <InfoBox>
+            <InfoBox onClick={() => window.open(CAU_TEAM_URL, '_blank')}>
               <InfoBoxImg src="images/information/idea.webp"></InfoBoxImg>
               <InfoBoxText>축제 기획단 카카오톡 채널 바로가기</InfoBoxText>
             </InfoBox>
           </BoxContainer>
           <BoxContainer>
             <Subtitle>축제 사이트에 오류가 있어요!</Subtitle>
-            <InfoBox>
+            <InfoBox onClick={() => window.open(LIKELION_TEAM_URL, '_blank')}>
               <InfoBoxImg src="images/information/idea.webp"></InfoBoxImg>
               <InfoBoxText>멋쟁이사자처럼 중앙대학교 카카오톡 채널 바로가기</InfoBoxText>
             </InfoBox>
