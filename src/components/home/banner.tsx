@@ -145,17 +145,13 @@ const Button = styled.button`
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 1);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3;
   transition: background 0.2s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 1);
-  }
 `;
 
 const LeftButton = styled(Button)`
