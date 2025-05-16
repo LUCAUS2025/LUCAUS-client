@@ -22,8 +22,8 @@ export const Header = () => {
     if (path.includes('notice')) return '공지사항';
     if (path.includes('lostitem')) return '분실물 안내';
     if (path.includes('barrierfree')) return '배리어프리';
-    if (path.includes('/stamp/board')) return '광장기획전 스탬프';
-    if (path.includes('/stamp/auth')) return '광장기획전 스탬프';
+    if (path.includes('/stamp/board')) return '도장판';
+    if (path.includes('/stamp/auth')) return '도장판';
     if (path.includes('/stamp/login')) return '로그인';
     if (path.includes('/stamp/signup')) return '회원가입';
 
