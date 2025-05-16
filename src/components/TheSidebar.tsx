@@ -26,7 +26,7 @@ const TheSidebar = () => {
           </ItemContainer>
           <ItemContainer>
             <MenuHeading>광장기획전</MenuHeading>
-            <MenuItem href="/stamp/auth?tab=stamp">스탬프</MenuItem>
+            <MenuItem href="/stamp/auth?tab=stamp">도장판</MenuItem>
           </ItemContainer>
           <ItemContainer>
             <MenuHeading>푸드트럭</MenuHeading>
