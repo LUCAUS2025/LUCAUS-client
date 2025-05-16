@@ -33,8 +33,8 @@ export const ItemPreviewContent: React.FC<ItemPreviewContentProps> = ({ item, on
         {item.type === 'booth' && item.categories.map((key, idx) => <Keyword key={idx}>#{key}</Keyword>)}
       </ItemKeywords>
       <ButtonContainer>
-        <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>
         <CloseButton onClick={() => onClose()}>닫기</CloseButton>
+        <DetailButton onClick={() => goDetail()}>부스 상세보기</DetailButton>
       </ButtonContainer>
     </Wrapper>
   );

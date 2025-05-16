@@ -91,7 +91,14 @@ export const Stage = () => {
           <div ref={yongRef}>
             <Title>청룡가요제</Title>
             <Subtitle>좌우로 넘겨보며 청룡가요제를 즐겨보세요!</Subtitle>
-            <Thumbnail />
+            <Thumbnail
+              artistImages={[
+                '/images/home/stage/dragon/노을.webp',
+                '/images/home/stage/dragon/밤.webp',
+                '/images/home/stage/dragon/새벽.webp',
+                '/images/home/stage/dragon/아침.webp',
+              ]}
+            />
           </div>
         )}
 
@@ -100,7 +107,7 @@ export const Stage = () => {
           <div ref={mukiRef}>
             <Title>무대기획전</Title>
             <img
-              src="/images/home/stage/mudaeki.webp"
+              src="/images/home/stage/muki/21.webp"
               alt="무대기획전 포스터"
               style={{ width: '100%', borderRadius: '12px' }}
             />
@@ -113,7 +120,7 @@ export const Stage = () => {
             <Title>응원한마당</Title>
             <Subtitle>Hurrah-C의 뜨거운 응원과 하나 되는 함성!</Subtitle>
             <img
-              src="/images/home/stage/mudaeki.webp"
+              src="/images/home/stage/muki/23.webp"
               alt="응원제 포스터"
               style={{ width: '100%', borderRadius: '12px' }}
             />
@@ -127,11 +134,15 @@ export const Stage = () => {
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
             <LineUp
               artists={['페어로근', 'Dance P.O.zz', '01OB']}
-              artistImages={['images/home/banner/1.webp', 'images/home/banner/1.webp', 'images/home/banner/1.webp']}
+              artistImages={[
+                'images/home/stage/main-artist/1.webp',
+                'images/home/stage/main-artist/2.webp',
+                'images/home/stage/main-artist/3.webp',
+              ]}
               bannerImages={[
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
+                'images/home/stage/main-stage/22-1.webp',
+                'images/home/stage/main-stage/22-2.webp',
+                'images/home/stage/main-stage/22-3.webp',
               ]}
               showListToggle={true}
             />
@@ -145,18 +156,17 @@ export const Stage = () => {
             <LineUp
               artists={['Movement', '김승재와\n흑백 건반들', '블루드래곤', 'A.M.P', '손니버스']}
               artistImages={[
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
+                'images/home/stage/main-artist/4.webp',
+                'images/home/stage/main-artist/5.webp',
+                'images/home/stage/main-artist/6.webp',
+                'images/home/stage/main-artist/7.webp',
+                'images/home/stage/main-artist/8.webp',
               ]}
               bannerImages={[
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
+                'images/home/stage/main-stage/23-1.webp',
+                'images/home/stage/main-stage/23-2.webp',
+                'images/home/stage/main-stage/23-3.webp',
+                'images/home/stage/main-stage/23-4.webp',
               ]}
               showListToggle={true}
             />
@@ -170,11 +180,15 @@ export const Stage = () => {
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
               artists={['쏜애플', '에스파', '정동원(JD1)']}
-              artistImages={['images/home/banner/1.webp', 'images/home/banner/1.webp', 'images/home/banner/1.webp']}
+              artistImages={[
+                'images/home/stage/artist-artist/1.webp',
+                'images/home/stage/artist-artist/2.webp',
+                'images/home/stage/artist-artist/3.webp',
+              ]}
               bannerImages={[
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
+                'images/home/stage/artist-stage/21-1.webp',
+                'images/home/stage/artist-stage/21-2.webp',
+                'images/home/stage/artist-stage/21-3.webp',
               ]}
               showListToggle={false}
             />
@@ -187,16 +201,16 @@ export const Stage = () => {
             <LineUp
               artists={['나상현씨밴드', '스테이씨', '창모', '행주']}
               artistImages={[
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
-                'images/home/banner/1.webp',
+                'images/home/stage/artist-artist/4.webp',
+                'images/home/stage/artist-artist/5.webp',
+                'images/home/stage/artist-artist/6.webp',
+                'images/home/stage/artist-artist/7.webp',
               ]}
               bannerImages={[
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
+                'images/home/stage/artist-stage/22-4.webp',
+                'images/home/stage/artist-stage/22-5.webp',
+                'images/home/stage/artist-stage/22-6.webp',
+                'images/home/stage/artist-stage/22-7.webp',
               ]}
               showListToggle={false}
             />
@@ -208,11 +222,15 @@ export const Stage = () => {
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
               artists={['YB', 'NCT DREAM', '다이나믹 듀오']}
-              artistImages={['images/home/banner/1.webp', 'images/home/banner/1.webp', 'images/home/banner/1.webp']}
+              artistImages={[
+                'images/home/stage/artist-artist/8.webp',
+                'images/home/stage/artist-artist/9.webp',
+                'images/home/stage/artist-artist/10.webp',
+              ]}
               bannerImages={[
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
-                'images/home/stage/newjeans.webp',
+                'images/home/stage/artist-stage/23-8.webp',
+                'images/home/stage/artist-stage/23-9.webp',
+                'images/home/stage/artist-stage/23-10.webp',
               ]}
               showListToggle={false}
             />
