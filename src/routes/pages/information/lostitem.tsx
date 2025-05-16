@@ -52,7 +52,7 @@ const LostItem = () => {
         name: item.name,
         date: item.updatedDateTime,
         image: item.photoUrl,
-        detail: `습득 장소 : ${item.place}`,
+        detail: `보관 장소 : ${item.place}`,
         ownerFound: item.ownerFound,
       }));
 
@@ -113,7 +113,9 @@ const LostItem = () => {
         <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
       <ItemList>
-        {lostItems.length > 0 ? (
+        {isLoading ? (
+          <NoItemsMessage>불러오는 중...</NoItemsMessage>
+        ) : lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
             <Item key={idx}>
               <ItemImage src={item.image || ''} />
@@ -130,7 +132,6 @@ const LostItem = () => {
         ) : (
           <NoItemsMessage>현재 등록된 분실물이 없습니다</NoItemsMessage>
         )}
-        {isLoading && <NoItemsMessage>불러오는 중...</NoItemsMessage>}
       </ItemList>
     </BigContainer>
   );
