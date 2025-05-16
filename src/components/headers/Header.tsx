@@ -18,7 +18,7 @@ export const Header = () => {
     if (path.includes('booth')) return '거리문화제';
     if (path.includes('foodTruck')) return '푸드트럭';
     if (path.includes('information')) return '정보';
-    if (path.includes('entry')) return '이동 정책';
+    if (path.includes('entry')) return '통행 정책';
     if (path.includes('notice')) return '공지사항';
     if (path.includes('lostitem')) return '분실물 안내';
     if (path.includes('barrierfree')) return '배리어프리';
