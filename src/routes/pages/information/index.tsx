@@ -113,7 +113,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 60px;
-  padding: 30px 16px;
+  padding: 20px 16px;
   margin-bottom: 17px;
 `;
 const FestivalInfo = styled.div`

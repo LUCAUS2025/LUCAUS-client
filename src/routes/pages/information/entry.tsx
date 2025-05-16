@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../../../components/common/BaseButton';
-import { mediaBig, mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
+import {
+  mediaAboveDesktop,
+  mediaBig,
+  mediaLargePad,
+  mediaLarggestPad,
+  mediaMediumPad,
+  mediaSmall,
+  mediaSmall_description,
+  mediaSmall_title,
+} from '../../../styles/responsive';
 
 const Entry = () => {
   const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'peperoSquare' | '104Stairway'>('mainGateArea');
@@ -97,7 +106,7 @@ const Wrapper = styled.div`
 
 const MapSection = styled.div`
   position: relative;
-  width: 100%;
+  //width: 100%;
   overflow: hidden;
 `;
 
@@ -108,16 +117,44 @@ const BackgroundMapContainer = styled.div`
 `;
 
 const BackgroundMap = styled.img`
-  width: 100%;
-  height: 60vh;
+  //width: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: left;
   z-index: 1;
   position: relative;
+
+  ${mediaSmall`
+    height: 64vh;
+  `}
+
+  height: 63vh;
+
+  ${mediaBig`
+    height: 64vh;
+    object-position: cover;
+    width: 100%;
+  `}
+  ${mediaMediumPad`
+    height: 70vh;
+    object-position: contain;
+  `}
+  ${mediaLargePad`
+    height: 70vh;
+    object-position: contain;
+  `}
+  ${mediaLarggestPad`
+    height: 70vh;
+    object-position: contain;
+  `}
+  ${mediaAboveDesktop`
+    height: 75vh;
+   object-position: contain;
+   width: 100%;
+  `}
 `;
 
 const OptionBtnContainer = styled.div`
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   gap: 14px;
