@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../../../components/common/BaseButton';
 import {
@@ -48,6 +48,10 @@ const Entry = () => {
     const backgroundMap = imageMap[entryType][focusedArea];
     return { backgroundMap };
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const { backgroundMap } = getMapLayerCombination();
 
@@ -107,7 +111,7 @@ const Wrapper = styled.div`
 const MapSection = styled.div`
   position: relative;
   //width: 100%;
-  overflow: hidden;
+  //overflow: hidden;
 `;
 
 const BackgroundMapContainer = styled.div`
