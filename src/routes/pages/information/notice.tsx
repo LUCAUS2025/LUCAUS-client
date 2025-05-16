@@ -35,6 +35,7 @@ const Notice = () => {
   }, []);
 
   const handleItemClick = (id: number) => {
+    window.scrollTo(0, 0); // 스크롤을 맨 위로 이동
     navigate(`/notice/${id}`);
   };
 
