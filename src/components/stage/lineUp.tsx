@@ -113,7 +113,7 @@ const TableHeader = styled.div`
   display: flex;
   font-weight: bold;
   padding: 0.75rem 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #d1d5dc;
 
   > div {
     flex: 1;
@@ -124,8 +124,7 @@ const TableHeader = styled.div`
 const TableRow = styled.div`
   display: flex;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #d1d5dc;
-
+  font-size: 1rem;
   > div {
     flex: 1;
     text-align: center;
@@ -133,11 +132,12 @@ const TableRow = styled.div`
 `;
 
 const Tag = styled.span`
+  font-size: 14px;
   background: #f3f4f6;
   border: 1px solid #d1d5dc;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  font-size: 12px;
+  color: #364153;
 `;
 
 interface LineUpProps {
