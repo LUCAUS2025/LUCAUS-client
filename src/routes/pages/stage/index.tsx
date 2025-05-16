@@ -168,8 +168,8 @@ export const Stage = () => {
                 'images/home/stage/main-stage/23-5.webp',
                 'images/home/stage/main-stage/23-1.webp',
                 'images/home/stage/main-stage/23-2.webp',
-                'images/home/stage/main-stage/23-3.webp',
                 'images/home/stage/main-stage/23-4.webp',
+                'images/home/stage/main-stage/23-3.webp',
               ]}
               showListToggle={true}
               times={['17:22-17:37', '17:39-17:54', '17:56-18:11', '18:13-18:28', '18:30-18:45']}
