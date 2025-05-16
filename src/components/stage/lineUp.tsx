@@ -73,6 +73,10 @@ export const BannerImage = styled.img`
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   margin-left: 1rem;
+
+  &:last-child {
+    margin-right: 1rem;
+  }
 `;
 
 const ListButtonWrapper = styled.div`
@@ -98,17 +102,18 @@ const ListButton = styled.button`
 `;
 
 const TableWrapper = styled.div`
-  background-color: #6d6d6d;
+  background-color: #f3f4f6;
   padding: 1rem;
   border-radius: 0.5rem;
-  color: white;
+  color: #00000;
 `;
 
 const TableHeader = styled.div`
+  color: #1447e6;
   display: flex;
   font-weight: bold;
   padding: 0.75rem 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #d1d5dc;
 
   > div {
     flex: 1;
@@ -119,8 +124,7 @@ const TableHeader = styled.div`
 const TableRow = styled.div`
   display: flex;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
+  font-size: 1rem;
   > div {
     flex: 1;
     text-align: center;
@@ -128,11 +132,12 @@ const TableRow = styled.div`
 `;
 
 const Tag = styled.span`
-  background: transparent;
-  border: 1px solid white;
+  font-size: 14px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5dc;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  font-size: 12px;
+  color: #364153;
 `;
 
 interface LineUpProps {
@@ -140,9 +145,11 @@ interface LineUpProps {
   artistImages: string[];
   bannerImages: string[];
   showListToggle?: boolean;
+  times?: string[];
+  categories?: string[];
 }
 
-export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: LineUpProps) => {
+export const LineUp = ({ artists, artistImages, bannerImages, showListToggle, times, categories }: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
 
@@ -187,9 +194,9 @@ export const LineUp = ({ artists, artistImages, bannerImages, showListToggle }: 
           </TableHeader>
           {artists.map((name, i) => (
             <TableRow key={i}>
-              <div>nn:nn - nn:nn</div>
+              <div>{times?.[i] ?? 'nn:nn - nn:nn'}</div>
               <div>
-                <Tag>{i === 1 ? '댄스' : '밴드'}</Tag>
+                <Tag>{categories?.[i] ?? (i === 1 ? '댄스' : '밴드')}</Tag>
               </div>
               <div>{name}</div>
             </TableRow>

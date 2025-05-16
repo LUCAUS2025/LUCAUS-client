@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BaseButton } from '../../../components/common/BaseButton';
-import { mediaBig, mediaSmall, mediaSmall_description, mediaSmall_title } from '../../../styles/responsive';
+import {
+  mediaAboveDesktop,
+  mediaBig,
+  mediaLargePad,
+  mediaLarggestPad,
+  mediaMediumPad,
+  mediaSmall,
+  mediaSmall_description,
+  mediaSmall_title,
+} from '../../../styles/responsive';
 
 const Entry = () => {
-  const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'freeSquare' | '104Stairway'>('mainGateArea');
+  const [focusedArea, setFocusedArea] = useState<'mainGateArea' | 'peperoSquare' | '104Stairway'>('mainGateArea');
   const [entryType, setEntryType] = useState<'passable' | 'barrierFree'>('passable');
 
-  const handleFocusArea = (area: 'mainGateArea' | 'freeSquare' | '104Stairway') => {
+  const handleFocusArea = (area: 'mainGateArea' | 'peperoSquare' | '104Stairway') => {
     if (focusedArea !== area) {
       setFocusedArea(area);
     }
@@ -19,19 +28,23 @@ const Entry = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const getMapLayerCombination = () => {
     const imageMap: Record<
       'passable' | 'barrierFree',
-      Record<'mainGateArea' | 'freeSquare' | '104Stairway', string>
+      Record<'mainGateArea' | 'peperoSquare' | '104Stairway', string>
     > = {
       passable: {
         mainGateArea: 'images/information/entry/frontEntry-passable.webp',
-        freeSquare: 'images/information/entry/freeSquare-passable.webp',
+        peperoSquare: 'images/information/entry/peperoSquare-passable.webp',
         '104Stairway': 'images/information/entry/104Stairway-passable.webp',
       },
       barrierFree: {
         mainGateArea: 'images/information/entry/frontEntry-barrierFree.webp',
-        freeSquare: 'images/information/entry/freeSquare-barrierFree.webp',
+        peperoSquare: 'images/information/entry/peperoSquare-barrierFree.webp',
         '104Stairway': 'images/information/entry/104Stairway-barrierFree.webp',
       },
     };
@@ -39,6 +52,10 @@ const Entry = () => {
     const backgroundMap = imageMap[entryType][focusedArea];
     return { backgroundMap };
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const { backgroundMap } = getMapLayerCombination();
 
@@ -73,8 +90,8 @@ const Entry = () => {
             <LocationBtn active={focusedArea === 'mainGateArea'} onClick={() => handleFocusArea('mainGateArea')}>
               정문 일대
             </LocationBtn>
-            <LocationBtn active={focusedArea === 'freeSquare'} onClick={() => handleFocusArea('freeSquare')}>
-              해방광장
+            <LocationBtn active={focusedArea === 'peperoSquare'} onClick={() => handleFocusArea('peperoSquare')}>
+              빼빼로 광장
             </LocationBtn>
             <LocationBtn active={focusedArea === '104Stairway'} onClick={() => handleFocusArea('104Stairway')}>
               104관 계단
@@ -97,8 +114,8 @@ const Wrapper = styled.div`
 
 const MapSection = styled.div`
   position: relative;
-  width: 100%;
-  overflow: hidden;
+  //width: 100%;
+  //overflow: hidden;
 `;
 
 const BackgroundMapContainer = styled.div`
@@ -108,16 +125,44 @@ const BackgroundMapContainer = styled.div`
 `;
 
 const BackgroundMap = styled.img`
-  width: 100%;
-  height: 60vh;
+  //width: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: left;
   z-index: 1;
   position: relative;
+
+  ${mediaSmall`
+    height: 64vh;
+  `}
+
+  height: 63vh;
+
+  ${mediaBig`
+    height: 64vh;
+    object-position: cover;
+    width: 100%;
+  `}
+  ${mediaMediumPad`
+    height: 70vh;
+    object-position: contain;
+  `}
+  ${mediaLargePad`
+    height: 70vh;
+    object-position: contain;
+  `}
+  ${mediaLarggestPad`
+    height: 70vh;
+    object-position: contain;
+  `}
+  ${mediaAboveDesktop`
+    height: 75vh;
+   object-position: contain;
+   width: 100%;
+  `}
 `;
 
 const OptionBtnContainer = styled.div`
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   gap: 14px;
