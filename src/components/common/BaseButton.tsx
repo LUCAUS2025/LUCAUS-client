@@ -23,10 +23,6 @@ export const BlackButton = styled.div`
   height: 42px;
   gap: 10px;
   border-radius: 8px;
-  padding-top: 8px;
-  padding-right: 10px;
-  padding-bottom: 8px;
-  padding-left: 10px;
   background: #1e2939;
   color: #f9fafb;
   display: flex;

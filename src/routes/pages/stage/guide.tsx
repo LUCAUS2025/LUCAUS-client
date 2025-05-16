@@ -19,7 +19,7 @@ const Guide = () => {
     <>
       <Tabs>
         <Tab active={currentTab === 'ticketing'} onClick={() => handleTabClick('ticketing')}>
-          공연 티켓팅 안내
+          공연 입장 정책 안내
         </Tab>
         <Tab active={currentTab === 'watching'} onClick={() => handleTabClick('watching')}>
           공연 관람 가이드

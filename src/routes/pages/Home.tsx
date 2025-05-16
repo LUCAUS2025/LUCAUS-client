@@ -31,18 +31,19 @@ export const Home = () => {
     <>
       <Wrapper16>
         <Banner />
+        <Toast />
         {isVisible && ( // 조건부 렌더링
           <>
+            <HalfMargin />
             <Title>광장기획전</Title>
             <Subtitle>지금 바로 열쇠를 모아 항해를 시작해보세요!</Subtitle>
             <Image
-              src="/images/home/banner/1.webp"
+              src="/images/home/gwangki.webp"
               alt="광장기획전 포스터"
-              onClick={() => navigate('/stamp/auth?tab=intro')}
+              onClick={() => navigate('/stamp/auth?tab=stamp')}
             />
           </>
         )}
-        <Toast />
         <Margin />
         <Title>이 무대 절대 놓치지 마세요!</Title>
         <Subtitle>올해 축제를 빛낼 아티스트들을 지금 확인하세요</Subtitle>
@@ -75,10 +76,6 @@ export const Home = () => {
 
         <HomeNotice />
         <Margin />
-        <Title>놓칠 수 없는 부스</Title>
-        <Subtitle>꼭 가봐야할 부스를 추천해드려요.</Subtitle>
-        <Thumbnail artistImages={['/images/home/artists/21-1.webp']} />
-        <Margin />
       </Wrapper16>
       <Margin />
       <Footer />
@@ -93,10 +90,14 @@ export const Wrapper16 = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  border-radius: 12px;
 `;
 
 const Margin = styled.div`
   width: 100%;
   height: 40px;
+`;
+
+const HalfMargin = styled.div`
+  width: 100%;
+  height: 20px;
 `;
