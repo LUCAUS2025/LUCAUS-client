@@ -222,5 +222,5 @@ const Info = styled.div`
 `;
 
 const VoidSpace = styled.div`
-  height: 160px;
+  height: 200px;
 `;

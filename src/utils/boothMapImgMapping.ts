@@ -75,8 +75,10 @@ export const mapBoothMapMagnifiedImg = (
       return '/images/booth/magnified/backdoor-booth-map-45-46.webp';
     } else if (47 <= selectedDayBoothNum && selectedDayBoothNum <= 54) {
       return '/images/booth/magnified/backdoor-booth-map-47-54.webp';
-    } else {
+    } else if (55 <= selectedDayBoothNum && selectedDayBoothNum <= 60) {
       return '/images/booth/magnified/backdoor-booth-map-55-60.webp';
+    } else {
+      return '/images/booth/magnified/backdoor-booth-map-61-64.webp';
     }
   }
   return '';
