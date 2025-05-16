@@ -16,15 +16,15 @@ const RewardInfoModal = ({ setOpenRewardInfoModal, boardType }: Props) => {
 
       {boardType == 1 ? (
         <TextWrapper>
-          <TextLine>3개:간식</TextLine>
-          <TextLine>5개:추첨 상품</TextLine>
-          <TextLine>7개:응모 상품</TextLine>
+          <TextLine>3개 : 간식</TextLine>
+          <TextLine>5개 : 추첨 상품</TextLine>
+          <TextLine>7개 : 응모 상품</TextLine>
         </TextWrapper>
       ) : (
         <TextWrapper>
-          <TextLine>2개:간식</TextLine>
-          <TextLine>4개:추첨 상품</TextLine>
-          <TextLine>6개:응모 상품</TextLine>
+          <TextLine>2개 : 간식</TextLine>
+          <TextLine>4개 : 추첨 상품</TextLine>
+          <TextLine>6개 : 응모 상품</TextLine>
         </TextWrapper>
       )}
 
@@ -77,7 +77,7 @@ const TextWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  margin-top: 20px;
+  margin-top: 5px;
 `;
 
 const StyledButton = styled.button`
