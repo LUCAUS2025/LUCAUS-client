@@ -36,6 +36,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
         (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
       );
       setBoothsByDatePlace(filteredData);
+      console.log(filteredData);
     }
   }, [selectedPlace, data]);
 
@@ -49,7 +50,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
       {boothsByDatePlace && boothsByDatePlace.length > 0 && type === 'booth' && (
         <List>
           {boothsByDatePlace?.map((item) => (
-            <Item key={item.dayBoothNum} onClick={() => setSelectedItem!(item)}>
+            <Item key={`${item.type}-${selectedDate}-item.dayBoothNum`} onClick={() => setSelectedItem!(item)}>
               <ItemContent>
                 <ItemId>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer>
