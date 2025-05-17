@@ -55,6 +55,7 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
   z-index: 9;
   display: flex;
   flex-direction: column;
+  user-select: none;
 `;
 
 const ContentWrapper = styled.div`

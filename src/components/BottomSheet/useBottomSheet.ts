@@ -41,12 +41,17 @@ export default function useBottomSheet() {
     return touchMove.movingDirection === 'down' ? scrollTop === 0 : false;
   };
 
+  const getCurrentTranslateY = () => {
+    const transform = sheet.current?.style.transform;
+    const match = transform?.match(/translateY\((-?\d+(?:\.\d+)?)px\)/);
+    return match ? parseFloat(match[1]) : 0;
+  };
+
   const handleTouchStart = (e: TouchEvent) => {
     const { touchStart } = metrics.current;
     if (!sheet.current) return;
     touchStart.sheetY = sheet.current!.getBoundingClientRect().y;
     touchStart.touchY = e.touches[0].clientY;
-    //sheet.current.style.transition = '';
   };
 
   const handleTouchMove = (e: TouchEvent) => {
@@ -63,15 +68,13 @@ export default function useBottomSheet() {
     if (!metrics.current.isContentAreaTouched || canUserMoveBottomSheet()) {
       e.preventDefault();
       if (!sheet.current) return;
-      sheet.current?.style.setProperty('transform', `translateY(${nextSheetY - MAX_Y}px)`);
+      sheet.current.style.setProperty('transform', `translateY(${nextSheetY - MAX_Y}px)`);
     }
-    if (content.current!.scrollTop === 0) metrics.current.scrollAtTopTouched = true;
-    else metrics.current.scrollAtTopTouched = false;
+
+    metrics.current.scrollAtTopTouched = content.current?.scrollTop === 0;
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
-    if (!sheet.current) return;
-    //sheet.current.style.transition = 'transform 0.1s ease-out';
     const { touchMove, touchStart } = metrics.current;
     const dragThreshold = 80;
     const dragDistance = e.changedTouches[0].clientY - touchStart.touchY;
@@ -79,28 +82,75 @@ export default function useBottomSheet() {
     const dragDown = touchMove.movingDirection === 'down';
     const dragUp = touchMove.movingDirection === 'up';
     const fromContent = metrics.current.isContentAreaTouched;
-    const getCurrentTranslateY = () => {
-      const transform = sheet.current?.style.transform;
-      const match = transform?.match(/translateY\((-?\d+(?:\.\d+)?)px\)/);
-      return match ? parseFloat(match[1]) : 0;
-    };
-
-    // 드래그가 끝난 후, 리스트가 스크롤 되도록
-    if (content.current) {
-      //바텀시트가 올라와있을 때만 리스트 스크롤 가능하도록
-      //화면 업데이트 직전 코드 실행할 수 있도록...-> 바텀시트 올리고 바로 리스트 스크롤 되도록
-      // requestAnimationFrame(() => {
-      //   if (!content.current) return;
-      //   content.current.style.overflowY = getCurrentTranslateY() < 0 ? 'auto' : 'hidden';
-      // });
-    }
 
     const shouldSnapToTop = !fromContent
       ? dragUp || Math.abs(dragDistance) < dragThreshold
       : !dragDown || !(content.current!.scrollTop === 0 && dragDistance > dragThreshold);
 
     if (!sheet.current) return;
-    sheet.current?.style.setProperty('transform', shouldSnapToTop ? `translateY(${MIN_Y - MAX_Y}px)` : 'translateY(0)');
+    sheet.current.style.setProperty('transform', shouldSnapToTop ? `translateY(${MIN_Y - MAX_Y}px)` : 'translateY(0)');
+
+    metrics.current = {
+      touchStart: { sheetY: 0, touchY: 0 },
+      touchMove: { prevTouchY: 0, movingDirection: 'none' },
+      isContentAreaTouched: false,
+      scrollAtTopTouched: false,
+    };
+  };
+
+  const handleMouseDown = (e: MouseEvent) => {
+    const { touchStart } = metrics.current;
+    if (!sheet.current) return;
+
+    touchStart.sheetY = sheet.current.getBoundingClientRect().y;
+    touchStart.touchY = e.clientY;
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    const { touchStart, touchMove } = metrics.current;
+    const currentY = e.clientY;
+
+    if (!touchMove.prevTouchY) touchMove.prevTouchY = touchStart.touchY;
+    touchMove.movingDirection = touchMove.prevTouchY < currentY ? 'down' : 'up';
+
+    const offset = currentY - touchStart.touchY;
+    let nextSheetY = touchStart.sheetY + offset;
+    nextSheetY = Math.min(Math.max(nextSheetY, MIN_Y), MAX_Y);
+
+    if (!metrics.current.isContentAreaTouched || canUserMoveBottomSheet()) {
+      e.preventDefault();
+      if (!sheet.current) return;
+      sheet.current.style.setProperty('transform', `translateY(${nextSheetY - MAX_Y}px)`);
+    }
+
+    metrics.current.scrollAtTopTouched = content.current?.scrollTop === 0;
+  };
+
+  const handleMouseUp = (e: MouseEvent) => {
+    const { touchMove, touchStart } = metrics.current;
+    const dragThreshold = 80;
+    const dragDistance = e.clientY - touchStart.touchY;
+
+    const dragDown = touchMove.movingDirection === 'down';
+    const dragUp = touchMove.movingDirection === 'up';
+    const fromContent = metrics.current.isContentAreaTouched;
+
+    const shouldSnapToTop = !fromContent
+      ? dragUp || Math.abs(dragDistance) < dragThreshold
+      : !dragDown || !(content.current!.scrollTop === 0 && dragDistance > dragThreshold);
+
+    if (sheet.current) {
+      sheet.current.style.setProperty(
+        'transform',
+        shouldSnapToTop ? `translateY(${MIN_Y - MAX_Y}px)` : 'translateY(0)',
+      );
+    }
+
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
 
     metrics.current = {
       touchStart: { sheetY: 0, touchY: 0 },
@@ -114,14 +164,20 @@ export default function useBottomSheet() {
     const sheetEl = sheet.current;
     if (!sheetEl) return;
 
+    // 모바일 터치 이벤트
     sheetEl.addEventListener('touchstart', handleTouchStart);
     sheetEl.addEventListener('touchmove', handleTouchMove);
     sheetEl.addEventListener('touchend', handleTouchEnd);
+
+    // 데스크탑 마우스 이벤트
+    sheetEl.addEventListener('mousedown', handleMouseDown);
 
     return () => {
       sheetEl.removeEventListener('touchstart', handleTouchStart);
       sheetEl.removeEventListener('touchmove', handleTouchMove);
       sheetEl.removeEventListener('touchend', handleTouchEnd);
+
+      sheetEl.removeEventListener('mousedown', handleMouseDown);
     };
   }, []);
 
@@ -133,9 +189,7 @@ export default function useBottomSheet() {
     };
     const contentEl = content.current;
     if (contentEl) {
-      // 처음에는 스크롤을 막음
       contentEl.addEventListener('touchstart', handleContentTouchStart);
-      //contentEl.style.overflowY = 'auto';
     }
   }, []);
 
