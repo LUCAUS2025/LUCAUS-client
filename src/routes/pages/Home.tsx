@@ -40,7 +40,10 @@ export const Home = () => {
             <Image
               src="/images/home/gwangki.webp"
               alt="광장기획전 포스터"
-              onClick={() => navigate('/stamp/auth?tab=stamp')}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                navigate('/stamp/auth?tab=stamp');
+              }}
             />
           </>
         )}
