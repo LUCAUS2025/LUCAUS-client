@@ -55,6 +55,7 @@ const Wrapper = styled.div<{ size: 'small' | 'middle' | 'large'; overlapFooter: 
   z-index: 9;
   display: flex;
   flex-direction: column;
+  user-select: none;
 `;
 
 const ContentWrapper = styled.div`
@@ -66,7 +67,7 @@ const ContentWrapper = styled.div`
 
 const smallSizeStyle = css`
   ${mediaSmall`
-    top: 63%;
+    top: 66%;
   `}
 
   top: 59%;
@@ -108,7 +109,7 @@ const largeSizeStyle = css`
   top: 29%;
 
   ${mediaSmall`
-    top: 27%;
+    top: 33%;
   `}
 
   ${mediaBig`
@@ -116,7 +117,7 @@ const largeSizeStyle = css`
   `}
 
   ${mediaMediumPad`
-    top: 29%;
+    top: 28%;
   `}
 
   ${mediaLargePad`

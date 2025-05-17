@@ -12,6 +12,7 @@ import { GoBackButton } from '../../../components/common/GoBackButton';
 import { fetchBoothList } from '../../../services/apis/booth/boothList';
 import { useHeader } from '../../../context/HeaderContext';
 import { mapBoothMapImg, mapBoothMapMagnifiedImg } from '../../../utils/boothMapImgMapping';
+import { LoadingPage } from '../LoadingPage';
 
 export const Booth = () => {
   const { setHideHeader } = useHeader();
@@ -20,10 +21,12 @@ export const Booth = () => {
   const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
   const [boothList, setBoothList] = useState<BoothItem[] | []>([]);
   const [mapImg, setMapImg] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getBoothList = async () => {
       try {
+        setIsLoading(false);
         const boothListResponse = await fetchBoothList(selectedDate.value as number);
         setBoothList(boothListResponse ?? []);
       } catch (e) {
@@ -70,6 +73,10 @@ export const Booth = () => {
       setSelectedDate(dateOptions[0]);
     }
   }, []);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <BaseLayer backgroundImgSrc={mapImg}>

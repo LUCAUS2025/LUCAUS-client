@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
 import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
 import { mapLocationToPlaceBooth, Option } from '../../../data/options';
 import { useNavigate } from 'react-router-dom';
+import { LoadingPage } from '../../../routes/pages/LoadingPage';
 
 interface ContentProps {
   theTitle?: string;
@@ -28,7 +29,8 @@ export const ItemListContent: React.FC<ContentProps> = ({
   const foodTruckList = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
   const [boothsByDatePlace, setBoothsByDatePlace] = useState<BoothItem[]>();
   const [selectedDate, setSelectedDate] = useState<number>(19);
-  //const [foodTruckByDatePlace, setFoodTruckByDatePlace] = useState<FoodTruckItem[]>();
+  const listContentRef = useRef<HTMLDivElement>(null);
+  const sheetHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
 
   useEffect(() => {
     if (type === 'booth') {
@@ -43,6 +45,12 @@ export const ItemListContent: React.FC<ContentProps> = ({
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (listContentRef.current) {
+      listContentRef.current.scrollTop = 0;
+    }
+  }, [selectedDate, selectedPlace]);
+
   return (
     <Wrapper>
       <TitleContainer>
@@ -51,12 +59,12 @@ export const ItemListContent: React.FC<ContentProps> = ({
       </TitleContainer>
       {/* 부스 리스트 */}
       {boothsByDatePlace && boothsByDatePlace.length > 0 && type === 'booth' && (
-        <List>
+        <List ref={listContentRef} $sheetHeight={sheetHeight}>
           {boothsByDatePlace?.map((item) => (
-            <Item key={`${item.type}-${selectedDate}-item.dayBoothNum`} onClick={() => setSelectedItem!(item)}>
+            <Item key={`${item.type}-${selectedDate}-item.dayBoothNum`}>
               <ItemContent>
-                <ItemId>#{item.dayBoothNum}</ItemId>
-                <ItemTextContainer>
+                <ItemId onClick={() => setSelectedItem!(item)}>#{item.dayBoothNum}</ItemId>
+                <ItemTextContainer onClick={() => setSelectedItem!(item)}>
                   <ItemTitle>{item.name}</ItemTitle>
                   <ItemDescription>{item.owner}</ItemDescription>
                   <ItemKeywords>
@@ -75,19 +83,14 @@ export const ItemListContent: React.FC<ContentProps> = ({
           <VoidSpace />
         </List>
       )}
-      {(!boothsByDatePlace || boothsByDatePlace?.length === 0) && type === 'booth' && (
-        <Info>운영중인 부스가 없습니다.</Info>
-      )}
+      {boothsByDatePlace?.length === 0 && type === 'booth' && <Info>운영중인 부스가 없습니다.</Info>}
       {/* 푸드트럭 리스트 */}
       {foodTruckList && type === 'foodTruck' && (
-        <List>
+        <List $sheetHeight={sheetHeight}>
           {foodTruckList?.map((item) => (
-            <Item
-              key={item.dayBoothNum}
-              onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`, { state: selectedDate })}
-            >
+            <Item key={item.dayBoothNum}>
               <ItemContent>
-                <ItemTextContainer>
+                <ItemTextContainer onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`, { state: selectedDate })}>
                   <ItemTitle>{item.name}</ItemTitle>
                   <ItemKeywords>
                     {item.representMenu.map((key, index) => (
@@ -104,9 +107,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
           ))}
         </List>
       )}
-      {(!foodTruckList || foodTruckList?.length === 0) && type === 'foodTruck' && (
-        <Info>운영중인 푸드트럭이 없습니다.</Info>
-      )}
+      {foodTruckList?.length === 0 && type === 'foodTruck' && <Info>운영중인 푸드트럭이 없습니다.</Info>}
     </Wrapper>
   );
 };
@@ -134,7 +135,7 @@ const Description = styled.div`
   font-weight: 400;
   color: #6a7282;
 `;
-const List = styled.div`
+const List = styled.div<{ $sheetHeight: number }>`
   display: flex;
   flex-direction: column;
   //padding-bottom: 20vh;
