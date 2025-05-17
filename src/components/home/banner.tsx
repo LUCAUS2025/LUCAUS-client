@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { table } from 'console';
 
 export const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -120,6 +121,24 @@ export const Banner = () => {
         <CardContent>
           {currentIndex === 0 ? (
             <Image onClick={() => navigate('/entry')} src={images[currentIndex]} alt="Dress Code" />
+          ) : currentIndex === 2 ? (
+            <a
+              href="https://www.instagram.com/p/DJn0LFbBZjP/?igsh=OGlhaWwzbGxidzAx"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ width: '90%' }}
+            >
+              <Image src={images[currentIndex]} alt="Instagram" style={{ cursor: 'pointer', width: '100%' }} />
+            </a>
+          ) : currentIndex === 3 ? (
+            <a
+              href="https://www.instagram.com/p/DJl4W3dhf0R/?igsh=dTdvM2ZleHNhazBw"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ width: '90%' }}
+            >
+              <Image src={images[currentIndex]} alt="Instagram" style={{ cursor: 'pointer', width: '100%' }} />
+            </a>
           ) : (
             <Image src={images[currentIndex]} alt="Dress Code" />
           )}
