@@ -16,15 +16,21 @@ const RewardInfoModal = ({ setOpenRewardInfoModal, boardType }: Props) => {
 
       {boardType == 1 ? (
         <TextWrapper>
-          <TextLine>3개 : 간식</TextLine>
-          <TextLine>5개 : 추첨 상품</TextLine>
-          <TextLine>7개 : 응모 상품</TextLine>
+          <TextLine>
+            <StyledSpan>3개 |</StyledSpan> 행운 쿠키
+          </TextLine>
+          <TextLine>
+            <StyledSpan>5개 |</StyledSpan> 보조배터리/축제 굿즈/간식 꾸러미 중 1
+          </TextLine>
+          <TextLine>
+            <StyledSpan>7개 |</StyledSpan> 특별 상품 응모
+          </TextLine>
         </TextWrapper>
       ) : (
         <TextWrapper>
-          <TextLine>2개 : 간식</TextLine>
-          <TextLine>4개 : 추첨 상품</TextLine>
-          <TextLine>6개 : 응모 상품</TextLine>
+          <TextLine>2개 : 행운 쿠키</TextLine>
+          <TextLine>4개 : 보조배터리/축제 굿즈/간식 꾸러미 중 1</TextLine>
+          <TextLine>6개 : 특별 상품 응모</TextLine>
         </TextWrapper>
       )}
 
@@ -47,6 +53,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 80%;
+  align-items: center;
 `;
 
 const TitleWrapper = styled.div`
@@ -71,7 +78,7 @@ const SubTitle = styled.div`
 `;
 
 const TextWrapper = styled.div`
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,4 +103,10 @@ const TextLine = styled.div`
   color: #364153;
   font-size: 14px;
   font-weight: 400;
+  //margin-left: 10%;
+  width: 100%;
+`;
+
+const StyledSpan = styled.span`
+  font-weight: 800;
 `;
