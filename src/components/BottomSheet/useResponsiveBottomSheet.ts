@@ -64,8 +64,8 @@ export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
       maxPhone: innerHeight * 0.67,
       miniTablet: innerHeight * 0.67,
       smallTablet: innerHeight * 0.72,
-      largeTablet: innerHeight * 0.77,
-      desktop: innerHeight * 0.78,
+      largeTablet: innerHeight * 0.71,
+      desktop: innerHeight * 0.7,
     };
 
     const MIN_Y = MIN_Y_MAP[screenSize];

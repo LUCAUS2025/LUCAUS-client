@@ -13,6 +13,7 @@ import { fetchBoothList } from '../../../services/apis/booth/boothList';
 import { useHeader } from '../../../context/HeaderContext';
 import { mapBoothMapImg, mapBoothMapMagnifiedImg } from '../../../utils/boothMapImgMapping';
 import { LoadingPage } from '../LoadingPage';
+import { useLocation } from 'react-router-dom';
 
 export const Booth = () => {
   const { setHideHeader } = useHeader();
@@ -22,6 +23,7 @@ export const Booth = () => {
   const [boothList, setBoothList] = useState<BoothItem[] | []>([]);
   const [mapImg, setMapImg] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     const getBoothList = async () => {
@@ -73,6 +75,10 @@ export const Booth = () => {
       setSelectedDate(dateOptions[0]);
     }
   }, []);
+
+  useEffect(() => {
+    setSelectedItem(null);
+  }, [location.key]);
 
   if (isLoading) {
     return <LoadingPage />;
