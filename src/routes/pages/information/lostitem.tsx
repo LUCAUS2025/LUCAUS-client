@@ -4,6 +4,7 @@ import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDateForNotice } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 import { itemsOptions, lostdateOptions, Option } from '../../../data/options';
+import { LoadingPage } from '../LoadingPage';
 
 interface LostItemProps {
   category: string;
@@ -119,7 +120,7 @@ const LostItem = () => {
       </DropDowns>
       <ItemList>
         {isLoading ? (
-          <NoItemsMessage>불러오는 중...</NoItemsMessage>
+          <LoadingPage />
         ) : lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
             <Item key={idx}>
