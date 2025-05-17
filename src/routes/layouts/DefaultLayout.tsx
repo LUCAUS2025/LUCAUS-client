@@ -15,6 +15,7 @@ const LayoutContent = () => {
   return (
     <LayoutDom>
       {!hideHeader && <TheHeader />}
+      <TheSidebar />
       <Content hideHeader={hideHeader}>
         <Outlet />
       </Content>
@@ -27,7 +28,6 @@ export const DefaultLayout = () => {
   return (
     <AppDom>
       <MenuProvider>
-        <TheSidebar />
         <HeaderProvider>
           <LayoutContent />
         </HeaderProvider>
@@ -47,7 +47,6 @@ const LayoutDom = styled.div`
 `;
 
 const AppDom = styled.div`
-  position: relative;
   width: min(100vw, 600px);
   height: 100vh;
   margin: 0 auto;

@@ -31,7 +31,7 @@ const TheSidebar = () => {
           <ItemContainer>
             <MenuHeading>공연</MenuHeading>
             <MenuItem href="/stage">오늘의 공연</MenuItem>
-            <MenuItem href="/guide/ticketing">공연 입장 정책 안내</MenuItem>
+            <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
             <MenuItem href="/guide/watching">관람 가이드</MenuItem>
           </ItemContainer>
           <ItemContainer>
@@ -50,7 +50,7 @@ const TheSidebar = () => {
             <MenuHeading>정보</MenuHeading>
             <MenuItem href="/lostitem">분실물 안내</MenuItem>
             <MenuItem href="/barrierfree">배리어프리</MenuItem>
-            <MenuItem href="/entry">통행 정책</MenuItem>
+            <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
             <MenuItem href="/notice">총학생회 공지사항</MenuItem>
           </ItemContainer>
         </MenuDom>
@@ -72,24 +72,19 @@ const ItemContainer = styled.div`
 `;
 
 const SidebarContainer = styled.div<{ isOpen: boolean }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 280px;
   height: 100%;
   background-color: white;
   transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
-  pointer-events: ${({ isOpen }) => (isOpen ? 'auto' : 'none')};
-  transition:
-    transform 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   z-index: 100;
 `;
 
 const Overlay = styled.div<{ isOpen: boolean }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
