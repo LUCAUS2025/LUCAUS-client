@@ -9,6 +9,7 @@ export const Box = styled.div`
   align-items: center;
   margin-top: 16px;
   width: 100%;
+  line-height: 1.5;
 `;
 
 export const SectionTitle = styled.h3` ... `;

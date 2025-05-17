@@ -5,6 +5,7 @@ import { BlackButton } from '../common/BaseButton';
 
 export const Description = styled.div`
   margin-top: 16px;
+  line-height: 1.5;
 `;
 
 const Ticketing: React.FC = () => {
