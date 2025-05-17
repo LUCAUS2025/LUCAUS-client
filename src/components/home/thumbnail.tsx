@@ -22,6 +22,7 @@ export const Thumbnail = ({ artistImages, instagram }: ThumbnailProps) => {
           }}
         />
       ))}
+      <Margin />
     </Card>
   );
 };
@@ -41,4 +42,8 @@ export const CardImage = styled.img`
   object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const Margin = styled.div`
+  margin-left: 1rem;
 `;

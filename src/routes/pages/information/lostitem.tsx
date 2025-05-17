@@ -4,6 +4,7 @@ import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDateForNotice } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 import { itemsOptions, lostdateOptions, Option } from '../../../data/options';
+import { LoadingPage } from '../LoadingPage';
 
 interface LostItemProps {
   category: string;
@@ -99,12 +100,17 @@ const LostItem = () => {
       <Container>
         분실물을 발견했어요. <br />
         어떻게 해야하나요? 🤔
-        <Answer>107관 총학생회실 방문 후 접수해주세요!</Answer>
+        <Answer>주변에 있는 축제 STAFF에게 전달해주세요.</Answer>
       </Container>
       <Container>
         잃어버린 물건이 있어요 😭 <br />
         어떻게 찾아야하나요?
-        <Answer>이미 총학생회에 접수된 물건이라면 107관 총학생회실 방문 후 개인 신분 확인 뒤 수령 가능합니다.</Answer>
+        <Answer>
+          아래 리스트에서 나의 분실물을 확인한 후, <br />
+          보관 장소에 방문하여 축제 STAFF에게
+          <br />
+          분실물 수령을 문의해주세요.
+        </Answer>
       </Container>
 
       <SectionTitle>내 분실물 찾기</SectionTitle>
@@ -114,7 +120,7 @@ const LostItem = () => {
       </DropDowns>
       <ItemList>
         {isLoading ? (
-          <NoItemsMessage>불러오는 중...</NoItemsMessage>
+          <LoadingPage />
         ) : lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
             <Item key={idx}>

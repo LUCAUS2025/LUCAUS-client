@@ -6,6 +6,10 @@ export const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const isDragging = useRef(false);
+  const dragStartX = useRef<number | null>(null);
 
   const images = [
     '/images/home/banner/1.webp',
@@ -55,12 +59,60 @@ export const Banner = () => {
     };
   }, []);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const diff = touchStartX.current - touchEndX.current;
+      if (diff > 50) nextSlide();
+      if (diff < -50) prevSlide();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    dragStartX.current = e.clientX;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || dragStartX.current === null) return;
+    const diff = dragStartX.current - e.clientX;
+    if (diff > 50) {
+      nextSlide();
+      isDragging.current = false;
+    } else if (diff < -50) {
+      prevSlide();
+      isDragging.current = false;
+    }
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    dragStartX.current = null;
+  };
+
   const prevIndex = (currentIndex - 1 + images.length) % images.length;
   const nextIndex = (currentIndex + 1) % images.length;
 
   return (
     <CarouselContainer>
-      <Card>
+      <Card
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+      >
         <BackCardLeft>
           <BackCardImage src={images[prevIndex]} alt="Previous Slide" />
         </BackCardLeft>
@@ -98,17 +150,6 @@ const Arrow = styled.img`
   width: 24px;
   height: 24px;
 `;
-
-const images = [
-  '/images/home/banner/1.webp',
-  '/images/home/banner/2.webp',
-  '/images/home/banner/3.webp',
-  '/images/home/banner/1.webp',
-  '/images/home/banner/2.webp',
-  '/images/home/banner/3.webp',
-  '/images/home/banner/1.webp',
-  '/images/home/banner/2.webp',
-];
 
 // 스타일 정의
 const CarouselContainer = styled.div`
