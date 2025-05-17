@@ -218,7 +218,7 @@ const Wrapper = styled.div`
   //overflow-y: auto;
   margin-top: calc(10vh);
   max-height: 400px;
-  gap: 5px;
+  gap: 10px;
 `;
 
 const BoothLine = styled.div`
