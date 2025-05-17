@@ -119,9 +119,7 @@ export const Banner = () => {
         </BackCardRight>
 
         <CardContent>
-          {currentIndex === 0 ? (
-            <Image onClick={() => navigate('/entry')} src={images[currentIndex]} alt="Dress Code" />
-          ) : currentIndex === 2 ? (
+          {currentIndex === 2 ? (
             <a
               href="https://www.instagram.com/p/DJn0LFbBZjP/?igsh=OGlhaWwzbGxidzAx"
               target="_blank"
