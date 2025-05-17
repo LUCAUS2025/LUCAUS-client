@@ -61,10 +61,10 @@ export const ItemListContent: React.FC<ContentProps> = ({
       {boothsByDatePlace && boothsByDatePlace.length > 0 && type === 'booth' && (
         <List ref={listContentRef} $sheetHeight={sheetHeight}>
           {boothsByDatePlace?.map((item) => (
-            <Item key={`${item.type}-${selectedDate}-item.dayBoothNum`} onClick={() => setSelectedItem!(item)}>
+            <Item key={`${item.type}-${selectedDate}-item.dayBoothNum`}>
               <ItemContent>
-                <ItemId>#{item.dayBoothNum}</ItemId>
-                <ItemTextContainer>
+                <ItemId onClick={() => setSelectedItem!(item)}>#{item.dayBoothNum}</ItemId>
+                <ItemTextContainer onClick={() => setSelectedItem!(item)}>
                   <ItemTitle>{item.name}</ItemTitle>
                   <ItemDescription>{item.owner}</ItemDescription>
                   <ItemKeywords>
@@ -90,12 +90,9 @@ export const ItemListContent: React.FC<ContentProps> = ({
       {foodTruckList && type === 'foodTruck' && (
         <List $sheetHeight={sheetHeight}>
           {foodTruckList?.map((item) => (
-            <Item
-              key={item.dayBoothNum}
-              onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`, { state: selectedDate })}
-            >
+            <Item key={item.dayBoothNum}>
               <ItemContent>
-                <ItemTextContainer>
+                <ItemTextContainer onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`, { state: selectedDate })}>
                   <ItemTitle>{item.name}</ItemTitle>
                   <ItemKeywords>
                     {item.representMenu.map((key, index) => (
