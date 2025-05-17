@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ItemListContent } from '../../../components/BottomSheet/innerContent/ItemListContent';
 import { dateMonthOption, dateOptions, dateYearOption } from '../../../data/options';
 import { fetchFoodTruckList } from '../../../services/apis/foodTruck/foodTruckList';
+import { LoadingPage } from '../LoadingPage';
 
 export const FoodTruck = () => {
   const [selectedDate, setSelectedDate] = useState<number>(19);
@@ -50,6 +51,10 @@ export const FoodTruck = () => {
       setSelectedDate(targetDate);
     }
   }, []);
+
+  if (!foodTruckList || foodTruckList.length == 0) {
+    return <LoadingPage />;
+  }
 
   return (
     <>

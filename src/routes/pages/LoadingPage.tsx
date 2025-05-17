@@ -6,7 +6,7 @@ export const LoadingPage = () => {
   return (
     <Wrapper>
       <LoadingSpinner />
-      <h4>로딩중...</h4>
+      <span style={{ fontSize: '12px' }}>로딩중...</span>
     </Wrapper>
   );
 };
@@ -18,4 +18,5 @@ const Wrapper = styled.div`
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  gap: 5px;
 `;

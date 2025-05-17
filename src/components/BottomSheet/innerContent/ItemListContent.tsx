@@ -51,10 +51,6 @@ export const ItemListContent: React.FC<ContentProps> = ({
     }
   }, [selectedDate, selectedPlace]);
 
-  if ((type === 'booth' && !boothsByDatePlace) || (type === 'foodTruck' && !foodTruckList)) {
-    return <LoadingPage />;
-  }
-
   return (
     <Wrapper>
       <TitleContainer>
@@ -121,7 +117,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 12px;
   //padding: 12px 0px;
-  height: 100vh;
 `;
 const TitleContainer = styled.div`
   display: flex;
