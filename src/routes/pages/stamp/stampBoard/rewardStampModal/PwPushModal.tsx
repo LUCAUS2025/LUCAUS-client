@@ -92,7 +92,7 @@ const PwPushModal = ({ setOpenRewardPwModal, selectedDate, isRewarded, setStampD
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>축제기획단 부스</Title>
+        <Title>상품 부스</Title>
         <SubTitle>상품 응모를 위해 축기단에게 화면을 보여주세요.</SubTitle>
       </TitleWrapper>
       <StyledInput
