@@ -79,7 +79,7 @@ const Button = styled.button`
   //max-width: 200px;
   min-height: 48px;
   height: 48px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   background-color: #f9fafb;
   border: 1px solid #1447e6;
