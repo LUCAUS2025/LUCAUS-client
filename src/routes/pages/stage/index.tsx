@@ -92,10 +92,10 @@ export const Stage = () => {
             <Subtitle>숨겨진 보컬 천재들의 뜨거운 경연을 만나보세요.</Subtitle>
             <Thumbnail
               artistImages={[
-                '/images/home/stage/dragon/노을.webp',
-                '/images/home/stage/dragon/밤.webp',
                 '/images/home/stage/dragon/새벽.webp',
                 '/images/home/stage/dragon/아침.webp',
+                '/images/home/stage/dragon/노을.webp',
+                '/images/home/stage/dragon/밤.webp',
               ]}
             />
           </div>
