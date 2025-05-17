@@ -108,7 +108,7 @@ const largeSizeStyle = css`
   top: 29%;
 
   ${mediaSmall`
-    top: 27%;
+    top: 33%;
   `}
 
   ${mediaBig`
@@ -116,7 +116,7 @@ const largeSizeStyle = css`
   `}
 
   ${mediaMediumPad`
-    top: 29%;
+    top: 28%;
   `}
 
   ${mediaLargePad`

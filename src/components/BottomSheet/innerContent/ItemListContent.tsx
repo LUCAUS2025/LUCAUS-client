@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BoothItem, BoothOrFoodTruckItem, FoodTruckItem } from '../../../data/boothFood';
 import { keywordBaseStyle } from '../../../styles/keyword';
@@ -28,6 +28,8 @@ export const ItemListContent: React.FC<ContentProps> = ({
   const foodTruckList = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
   const [boothsByDatePlace, setBoothsByDatePlace] = useState<BoothItem[]>();
   const [selectedDate, setSelectedDate] = useState<number>(19);
+  const listContentRef = useRef<HTMLDivElement>(null);
+  const sheetHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
   //const [foodTruckByDatePlace, setFoodTruckByDatePlace] = useState<FoodTruckItem[]>();
 
   useEffect(() => {
@@ -43,6 +45,12 @@ export const ItemListContent: React.FC<ContentProps> = ({
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (listContentRef.current) {
+      listContentRef.current.scrollTop = 0;
+    }
+  }, [selectedDate, selectedPlace]);
+
   return (
     <Wrapper>
       <TitleContainer>
@@ -51,7 +59,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
       </TitleContainer>
       {/* 부스 리스트 */}
       {boothsByDatePlace && boothsByDatePlace.length > 0 && type === 'booth' && (
-        <List>
+        <List ref={listContentRef} $sheetHeight={sheetHeight}>
           {boothsByDatePlace?.map((item) => (
             <Item key={`${item.type}-${selectedDate}-item.dayBoothNum`} onClick={() => setSelectedItem!(item)}>
               <ItemContent>
@@ -80,7 +88,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
       )}
       {/* 푸드트럭 리스트 */}
       {foodTruckList && type === 'foodTruck' && (
-        <List>
+        <List $sheetHeight={sheetHeight}>
           {foodTruckList?.map((item) => (
             <Item
               key={item.dayBoothNum}
@@ -116,6 +124,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 12px;
   //padding: 12px 0px;
+  height: 100vh;
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -134,7 +143,7 @@ const Description = styled.div`
   font-weight: 400;
   color: #6a7282;
 `;
-const List = styled.div`
+const List = styled.div<{ $sheetHeight: number }>`
   display: flex;
   flex-direction: column;
   //padding-bottom: 20vh;
