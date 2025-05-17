@@ -139,6 +139,8 @@ export const Banner = () => {
             >
               <Image src={images[currentIndex]} alt="Instagram" style={{ cursor: 'pointer', width: '100%' }} />
             </a>
+          ) : currentIndex === 4 ? (
+            <Image onClick={() => navigate('/stamp/auth?tab=stamp')} src={images[currentIndex]} alt="Dress Code" />
           ) : (
             <Image src={images[currentIndex]} alt="Dress Code" />
           )}
