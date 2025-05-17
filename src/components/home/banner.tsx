@@ -15,11 +15,8 @@ export const Banner = () => {
     '/images/home/banner/1.webp',
     '/images/home/banner/2.webp',
     '/images/home/banner/3.webp',
-    '/images/home/banner/1.webp',
-    '/images/home/banner/2.webp',
-    '/images/home/banner/3.webp',
-    '/images/home/banner/1.webp',
-    '/images/home/banner/2.webp',
+    '/images/home/banner/4.webp',
+    '/images/home/banner/5.webp',
   ];
 
   const startAutoSlide = () => {
