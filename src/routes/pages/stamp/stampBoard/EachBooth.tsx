@@ -23,15 +23,7 @@ const EachBooth = ({ isCleared, index, onClick, boothName, customPadding, childN
   const cleared = isCleared[realIndex];
 
   let title;
-  if (boothName == '난파선 수리 대작전') {
-    title = (
-      <>
-        <span>난파선 수리</span>
-        <br />
-        <span>대작전</span>
-      </>
-    );
-  } else if (boothName == '금은보화를 얻어라!') {
+  if (boothName == '금은보화를 얻어라!') {
     title = (
       <>
         <span>금은보화를</span>
