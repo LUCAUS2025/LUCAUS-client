@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
+import { Margin } from '../home/thumbnail';
 
 export const ArtistScroll = styled.div`
   display: flex;
@@ -255,6 +256,7 @@ export const LineUp = ({
                 }}
               />
             ))}
+            <Margin />
           </BannerScroll>
         </>
       )}

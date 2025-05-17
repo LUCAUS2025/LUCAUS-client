@@ -99,17 +99,6 @@ const Arrow = styled.img`
   height: 24px;
 `;
 
-const images = [
-  '/images/home/banner/1.webp',
-  '/images/home/banner/2.webp',
-  '/images/home/banner/3.webp',
-  '/images/home/banner/1.webp',
-  '/images/home/banner/2.webp',
-  '/images/home/banner/3.webp',
-  '/images/home/banner/1.webp',
-  '/images/home/banner/2.webp',
-];
-
 // 스타일 정의
 const CarouselContainer = styled.div`
   margin: 0 -16px;
