@@ -123,7 +123,7 @@ export const Banner = () => {
             <Image onClick={() => navigate('/entry')} src={images[currentIndex]} alt="Dress Code" />
           ) : currentIndex === 2 ? (
             <a
-              href="https://www.instagram.com/p/DJn0LFbBZjP/?igsh=OGlhaWwzbGxidzAx&img_index=1"
+              href="https://www.instagram.com/p/DJn0LFbBZjP/?igsh=OGlhaWwzbGxidzAx"
               target="_blank"
               rel="noopener noreferrer"
               style={{ width: '90%' }}
@@ -132,7 +132,7 @@ export const Banner = () => {
             </a>
           ) : currentIndex === 3 ? (
             <a
-              href="https://www.instagram.com/p/DJl4W3dhf0R/?igsh=OXV4YnB1OHQ1ejJj&img_index=1"
+              href="https://www.instagram.com/p/DJl4W3dhf0R/?igsh=dTdvM2ZleHNhazBw"
               target="_blank"
               rel="noopener noreferrer"
               style={{ width: '90%' }}
