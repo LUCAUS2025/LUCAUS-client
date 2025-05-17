@@ -43,7 +43,7 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
               <InfoLabel>운영 시간</InfoLabel>
             </LabelContainer>
             <BoothTimeRow>
-              <TimeText>10:00 ~ 17:00</TimeText>
+              <TimeText>10:00 ~ 18:00</TimeText>
             </BoothTimeRow>
           </BoothTimeItem>
         ) : (

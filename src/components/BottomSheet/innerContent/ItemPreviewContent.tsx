@@ -53,7 +53,7 @@ const Wrapper = styled.div`
   -webkit-overflow-scrolling: none;
 
   ${mediaSmall`
-    gap: 9px;
+    gap: 7px;
     padding: 0px 20px;
   `}
 `;
@@ -76,6 +76,10 @@ const Description = styled.div`
   font-size: 12px;
   font-weight: 400;
   color: #6a7282;
+
+  ${mediaSmall`
+    font-size: 11px;
+  `}
 `;
 const ItemKeywords = styled.div`
   display: flex;
@@ -85,6 +89,9 @@ const ItemKeywords = styled.div`
 `;
 const Keyword = styled.div`
   ${keywordBaseStyle}
+  ${mediaSmall`
+    font-size: 11px;
+  `}
 `;
 const ButtonContainer = styled.div`
   margin-top: 8px;
@@ -111,7 +118,7 @@ const DetailButton = styled.div`
   width: 100%;
   ${mediaSmall`
     font-size: 13px;
-    height: 42px;
+    height: 37px;
     order: 2;
   `}
 `;
@@ -129,7 +136,7 @@ const CloseButton = styled.div`
 
   ${mediaSmall`
     font-size: 13px;
-    height: 42px;
+    height: 37px;
     justify-self: flex-start;
   `}
 `;

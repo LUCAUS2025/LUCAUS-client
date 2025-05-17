@@ -9,6 +9,7 @@ export const Box = styled.div`
   align-items: center;
   margin-top: 16px;
   width: 100%;
+  line-height: 1.5;
 `;
 
 export const SectionTitle = styled.h3` ... `;
@@ -31,13 +32,13 @@ const Watching: React.FC = () => {
       {/* <TestMapImage /> */}
       <Description>
         <strong>[본 무대 반입 금지 물품]</strong>
-        <br />- 유리병 등 위험할 수 있는 물품
-        <br />- 모든 종류의 주류
-        <br />- 테이크아웃 잔에 담긴 음료 (페트병 등 개폐 가능한 음료는 가능)
-        <br />- 라면, 배달 음식 등 타인에게 불쾌감을 줄 수 있는 음식
-        <br />- 대포카메라, 사다리, 의자, 셀카봉
-        <br />- 타인의 진로나 시야를 방해할 수 있는 물품
-        <br />- 기타 안전사고의 우려가 있는 물품
+        <br />- 🫙 유리병 등 위험할 수 있는 물품
+        <br />- 🍺 모든 종류의 주류
+        <br />- 🥤 테이크아웃 잔에 담긴 음료 (페트병 등 개폐 가능한 음료는 가능)
+        <br />- 🍜 라면, 배달 음식 등 타인에게 불쾌감을 줄 수 있는 음식
+        <br />- 🎥 대포카메라, 사다리, 의자, 셀카봉
+        <br />- 🔭 타인의 진로나 시야를 방해할 수 있는 물품
+        <br />- ⚠️ 기타 안전사고의 우려가 있는 물품
         <br />
         <br />
         <strong>[기타 유의사항]</strong>

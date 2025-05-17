@@ -71,18 +71,18 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
   //bottom: 0;
 
   ${({ $sheetHeight }) => css`
-    top: calc(100% - ${$sheetHeight * 0.53}px);
-
     ${mediaSmall(`
       top: calc(100% - ${$sheetHeight * 0.47}px);
     `)}
 
+    top: calc(100% - ${$sheetHeight * 0.53}px);
+
     ${mediaBig(`
-      top: calc(100% - ${$sheetHeight * 0.53}px);
+      top: calc(100% - ${$sheetHeight * 0.52}px);
     `)}
 
     ${mediaMediumPad(`
-      top: calc(100% - ${$sheetHeight * 0.42}px);
+      top: calc(100% - ${$sheetHeight * 0.49}px);
     `)}
 
     ${mediaLargePad(`

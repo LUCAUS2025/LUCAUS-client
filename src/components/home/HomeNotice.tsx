@@ -41,13 +41,20 @@ const HomeNotice = () => {
     <NoticeSection>
       <SectionHeader>
         <Title>최근 공지사항</Title>
-        <MoreButton onClick={() => navigate('/notice')}>더보기</MoreButton>
+        <MoreButton
+          onClick={() => {
+            window.scrollTo(0, 0);
+            navigate('/notice');
+          }}
+        >
+          더보기
+        </MoreButton>
       </SectionHeader>
       {notices.slice(0, 2).map((notice, index) => (
         <NoticeCard
           key={index}
           onClick={() => {
-            window.scrollTo(0, 0); // 추가된 부분
+            window.scrollTo(0, 0);
             navigate(`/notice/${notice.id}`);
           }}
         >
