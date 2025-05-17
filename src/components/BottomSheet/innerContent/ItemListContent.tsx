@@ -5,6 +5,7 @@ import { keywordBaseStyle } from '../../../styles/keyword';
 import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
 import { mapLocationToPlaceBooth, Option } from '../../../data/options';
 import { useNavigate } from 'react-router-dom';
+import { LoadingPage } from '../../../routes/pages/LoadingPage';
 
 interface ContentProps {
   theTitle?: string;
@@ -30,7 +31,6 @@ export const ItemListContent: React.FC<ContentProps> = ({
   const [selectedDate, setSelectedDate] = useState<number>(19);
   const listContentRef = useRef<HTMLDivElement>(null);
   const sheetHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
-  //const [foodTruckByDatePlace, setFoodTruckByDatePlace] = useState<FoodTruckItem[]>();
 
   useEffect(() => {
     if (type === 'booth') {
@@ -50,6 +50,10 @@ export const ItemListContent: React.FC<ContentProps> = ({
       listContentRef.current.scrollTop = 0;
     }
   }, [selectedDate, selectedPlace]);
+
+  if ((type === 'booth' && !boothsByDatePlace) || (type === 'foodTruck' && !foodTruckList)) {
+    return <LoadingPage />;
+  }
 
   return (
     <Wrapper>
@@ -83,9 +87,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
           <VoidSpace />
         </List>
       )}
-      {(!boothsByDatePlace || boothsByDatePlace?.length === 0) && type === 'booth' && (
-        <Info>운영중인 부스가 없습니다.</Info>
-      )}
+      {boothsByDatePlace?.length === 0 && type === 'booth' && <Info>운영중인 부스가 없습니다.</Info>}
       {/* 푸드트럭 리스트 */}
       {foodTruckList && type === 'foodTruck' && (
         <List $sheetHeight={sheetHeight}>
@@ -109,9 +111,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
           ))}
         </List>
       )}
-      {(!foodTruckList || foodTruckList?.length === 0) && type === 'foodTruck' && (
-        <Info>운영중인 푸드트럭이 없습니다.</Info>
-      )}
+      {foodTruckList?.length === 0 && type === 'foodTruck' && <Info>운영중인 푸드트럭이 없습니다.</Info>}
     </Wrapper>
   );
 };
