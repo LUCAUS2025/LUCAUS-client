@@ -36,7 +36,7 @@ export const Information = () => {
           <InfoBox onClick={() => navigate('/notice')}>
             <InfoTitleImg src="images/information/idea.webp" />
             <InfoTitleCol>
-              <InfoBoxTitle>총학생회 공지</InfoBoxTitle>
+              <InfoBoxTitle>축제기획단 공지</InfoBoxTitle>
               <InfoBoxDescription>{recentNotice}</InfoBoxDescription>
             </InfoTitleCol>
           </InfoBox>
