@@ -46,7 +46,7 @@ const NoticeDetail = () => {
             <ItemName>{notice.title ?? '제목 없음'}</ItemName>
             <Line>
               <Tag>{notice.category}</Tag>
-              <ItemDate>등록 일시 | {formatDateForNotice(notice.uploadDateTime)}</ItemDate>
+              <ItemDate>등록 일자 | {formatDateForNotice(notice.uploadDateTime)}</ItemDate>
             </Line>
           </ItemInfo>
         </Item>
