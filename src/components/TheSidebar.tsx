@@ -115,6 +115,7 @@ const MenuItem = styled.a`
   font-size: 16px;
   color: #333;
   text-decoration: none;
+  width: 248px;
   padding: 8px 16px;
   transition:
     font-size 0.3s ease,
