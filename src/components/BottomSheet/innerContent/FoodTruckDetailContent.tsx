@@ -55,6 +55,8 @@ export const FoodTruckDetailContent: React.FC<FoodTruckDetailContentProps> = ({
             selectedDate={selectedDate}
             location={foodTruckDetail.location}
             opDateList={foodTruckDetail?.opDateList}
+            opTimeStart={1000}
+            opTimeEnd={1800}
           />
         </OperatingContainer>
         <DetailReview type={'foodTruck'} onOpenReview={openReviewSheet} reviewData={foodTruckDetail.foodTruckReviews} />
