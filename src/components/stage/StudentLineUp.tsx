@@ -158,7 +158,7 @@ interface LineUpProps {
   onInternalScrollTrigger?: () => void; // ✅ 추가
 }
 
-export const LineUp = ({
+export const StudentLineUp = ({
   artists,
   artistImages,
   bannerImages,
@@ -203,7 +203,11 @@ export const LineUp = ({
     onInternalScrollTrigger?.();
     const el = scrollRef.current?.querySelector(`[data-index='${index}']`);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest', // Y축 이동 억제
+        inline: 'start', // X축 이동은 유지
+      });
       setSelected(index);
     }
   };
@@ -268,3 +272,5 @@ export const LineUp = ({
     </>
   );
 };
+
+export default StudentLineUp;
