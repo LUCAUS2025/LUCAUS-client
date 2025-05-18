@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Thumbnail } from '../../../components/home/thumbnail';
 import { LineUp } from '../../../components/stage/lineUp';
 import { useNavigate } from 'react-router-dom';
@@ -15,15 +15,16 @@ const customDateOptions: Option[] = stagedateOptions.map((date) => ({
 }));
 
 const stageOptionsByDate: { [key: string]: string[] } = {
-  '21일': ['무대기획전', '아티스트'],
-  '22일': ['청룡가요제', '학생무대', '아티스트'],
-  '23일': ['응원한마당', '학생무대', '아티스트'],
+  '21일': ['무대기획전', '아티스트-21일'],
+  '22일': ['청룡가요제', '학생무대', '아티스트-22일'],
+  '23일': ['응원한마당', '학생무대', '아티스트-23일'],
 };
 
 export const Stage = () => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Option>(customDateOptions[0]);
   const [selectedStage, setSelectedStage] = useState(stageOptionsByDate[customDateOptions[0].value][0]);
+  const disableObserverRef = useRef(false); // 👈 observer 감지 중단 flag
 
   const availableStages = stageOptionsByDate[selectedDate.value] || [];
 
@@ -33,13 +34,19 @@ export const Stage = () => {
   }, [selectedDate]);
 
   const handleStageSelect = (option: string) => {
+    disableObserverRef.current = true; // 감지 일시 중단
     setSelectedStage(option);
+
     setTimeout(() => {
-      const target = document.getElementById(option);
+      const target = document.querySelector(`[data-stage="${option}"]`);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-    }, 100);
+    }, 50);
+
+    setTimeout(() => {
+      disableObserverRef.current = false; // 감지 재활성화
+    }, 500);
   };
 
   const isSelectedDate = (date: string) => selectedDate.value === date;
@@ -47,6 +54,8 @@ export const Stage = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (disableObserverRef.current) return;
+
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
@@ -54,6 +63,8 @@ export const Stage = () => {
         if (visible.length > 0) {
           const topVisible = visible[0].target as HTMLElement;
           const stage = topVisible.dataset.stage;
+
+          // stage는 정확히 availableStages에 포함된 값만 허용
           if (stage && availableStages.includes(stage)) {
             setSelectedStage(stage);
           }
@@ -62,7 +73,7 @@ export const Stage = () => {
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.3, // 30% 이상 보이면 인식
+        threshold: 0.3,
       },
     );
 
@@ -70,10 +81,11 @@ export const Stage = () => {
       .map((stage) => document.querySelector(`[data-stage="${stage}"]`))
       .filter(Boolean) as HTMLElement[];
 
+    // 옵저버는 학생무대, 아티스트 등 상위 블록만 감지
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [selectedDate]);
+  }, [selectedDate, availableStages]);
 
   return (
     <>
@@ -87,7 +99,7 @@ export const Stage = () => {
         <OptionItemContainer style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
           {availableStages.map((option) => (
             <OptionItem key={option} selected={selectedStage === option} onClick={() => handleStageSelect(option)}>
-              {option}
+              {option.replace(/-.*$/, '')}
             </OptionItem>
           ))}
         </OptionItemContainer>
@@ -101,6 +113,18 @@ export const Stage = () => {
           alt="티켓 안내"
         />
 
+        {isSelectedDate('21일') && (
+          <div id="무대기획전" data-stage="무대기획전">
+            <Title>무대기획전</Title>
+            <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
+            <img
+              src="/images/home/stage/muki/21.webp"
+              alt="무대기획전 포스터"
+              style={{ width: '100%', borderRadius: '12px' }}
+            />
+          </div>
+        )}
+
         {isSelectedDate('22일') && (
           <div id="청룡가요제" data-stage="청룡가요제">
             <Title>청룡가요제</Title>
@@ -112,18 +136,6 @@ export const Stage = () => {
                 '/images/home/stage/dragon/노을.webp',
                 '/images/home/stage/dragon/밤.webp',
               ]}
-            />
-          </div>
-        )}
-
-        {isSelectedDate('21일') && (
-          <div id="무대기획전" data-stage="무대기획전">
-            <Title>무대기획전</Title>
-            <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
-            <img
-              src="/images/home/stage/muki/21.webp"
-              alt="무대기획전 포스터"
-              style={{ width: '100%', borderRadius: '12px' }}
             />
           </div>
         )}
@@ -191,7 +203,7 @@ export const Stage = () => {
         )}
 
         {selectedDate.value === '21일' && (
-          <div id="아티스트" data-stage="아티스트">
+          <div id="아티스트" data-stage="아티스트-21일">
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
@@ -216,7 +228,7 @@ export const Stage = () => {
           </div>
         )}
         {selectedDate.value === '22일' && (
-          <div id="아티스트" data-stage="아티스트">
+          <div id="아티스트" data-stage="아티스트-22일">
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
@@ -244,7 +256,7 @@ export const Stage = () => {
           </div>
         )}
         {selectedDate.value === '23일' && (
-          <div id="아티스트" data-stage="아티스트">
+          <div id="아티스트" data-stage="아티스트-23일">
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp

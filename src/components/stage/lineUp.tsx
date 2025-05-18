@@ -123,18 +123,18 @@ const TableHeader = styled.div`
 
 const TableRow = styled.div`
   display: flex;
-  align-items: center; // 수직 정렬 추가
+  align-items: center;
   justify-content: center;
   padding: 0.75rem 0;
   font-size: 1rem;
-  line-height: 1.4; // 줄 간격 약간 조정
+  line-height: 1.4;
   > div {
     flex: 1;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; // 여러 줄 텍스트를 위아래로 정렬
+    flex-direction: column;
   }
 `;
 
@@ -155,6 +155,7 @@ interface LineUpProps {
   times?: string[];
   categories?: string[];
   instagram?: string[];
+  onInternalScrollTrigger?: () => void; // ✅ 추가
 }
 
 export const LineUp = ({
@@ -165,9 +166,11 @@ export const LineUp = ({
   times,
   categories,
   instagram,
+  onInternalScrollTrigger,
 }: LineUpProps) => {
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -183,13 +186,13 @@ export const LineUp = ({
         }
       },
       {
-        root: document.querySelector('#banner-scroll'),
+        root: scrollRef.current,
         threshold: 0.6,
       },
     );
 
     bannerImages.forEach((_, i) => {
-      const el = document.querySelector(`[data-index='${i}']`);
+      const el = scrollRef.current?.querySelector(`[data-index='${i}']`);
       if (el) observer.observe(el);
     });
 
@@ -197,7 +200,8 @@ export const LineUp = ({
   }, [bannerImages]);
 
   const scrollTo = (index: number) => {
-    const el = document.querySelector(`[data-index='${index}']`);
+    onInternalScrollTrigger?.(); // ✅ 외부 스크롤 감지 비활성화
+    const el = scrollRef.current?.querySelector(`[data-index='${index}']`);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', inline: 'start' });
       setSelected(index);
@@ -236,7 +240,7 @@ export const LineUp = ({
             ))}
           </ArtistScroll>
 
-          <BannerScroll id="banner-scroll">
+          <BannerScroll ref={scrollRef}>
             {bannerImages.map((src, index) => (
               <BannerImage
                 key={index}
@@ -264,5 +268,3 @@ export const LineUp = ({
     </>
   );
 };
-
-export default LineUp;
