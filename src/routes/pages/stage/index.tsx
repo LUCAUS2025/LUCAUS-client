@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Thumbnail } from '../../../components/home/thumbnail';
 import { LineUp } from '../../../components/stage/lineUp';
 import { useNavigate } from 'react-router-dom';
@@ -25,12 +25,6 @@ export const Stage = () => {
   const [selectedDate, setSelectedDate] = useState<Option>(customDateOptions[0]);
   const [selectedStage, setSelectedStage] = useState(stageOptionsByDate[customDateOptions[0].value][0]);
 
-  const yongRef = useRef<HTMLDivElement>(null);
-  const cheeringRef = useRef<HTMLDivElement>(null);
-  const mainStageRef = useRef<HTMLDivElement>(null);
-  const artistRef = useRef<HTMLDivElement>(null);
-  const mukiRef = useRef<HTMLDivElement>(null);
-
   const availableStages = stageOptionsByDate[selectedDate.value] || [];
 
   useEffect(() => {
@@ -40,25 +34,46 @@ export const Stage = () => {
 
   const handleStageSelect = (option: string) => {
     setSelectedStage(option);
-    const sectionRefs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
-      청룡가요제: yongRef,
-      응원한마당: cheeringRef,
-      학생무대: mainStageRef,
-      아티스트: artistRef,
-      무대기획전: mukiRef,
-    };
-
-    const targetRef = sectionRefs[option];
-    if (targetRef?.current) {
-      const offsetTop = targetRef.current.offsetTop;
-      window.scrollTo({
-        top: offsetTop - 180,
-        behavior: 'smooth',
-      });
-    }
+    setTimeout(() => {
+      const target = document.getElementById(option);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
   };
 
   const isSelectedDate = (date: string) => selectedDate.value === date;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          const topVisible = visible[0].target as HTMLElement;
+          const stage = topVisible.dataset.stage;
+          if (stage && availableStages.includes(stage)) {
+            setSelectedStage(stage);
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3, // 30% 이상 보이면 인식
+      },
+    );
+
+    const elements = availableStages
+      .map((stage) => document.querySelector(`[data-stage="${stage}"]`))
+      .filter(Boolean) as HTMLElement[];
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [selectedDate]);
 
   return (
     <>
@@ -82,12 +97,12 @@ export const Stage = () => {
         <img
           src="/images/home/stage/ticket.webp"
           onClick={() => navigate('/guide/ticketing')}
-          style={{ width: '100%', cursor: 'pointer', marginBottom: '50px' }}
+          style={{ width: '100%', cursor: 'pointer' }}
           alt="티켓 안내"
         />
 
         {isSelectedDate('22일') && (
-          <div ref={yongRef} style={{ marginTop: '-60px' }}>
+          <div id="청룡가요제" data-stage="청룡가요제">
             <Title>청룡가요제</Title>
             <Subtitle>숨겨진 보컬 천재들의 뜨거운 경연을 만나보세요.</Subtitle>
             <Thumbnail
@@ -101,9 +116,8 @@ export const Stage = () => {
           </div>
         )}
 
-        {/* 무대기획전 */}
         {isSelectedDate('21일') && (
-          <div ref={mukiRef} style={{ marginTop: '-60px' }}>
+          <div id="무대기획전" data-stage="무대기획전">
             <Title>무대기획전</Title>
             <Subtitle>축제 기획단에서 야심차게 준비했다!</Subtitle>
             <img
@@ -114,9 +128,8 @@ export const Stage = () => {
           </div>
         )}
 
-        {/* 응원제 */}
         {isSelectedDate('23일') && (
-          <div ref={cheeringRef} style={{ marginTop: '-60px' }}>
+          <div id="응원한마당" data-stage="응원한마당">
             <Title>응원한마당</Title>
             <Subtitle>Hurrah-C의 뜨거운 응원과 하나 되는 함성!</Subtitle>
             <img
@@ -127,9 +140,8 @@ export const Stage = () => {
           </div>
         )}
 
-        {/* 본무대 */}
         {isSelectedDate('22일') && (
-          <div ref={mainStageRef}>
+          <div id="학생무대" data-stage="학생무대">
             <Title>학생무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
             <LineUp
@@ -150,9 +162,9 @@ export const Stage = () => {
             />
           </div>
         )}
-        {/* 본무대 */}
+
         {isSelectedDate('23일') && (
-          <div ref={mainStageRef}>
+          <div id="학생무대" data-stage="학생무대">
             <Title>학생무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
             <LineUp
@@ -178,9 +190,8 @@ export const Stage = () => {
           </div>
         )}
 
-        {/* 아티스트 */}
-        {isSelectedDate('21일') && (
-          <div ref={artistRef}>
+        {selectedDate.value === '21일' && (
+          <div id="아티스트" data-stage="아티스트">
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
@@ -204,8 +215,8 @@ export const Stage = () => {
             />
           </div>
         )}
-        {isSelectedDate('22일') && (
-          <div ref={artistRef}>
+        {selectedDate.value === '22일' && (
+          <div id="아티스트" data-stage="아티스트">
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
@@ -232,8 +243,8 @@ export const Stage = () => {
             />
           </div>
         )}
-        {isSelectedDate('23일') && (
-          <div ref={artistRef}>
+        {selectedDate.value === '23일' && (
+          <div id="아티스트" data-stage="아티스트">
             <Title>아티스트 라인업</Title>
             <Subtitle>올해 축제를 빛낼 아티스트를 지금 바로 확인해보세요.</Subtitle>
             <LineUp
@@ -321,7 +332,5 @@ const Container = styled.div`
   padding: 64px 16px 30px 16px;
   display: flex;
   flex-direction: column;
-  align-items: justify-content;
-  min-height: 63vh;
   gap: 60px;
 `;

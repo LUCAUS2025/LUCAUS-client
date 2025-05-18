@@ -4,7 +4,7 @@ import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDateForNotice } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 import { itemsOptions, lostdateOptions, Option } from '../../../data/options';
-import { LoadingPage } from '../LoadingPage';
+import { r } from 'framer-motion/dist/types.d-CtuPurYT';
 
 interface LostItemProps {
   category: string;
@@ -47,7 +47,7 @@ const LostItem = () => {
         page,
         size: 10,
       });
-
+      // console.log(res);
       const items = res.result.content.map((item) => ({
         category: item.category,
         name: item.name,
@@ -71,6 +71,12 @@ const LostItem = () => {
     }
   };
 
+  // 초기 로드
+  useEffect(() => {
+    fetchLostItems();
+    // console.log('초기 로드');
+  }, [selectDate, selectItem]);
+
   // 필터 변경 시 초기화
   useEffect(() => {
     setPage(1);
@@ -78,15 +84,11 @@ const LostItem = () => {
     setLostItems([]);
   }, [selectDate, selectItem]);
 
-  // 초기 로드
-  useEffect(() => {
-    fetchLostItems();
-  }, [selectDate, selectItem]);
-
   // 무한 스크롤 감지
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + document.documentElement.scrollTop + 100 >= document.documentElement.offsetHeight) {
+        // console.log('스크롤 끝');
         fetchLostItems();
       }
     };
@@ -120,7 +122,7 @@ const LostItem = () => {
       </DropDowns>
       <ItemList>
         {isLoading ? (
-          <LoadingPage />
+          <div>로딩중 ...</div>
         ) : lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
             <Item key={idx}>
