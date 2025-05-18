@@ -66,6 +66,8 @@ export const BoothDetailContent: React.FC<BoothDetailContentProps> = ({
             selectedDate={selectedDate}
             location={boothDetail?.location}
             opDateList={boothDetail?.opDateList}
+            opTimeStart={boothDetail?.opTimeStart}
+            opTimeEnd={boothDetail?.opTimeEnd}
           />
         </OperatingContainer>
         <DetailReview type={'booth'} onOpenReview={openReviewSheet} reviewData={boothDetail.boothReview} />
