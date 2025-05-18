@@ -31,7 +31,7 @@ const TheSidebar = () => {
           <ItemContainer>
             <MenuHeading>공연</MenuHeading>
             <MenuItem href="/stage">오늘의 공연</MenuItem>
-            <MenuItem href="/guide/ticketing">공연 티켓팅 안내</MenuItem>
+            <MenuItem href="/guide/ticketing">공연 입장 정책 안내</MenuItem>
             <MenuItem href="/guide/watching">관람 가이드</MenuItem>
           </ItemContainer>
           <ItemContainer>
@@ -50,7 +50,7 @@ const TheSidebar = () => {
             <MenuHeading>정보</MenuHeading>
             <MenuItem href="/lostitem">분실물 안내</MenuItem>
             <MenuItem href="/barrierfree">배리어프리</MenuItem>
-            <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
+            <MenuItem href="/entry">통행 정책</MenuItem>
             <MenuItem href="/notice">축제기획단 공지사항</MenuItem>
           </ItemContainer>
         </MenuDom>
