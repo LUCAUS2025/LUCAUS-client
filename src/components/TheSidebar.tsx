@@ -51,7 +51,7 @@ const TheSidebar = () => {
             <MenuItem href="/lostitem">분실물 안내</MenuItem>
             <MenuItem href="/barrierfree">배리어프리</MenuItem>
             <MenuItem href="/entry">입장 정책 및 이동 동선</MenuItem>
-            <MenuItem href="/notice">총학생회 공지사항</MenuItem>
+            <MenuItem href="/notice">축제기획단 공지사항</MenuItem>
           </ItemContainer>
         </MenuDom>
       </SidebarContainer>
