@@ -9,6 +9,8 @@ interface DetailOperatingInfoProps {
   selectedDate: number;
   location: string;
   opDateList: number[];
+  opTimeStart: number;
+  opTimeEnd: number;
 }
 
 export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
@@ -16,7 +18,13 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
   selectedDate,
   location,
   opDateList,
+  opTimeStart,
+  opTimeEnd,
 }) => {
+  const opTimeStartT = String(Math.floor(opTimeStart / 100)).padStart(2, '0');
+  const opTimeStartM = String(opTimeStart % 100).padStart(2, '0');
+  const opTimeEndT = String(Math.floor(opTimeEnd / 100)).padStart(2, '0');
+  const opTimeEndM = String(opTimeEnd % 100).padStart(2, '0');
   return (
     <Wrapper>
       <InfoContainer>
@@ -43,7 +51,9 @@ export const DetailOperatingInfo: React.FC<DetailOperatingInfoProps> = ({
               <InfoLabel>운영 시간</InfoLabel>
             </LabelContainer>
             <BoothTimeRow>
-              <TimeText>10:00 ~ 18:00</TimeText>
+              <TimeText>
+                {opTimeStartT}:{opTimeStartM} ~ {opTimeEndT}:{opTimeEndM}
+              </TimeText>
             </BoothTimeRow>
           </BoothTimeItem>
         ) : (
