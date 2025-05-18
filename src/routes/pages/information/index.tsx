@@ -71,7 +71,7 @@ export const Information = () => {
             </InfoBox>
           </BoxContainer>
           <BoxContainer>
-            <Subtitle>축제 사이트에 오류가 있어요!</Subtitle>
+            <Subtitle>축제 사이트에 궁금한 점이 있어요!</Subtitle>
             <InfoBox onClick={() => window.open(LIKELION_TEAM_URL, '_blank')}>
               <InfoBoxImg src="images/information/idea.webp"></InfoBoxImg>
               <InfoBoxText>멋쟁이사자처럼 중앙대학교 카카오톡 채널 바로가기</InfoBoxText>
