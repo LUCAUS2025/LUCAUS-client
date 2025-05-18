@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { Title } from '../../routes/pages/stage';
 import { useNavigate } from 'react-router-dom';
-import { getNotices } from '../../services/apis/notice';
+
 import { useEffect, useState } from 'react';
 import { formatDateNoTime } from '../common/formatData';
+import { getTwoRecentNotice } from '../../services/apis/notice';
 
 interface Notice {
   id: number;
@@ -19,9 +20,9 @@ const HomeNotice = () => {
   const [notices, setNotices] = useState<Notice[]>([]);
 
   const getNotice = () => {
-    getNotices()
+    getTwoRecentNotice()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         if (res.result && res.result.content && res.result.content.length > 0) {
           setNotices(res.result.content);
         } else {

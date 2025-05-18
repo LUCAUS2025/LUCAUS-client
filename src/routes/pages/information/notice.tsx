@@ -2,9 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Item, ItemDate, ItemDetail, ItemInfo, ItemName, Line, Tag } from './lostitem';
 import { useEffect, useState } from 'react';
-import { getNotices } from '../../../services/apis/notice';
 import { formatDateForNotice } from '../../../components/common/formatData';
-import { LoadingPage } from '../LoadingPage';
+import { getNotices } from '../../../services/apis/notice';
 
 interface Notice {
   id: number;
@@ -18,51 +17,63 @@ interface Notice {
 const Notice = () => {
   const navigate = useNavigate();
   const [notices, setNotices] = useState<Notice[]>([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    getNotices()
-      .then((res) => {
-        if (res.result?.content?.length > 0) {
-          setNotices(res.result.content);
-        } else {
-          setNotices([]);
-        }
-        // console.log(res.result);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const fetchNotices = async () => {
+    if (isLoading || !hasMore) return;
+    setIsLoading(true);
 
-  const handleItemClick = (id: number) => {
-    window.scrollTo(0, 0); // 스크롤을 맨 위로 이동
-    navigate(`/notice/${id}`);
+    try {
+      const res = await getNotices({ page, size: 10 });
+
+      const newNotices = res.result?.content || [];
+
+      setNotices((prev) => [...prev, ...newNotices]);
+
+      if (newNotices.length < 10) {
+        setHasMore(false);
+      } else {
+        setPage((prev) => prev + 1);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  if (!notices || notices.length === 0) {
-    return <LoadingPage />;
-  }
+  useEffect(() => {
+    fetchNotices();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop + 100 >= document.documentElement.offsetHeight) {
+        fetchNotices();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [page, hasMore, isLoading]);
+
+  const handleItemClick = (id: number) => {
+    window.scrollTo(0, 0);
+    navigate(`/notice/${id}`);
+  };
 
   return (
     <div>
       {notices.map((item) => {
         const uploadDate = new Date(item.uploadDateTime);
         const now = new Date();
-
-        // 오늘 날짜
-        const isToday =
-          uploadDate.getFullYear() === now.getFullYear() &&
-          uploadDate.getMonth() === now.getMonth() &&
-          uploadDate.getDate() === now.getDate();
-
-        // 어제 날짜
         const yesterday = new Date(now);
         yesterday.setDate(now.getDate() - 1);
-        const isYesterday =
-          uploadDate.getFullYear() === yesterday.getFullYear() &&
-          uploadDate.getMonth() === yesterday.getMonth() &&
-          uploadDate.getDate() === yesterday.getDate();
 
+        const isToday = uploadDate.toDateString() === now.toDateString();
+        const isYesterday = uploadDate.toDateString() === yesterday.toDateString();
         const isRecent = isToday || isYesterday;
 
         return (
@@ -81,12 +92,15 @@ const Notice = () => {
           </ClickableItem>
         );
       })}
+      {isLoading && <div>로딩 중...</div>}
+      {!hasMore && notices.length > 0 && <EndMessage>더 이상 공지사항이 없습니다.</EndMessage>}
     </div>
   );
 };
 
 export default Notice;
 
+// Styled Components
 const ClickableItem = styled(Item)`
   position: relative;
   cursor: pointer;
@@ -114,4 +128,11 @@ const RedDot = styled.span`
 const ItemNameRow = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const EndMessage = styled.div`
+  text-align: center;
+  padding: 24px;
+  color: #6b7280;
+  font-size: 14px;
 `;
