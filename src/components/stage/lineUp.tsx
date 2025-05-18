@@ -200,7 +200,7 @@ export const LineUp = ({
   }, [bannerImages]);
 
   const scrollTo = (index: number) => {
-    onInternalScrollTrigger?.(); // ✅ 외부 스크롤 감지 비활성화
+    onInternalScrollTrigger?.();
     const el = scrollRef.current?.querySelector(`[data-index='${index}']`);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', inline: 'start' });
