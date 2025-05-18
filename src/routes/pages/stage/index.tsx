@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { DateDropDown } from '../../../components/common/DropDown/DateDropDown';
 import { Option } from '../../../data/options';
 import Footer from '../../../components/home/Footer';
+import StudentLineUp from '../../../components/stage/StudentLineUp';
 
 const stagedateOptions = ['21일', '22일', '23일'];
 
@@ -156,7 +157,7 @@ export const Stage = () => {
           <div id="학생무대" data-stage="학생무대">
             <Title>학생무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
-            <LineUp
+            <StudentLineUp
               artists={['페어로근', 'Dance P.O.zz', '01OB']}
               artistImages={[
                 'images/home/stage/main-artist/1.webp',
@@ -179,7 +180,7 @@ export const Stage = () => {
           <div id="학생무대" data-stage="학생무대">
             <Title>학생무대 라인업</Title>
             <Subtitle>이곳에서만 볼 수 있는 특별한 무대! 함께 즐겨요.</Subtitle>
-            <LineUp
+            <StudentLineUp
               artists={['Movement', '김승재와\n흑백 건반들', '블루드래곤', 'A.M.P', '손니버스']}
               artistImages={[
                 'images/home/stage/main-artist/4.webp',
