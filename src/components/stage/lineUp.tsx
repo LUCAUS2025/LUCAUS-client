@@ -206,7 +206,7 @@ export const LineUp = ({
         <TableWrapper>
           <TableHeader>
             <div>시간</div>
-            <div>카테고리</div>
+            <div>장르</div>
             <div>공연팀</div>
           </TableHeader>
           {artists.map((name, i) => (

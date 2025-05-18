@@ -82,7 +82,7 @@ export const Stage = () => {
         <img
           src="/images/home/stage/ticket.webp"
           onClick={() => navigate('/guide/ticketing')}
-          style={{ width: '100%' }}
+          style={{ width: '100%', cursor: 'pointer', marginBottom: '50px' }}
           alt="티켓 안내"
         />
 

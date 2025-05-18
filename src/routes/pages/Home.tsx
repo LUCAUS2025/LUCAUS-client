@@ -80,7 +80,6 @@ export const Home = () => {
         <HomeNotice />
         <Margin />
       </Wrapper16>
-      <Margin />
       <Footer />
     </>
   );
