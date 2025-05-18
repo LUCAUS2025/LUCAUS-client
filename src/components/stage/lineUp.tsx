@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ListOrdered, Image as ImageIcon } from 'lucide-react';
 import { Margin } from '../home/thumbnail';
@@ -64,7 +64,6 @@ export const BannerScroll = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   margin: 0 -16px 0 -16px;
-  // gap: 1rem;
 `;
 
 export const BannerImage = styled.img`
@@ -73,7 +72,7 @@ export const BannerImage = styled.img`
   object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  margin-left: 1rem;
+  padding-left: 1rem;
 
   &:last-child {
     margin-right: 1rem;
@@ -170,34 +169,39 @@ export const LineUp = ({
   const [selected, setSelected] = useState(0);
   const [isListView, setIsListView] = useState(false);
 
-  const bannerContainerRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<(HTMLImageElement | null)[]>([]);
-  const artistContainerRef = useRef<HTMLDivElement>(null);
-  const artistItemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.left - b.boundingClientRect.left);
+        if (visible.length > 0) {
+          const index = Number(visible[0].target.getAttribute('data-index'));
+          if (!isNaN(index)) {
+            setSelected(index);
+          }
+        }
+      },
+      {
+        root: document.querySelector('#banner-scroll'),
+        threshold: 0.6,
+      },
+    );
 
-  const scrollToIndex = (index: number) => {
-    const el = sectionRefs.current[index];
-    if (el) {
-      const parent = bannerContainerRef.current;
-      if (parent) {
-        const left = el.offsetLeft - 16;
-        parent.scrollTo({ left, behavior: 'smooth' });
-      } else {
-        el.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'start',
-          block: 'nearest',
-        });
-      }
-    }
-
-    artistItemRefs.current[index]?.scrollIntoView({
-      behavior: 'smooth',
-      inline: 'start',
-      block: 'nearest',
+    bannerImages.forEach((_, i) => {
+      const el = document.querySelector(`[data-index='${i}']`);
+      if (el) observer.observe(el);
     });
 
-    setSelected(index);
+    return () => observer.disconnect();
+  }, [bannerImages]);
+
+  const scrollTo = (index: number) => {
+    const el = document.querySelector(`[data-index='${index}']`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+      setSelected(index);
+    }
   };
 
   return (
@@ -221,16 +225,9 @@ export const LineUp = ({
         </TableWrapper>
       ) : (
         <>
-          <ArtistScroll ref={artistContainerRef}>
+          <ArtistScroll>
             {artists.map((name, index) => (
-              <ArtistItem
-                key={index}
-                selected={selected === index}
-                onClick={() => scrollToIndex(index)}
-                ref={(el) => {
-                  artistItemRefs.current[index] = el;
-                }}
-              >
+              <ArtistItem key={index} selected={selected === index} onClick={() => scrollTo(index)}>
                 <ArtistImageWrapper selected={selected === index}>
                   <ArtistImage src={artistImages[index]} alt="artist" />
                 </ArtistImageWrapper>
@@ -239,20 +236,16 @@ export const LineUp = ({
             ))}
           </ArtistScroll>
 
-          <BannerScroll ref={bannerContainerRef}>
+          <BannerScroll id="banner-scroll">
             {bannerImages.map((src, index) => (
               <BannerImage
                 key={index}
                 src={src}
+                data-index={index}
                 alt={`배너 ${index + 1}`}
-                ref={(el) => {
-                  sectionRefs.current[index] = el;
-                }}
                 onClick={() => {
                   const link = instagram?.[index];
-                  if (link) {
-                    window.open(link, '_blank');
-                  }
+                  if (link) window.open(link, '_blank');
                 }}
               />
             ))}
