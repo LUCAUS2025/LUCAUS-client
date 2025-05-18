@@ -22,7 +22,7 @@ const HomeNotice = () => {
   const getNotice = () => {
     getTwoRecentNotice()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.result && res.result.content && res.result.content.length > 0) {
           setNotices(res.result.content);
         } else {
