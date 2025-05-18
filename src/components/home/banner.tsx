@@ -121,26 +121,16 @@ export const Banner = () => {
         <CardContent>
           {currentIndex === 0 ? (
             <Image onClick={() => navigate('/entry')} src={images[currentIndex]} alt="Dress Code" />
+          ) : currentIndex === 1 ? (
+            <Image onClick={() => navigate('/notice/772')} src={images[currentIndex]} alt="울림 WEEK" />
           ) : currentIndex === 2 ? (
-            <a
-              href="https://www.instagram.com/p/DJn0LFbBZjP/?igsh=OGlhaWwzbGxidzAx"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ width: '90%' }}
-            >
-              <Image src={images[currentIndex]} alt="Instagram" style={{ cursor: 'pointer', width: '100%' }} />
-            </a>
+            <Image onClick={() => navigate('/notice/770')} src={images[currentIndex]} alt="다회용기" />
           ) : currentIndex === 3 ? (
-            <a
-              href="https://www.instagram.com/p/DJl4W3dhf0R/?igsh=dTdvM2ZleHNhazBw"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ width: '90%' }}
-            >
-              <Image src={images[currentIndex]} alt="Instagram" style={{ cursor: 'pointer', width: '100%' }} />
-            </a>
+            <Image onClick={() => navigate('/notice/771')} src={images[currentIndex]} alt="보조배터리" />
+          ) : currentIndex === 4 ? (
+            <Image onClick={() => navigate('/stamp/auth?tab=stamp')} src={images[currentIndex]} alt="항해일지" />
           ) : (
-            <Image src={images[currentIndex]} alt="Dress Code" />
+            <Image src={images[currentIndex]} alt="배너" />
           )}
 
           <LeftButton onClick={prevSlide}>
