@@ -120,7 +120,7 @@ const LostItem = () => {
       </DropDowns>
       <ItemList>
         {isLoading ? (
-          <LoadingPage />
+          <div>로딩중 ...</div>
         ) : lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
             <Item key={idx}>
