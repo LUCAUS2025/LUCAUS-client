@@ -23,52 +23,84 @@ const EachBooth = ({ isCleared, index, onClick, boothName, customPadding, childN
   const cleared = isCleared[realIndex];
 
   let title;
-  if (boothName == '금은보화를 얻어라!') {
+  if (boothName == '#2 출렁이는 갑판') {
     title = (
       <>
-        <span>금은보화를</span>
+        <span>#2 출렁이는</span>
         <br />
-        <span>얻어라!</span>
+        <span>갑판</span>
       </>
     );
-  } else if (boothName == '누가 맹수 소리를 내었는가') {
+  } else if (boothName == '#5 오늘은 낚시왕') {
     title = (
       <>
-        <span>누가 맹수</span>
+        <span>#5 오늘은</span>
+        <br />
+        <span>낚시왕</span>
+      </>
+    );
+  } else if (boothName == '#7 운명의 해적섬') {
+    title = (
+      <>
+        <span>#7 운명의</span>
+        <br />
+        <span>해적섬</span>
+      </>
+    );
+  } else if (boothName == '#8 누가 맹수 소리를 내었는가') {
+    title = (
+      <>
+        <span>#8 누가 맹수 </span>
         <br />
         <span>소리를 내었는가</span>
       </>
     );
-  } else if (boothName == '바다 위 생존 상황!') {
+  } else if (boothName == '#2 이 거지 같은 콩섬에 버려지다니') {
     title = (
       <>
-        <span>바다 위</span>
+        <span>#2 이 거지 같은</span>
+        <br />
+        <span>콩섬에</span>
+        <br />
+        <span>버려지다니</span>
+      </>
+    );
+  } else if (boothName == '#3 바다 위 생존 상황!') {
+    title = (
+      <>
+        <span>#3 바다 위</span>
         <br />
         <span>생존 상황!</span>
       </>
     );
-  } else if (boothName == '사랑은 돌아오는 거야') {
+  } else if (boothName == '#4 사랑은 돌아오는 거야') {
     title = (
       <>
-        <span>사랑은</span>
+        <span>#4 사랑은</span>
         <br />
         <span>돌아오는 거야</span>
       </>
     );
-  } else if (boothName == '바다 식구를 찾아라!') {
+  } else if (boothName == '#7 오늘은 낚시왕') {
     title = (
       <>
-        <span>바다 식구를</span>
+        <span>#7 오늘은</span>
         <br />
-        <span>찾아라!</span>
+        <span>낚시왕</span>
       </>
     );
-  } else if (boothName == '관찰력 100단 선원으로 살아남기!') {
+  } else if (boothName == '#8 바람 위의 항해') {
     title = (
       <>
-        <span>관찰력 100단</span>
+        <span>#8 바람 위의</span>
         <br />
-        <span>선원으로</span>
+        <span>항해</span>
+      </>
+    );
+  } else if (boothName == '#9 뱃멀미 살아남기!') {
+    title = (
+      <>
+        <span>#9 뱃멀미</span>
         <br />
         <span>살아남기!</span>
       </>
