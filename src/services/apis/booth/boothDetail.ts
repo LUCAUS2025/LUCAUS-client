@@ -13,6 +13,8 @@ export interface BoothDetailRawData {
   boothReview: BoothReviewItem[];
   boothId: number;
   opDateList: number[];
+  opTimeStart: number;
+  opTimeEnd: number;
 }
 
 interface BoothDetail {
