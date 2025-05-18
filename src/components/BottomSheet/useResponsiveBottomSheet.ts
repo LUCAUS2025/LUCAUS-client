@@ -13,7 +13,8 @@ interface BottomSheetDimensions {
     | 'miniTablet' //아이패드 미니
     | 'smallTablet'
     | 'largeTablet'
-    | 'desktop';
+    | 'desktop'
+    | 'largeDesktop';
 }
 
 export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
@@ -39,8 +40,10 @@ export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
       screenSize = 'smallTablet';
     } else if (innerWidth <= 1280) {
       screenSize = 'largeTablet';
-    } else {
+    } else if (innerWidth <= 1310) {
       screenSize = 'desktop';
+    } else {
+      screenSize = 'largeDesktop';
     }
 
     const MIN_Y_MAP: Record<BottomSheetDimensions['screenSize'], number> = {
@@ -53,6 +56,7 @@ export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
       smallTablet: innerHeight * 0.1,
       largeTablet: innerHeight * 0.1,
       desktop: innerHeight * 0.1,
+      largeDesktop: innerHeight * 0.1,
     };
 
     //가장 위로 올라왔을때
@@ -64,8 +68,9 @@ export const useResponsiveBottomSheetHeight = (): BottomSheetDimensions => {
       maxPhone: innerHeight * 0.67,
       miniTablet: innerHeight * 0.67,
       smallTablet: innerHeight * 0.72,
-      largeTablet: innerHeight * 0.77,
-      desktop: innerHeight * 0.78,
+      largeTablet: innerHeight * 0.71,
+      desktop: innerHeight * 0.7,
+      largeDesktop: innerHeight * 0.65,
     };
 
     const MIN_Y = MIN_Y_MAP[screenSize];
