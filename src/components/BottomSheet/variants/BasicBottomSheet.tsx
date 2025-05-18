@@ -11,6 +11,7 @@ import {
   mediaBig,
   mediaLargePad,
   mediaLarggestPad,
+  mediaMedium,
   mediaMediumPad,
   mediaSmall,
 } from '../../../styles/responsive';
@@ -72,10 +73,14 @@ const Wrapper = styled(motion.div)<{ $sheetHeight: number }>`
 
   ${({ $sheetHeight }) => css`
     ${mediaSmall(`
-      top: calc(100% - ${$sheetHeight * 0.47}px);
+      top: calc(100% - ${$sheetHeight * 0.45}px);
     `)}
 
-    top: calc(100% - ${$sheetHeight * 0.53}px);
+    ${mediaMedium(`
+      top: calc(100% - ${$sheetHeight * 0.48}px);
+    `)}
+
+    top: calc(100% - ${$sheetHeight * 0.52}px);
 
     ${mediaBig(`
       top: calc(100% - ${$sheetHeight * 0.52}px);

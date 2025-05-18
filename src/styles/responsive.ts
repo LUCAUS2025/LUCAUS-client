@@ -7,6 +7,12 @@ export const mediaSmall = (styles: TemplateStringsArray | string) => css`
   }
 `;
 
+export const mediaMedium = (styles: TemplateStringsArray | string) => css`
+  @media (max-width: 395px) {
+    ${styles}
+  }
+`;
+
 export const mediaBig = (styles: TemplateStringsArray | string) => css`
   @media (min-width: 410px) {
     ${styles}
