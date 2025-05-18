@@ -186,7 +186,7 @@ export const LineUp = ({
         }
       },
       {
-        root: scrollRef.current,
+        root: null,
         threshold: 0.6,
       },
     );
