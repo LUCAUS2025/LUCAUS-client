@@ -18,16 +18,6 @@ const MapImage = styled.img` ... `;
 const Watching: React.FC = () => {
   return (
     <>
-      <Box>
-        <div>
-          공연 입장 QR 코드
-          <br />
-          이곳에서 바로 확인하세요!
-        </div>
-        <BlackButton onClick={() => window.open('https://festival.cau.ac.kr/index.html', '_blank')}>
-          바로가기
-        </BlackButton>
-      </Box>
       <SectionTitle>공연 관람 시 꼭 지켜주세요</SectionTitle>
       {/* <TestMapImage /> */}
       <Description>
