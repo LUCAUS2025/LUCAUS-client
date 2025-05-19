@@ -4,6 +4,7 @@ import { Item, ItemDate, ItemDetail, ItemInfo, ItemName, Line, Tag } from './los
 import { useEffect, useState } from 'react';
 import { formatDateForNotice } from '../../../components/common/formatData';
 import { getNotices } from '../../../services/apis/notice';
+import { LoadingPage } from '../LoadingPage';
 
 interface Notice {
   id: number;
@@ -92,8 +93,8 @@ const Notice = () => {
           </ClickableItem>
         );
       })}
-      {isLoading && <div>로딩 중...</div>}
-      {!hasMore && notices.length > 0 && <EndMessage>더 이상 공지사항이 없습니다.</EndMessage>}
+      {isLoading && <LoadingPage />}
+      {/* {!hasMore && notices.length > 0 && <EndMessage>더 이상 공지사항이 없습니다.</EndMessage>} */}
     </div>
   );
 };
