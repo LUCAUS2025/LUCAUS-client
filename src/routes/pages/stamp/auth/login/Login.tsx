@@ -99,6 +99,8 @@ const Login = () => {
                   type="password"
                   value={loginData.pw}
                   onChange={(e) => handleInputChange('pw', e.target.value)}
+                  name="fake-password"
+                  autoComplete="new-password"
                 />
                 {isError ? <ErrorLine>아이디 또는 비밀번호가 일치하지 않습니다.</ErrorLine> : <EmptyBox />}
               </InputAndError>

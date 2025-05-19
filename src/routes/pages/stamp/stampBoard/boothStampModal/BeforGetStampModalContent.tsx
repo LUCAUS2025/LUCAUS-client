@@ -104,6 +104,8 @@ const BeforGetStampModalContent = ({
         type="password"
         value={pwData}
         onChange={(e) => handleInputChange(e.target.value)}
+        name="fake-password"
+        autoComplete="new-password"
       ></StyledInput>
       {isWrongPw ? <ErrorLine>비밀번호가 일치하지 않습니다</ErrorLine> : <ErrorLine />}
       <ButtonWrapper>

@@ -163,6 +163,8 @@ const Signup = () => {
                   type="password"
                   value={signupData.pw}
                   onChange={(e) => handleInputChange('pw', e.target.value)}
+                  name="fake-password"
+                  autoComplete="new-password"
                 />
                 {errorState.isPwError ? <ErrorLine>{errorState.pwErrorMessage}</ErrorLine> : <EmptyBox />}
               </InputAndError>
