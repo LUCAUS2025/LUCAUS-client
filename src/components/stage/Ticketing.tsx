@@ -22,9 +22,10 @@ const Ticketing: React.FC = () => {
         </BlackButton>
       </Box>
       <Description>
-        티켓팅 방식 및 입장 정책에 대한
+        <h3>공연 입장 정책은 추후 공지될 예정입니다.</h3>
+        본무대 전 축제기획단 인스타그램에
         <br />
-        설명글 텍스트
+        업로드될 카드 뉴스를 참고해 주세요.
       </Description>
     </>
   );

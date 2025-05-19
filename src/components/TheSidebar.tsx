@@ -48,10 +48,10 @@ const TheSidebar = () => {
           </ItemContainer>
           <ItemContainer>
             <MenuHeading>정보</MenuHeading>
+            <MenuItem href="/notice">축제기획단 공지사항</MenuItem>
             <MenuItem href="/lostitem">분실물 안내</MenuItem>
             <MenuItem href="/barrierfree">배리어프리</MenuItem>
             <MenuItem href="/entry">통행 정책</MenuItem>
-            <MenuItem href="/notice">축제기획단 공지사항</MenuItem>
           </ItemContainer>
         </MenuDom>
       </SidebarContainer>

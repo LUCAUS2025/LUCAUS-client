@@ -92,6 +92,7 @@ export const Wrapper16 = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  border-radius: 8px;
 `;
 
 const Margin = styled.div`
