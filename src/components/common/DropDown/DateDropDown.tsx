@@ -3,7 +3,7 @@ import { DropDown } from './DropDown';
 import { dateOptions, Option } from '../../../data/options';
 
 interface DateDropDownProps {
-  selectedDate: Option;
+  selectedDate?: Option;
   setSelectedDate: (option: Option) => void;
   darkMode: boolean;
   customData?: Option[];
