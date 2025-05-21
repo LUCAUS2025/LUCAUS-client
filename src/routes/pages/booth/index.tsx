@@ -14,11 +14,12 @@ import { useHeader } from '../../../context/HeaderContext';
 import { mapBoothMapImg, mapBoothMapMagnifiedImg } from '../../../utils/boothMapImgMapping';
 import { LoadingPage } from '../LoadingPage';
 import { useLocation } from 'react-router-dom';
+import { getTodayDateOption } from '../../../utils/getTodayDateOption';
 
 export const Booth = () => {
   const { setHideHeader } = useHeader();
-  const [selectedDate, setSelectedDate] = useState<Option>(dateOptions[0]);
-  const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0]);
+  const [selectedDate, setSelectedDate] = useState<Option>(() => getTodayDateOption());
+  const [selectedPlace, setSelectedPlace] = useState<Option>(placeOptions[0] || null);
   const [selectedItem, setSelectedItem] = useState<BoothOrFoodTruckItem | null>(null);
   const [boothList, setBoothList] = useState<BoothItem[] | []>([]);
   const [mapImg, setMapImg] = useState<string>('');
@@ -29,7 +30,7 @@ export const Booth = () => {
     const getBoothList = async () => {
       try {
         setIsLoading(false);
-        const boothListResponse = await fetchBoothList(selectedDate.value as number);
+        const boothListResponse = await fetchBoothList(selectedDate?.value as number);
         setBoothList(boothListResponse ?? []);
       } catch (e) {
         alert('로딩에 실패하였습니다.');
@@ -39,42 +40,31 @@ export const Booth = () => {
   }, [selectedDate]);
 
   useEffect(() => {
+    const getBoothList = async () => {
+      try {
+        setIsLoading(false);
+        const boothListResponse = await fetchBoothList(selectedDate?.value as number);
+        setBoothList(boothListResponse ?? []);
+      } catch (e) {
+        alert('로딩에 실패하였습니다.');
+      }
+    };
+    getBoothList();
+  }, []);
+
+  useEffect(() => {
     setHideHeader(!!selectedItem);
     return () => setHideHeader(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
 
   useEffect(() => {
-    if (selectedItem && selectedItem?.dayBoothNum) {
+    if (selectedItem && selectedItem?.dayBoothNum && selectedDate) {
       setMapImg(mapBoothMapMagnifiedImg(selectedDate, selectedItem?.dayBoothNum, selectedPlace));
-    } else {
+    } else if (selectedDate) {
       setMapImg(mapBoothMapImg(selectedDate, selectedPlace));
     }
   }, [selectedDate, selectedItem, selectedPlace]);
-
-  useEffect(() => {
-    const today = new Date();
-
-    const selectedYear = Number(dateYearOption.value);
-    const selectedMonth = Number(dateMonthOption.value);
-    const todayYear = today.getFullYear();
-    const todayMonth = today.getMonth() + 1;
-    const todayDate = today.getDate();
-    // 오늘이 지정된 연도/월이며, 축제 기간 날짜 옵션 내에 포함된다면
-    if (
-      todayYear === selectedYear &&
-      todayMonth === selectedMonth &&
-      dateOptions.some((option) => option.value === todayDate)
-    ) {
-      const todayOption = dateOptions.find((option) => option.value === todayDate);
-      if (todayOption) {
-        setSelectedDate(todayOption);
-      }
-    } else {
-      // 아니면 축제 첫째날로 설정
-      setSelectedDate(dateOptions[0]);
-    }
-  }, []);
 
   useEffect(() => {
     setSelectedItem(null);
@@ -116,7 +106,7 @@ export const Booth = () => {
             componentProps={{
               item: selectedItem,
               onClose: () => setSelectedItem(null),
-              selectedDate: selectedDate.value as number,
+              selectedDate: selectedDate?.value as number,
             }}
             isBottomSheetHeader={true}
             overlapFooter={false}

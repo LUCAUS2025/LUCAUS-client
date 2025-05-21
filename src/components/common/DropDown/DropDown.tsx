@@ -5,7 +5,7 @@ import { Option } from '../../../data/options';
 
 interface DropDownProps {
   options: Option[];
-  selectedOption: Option;
+  selectedOption?: Option;
   setSelectedOption: (option: Option) => void;
   logoSrc: string;
   isLong?: boolean;
@@ -42,7 +42,7 @@ export const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, set
     <Wrapper onClick={toggleDropDown} ref={dropDownRef} isLong={isLong}>
       <SelectedWrapper $active={active}>
         <Logo src={logoSrc} />
-        <SelectedText isLong={isLong}>{selectedOption.label}</SelectedText>
+        <SelectedText isLong={isLong}>{selectedOption?.label}</SelectedText>
         <DownIcon src="/images/common/dropDown.webp" />
       </SelectedWrapper>
       <OptionList active={active}>
