@@ -100,6 +100,8 @@ const PwPushModal = ({ setOpenRewardPwModal, selectedDate, isRewarded, setStampD
         type="password"
         value={pwData}
         onChange={(e) => handleInputChange(e.target.value)}
+        name="fake-password"
+        autoComplete="new-password"
       ></StyledInput>
       {isError?.error ? <ErrorLine>{isError.message}</ErrorLine> : <ErrorLine />}
       <ButtonWrapper>
