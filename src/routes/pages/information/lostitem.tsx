@@ -120,7 +120,7 @@ const LostItem = () => {
         {lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
             <Item key={idx}>
-              <ItemImage src={item.image || ''} />
+              <ItemImage src={item.image || undefined} />{' '}
               <ItemInfo>
                 <ItemName>{item.name}</ItemName>
                 <ItemDetail>{item.detail}</ItemDetail>
