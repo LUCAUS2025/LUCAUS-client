@@ -42,7 +42,7 @@ const LostItem = () => {
         page,
         size: 10,
       });
-      console.log(res);
+      // console.log(res);
       const items = res.result.content.map((item) => ({
         category: item.category,
         name: item.name,
