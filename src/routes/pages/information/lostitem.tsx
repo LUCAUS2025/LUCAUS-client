@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDateForNotice } from '../../../components/common/formatData';
@@ -18,8 +18,10 @@ const LostItem = () => {
   const [lostItems, setLostItems] = useState<LostItemProps[]>([]);
   const [selectDate, setSelectDate] = useState<Option>(lostdateOptions[0]);
   const [selectItem, setSelectItem] = useState<Option>(itemsOptions[0]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+
+  const pageRef = useRef(1);
+  const isFetchingRef = useRef(false);
+  const hasMoreRef = useRef(true);
 
   const translateCategory = (category: string) => {
     const categoryMap: Record<string, string> = {
@@ -35,14 +37,18 @@ const LostItem = () => {
   };
 
   const fetchLostItems = async () => {
+    if (isFetchingRef.current || !hasMoreRef.current) return;
+
+    isFetchingRef.current = true;
+    // console.log('Page:', pageRef.current);
     try {
       const res = await getLostItems({
         date: String(selectDate.value),
         category: String(selectItem.value),
-        page,
+        page: pageRef.current,
         size: 10,
       });
-      // console.log(res);
+
       const items = res.result.content.map((item) => ({
         category: item.category,
         name: item.name,
@@ -55,38 +61,37 @@ const LostItem = () => {
       setLostItems((prev) => [...prev, ...items]);
 
       if (res.result.content.length < 10) {
-        setHasMore(false);
+        hasMoreRef.current = false;
       } else {
-        setPage((prev) => prev + 1);
+        pageRef.current += 1;
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      isFetchingRef.current = false;
     }
   };
 
   useEffect(() => {
-    const resetAndFetch = async () => {
-      setPage(1);
-      setHasMore(true);
-      setLostItems([]);
-      await fetchLostItems();
-    };
-
-    resetAndFetch();
+    pageRef.current = 1;
+    hasMoreRef.current = true;
+    setLostItems([]);
+    fetchLostItems();
   }, [selectDate, selectItem]);
 
-  // 무한 스크롤 감지
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop + 100 >= document.documentElement.offsetHeight) {
-        // console.log('스크롤 끝');
+      const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
+      const bottomPosition = document.documentElement.offsetHeight;
+
+      if (scrollPosition + 100 >= bottomPosition) {
         fetchLostItems();
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [page, hasMore]);
+  }, []);
 
   return (
     <BigContainer>
@@ -110,6 +115,7 @@ const LostItem = () => {
         <LostDateDropDown selectedDate={selectDate} setSelectedDate={setSelectDate} darkMode={true} />
         <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
+
       <ItemList>
         {lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
@@ -162,6 +168,13 @@ const Answer = styled.div`
 const SectionTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
+`;
+
+const DropDowns = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-direction: row;
 `;
 
 export const ItemList = styled.div`
@@ -222,13 +235,6 @@ export const Line = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-`;
-
-const DropDowns = styled.div`
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-  flex-direction: row;
 `;
 
 const NoItemsMessage = styled.div`
