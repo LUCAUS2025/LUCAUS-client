@@ -4,7 +4,6 @@ import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDateForNotice } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 import { itemsOptions, lostdateOptions, Option } from '../../../data/options';
-import { r } from 'framer-motion/dist/types.d-CtuPurYT';
 
 interface LostItemProps {
   category: string;
@@ -37,7 +36,9 @@ const LostItem = () => {
   };
 
   const fetchLostItems = async () => {
-    if (isLoading || !hasMore) return;
+    // console.log('fetchLostItems');
+    if (!hasMore) return;
+    // console.log('fetchLostItems hasMore');
     setIsLoading(true);
 
     try {
@@ -82,6 +83,7 @@ const LostItem = () => {
     setPage(1);
     setHasMore(true);
     setLostItems([]);
+    // fetchLostItems();
   }, [selectDate, selectItem]);
 
   // 무한 스크롤 감지
