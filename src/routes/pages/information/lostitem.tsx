@@ -20,7 +20,6 @@ const LostItem = () => {
   const [selectItem, setSelectItem] = useState<Option>(itemsOptions[0]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
 
   const translateCategory = (category: string) => {
     const categoryMap: Record<string, string> = {
@@ -36,9 +35,6 @@ const LostItem = () => {
   };
 
   const fetchLostItems = async () => {
-    if (isLoading || !hasMore) return;
-    setIsLoading(true);
-
     try {
       const res = await getLostItems({
         date: String(selectDate.value),
@@ -65,8 +61,6 @@ const LostItem = () => {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -92,7 +86,7 @@ const LostItem = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [page, hasMore, isLoading]);
+  }, [page, hasMore]);
 
   return (
     <BigContainer>
@@ -117,9 +111,7 @@ const LostItem = () => {
         <LostitemDropDown selectedItem={selectItem} setSelectedItem={setSelectItem} darkMode={false} />
       </DropDowns>
       <ItemList>
-        {isLoading ? (
-          <div>로딩중 ...</div>
-        ) : lostItems.length > 0 ? (
+        {lostItems.length > 0 ? (
           lostItems.map((item, idx) => (
             <Item key={idx}>
               <ItemImage src={item.image || ''} />
