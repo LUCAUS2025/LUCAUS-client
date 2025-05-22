@@ -4,7 +4,6 @@ import { getLostItems } from '../../../services/apis/lostitem';
 import { formatDateForNotice } from '../../../components/common/formatData';
 import { LostDateDropDown, LostitemDropDown } from '../../../components/common/DropDown/LostitemDropDown';
 import { itemsOptions, lostdateOptions, Option } from '../../../data/options';
-import { r } from 'framer-motion/dist/types.d-CtuPurYT';
 
 interface LostItemProps {
   category: string;
@@ -33,7 +32,7 @@ const LostItem = () => {
       OTHERS: '기타',
       TOTAL: '전체',
     };
-    return categoryMap[category] || '기타';
+    return categoryMap[category] || '전체';
   };
 
   const fetchLostItems = async () => {
@@ -47,7 +46,7 @@ const LostItem = () => {
         page,
         size: 10,
       });
-      // console.log(res);
+      console.log(res);
       const items = res.result.content.map((item) => ({
         category: item.category,
         name: item.name,
@@ -71,17 +70,15 @@ const LostItem = () => {
     }
   };
 
-  // 초기 로드
   useEffect(() => {
-    fetchLostItems();
-    // console.log('초기 로드');
-  }, [selectDate, selectItem]);
+    const resetAndFetch = async () => {
+      setPage(1);
+      setHasMore(true);
+      setLostItems([]);
+      await fetchLostItems();
+    };
 
-  // 필터 변경 시 초기화
-  useEffect(() => {
-    setPage(1);
-    setHasMore(true);
-    setLostItems([]);
+    resetAndFetch();
   }, [selectDate, selectItem]);
 
   // 무한 스크롤 감지
