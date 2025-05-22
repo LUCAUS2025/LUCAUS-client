@@ -46,8 +46,8 @@ export const itemsOptions: Option[] = [
 ];
 
 export const lostdateOptions: Option[] = [
-  { label: '19 월', value: '2025-05-19' },
-  { label: '20 화', value: '2025-05-20' },
+  // { label: '19 월', value: '2025-05-19' },
+  // { label: '20 화', value: '2025-05-20' },
   { label: '21 수', value: '2025-05-21' },
   { label: '22 목', value: '2025-05-22' },
   { label: '23 금', value: '2025-05-23' },
