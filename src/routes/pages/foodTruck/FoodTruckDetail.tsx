@@ -28,7 +28,7 @@ export const FoodTruckDetail = () => {
   };
 
   useEffect(() => {
-    getFoodTruckDetail();
+    //getFoodTruckDetail();
   }, [dayFoodTruckNum, selectedDate]);
 
   useEffect(() => {
