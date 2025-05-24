@@ -37,7 +37,7 @@ export const Information = () => {
             <InfoTitleImg src="images/information/idea.webp" />
             <InfoTitleCol>
               <InfoBoxTitle>축제기획단 공지</InfoBoxTitle>
-              <InfoBoxDescription>{recentNotice}</InfoBoxDescription>
+              {/* <InfoBoxDescription>{recentNotice}</InfoBoxDescription> */}
             </InfoTitleCol>
           </InfoBox>
           <CardList>
