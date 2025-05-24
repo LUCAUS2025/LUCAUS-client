@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getNotice } from '../../../services/apis/notice';
 import { formatDateForNotice } from '../../../components/common/formatData';
 import styled from 'styled-components';
-import { LoadingPage } from '../LoadingPage';
+import { VoidPage } from '../VoidPage';
 
 interface Notice {
   id: number;
@@ -35,7 +35,7 @@ const NoticeDetail = () => {
   }, []);
 
   if (!notice) {
-    return <LoadingPage />;
+    return <VoidPage />;
   }
 
   return (
