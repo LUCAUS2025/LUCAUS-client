@@ -93,8 +93,8 @@ const Notice = () => {
           </ClickableItem>
         );
       })}
-      {isLoading && <LoadingPage />}
-      {/* {!hasMore && notices.length > 0 && <EndMessage>더 이상 공지사항이 없습니다.</EndMessage>} */}
+      {/* {isLoading && <LoadingPage />} */}
+      {notices.length === 0 && <EndMessage>2025년 루카우스 웹사이트 운영 기간이 종료되었습니다.</EndMessage>}
     </div>
   );
 };
