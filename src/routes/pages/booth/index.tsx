@@ -35,7 +35,7 @@ export const Booth = () => {
         const boothListResponse = await fetchBoothList(selectedDate?.value as number);
         setBoothList(boothListResponse ?? []);
       } catch (e) {
-        alert('로딩에 실패하였습니다.');
+        // alert('로딩에 실패하였습니다.');
       }
     };
     getBoothList();
@@ -48,7 +48,7 @@ export const Booth = () => {
         const boothListResponse = await fetchBoothList(selectedDate?.value as number);
         setBoothList(boothListResponse ?? []);
       } catch (e) {
-        alert('로딩에 실패하였습니다.');
+        // alert('로딩에 실패하였습니다.');
       }
     };
     //getBoothList();

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const VoidPage = () => {
-  return <Wrapper>운영시간이 아닙니다.</Wrapper>;
+  return <Wrapper>2025년 루카우스 웹사이트 운영 기간이 종료되었습니다.</Wrapper>;
 };
 
 const Wrapper = styled.div`

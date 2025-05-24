@@ -18,7 +18,7 @@ export const FoodTruck = () => {
         const foodTruckResponse = await fetchFoodTruckList(selectedDate);
         setFoodTruckList(foodTruckResponse ?? []);
       } catch (e) {
-        alert('로딩에 실패하였습니다.');
+        // alert('로딩에 실패하였습니다.');
       }
     };
     //getFoodTruckList();
