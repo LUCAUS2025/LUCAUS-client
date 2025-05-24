@@ -32,7 +32,7 @@ const Toast = () => {
       {shortNotice && shortNotice.length > 0 ? (
         <Notice>{shortNotice}</Notice>
       ) : (
-        <Notice>2025년 루카우스 웹사이트가 종료되었습니다.</Notice>
+        <Notice>2025년 루카우스 웹사이트 운영 기간이 종료되었습니다.</Notice>
       )}
     </Container>
   );
