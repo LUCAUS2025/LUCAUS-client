@@ -5,10 +5,12 @@ import { ItemListContent } from '../../../components/BottomSheet/innerContent/It
 import { dateMonthOption, dateOptions, dateYearOption } from '../../../data/options';
 import { fetchFoodTruckList } from '../../../services/apis/foodTruck/foodTruckList';
 import { LoadingPage } from '../LoadingPage';
+import { VoidPage } from '../VoidPage';
 
 export const FoodTruck = () => {
   const [selectedDate, setSelectedDate] = useState<number>(19);
   const [foodTruckList, setFoodTruckList] = useState<FoodTruckItem[] | []>([]);
+  const [apiStatus, setApiStatus] = useState<boolean>(false);
 
   useEffect(() => {
     const getFoodTruckList = async () => {
@@ -19,7 +21,7 @@ export const FoodTruck = () => {
         alert('로딩에 실패하였습니다.');
       }
     };
-    getFoodTruckList();
+    //getFoodTruckList();
   }, []);
 
   useEffect(() => {
@@ -51,6 +53,10 @@ export const FoodTruck = () => {
       setSelectedDate(targetDate);
     }
   }, []);
+
+  if (!apiStatus) {
+    return <VoidPage />;
+  }
 
   if (!foodTruckList || foodTruckList.length == 0) {
     return <LoadingPage />;

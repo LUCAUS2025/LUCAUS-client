@@ -28,7 +28,7 @@ export const BoothDetail = () => {
   };
 
   useEffect(() => {
-    getBoothDetail();
+    //getBoothDetail();
   }, [dayBoothNum, selectedDate]);
 
   useEffect(() => {

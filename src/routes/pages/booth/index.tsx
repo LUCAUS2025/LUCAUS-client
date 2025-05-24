@@ -15,6 +15,7 @@ import { mapBoothMapImg, mapBoothMapMagnifiedImg } from '../../../utils/boothMap
 import { LoadingPage } from '../LoadingPage';
 import { useLocation } from 'react-router-dom';
 import { getTodayDateOption } from '../../../utils/getTodayDateOption';
+import { VoidPage } from '../VoidPage';
 
 export const Booth = () => {
   const { setHideHeader } = useHeader();
@@ -25,6 +26,7 @@ export const Booth = () => {
   const [mapImg, setMapImg] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
+  const [apiStatus, setApiStatus] = useState(false);
 
   useEffect(() => {
     const getBoothList = async () => {
@@ -49,7 +51,7 @@ export const Booth = () => {
         alert('로딩에 실패하였습니다.');
       }
     };
-    getBoothList();
+    //getBoothList();
   }, []);
 
   useEffect(() => {
@@ -69,6 +71,10 @@ export const Booth = () => {
   useEffect(() => {
     setSelectedItem(null);
   }, [location.key]);
+
+  if (!apiStatus) {
+    return <VoidPage />;
+  }
 
   if (isLoading) {
     return <LoadingPage />;

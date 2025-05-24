@@ -132,7 +132,7 @@ const LostItem = () => {
             </Item>
           ))
         ) : (
-          <NoItemsMessage>현재 등록된 분실물이 없습니다</NoItemsMessage>
+          <NoItemsMessage>루카우스 웹사이트 운영 기간이 종료되었습니다.</NoItemsMessage>
         )}
       </ItemList>
     </BigContainer>
