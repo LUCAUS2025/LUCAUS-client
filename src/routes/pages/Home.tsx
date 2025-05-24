@@ -77,7 +77,7 @@ export const Home = () => {
           ]}
         />
 
-        <HomeNotice />
+        {/* <HomeNotice /> */}
         <Margin />
       </Wrapper16>
       <Footer />

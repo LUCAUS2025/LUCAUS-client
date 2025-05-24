@@ -51,19 +51,25 @@ const HomeNotice = () => {
           더보기
         </MoreButton>
       </SectionHeader>
-      {notices.slice(0, 2).map((notice, index) => (
-        <NoticeCard
-          key={index}
-          onClick={() => {
-            window.scrollTo(0, 0);
-            navigate(`/notice/${notice.id}`);
-          }}
-        >
-          <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
-          <NoticeContent>{notice.content}</NoticeContent>
-          <NoticeDate>{formatDateNoTime(notice.uploadDateTime)}</NoticeDate>
+      {notices.length > 0 ? (
+        notices.slice(0, 2).map((notice, index) => (
+          <NoticeCard
+            key={index}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              navigate(`/notice/${notice.id}`);
+            }}
+          >
+            <NoticeTitle>{notice.title ?? '제목 없음'}</NoticeTitle>
+            <NoticeContent>{notice.content}</NoticeContent>
+            <NoticeDate>{formatDateNoTime(notice.uploadDateTime)}</NoticeDate>
+          </NoticeCard>
+        ))
+      ) : (
+        <NoticeCard>
+          <NoticeTitle>2025년 루카우스 웹사이트 운영 기간이 종료되었습니다.</NoticeTitle>
         </NoticeCard>
-      ))}
+      )}
     </NoticeSection>
   );
 };

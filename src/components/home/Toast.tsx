@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Icon } from '../common/GoBackButton';
 import { getshortNotice } from '../../services/apis/notice';
 import { useEffect, useState } from 'react';
+import { s } from 'framer-motion/dist/types.d-CtuPurYT';
 
 const Toast = () => {
   const [shortNotice, setShortNotice] = useState<string | null>(null);
@@ -13,7 +14,7 @@ const Toast = () => {
         if (res.result[0].info.length > 0) {
           setShortNotice(res.result[0].info);
         } else {
-          setShortNotice('공지사항이 없습니다.');
+          setShortNotice('2025 루카우스 웹사이트가 종료되었습니다');
         }
       })
       .catch((err) => {
@@ -28,7 +29,11 @@ const Toast = () => {
   return (
     <Container>
       <Icon src="/images/common/Info.webp" alt="information" style={{ marginLeft: '4px' }} />
-      <Notice>{shortNotice}</Notice>
+      {shortNotice && shortNotice.length > 0 ? (
+        <Notice>{shortNotice}</Notice>
+      ) : (
+        <Notice>2025년 루카우스 웹사이트가 종료되었습니다.</Notice>
+      )}
     </Container>
   );
 };
