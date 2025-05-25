@@ -8,9 +8,14 @@
 
 ## 배포 기간 Release Window
 2025.05.19 ~ 2025.05.23
-## developers
 
-- [정선빈]()
-- [황인영]()
-- [김태진]()
+## 만든이 Developers
+### [정선빈](https://github.com/jungsunbeen)
+- [사이트 메인 페이지](https://lucaus.co.kr)
+- [공연 페이지](https://lucaus.co.kr/stage)
+- [분실물 페이지](https://lucaus.co.kr/lostitem)
+- [공지사항 페이지](https://lucaus.co.kr/notice)
+  
+### [황인영](https://github.com/hwiy01)
+### [김태진](https://github.com/kimtree24)
 
