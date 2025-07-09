@@ -16,6 +16,7 @@ import { LoadingPage } from '../LoadingPage';
 import { useLocation } from 'react-router-dom';
 import { getTodayDateOption } from '../../../utils/getTodayDateOption';
 import { VoidPage } from '../VoidPage';
+import { boothListMock } from '../../../mock/boothMockData';
 
 export const Booth = () => {
   const { setHideHeader } = useHeader();
@@ -72,9 +73,9 @@ export const Booth = () => {
     setSelectedItem(null);
   }, [location.key]);
 
-  if (!apiStatus) {
-    return <VoidPage />;
-  }
+  // if (!apiStatus) {
+  //   return <VoidPage />;
+  // }
 
   if (isLoading) {
     return <LoadingPage />;
@@ -92,7 +93,7 @@ export const Booth = () => {
           <BasicBottomSheet
             title={'부스 배치도'}
             description={'*한 단위체의 부스 연속 사용 시 앞번호로 표기됩니다.'}
-            data={boothList}
+            data={boothListMock}
             setSelectedItem={setSelectedItem}
             selectedPlace={selectedPlace}
             type="booth"

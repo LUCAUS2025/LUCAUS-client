@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { fetchFoodTruckDetail, FoodTruckDetailRawData } from '../../../services/apis/foodTruck/foodTruckDetail';
 import { useHeader } from '../../../context/HeaderContext';
 import { LoadingPage } from '../LoadingPage';
+import { foodTruckDetailMock } from '../../../mock/foodTruckMockData';
 
 export const FoodTruckDetail = () => {
   const { setHideHeader } = useHeader();
@@ -29,6 +30,7 @@ export const FoodTruckDetail = () => {
 
   useEffect(() => {
     //getFoodTruckDetail();
+    setFoodTruckDetail(foodTruckDetailMock[0]);
   }, [dayFoodTruckNum, selectedDate]);
 
   useEffect(() => {

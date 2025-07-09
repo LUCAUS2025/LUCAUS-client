@@ -35,3 +35,16 @@ export async function fetchFoodTruckList(date: number) {
     if (error) throw error;
   }
 }
+
+export const foodTruckDetailMock = [
+  {
+    dayFoodTruckNum: 1,
+    name: '맛있닭강정',
+    cover: 'https://cdn.foodtruck-image.com/sample.jpg',
+    location: '104관 뒤편',
+    foodTruckId: 202,
+    foodTruckReviews: [{ DELICIOUS: 20 }, { RECOMMEND: 10 }, { MANY: 5 }, { FAST: 8 }],
+    menus: [{ '닭강정(순한맛)': 6000 }, { '닭강정(매운맛)': 6500 }, { 콜라: 2000 }],
+    opDateList: [20240522, 20240523],
+  },
+];

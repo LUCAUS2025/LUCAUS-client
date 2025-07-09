@@ -18,7 +18,7 @@ export const Information = () => {
       const result = await getOneRecentNotice();
       setRecentNotice(result.result.content[0].title);
     };
-    getNotice();
+    //getNotice();
   }, [recentNotice]);
 
   useEffect(() => {

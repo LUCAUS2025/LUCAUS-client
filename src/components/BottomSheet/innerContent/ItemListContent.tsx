@@ -5,7 +5,6 @@ import { keywordBaseStyle } from '../../../styles/keyword';
 import { mediaSmall, mediaSmall_subTitle, mediaSmall_title } from '../../../styles/responsive';
 import { mapLocationToPlaceBooth, Option } from '../../../data/options';
 import { useNavigate } from 'react-router-dom';
-import { LoadingPage } from '../../../routes/pages/LoadingPage';
 
 interface ContentProps {
   theTitle?: string;
@@ -28,28 +27,29 @@ export const ItemListContent: React.FC<ContentProps> = ({
   const boothsByDate = data?.filter((item): item is BoothItem => item.type === 'booth');
   const foodTruckList = data?.filter((item): item is FoodTruckItem => item.type === 'foodTruck');
   const [boothsByDatePlace, setBoothsByDatePlace] = useState<BoothItem[]>();
-  const [selectedDate, setSelectedDate] = useState<number>(19);
+  // const [selectedDate, setSelectedDate] = useState<number>(19); // 주석 처리: 날짜 무관하게 고정 데이터
   const listContentRef = useRef<HTMLDivElement>(null);
   const sheetHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
 
   useEffect(() => {
     if (type === 'booth') {
-      const filteredData = boothsByDate?.filter(
-        (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
-      );
-      setBoothsByDatePlace(filteredData);
+      // const filteredData = boothsByDate?.filter(
+      //   (item) => mapLocationToPlaceBooth(item.location) === selectedPlace?.value,
+      // );
+      //setBoothsByDatePlace(filteredData);
+      setBoothsByDatePlace(boothsByDate);
     }
   }, [selectedPlace, data]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
-  useEffect(() => {
-    if (listContentRef.current) {
-      listContentRef.current.scrollTop = 0;
-    }
-  }, [selectedDate, selectedPlace]);
+  // useEffect(() => {
+  //   if (listContentRef.current) {
+  //     listContentRef.current.scrollTop = 0;
+  //   }
+  // }, [selectedDate, selectedPlace]); // selectedDate 제거
 
   return (
     <Wrapper>
@@ -61,7 +61,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
       {boothsByDatePlace && boothsByDatePlace.length > 0 && type === 'booth' && (
         <List ref={listContentRef} $sheetHeight={sheetHeight}>
           {boothsByDatePlace?.map((item) => (
-            <Item key={`${item.type}-${selectedDate}-item.dayBoothNum`}>
+            <Item key={`${item.type}-${item.dayBoothNum}`}>
               <ItemContent>
                 <ItemId onClick={() => setSelectedItem!(item)}>#{item.dayBoothNum}</ItemId>
                 <ItemTextContainer onClick={() => setSelectedItem!(item)}>
@@ -90,7 +90,7 @@ export const ItemListContent: React.FC<ContentProps> = ({
           {foodTruckList?.map((item) => (
             <Item key={item.dayBoothNum}>
               <ItemContent>
-                <ItemTextContainer onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`, { state: selectedDate })}>
+                <ItemTextContainer onClick={() => navigate(`/foodTruck/${item?.dayBoothNum}`)}>
                   <ItemTitle>{item.name}</ItemTitle>
                   <ItemKeywords>
                     {item.representMenu.map((key, index) => (
@@ -116,7 +116,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  //padding: 12px 0px;
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -127,7 +126,6 @@ const TitleContainer = styled.div`
 const Title = styled.div`
   font-size: 20px;
   font-weight: 600;
-
   ${mediaSmall_title}
 `;
 const Description = styled.div`
@@ -138,13 +136,11 @@ const Description = styled.div`
 const List = styled.div<{ $sheetHeight: number }>`
   display: flex;
   flex-direction: column;
-  //padding-bottom: 20vh;
 `;
 const Item = styled.div`
   display: flex;
   flex-direction: row;
   padding: 12px 20px;
-
   &:hover {
     background: #e7f1ff;
   }
@@ -163,7 +159,6 @@ const ItemTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 4px;
-
   ${mediaSmall_subTitle}
 `;
 const ItemDescription = styled.div`
@@ -209,13 +204,11 @@ const RecommendNum = styled.div`
 const RecommendIcon = styled.img`
   width: 16px;
   height: 16px;
-
   ${mediaSmall`
     width: 14px;
     height: 14px;
   `}
 `;
-
 const Info = styled.div`
   font-size: 12px;
   display: flex;
@@ -225,7 +218,6 @@ const Info = styled.div`
   padding-bottom: 60vh;
   color: #6a7282;
 `;
-
 const VoidSpace = styled.div`
   height: 205px;
 `;

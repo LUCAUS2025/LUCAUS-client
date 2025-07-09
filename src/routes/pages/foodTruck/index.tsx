@@ -6,6 +6,7 @@ import { dateMonthOption, dateOptions, dateYearOption } from '../../../data/opti
 import { fetchFoodTruckList } from '../../../services/apis/foodTruck/foodTruckList';
 import { LoadingPage } from '../LoadingPage';
 import { VoidPage } from '../VoidPage';
+import { foodTruckListMock } from '../../../mock/foodTruckMockData';
 
 export const FoodTruck = () => {
   const [selectedDate, setSelectedDate] = useState<number>(19);
@@ -54,13 +55,13 @@ export const FoodTruck = () => {
     }
   }, []);
 
-  if (!apiStatus) {
-    return <VoidPage />;
-  }
+  // if (!apiStatus) {
+  //   return <VoidPage />;
+  // }
 
-  if (!foodTruckList || foodTruckList.length == 0) {
-    return <LoadingPage />;
-  }
+  // if (!foodTruckList || foodTruckList.length == 0) {
+  //   return <LoadingPage />;
+  // }
 
   return (
     <>
@@ -68,7 +69,7 @@ export const FoodTruck = () => {
         <ItemListContent
           theTitle={'푸드트럭 안내'}
           theDescription={'매일 10시부터 19시, 맛의 향연을 즐겨보세요!'}
-          data={foodTruckList || []}
+          data={foodTruckListMock || []}
           type="foodTruck"
         />
       </Container>

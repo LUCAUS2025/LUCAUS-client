@@ -8,6 +8,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { BoothDetailRawData, fetchBoothDetail } from '../../../services/apis/booth/boothDetail';
 import { useHeader } from '../../../context/HeaderContext';
 import { LoadingPage } from '../LoadingPage';
+import { boothDetailMock } from '../../../mock/boothMockData';
 
 export const BoothDetail = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ export const BoothDetail = () => {
 
   useEffect(() => {
     //getBoothDetail();
+    setBoothDetail(boothDetailMock[0]);
   }, [dayBoothNum, selectedDate]);
 
   useEffect(() => {
