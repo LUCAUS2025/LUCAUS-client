@@ -18,6 +18,9 @@ import { getTodayDateOption } from '../../../utils/getTodayDateOption';
 import { VoidPage } from '../VoidPage';
 import { boothListMock } from '../../../mock/boothMockData';
 
+const boothListCache = new Map<string, BoothItem[]>();
+const makeBoothListCacheKey = (date: number, place: string) => `${date}_${place}`;
+
 export const Booth = () => {
   const { setHideHeader } = useHeader();
   const [selectedDate, setSelectedDate] = useState<Option>(() => getTodayDateOption());
@@ -31,29 +34,33 @@ export const Booth = () => {
 
   useEffect(() => {
     const getBoothList = async () => {
+      setIsLoading(true);
+
+      const dateValue = selectedDate?.value as number;
+      const placeValue = selectedPlace?.value as string;
+      const cacheKey = makeBoothListCacheKey(dateValue, placeValue);
+
+      if (boothListCache.has(cacheKey)) {
+        setBoothList(boothListCache.get(cacheKey)!);
+        setIsLoading(false);
+        return;
+      }
+
       try {
         setIsLoading(false);
-        const boothListResponse = await fetchBoothList(selectedDate?.value as number);
-        setBoothList(boothListResponse ?? []);
+        const boothListResponse = await fetchBoothList(dateValue);
+        const finalData = boothListResponse ?? boothListMock;
+
+        boothListCache.set(cacheKey, finalData);
+
+        setBoothList(finalData);
       } catch (e) {
         // alert('로딩에 실패하였습니다.');
+        setBoothList(boothListMock);
       }
     };
     getBoothList();
-  }, [selectedDate]);
-
-  useEffect(() => {
-    const getBoothList = async () => {
-      try {
-        setIsLoading(false);
-        const boothListResponse = await fetchBoothList(selectedDate?.value as number);
-        setBoothList(boothListResponse ?? []);
-      } catch (e) {
-        // alert('로딩에 실패하였습니다.');
-      }
-    };
-    //getBoothList();
-  }, []);
+  }, [selectedDate, selectedPlace]);
 
   useEffect(() => {
     setHideHeader(!!selectedItem);
